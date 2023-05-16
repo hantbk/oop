@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
+   <children>
+      <AnchorPane fx:id="first_pane" layoutY="14.0" prefHeight="800.0" prefWidth="1280.0">
+         <children>
+            <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #19A7CE;" />
+            <AnchorPane layoutX="32.0" layoutY="78.0" prefHeight="186.0" prefWidth="1162.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/tabpane.css">
+               <children>
+                  <Label layoutX="44.0" layoutY="14.0" prefHeight="29.0" prefWidth="53.0" text="IT" textAlignment="CENTER" textFill="#dd1515">
+                     <font>
+                        <Font size="60.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="1080.0" prefHeight="190.0" prefWidth="80.0">
+                     <children>
+                        <Button fx:id="btn_add" layoutX="48.0" mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons8-setting-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <Button layoutX="1006.0" layoutY="136.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="44.0" layoutY="124.0" text="Home " textFill="RED">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="110.0" layoutY="124.0" text="/ My courses / ">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="256.0" layoutY="124.0" text="THI CUỐI KỲ" textFill="RED">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TabPane layoutX="32.0" layoutY="300.0" prefHeight="464.0" prefWidth="1166.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/tabpane.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="150.0" tabMinHeight="35.0" tabMinWidth="88.0">
+              <tabs>
+                <Tab text="Questions">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1194.0">
+                           <children>
+                              <Label layoutX="25.0" layoutY="25.0" text="Question bank" textFill="RED">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="79.0" text="Select a category:" textFill="#464343">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="118.0" text="The default category for question shared in context">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox layoutX="25.0" layoutY="156.0" mnemonicParsing="false" text="Also show question from subcategories">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox layoutX="25.0" layoutY="192.0" mnemonicParsing="false" text="Also show old questions">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Button layoutX="25.0" layoutY="232.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="240.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                              <TreeView fx:id="btn_category" layoutX="150.0" layoutY="74.0" prefHeight="32.0" prefWidth="230.0" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Categories">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                  <Tab text="Import">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Export">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
