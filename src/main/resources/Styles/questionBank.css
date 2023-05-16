@@ -24,3 +24,12 @@
 .tab-pane {
     -fx-padding: 15 0 0 20;
 }
+
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+}
+
+.tree-cell:hover {
+  -fx-background-color: blue;
+  -fx-text-fill: white;
+}
