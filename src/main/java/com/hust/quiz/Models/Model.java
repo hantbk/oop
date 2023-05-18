@@ -1,4 +1,5 @@
 package com.hust.quiz.Models;
+
 import javafx.scene.control.TreeItem;
 
 import java.sql.Connection;
@@ -8,11 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Model {
-    private static Model instance;
     static final String url = "jdbc:mysql://localhost:3306/quiz";
     static final String username = "root";
     static final String password = "";
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static Model instance;
 
     private Model() {
     }
