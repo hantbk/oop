@@ -1,6 +1,7 @@
 module com.hust.quiz {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.hust.quiz to javafx.fxml;

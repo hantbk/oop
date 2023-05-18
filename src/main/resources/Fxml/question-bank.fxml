@@ -95,7 +95,7 @@
                                  </font>
                               </Button>
                               <ComboBox fx:id="btn_category" layoutX="155.0" layoutY="74.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />
-                              <TreeView fx:id="treeView" layoutX="155.0" layoutY="106.0" prefHeight="288.0" prefWidth="327.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
+                              <TreeView fx:id="category" layoutX="155.0" layoutY="106.0" prefHeight="288.0" prefWidth="327.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
