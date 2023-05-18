@@ -49,7 +49,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/icons8-setting-50.png" />
+                        <Image url="@../Img/setting.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -62,17 +62,17 @@
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/menu.png" />
+                        <Image url="@../Img/menu.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/male_user_50px.png" />
+                        <Image url="@../Img/male_user.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1230.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/dropdown.png" />
+                        <Image url="@../Img/dropdown.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
@@ -95,7 +95,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../img/icons8-setting-50.png" />
+                                    <Image url="@../Img/setting.png" />
                                  </image>
                               </ImageView>
                            </graphic>

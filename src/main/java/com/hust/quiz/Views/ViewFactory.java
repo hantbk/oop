@@ -20,8 +20,8 @@ public class ViewFactory {
     private ViewFactory() {
         stage = new Stage();
 
-        FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/home-view.fxml"));
-        FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/question-bank.fxml"));
+        FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
+        FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
 
         try {
             homeScene = new Scene(home.load());
