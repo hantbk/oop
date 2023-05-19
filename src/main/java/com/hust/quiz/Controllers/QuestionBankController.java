@@ -3,11 +3,11 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -38,9 +38,7 @@ public class QuestionBankController implements Initializable {
     }
 
     private void updateCategory() {
-        TreeItem<String> rootNode = Model.getInstance().query("SELECT * FROM quiz.course_categories");
-
-
+        TreeItem<String> rootNode = Model.getInstance().updateCategory();
 
         category.setRoot(rootNode);
         category.setShowRoot(false);

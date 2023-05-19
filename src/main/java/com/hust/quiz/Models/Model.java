@@ -26,7 +26,7 @@ public class Model {
     }
 
     // query
-    public TreeItem<String> query(String query) {
+    public TreeItem<String> updateCategory() {
         TreeItem<String> rootNode = new TreeItem<>("Root Node");
         rootNode.setExpanded(true);
         try {
@@ -37,7 +37,7 @@ public class Model {
                 return rootNode;
             }
             Statement stmt = conn.createStatement();
-            ResultSet resultSet = stmt.executeQuery(query);
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM quiz.course_categories");
 
             ArrayList<TreeItem<String>> treeItems = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class Model {
             stmt.close();
             conn.close();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return rootNode;
     }
