@@ -20,7 +20,7 @@
 
 <AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
    <children>
-      <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
+      <AnchorPane prefHeight="800.0" prefWidth="1280.0">
          <children>
             <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css">
                <children>
@@ -31,7 +31,7 @@
                   </Label>
                   <AnchorPane layoutX="1064.0" prefHeight="150.0" prefWidth="90.0">
                      <children>
-                        <Button fx:id="btn_add" layoutX="45.0" layoutY="6.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.rightAnchor="9.400000000000006">
+                        <Button layoutX="45.0" layoutY="6.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.rightAnchor="9.400000000000006">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -105,12 +105,12 @@
                               </Label>
                               <Label layoutX="25.0" layoutY="63.0" text="Select a category:" textFill="#464343">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
                               <Label layoutX="25.0" layoutY="106.0" text="The default category for question shared in context">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
                               <CheckBox layoutX="25.0" layoutY="140.0" mnemonicParsing="false" text="Also show question from subcategories">
@@ -123,7 +123,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </CheckBox>
-                              <Button fx:id="btnCreateQuestion" layoutX="25.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
+                              <Button fx:id="btnCreateQuestion" layoutX="25.0" layoutY="206.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -148,7 +148,7 @@
                                           </ImageView>
                                           <Label layoutX="42.0" layoutY="2.0" prefHeight="50.0" prefWidth="188.0" text="Add Category" textFill="RED">
                                              <font>
-                                                <Font name="System Bold" size="30.0" />
+                                                <Font size="30.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -159,7 +159,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="200.0" text="Parent category">
                                                    <font>
-                                                      <Font size="20.0" />
+                                                      <Font size="18.0" />
                                                    </font>
                                                    <padding>
                                                       <Insets left="20.0" />
@@ -172,7 +172,7 @@
                                                             <Image url="@../Img/icons8-question-30.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ComboBox layoutX="330.0" layoutY="5.0" prefHeight="40.0" prefWidth="250.0" promptText="Default" />
+                                                      <ComboBox fx:id="btn_category2" layoutX="330.0" layoutY="5.0" prefHeight="40.0" prefWidth="250.0" promptText="Default" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>
@@ -181,7 +181,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="200.0" text="Name">
                                                    <font>
-                                                      <Font size="20.0" />
+                                                      <Font size="18.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets />
@@ -197,7 +197,7 @@
                                                             <Image url="@../Img/icons8-error-64.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <TextField layoutX="330.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
+                                                      <TextField fx:id="nameCategory" layoutX="330.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>
@@ -206,7 +206,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="200.0" text="Category Info">
                                                    <font>
-                                                      <Font size="20.0" />
+                                                      <Font size="18.0" />
                                                    </font>
                                                    <padding>
                                                       <Insets left="20.0" />
@@ -214,7 +214,7 @@
                                                 </Label>
                                                 <AnchorPane prefHeight="151.0" prefWidth="961.0">
                                                    <children>
-                                                      <TextArea layoutX="319.0" layoutY="3.0" prefHeight="130.0" prefWidth="511.0" />
+                                                      <TextArea fx:id="categoryInfo" layoutX="319.0" layoutY="3.0" prefHeight="130.0" prefWidth="511.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>
@@ -223,7 +223,7 @@
                                              <children>
                                                 <Label prefHeight="50.0" prefWidth="200.0" text="ID Number">
                                                    <font>
-                                                      <Font size="20.0" />
+                                                      <Font size="18.0" />
                                                    </font>
                                                    <padding>
                                                       <Insets left="20.0" />
@@ -231,12 +231,12 @@
                                                 </Label>
                                                 <AnchorPane prefHeight="50.0" prefWidth="985.0">
                                                    <children>
-                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="300.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="303.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../Img/icons8-question-30.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <TextField layoutX="330.0" layoutY="5.0" prefHeight="32.0" prefWidth="86.0" />
+                                                      <TextField fx:id="idNewCategory" layoutX="330.0" layoutY="5.0" prefHeight="32.0" prefWidth="86.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>
@@ -245,7 +245,7 @@
                                              <children>
                                                 <AnchorPane prefHeight="50.0" prefWidth="985.0">
                                                    <children>
-                                                      <Button layoutX="470.0" layoutY="25.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #dd1515;" text="ADD CATEGORY" textFill="WHITE">
+                                                      <Button fx:id="btnAddCategory" layoutX="470.0" layoutY="25.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" style="-fx-background-color: #dd1515;" text="ADD CATEGORY" textFill="WHITE">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
@@ -259,12 +259,12 @@
                                              <children>
                                                 <AnchorPane prefHeight="53.0" prefWidth="1137.0">
                                                    <children>
-                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="687.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="699.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../Img/icons8-error-64.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label layoutX="408.0" layoutY="-3.0" prefHeight="42.0" text="There are required fields in this form marked">
+                                                      <Label fx:id="noticeAddCategory" alignment="CENTER" layoutX="391.0" layoutY="-3.0" prefHeight="42.0" prefWidth="317.0" text="There are required fields in this form marked">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
@@ -277,6 +277,7 @@
                                     </VBox>
                                  </children>
                               </VBox>
+                              <TreeView fx:id="category2" layoutX="506.0" layoutY="97.0" prefHeight="200.0" prefWidth="250.0" visible="false" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
