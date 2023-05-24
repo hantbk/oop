@@ -7,40 +7,39 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ViewFactory {
-    public enum SCENES {
-        HOME,
-        QUESTION_BANK,
-        MULTI_CHOICE
-    }
+    private static ViewFactory instance;
     private final Stage stage;
     private Scene homeScene;
     private Scene questionBankScene;
-    private Scene multiChoiceScene;
+    private Scene multipleChoiceScene;
+    //private Scene choiceQuestionView;
 
-    private static ViewFactory instance;
     // singleton design pattern
     private ViewFactory() {
         stage = new Stage();
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
-        FXMLLoader multiChoiceView = new FXMLLoader(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
+        FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
+        //FXMLLoader choiceQuestionView = new FXMLLoader(getClass().getResource("/Fxml/ChoiceQuestionView.fxml"));
 
         try {
             homeScene = new Scene(home.load());
             questionBankScene = new Scene(questionBankView.load());
-            multiChoiceScene = new Scene(multiChoiceView.load());
+            multipleChoiceScene = new Scene(multipleChoiceView.load());
 
         } catch (IOException e) {
             System.out.println("Error to load fxml");
             System.out.println(e.getMessage());
         }
 
+        //stage.setScene(multipleChoiceQuestionScene);
         stage.setScene(homeScene);
         stage.setResizable(false);
         stage.setTitle("Quiz App");
         stage.show();
     }
+
     public static ViewFactory getInstance() {
         if (instance == null) {
             instance = new ViewFactory();
@@ -59,12 +58,18 @@ public class ViewFactory {
                 break;
             }
             case MULTI_CHOICE: {
-                stage.setScene(multiChoiceScene);
+                stage.setScene(multipleChoiceScene);
                 break;
             }
             default: {
                 stage.setScene(homeScene);
             }
         }
+    }
+
+    public enum SCENES {
+        HOME,
+        QUESTION_BANK,
+        MULTI_CHOICE
     }
 }
