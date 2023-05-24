@@ -21,7 +21,6 @@ public class ViewFactory {
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
         FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
-        //FXMLLoader choiceQuestionView = new FXMLLoader(getClass().getResource("/Fxml/ChoiceQuestionView.fxml"));
 
         try {
             homeScene = new Scene(home.load());
@@ -30,7 +29,7 @@ public class ViewFactory {
 
         } catch (IOException e) {
             System.out.println("Error to load fxml");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         //stage.setScene(multipleChoiceQuestionScene);

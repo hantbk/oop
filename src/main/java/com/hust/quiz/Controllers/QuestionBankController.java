@@ -8,21 +8,46 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import java.sql.SQLException;
+import java.util.*;
 
 public class QuestionBankController implements Initializable {
-
+    private Map<Integer, TreeItem<String>> treeItems;
+    private int parent_id = 0;
     @FXML
     private TabPane tabPane;
     @FXML
-    private ComboBox<String> btn_category;
+    private ComboBox<String> btn_category, btn_category2;
     @FXML
-    private TreeView<String> category;
+    private TreeView<String> category, category2;
     @FXML
-    private Button btnCreateQuestion;
+    private Button btnCreateQuestion, btnAddCategory;
+    @FXML
+    private TextField nameCategory, idNewCategory;
+    @FXML
+    private TextArea categoryInfo;
+    @FXML
+    private Label noticeAddCategory;
+
+    // https://stackoverflow.com/questions/1383797/java-hashmap-how-to-get-key-from-value
+    public static <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
+        Set<T> keys = new HashSet<>();
+        for (Map.Entry<T, E> entry : map.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                keys.add(entry.getKey());
+            }
+        }
+        return keys;
+    }
+
+    private static void expandAll(TreeItem<?> item) {
+        if (item != null && !item.isLeaf()) {
+            item.setExpanded(true);
+            for (TreeItem<?> child : item.getChildren()) {
+                expandAll(child);
+            }
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,8 +59,59 @@ public class QuestionBankController implements Initializable {
         category.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category.getSelectionModel().getSelectedItem();
-                btn_category.setValue(selectedItem.getValue());
-                category.setVisible(!category.isVisible());
+                if (selectedItem != null) {
+                    btn_category.setValue(selectedItem.getValue());
+                    category.setVisible(!category.isVisible());
+                }
+            }
+        });
+
+        category2.getParent().setOnMouseClicked(event -> category2.setVisible(false));
+        btn_category2.setOnMouseClicked(event -> category2.setVisible(!category2.isVisible()));
+        category2.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                TreeItem<String> selectedItem = category2.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    parent_id = getKeysByValue(treeItems, selectedItem).iterator().next();
+                    System.out.println(parent_id);
+                    btn_category2.setValue(selectedItem.getValue());
+                    category2.setVisible(!category2.isVisible());
+                }
+            }
+        });
+
+        btnAddCategory.setOnAction(actionEvent -> {
+            CategoryService s = new CategoryService();
+            String name = nameCategory.getText();
+            String info = categoryInfo.getText();
+            if (name.equals("") || idNewCategory.getText().equals("")) {
+                noticeAddCategory.setText("Please fill in all fields required!");
+            } else if (parent_id == 0) {
+                noticeAddCategory.setText("Please choose a parent category!");
+            } else {
+                int id = Integer.parseInt(idNewCategory.getText());
+                Category c = new Category(name, parent_id, 0, id, info);
+                try {
+                    s.addCategory(c);
+                    updateCategory();
+                    noticeAddCategory.setText("Add category successfully!");
+                } catch (SQLException e) {
+                    String errorMessage = e.getMessage();
+                    System.out.println(errorMessage);
+                    if (errorMessage.contains("Duplicate entry")) {
+                        String[] parts = errorMessage.split("'");
+                        String columnName = parts[3]; // Lấy tên của cột bị trùng lặp
+                        if (columnName.contains("id_number")) {
+                            noticeAddCategory.setText("ID is already existed!");
+                        } else if (columnName.contains("name")) {
+                            noticeAddCategory.setText("Name is already existed!");
+                        }
+                    } else {
+                        // Xử lý các loại ngoại lệ khác
+                        noticeAddCategory.setText("Add category failed!");
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
         });
     }
@@ -50,20 +126,26 @@ public class QuestionBankController implements Initializable {
         CategoryService s = new CategoryService();
         List<Category> categories = s.getCategories();
         TreeItem<String> rootNode = new TreeItem<>("Root Node");
-        ArrayList<TreeItem<String>> treeItems = new ArrayList<>();
+        treeItems = new HashMap<>();
 
         for (Category c : categories) {
             TreeItem<String> treeItem = new TreeItem<>(c.toString());
-            treeItems.add(treeItem);
+            treeItems.put(c.getId(), treeItem);
             int parent_id = c.getParent_id();
             if (parent_id == 0) {
                 rootNode.getChildren().add(treeItem);
             } else {
-                treeItems.get(parent_id - 1).getChildren().add(treeItem);
+                treeItems.get(parent_id).getChildren().add(treeItem);
             }
         }
         rootNode.setExpanded(true);
+        expandAll(rootNode);
+
         category.setRoot(rootNode);
         category.setShowRoot(false);
+
+
+        category2.setRoot(rootNode);
+        category2.setShowRoot(false);
     }
 }

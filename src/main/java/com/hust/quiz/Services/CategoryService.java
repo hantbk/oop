@@ -18,7 +18,7 @@ public class CategoryService {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt("id"), rs.getString("name"),
-                        rs.getInt("parent_id"), rs.getInt("course_count"), rs.getString("category_info"));
+                        rs.getInt("parent_id"), rs.getInt("course_count"), rs.getInt("id_number"), rs.getString("category_info"));
                 results.add(c);
             }
             rs.close();
@@ -27,5 +27,15 @@ public class CategoryService {
             System.out.println(e.getMessage());
         }
         return results;
+    }
+
+    public void addCategory(Category c) throws SQLException {
+        try (Connection conn = Utils.getConnection()) {
+            Statement st = conn.createStatement();
+            String sql = "INSERT INTO category (name, parent_id, course_count, id_number, category_info) VALUES ('" +
+                    c.getName() + "', " + c.getParent_id() + ", " + c.getCourse_count() + ", " + c.getId_number() + ", '" + c.getCategory_info() + "')";
+            st.executeUpdate(sql);
+            st.close();
+        }
     }
 }
