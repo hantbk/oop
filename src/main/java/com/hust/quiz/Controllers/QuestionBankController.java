@@ -1,23 +1,28 @@
 package com.hust.quiz.Controllers;
 
-import com.hust.quiz.Models.Model;
+import com.hust.quiz.Models.Category;
+import com.hust.quiz.Services.CategoryService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class QuestionBankController implements Initializable {
 
-    @FXML private ComboBox<String> btn_category;
-    @FXML private TreeView<String> category;
-    @FXML private Button btnCreateQuestion;
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private ComboBox<String> btn_category;
+    @FXML
+    private TreeView<String> category;
+    @FXML
+    private Button btnCreateQuestion;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,8 +39,30 @@ public class QuestionBankController implements Initializable {
             }
         });
     }
+
+    public void setTabPane(int index) {
+        SelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+        selectionModel.clearSelection();
+        selectionModel.select(index);
+    }
+
     private void updateCategory() {
-        TreeItem<String> rootNode = Model.getInstance().updateCategory();
+        CategoryService s = new CategoryService();
+        List<Category> categories = s.getCategories();
+        TreeItem<String> rootNode = new TreeItem<>("Root Node");
+        ArrayList<TreeItem<String>> treeItems = new ArrayList<>();
+
+        for (Category c : categories) {
+            TreeItem<String> treeItem = new TreeItem<>(c.toString());
+            treeItems.add(treeItem);
+            int parent_id = c.getParent_id();
+            if (parent_id == 0) {
+                rootNode.getChildren().add(treeItem);
+            } else {
+                treeItems.get(parent_id - 1).getChildren().add(treeItem);
+            }
+        }
+        rootNode.setExpanded(true);
         category.setRoot(rootNode);
         category.setShowRoot(false);
     }

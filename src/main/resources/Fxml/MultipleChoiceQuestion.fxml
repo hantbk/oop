@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.MultipleChoiceQuestionController">
+<AnchorPane prefHeight="760.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.MultipleChoiceQuestionController">
     <children>
         <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
             <children>
@@ -120,11 +120,11 @@
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #19A7CE;" />
-        <ScrollPane layoutX="60.0" layoutY="250.0" prefHeight="1000.0" prefWidth="1160.0">
+        <ScrollPane layoutX="60.0" layoutY="250.0" prefHeight="522.0" prefWidth="1156.0">
             <content>
-                <AnchorPane prefHeight="500.0" prefWidth="1160.0">
+                <AnchorPane prefHeight="729.0" prefWidth="1160.0">
                     <children>
-                        <AnchorPane layoutX="500.0" layoutY="525.0" prefHeight="290.0" prefWidth="575.0">
+                        <AnchorPane layoutX="500.0" layoutY="525.0" prefHeight="100.0" prefWidth="563.0">
                             <children>
                                 <GridPane fx:id="choiceGrid" prefHeight="23.0" prefWidth="19.0">
                                     <rowConstraints>
@@ -201,11 +201,14 @@
                                 </AnchorPane>
                             </children>
                         </GridPane>
+                  <Button fx:id="btn_blankchoice" layoutX="127.0" layoutY="588.0" mnemonicParsing="false" text="Blank for 3 more choice">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
                     </children>
                 </AnchorPane>
             </content>
         </ScrollPane>
     </children>
 </AnchorPane>
-
-

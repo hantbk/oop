@@ -2,40 +2,20 @@ DROP DATABASE IF EXISTS `quiz`;
 CREATE DATABASE `quiz`;
 USE `quiz`;
 
-CREATE TABLE `users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC)
-);
-
-CREATE TABLE `questions` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `question` VARCHAR(255) NOT NULL,
-  `A` VARCHAR(255) NOT NULL,
-  `B` VARCHAR(255) NOT NULL,
-  `C` VARCHAR(255) NOT NULL,
-  `D` VARCHAR(255) NOT NULL,
-  `answer` VARCHAR(255) NOT NULL,
-  `created_at` DATETIME NOT NULL,
-  `updated_at` DATETIME NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `course_categories` (
-    `id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `category` (
+    `id` INT NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `parent_id` INT,
     `course_count` INT NOT NULL,
+    `category_info` VARCHAR(255),
      CONSTRAINT `fk` FOREIGN KEY (`parent_id`)
-        REFERENCES `course_categories` (`id`)
+        REFERENCES `category` (`id`)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO `course_categories` (`id`, `name`, `parent_id`, `course_count`) VALUES
+INSERT INTO `category` (`id`, `name`, `parent_id`, `course_count`) VALUES
 (1, 'Course IT', NULL, 0),
 (2, 'Top for IT', 1, 0),
 (3, 'C câu hỏi dễ', 2, 256),
@@ -55,3 +35,17 @@ INSERT INTO `course_categories` (`id`, `name`, `parent_id`, `course_count`) VALU
 (17, 'Sử Địa GK2 L7', 2, 130),
 (18, 'Tin học GK2 L7', 2, 94),
 (19, 'Vật lý GK2 L7', 2, 121);
+
+
+-- CREATE TABLE `questions` (
+--   `id` INT NOT NULL AUTO_INCREMENT,
+--   `question` VARCHAR(255) NOT NULL,
+--   `A` VARCHAR(255) NOT NULL,
+--   `B` VARCHAR(255) NOT NULL,
+--   `C` VARCHAR(255) NOT NULL,
+--   `D` VARCHAR(255) NOT NULL,
+--   `answer` VARCHAR(255) NOT NULL,
+--   `created_at` DATETIME NOT NULL,
+--   `updated_at` DATETIME NOT NULL,
+--   PRIMARY KEY (`id`)
+-- );
