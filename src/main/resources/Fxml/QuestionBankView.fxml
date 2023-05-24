@@ -146,9 +146,9 @@
                                                 <Image url="@../Img/bluearrowdown.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="42.0" layoutY="2.0" prefHeight="50.0" text="Add Category" textFill="RED">
+                                          <Label layoutX="42.0" layoutY="2.0" prefHeight="50.0" prefWidth="188.0" text="Add Category" textFill="RED">
                                              <font>
-                                                <Font name="System Bold" size="20.0" />
+                                                <Font name="System Bold" size="30.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -465,14 +465,14 @@
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Button>
-                                                <HBox alignment="CENTER">
+                                                <HBox alignment="CENTER" prefHeight="31.0" prefWidth="1100.0">
                                                    <children>
-                                                      <Label text="There are required fields in this form marked">
+                                                      <Label prefHeight="14.0" prefWidth="275.0" text="There are required fields in this form marked">
                                                          <font>
                                                             <Font size="15.0" />
                                                          </font>
                                                          <HBox.margin>
-                                                            <Insets top="5.0" />
+                                                            <Insets top="10.0" />
                                                          </HBox.margin>
                                                       </Label>
                                                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -480,7 +480,7 @@
                                                             <Image url="@../Img/icons8-error-64.png" />
                                                          </image>
                                                          <HBox.margin>
-                                                            <Insets left="5.0" top="5.0" />
+                                                            <Insets left="5.0" top="10.0" />
                                                          </HBox.margin>
                                                       </ImageView>
                                                    </children>
