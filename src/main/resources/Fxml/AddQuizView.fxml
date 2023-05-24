@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
+    <children>
+        <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
+            <children>
+                <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
+                    <children>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../Img/menu.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../Img/male_user.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../Img/whitearrowdown.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="700.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+               <children>
+                  <HBox prefHeight="60.0" prefWidth="1160.0">
+                     <children>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/filecheck.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="60.0" prefWidth="235.0" text="Adding a new Quiz" textFill="RED">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/icons8-question-30.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" top="25.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <AnchorPane layoutX="57.0" layoutY="43.0" prefHeight="650.0" prefWidth="1040.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/bluearrowdown.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="50.0" text="General" textFill="RED">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="1140.0">
+                                 <children>
+                                    <Label prefHeight="50.0" prefWidth="500.0" text="Name">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Img/icons8-error-64.png" />
+                                             </image>
+                                          </ImageView>
+                                          <TextField layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="1140.0">
+                                 <children>
+                                    <Label prefHeight="50.0" prefWidth="500.0" text="Description">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                       <children>
+                                          <TextField alignment="TOP_LEFT" layoutX="230.0" layoutY="5.0" prefHeight="170.0" prefWidth="400.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="1140.0">
+                                 <children>
+                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                       <children>
+                                          <CheckBox layoutX="544.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="255.0" text="Display description on course page ">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </CheckBox>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="795.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Img/icons8-question-30.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/bluearrowdown.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="50.0" text="Timing" textFill="RED">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="1140.0">
+                                 <children>
+                                    <Label prefHeight="50.0" prefWidth="500.0" text="Name">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Img/icons8-question-30.png" />
+                                             </image>
+                                          </ImageView>
+                                          <DatePicker layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
