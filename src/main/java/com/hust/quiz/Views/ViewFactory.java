@@ -9,11 +9,13 @@ import java.io.IOException;
 public class ViewFactory {
     public enum SCENES {
         HOME,
-        QUESTION_BANK
+        QUESTION_BANK,
+        MULTI_CHOICE
     }
     private final Stage stage;
     private Scene homeScene;
     private Scene questionBankScene;
+    private Scene multiChoiceScene;
 
     private static ViewFactory instance;
     // singleton design pattern
@@ -22,10 +24,12 @@ public class ViewFactory {
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
+        FXMLLoader multiChoiceView = new FXMLLoader(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
 
         try {
             homeScene = new Scene(home.load());
             questionBankScene = new Scene(questionBankView.load());
+            multiChoiceScene = new Scene(multiChoiceView.load());
 
         } catch (IOException e) {
             System.out.println("Error to load fxml");
@@ -52,6 +56,10 @@ public class ViewFactory {
             }
             case QUESTION_BANK: {
                 stage.setScene(questionBankScene);
+                break;
+            }
+            case MULTI_CHOICE: {
+                stage.setScene(multiChoiceScene);
                 break;
             }
             default: {
