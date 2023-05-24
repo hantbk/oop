@@ -26,7 +26,7 @@ public class HomeController implements Initializable {
         // configure btn_add, btn_back
         btn_add.setOnAction(e -> {
             second_pane.setVisible(true);
-            first_pane.setOpacity(0.3);
+            first_pane.setOpacity(0.1);
             first_pane.setDisable(true);
         });
 

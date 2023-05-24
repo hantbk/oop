@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.HomeController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.HomeController">
    <children>
       <AnchorPane fx:id="second_pane" prefHeight="800.0" prefWidth="1280.0" visible="false">
          <children>
-            <AnchorPane layoutX="56.0" layoutY="298.0" prefHeight="192.0" prefWidth="1163.0" style="-fx-border-color: #AFD3E2; -fx-background-color: white;">
+            <AnchorPane layoutX="56.0" layoutY="272.0" prefHeight="210.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2; -fx-background-color: white;">
                <children>
-                  <VBox layoutX="1001.0" layoutY="30.0" prefHeight="164.0" prefWidth="160.0">
+                  <VBox layoutX="962.0" layoutY="19.0" prefHeight="164.0" prefWidth="160.0">
                      <children>
                         <Button fx:id="btn_question" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: rgba(0,0,0,0);" text="Questions" textFill="#19a7ce">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
-                      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: rgba(0,0,0,0);" text="Categories" textFill="#19a7ce">
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: rgba(0,0,0,0);" text="Categories" textFill="#19a7ce">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -43,17 +45,17 @@
                         <Font size="55.0" />
                      </font>
                   </Label>
+                  <Button fx:id="btn_back" layoutX="1116.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.rightAnchor="0.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/icons8-cancel-40.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
-            <Button fx:id="btn_back" layoutX="1183.0" layoutY="92.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Img/setting.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
@@ -70,9 +72,9 @@
                         <Image url="@../Img/male_user.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1230.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Img/dropdown.png" />
+                        <Image url="@../Img/whitearrowdown.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
@@ -82,16 +84,21 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="57.0" layoutY="92.0" prefHeight="186.0" prefWidth="1162.0" style="-fx-border-color: #AFD3E2;">
+            <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
                <children>
-                  <Label layoutX="30.0" layoutY="8.0" prefHeight="29.0" prefWidth="53.0" text="IT" textAlignment="CENTER" textFill="#dd1515">
+                  <Label layoutX="40.0" layoutY="20.0" prefHeight="30.0" prefWidth="60.0" text="IT" textAlignment="CENTER" textFill="#dd1515">
                      <font>
                         <Font size="60.0" />
                      </font>
                   </Label>
-                  <AnchorPane layoutX="1080.0" prefHeight="190.0" prefWidth="80.0">
+                  <Button layoutX="969.0" layoutY="96.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <AnchorPane layoutX="1064.0" layoutY="4.0" prefHeight="34.0" prefWidth="92.0">
                      <children>
-                        <Button fx:id="btn_add" layoutX="48.0" mnemonicParsing="false">
+                        <Button fx:id="btn_add" layoutX="84.0" layoutY="7.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -100,13 +107,146 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <ImageView fitHeight="27.0" fitWidth="10.0" layoutX="45.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="9.0">
+                           <image>
+                              <Image url="@../Img/redarrowdown.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="1006.0" layoutY="136.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
+                  <HBox layoutX="40.0" layoutY="100.0">
+                     <children>
+                        <Label text="Home" textFill="RED">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="My courses">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="THI CUỐI KỲ" textFill="RED">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="60.0" layoutY="259.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+               <children>
+                  <VBox layoutX="20.0" layoutY="20.0" prefHeight="350.0" prefWidth="356.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/filecheck.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label prefHeight="70.0" text="Kiểm tra cuối kỳ môn IT4895Q">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/filecheck.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label prefHeight="70.0" text="Thi thử KTLT">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/filecheck.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label prefHeight="70.0" text="Thi GK2 Tin học 7">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/filecheck.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label prefHeight="70.0" text="Thi GK2 Sử Địa 7">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/filecheck.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label prefHeight="70.0" text="Thi giữa kỳ 2 môn Công nghệ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
          </children>

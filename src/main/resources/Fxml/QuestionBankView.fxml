@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
    <children>
-      <AnchorPane fx:id="first_pane" layoutY="14.0" prefHeight="800.0" prefWidth="1280.0">
+      <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
          <children>
-            <AnchorPane layoutX="40.0" layoutY="75.0" prefHeight="140.0" prefWidth="1166.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css">
+            <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css">
                <children>
-                  <Label layoutX="44.0" layoutY="14.0" prefHeight="29.0" prefWidth="53.0" text="IT" textAlignment="CENTER" textFill="#dd1515">
+                  <Label layoutX="40.0" layoutY="20.0" prefHeight="30.0" prefWidth="60.0" text="IT" textAlignment="CENTER" textFill="#dd1515">
                      <font>
-                        <Font size="55.0" />
+                        <Font size="60.0" />
                      </font>
                   </Label>
-                  <AnchorPane layoutX="1080.0" prefHeight="170.0" prefWidth="84.0">
+                  <AnchorPane layoutX="1064.0" prefHeight="150.0" prefWidth="90.0">
                      <children>
-                        <Button fx:id="btn_add" layoutX="48.0" mnemonicParsing="false">
+                        <Button fx:id="btn_add" layoutX="45.0" layoutY="6.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.rightAnchor="9.400000000000006">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -34,35 +40,63 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button layoutX="-56.0" layoutY="111.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Button>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" layoutX="76.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="4.400000000000006" AnchorPane.topAnchor="15.0">
+                           <image>
+                              <Image url="@../Img/redarrowdown.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="44.0" layoutY="108.0" text="Home " textFill="RED">
+                  <Button layoutX="998.0" layoutY="100.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="170.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="21.0">
                      <font>
-                        <Font size="22.0" />
+                        <Font size="20.0" />
                      </font>
-                  </Label>
-                  <Label layoutX="110.0" layoutY="108.0" text="/ My courses / ">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="256.0" layoutY="108.0" text="THI CUỐI KỲ" textFill="RED">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
+                  </Button>
+                  <HBox layoutX="40.0" layoutY="100.0">
+                     <children>
+                        <Label text="Home" textFill="RED">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="My courses">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="THI CUỐI KỲ" textFill="RED">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
-            <TabPane layoutX="40.0" layoutY="278.0" prefHeight="464.0" prefWidth="1166.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="150.0" tabMinHeight="35.0" tabMinWidth="88.0">
-              <tabs>
-                <Tab text="Questions">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1194.0">
+            <TabPane layoutX="60.0" layoutY="250.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="150.0" tabMinHeight="35.0" tabMinWidth="88.0">
+               <tabs>
+                  <Tab text="Questions">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1194.0" style="-fx-border-color: #19A7CE;">
                            <children>
                               <Label layoutX="25.0" layoutY="14.0" text="Question bank" textFill="RED">
                                  <font>
@@ -71,42 +105,396 @@
                               </Label>
                               <Label layoutX="25.0" layoutY="63.0" text="Select a category:" textFill="#464343">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                               <Label layoutX="25.0" layoutY="106.0" text="The default category for question shared in context">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
-                              <CheckBox layoutX="20.0" layoutY="140.0" mnemonicParsing="false" text="Also show question from subcategories">
+                              <CheckBox layoutX="25.0" layoutY="140.0" mnemonicParsing="false" text="Also show question from subcategories">
                                  <font>
-                                    <Font size="13.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </CheckBox>
-                              <CheckBox layoutX="20.0" layoutY="170.0" mnemonicParsing="false" text="Also show old questions">
+                              <CheckBox layoutX="25.0" layoutY="170.0" mnemonicParsing="false" text="Also show old questions">
                                  <font>
-                                    <Font size="13.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </CheckBox>
-                              <Button layoutX="21.0" layoutY="202.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="240.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
+                              <Button layoutX="25.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
                                  <font>
-                                    <Font name="System Bold" size="15.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <ComboBox fx:id="btn_category" layoutX="155.0" layoutY="58.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />
-                              <TreeView fx:id="category" layoutX="155.0" layoutY="89.0" prefHeight="288.0" prefWidth="327.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
+                              <ComboBox fx:id="btn_category" layoutX="183.0" layoutY="60.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />
+                              <TreeView fx:id="category" layoutX="183.0" layoutY="91.0" prefHeight="286.0" prefWidth="359.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
                            </children></AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Categories">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </Tab>
+                     </content>
+                  </Tab>
+                  <Tab text="Categories">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #19A7CE;">
+                           <children>
+                              <VBox prefHeight="439.0" prefWidth="1137.0">
+                                 <children>
+                                    <AnchorPane prefHeight="0.0" prefWidth="1140.0">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Img/bluearrowdown.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label layoutX="42.0" layoutY="2.0" prefHeight="50.0" text="Add Category" textFill="RED">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <VBox prefHeight="392.0" prefWidth="1137.0">
+                                       <children>
+                                          <HBox prefHeight="50.0" prefWidth="881.0">
+                                             <children>
+                                                <Label prefHeight="50.0" prefWidth="200.0" text="Parent category">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="20.0" />
+                                                   </padding>
+                                                </Label>
+                                                <AnchorPane prefHeight="50.0" prefWidth="985.0">
+                                                   <children>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="300.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Img/icons8-question-30.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ComboBox layoutX="330.0" layoutY="5.0" prefHeight="40.0" prefWidth="250.0" promptText="Default" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="50.0" prefWidth="881.0">
+                                             <children>
+                                                <Label prefHeight="50.0" prefWidth="200.0" text="Name">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets left="20.0" />
+                                                   </padding>
+                                                </Label>
+                                                <AnchorPane prefHeight="50.0" prefWidth="985.0">
+                                                   <children>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="300.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Img/icons8-error-64.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <TextField layoutX="330.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="50.0" prefWidth="881.0">
+                                             <children>
+                                                <Label prefHeight="50.0" prefWidth="200.0" text="Category Info">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="20.0" />
+                                                   </padding>
+                                                </Label>
+                                                <AnchorPane prefHeight="151.0" prefWidth="961.0">
+                                                   <children>
+                                                      <TextArea layoutX="319.0" layoutY="3.0" prefHeight="130.0" prefWidth="511.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="50.0" prefWidth="881.0">
+                                             <children>
+                                                <Label prefHeight="50.0" prefWidth="200.0" text="ID Number">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="20.0" />
+                                                   </padding>
+                                                </Label>
+                                                <AnchorPane prefHeight="50.0" prefWidth="985.0">
+                                                   <children>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="300.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Img/icons8-question-30.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <TextField layoutX="330.0" layoutY="5.0" prefHeight="32.0" prefWidth="86.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="83.0" prefWidth="1137.0">
+                                             <children>
+                                                <AnchorPane prefHeight="50.0" prefWidth="985.0">
+                                                   <children>
+                                                      <Button layoutX="470.0" layoutY="25.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #dd1515;" text="ADD CATEGORY" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Line endX="950.0" endY="-5.8404541015625" layoutX="170.0" layoutY="14.0" opacity="0.3" startX="-150.0" startY="-5.8404541015625" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="50.0" prefWidth="881.0">
+                                             <children>
+                                                <AnchorPane prefHeight="53.0" prefWidth="1137.0">
+                                                   <children>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="687.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Img/icons8-error-64.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="408.0" layoutY="-3.0" prefHeight="42.0" text="There are required fields in this form marked">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
                   <Tab text="Import">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="439.0" prefWidth="1137.0">
+                                 <children>
+                                    <AnchorPane prefHeight="0.0" prefWidth="1140.0">
+                                       <children>
+                                          <Label prefHeight="50.0" text="Import questions from file" textFill="RED">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="0.0" prefWidth="1140.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1140.0">
+                                             <children>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Img/bluearrowdown.png" />
+                                                   </image>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
+                                                <Label prefWidth="450.0" text="File format" textFill="RED">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label text="Aiken format">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <Line endX="1020.0" opacity="0.3" startX="-100.0" />
+                                    <AnchorPane prefWidth="1140.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefWidth="1140.0">
+                                             <children>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Img/bluearrowright.png" />
+                                                   </image>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
+                                                <Label text="General" textFill="RED">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </AnchorPane>
+                                    <Line endX="1020.0" opacity="0.3" startX="-100.0" />
+                                    <AnchorPane prefHeight="50.0" prefWidth="1140.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1140.0">
+                                             <children>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Img/bluearrowdown.png" />
+                                                   </image>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
+                                                <Label text="Import questions from file" textFill="RED">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="70.0" prefWidth="1140.0">
+                                       <children>
+                                          <HBox prefWidth="1140.0">
+                                             <children>
+                                                <Label text="Import">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <VBox prefWidth="668.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                                                         <children>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../Img/icons8-error-64.png" />
+                                                               </image>
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </ImageView>
+                                                            <Button mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: #19A7CE;" text="CHOOSE A FILE" textFill="WHITE">
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Label text="Maximum size for new files: 100MB">
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <Button mnemonicParsing="false" prefHeight="110.0" prefWidth="550.0" style="-fx-background-color: rgba(0,0,0,0); -fx-border-color: BLACK; -fx-border-width: 0.3px;" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="3.0">
+                                                               <graphic>
+                                                                  <AnchorPane style="-fx-border-style: dashed; -fx-border-width: 1px;">
+                                                                     <children>
+                                                                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="550.0">
+                                                                           <children>
+                                                                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@../Img/dropfile.gif" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                              <Label text="You can drag and drop files here to add them." />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                               </graphic>
+                                                               <padding>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </padding>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="400.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefWidth="1100.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Button>
+                                                <HBox alignment="CENTER">
+                                                   <children>
+                                                      <Label text="There are required fields in this form marked">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Img/icons8-error-64.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                   <Tab text="Export">
@@ -114,9 +502,9 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                      </content>
                   </Tab>
-              </tabs>
+               </tabs>
             </TabPane>
-            <AnchorPane layoutY="-16.0" prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #19A7CE;" />
+            <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #19A7CE;" />
          </children>
       </AnchorPane>
    </children>

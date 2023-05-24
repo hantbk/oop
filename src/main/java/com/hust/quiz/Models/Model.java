@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Model {
     static final String url = "jdbc:mysql://localhost:3306/quiz";
     static final String username = "root";
-    static final String password = "";
+    static final String password = "root";
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Model instance;
 
