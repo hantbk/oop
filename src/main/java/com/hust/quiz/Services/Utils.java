@@ -8,7 +8,7 @@ public class Utils {
     static final String url = "jdbc:mysql://localhost:3306/quiz";
     static final String username = "root";
     // password maybe different
-    static final String password = "";
+    static final String password = "root";
 
     static {
         try {

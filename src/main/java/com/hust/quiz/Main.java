@@ -14,7 +14,6 @@ public class Main extends Application {
         launch();
     }
 
-    @Override
     public void start(Stage stage) throws IOException {
 //        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
 //        Scene scene = new Scene(root);
@@ -23,4 +22,6 @@ public class Main extends Application {
 //        stage.show();
         ViewFactory view = ViewFactory.getInstance();
     }
+
+
 }

@@ -15,6 +15,7 @@ CREATE TABLE `category` (
     PRIMARY KEY (`id`)
 );
 
+
 INSERT INTO `category` (`id`, `name`, `parent_id`, `course_count`) VALUES
 (1, 'Course IT', NULL, 0),
 (2, 'Top for IT', 1, 0),

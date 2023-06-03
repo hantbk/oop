@@ -37,6 +37,7 @@ public class ViewFactory {
         stage.setScene(homeScene);
         stage.setResizable(false);
         stage.setTitle("Quiz App");
+        stage.setFullScreen(true);
         stage.show();
     }
 

@@ -18,9 +18,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="760.0" minWidth="1280.0" prefHeight="760.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
    <children>
-      <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
+      <AnchorPane fx:id="first_pane" prefHeight="780.0" prefWidth="1280.0">
          <children>
             <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css">
                <children>
