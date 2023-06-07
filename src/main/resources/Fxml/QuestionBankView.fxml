@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1280.0">
          <children>
@@ -108,28 +109,78 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="25.0" layoutY="106.0" text="The default category for question shared in context">
+                              <Label layoutX="25.0" layoutY="105.0" text="The default category for question shared in context">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <CheckBox layoutX="25.0" layoutY="140.0" mnemonicParsing="false" text="Also show question from subcategories">
+                              <CheckBox layoutX="25.0" layoutY="135.0" mnemonicParsing="false" text="Also show question from subcategories">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </CheckBox>
-                              <CheckBox layoutX="25.0" layoutY="170.0" mnemonicParsing="false" text="Also show old questions">
+                              <CheckBox layoutX="25.0" layoutY="160.0" mnemonicParsing="false" text="Also show old questions">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </CheckBox>
-                              <Button fx:id="btnCreateQuestion" layoutX="25.0" layoutY="206.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
+                              <Button fx:id="btnCreateQuestion" layoutX="25.0" layoutY="190.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <ComboBox fx:id="btn_category" layoutX="183.0" layoutY="60.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />
                               <TreeView fx:id="category" layoutX="183.0" layoutY="91.0" prefHeight="286.0" prefWidth="359.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
+                              <AnchorPane fx:id="pane_question_list" layoutX="25.0" layoutY="235.0" visible="false">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </CheckBox>
+                                          <VBox prefWidth="1000.0">
+                                             <children>
+                                                <Label prefWidth="300.0" text="Question">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Question name" textFill="#19a7ce">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="/">
+                                                         <HBox.margin>
+                                                            <Insets left="3.0" right="3.0" />
+                                                         </HBox.margin>
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefWidth="300.0" text="ID number" textFill="#19a7ce">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <Label text="Actions">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <ScrollPane fx:id="questionBankList" hbarPolicy="NEVER" layoutY="40.0" prefHeight="143.0" prefWidth="1089.0" />
+                                 </children>
+                              </AnchorPane>
+                              <ComboBox fx:id="btn_category" layoutX="183.0" layoutY="60.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
