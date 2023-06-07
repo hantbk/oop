@@ -12,6 +12,7 @@ public class ViewFactory {
     private Scene homeScene;
     private Scene questionBankScene;
     private Scene multipleChoiceScene;
+    private Scene addQuizScene;
     //private Scene choiceQuestionView;
 
     // singleton design pattern
@@ -21,16 +22,17 @@ public class ViewFactory {
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
         FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
-        //FXMLLoader choiceQuestionView = new FXMLLoader(getClass().getResource("/Fxml/ChoiceQuestionView.fxml"));
+        FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
 
         try {
             homeScene = new Scene(home.load());
             questionBankScene = new Scene(questionBankView.load());
             multipleChoiceScene = new Scene(multipleChoiceView.load());
+            addQuizScene = new Scene(addQuizView.load());
 
         } catch (IOException e) {
             System.out.println("Error to load fxml");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         //stage.setScene(multipleChoiceQuestionScene);
@@ -62,6 +64,10 @@ public class ViewFactory {
                 stage.setScene(multipleChoiceScene);
                 break;
             }
+            case ADD_QUIZ: {
+                stage.setScene(addQuizScene);
+                break;
+            }
             default: {
                 stage.setScene(homeScene);
             }
@@ -71,6 +77,7 @@ public class ViewFactory {
     public enum SCENES {
         HOME,
         QUESTION_BANK,
-        MULTI_CHOICE
+        MULTI_CHOICE,
+        ADD_QUIZ
     }
 }

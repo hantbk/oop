@@ -1,57 +1,33 @@
 package com.hust.quiz.Models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Question {
-    private String id;
-    private String content;
-    private int categoryId;
-    private List<Choice> listChoice;
+    private int question_id;
+    private String question_content;
+    private int category_id;
+    public Question() {
 
-    public Question(){
     }
 
-    public Question(String id, String content, List<Choice> listChoice) {
-        this.id = id;
-        this.content = content;
-        this.listChoice = listChoice;
+    // missing category: FIXED - DONE
+    // constructor for getting questions
+    public Question(int question_id, String question_content, int category_id) {
+        this.question_id = question_id;
+        this.question_content = question_content;
+        this.category_id = category_id;
     }
 
-
-    public void getDetailQuestion() {
-        System.out.println(id + ": " + content);
-        for(Choice choice : listChoice){
-            System.out.println(choice.toString());
-        }
+    // missing category - DONE FIXED
+    // constructor for adding questions: NOT DONE
+    public int getId() {
+        return question_id;
     }
-
-    public Question(String id, String content, int categoryId, List<Choice> listChoice) {
-        this.id = id;
-        this.content = content;
-        this.categoryId = categoryId;
-        this.listChoice = listChoice;
+    public void setId(int id) {
+        this.question_id = id;
     }
-
-//    public String
-
-    public String getId() { return id;  }
-
-    public void setId(String id) {  this.id = id;   }
-
-    public String getContent() {    return content; }
-
-    public void setContent(String content) {    this.content = content; }
-
-    public int getCategoryId() {   return categoryId; }
-
-    public void setCategoryId(int categoryId) {   this.categoryId = categoryId; }
-
-    public List<Choice> getListChoice() {
-        return listChoice;
+    public String getQuestion() {
+        return question_content;
     }
-
-    public void setListChoice(List<Choice> listChoice) {
-        this.listChoice = listChoice;
+    public void setQuestion(String question) {
+        this.question_content = question;
     }
 }

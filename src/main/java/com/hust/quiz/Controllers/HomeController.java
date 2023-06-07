@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
     @FXML
-    private Button btn_add, btn_back, btn_question, btn_category, btn_import, btn_export;
+    private Button btn_add, btn_back, btn_question, btn_category, btn_import, btn_export, btn_turn_editing_on;
     @FXML
     private AnchorPane second_pane, first_pane;
 
@@ -34,6 +34,12 @@ public class HomeController implements Initializable {
             first_pane.setDisable(false);
         });
 
+        // configure btn_turn_editing_on
+
+        btn_turn_editing_on.setOnAction(event -> {
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ);
+        });
+
         // configure btn_question, btn_category, btn_import, btn_export
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
         try {
@@ -42,6 +48,7 @@ public class HomeController implements Initializable {
             throw new RuntimeException(e);
         }
         QuestionBankController controller = loader.getController();
+
         btn_question.setOnAction(event -> {
             controller.setTabPane(0);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
@@ -61,7 +68,5 @@ public class HomeController implements Initializable {
             controller.setTabPane(3);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
         });
-
-
     }
 }
