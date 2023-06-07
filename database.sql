@@ -2,23 +2,48 @@ DROP DATABASE IF EXISTS `quiz`;
 CREATE DATABASE `quiz`;
 USE `quiz`;
 
-CREATE TABLE `category` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL,
-    `parent_id` INT,
-    `course_count` INT NOT NULL,
-    `id_number` INT NOT NULL,
-    `category_info` VARCHAR(255),
-     CONSTRAINT `fk` FOREIGN KEY (`parent_id`)
-        REFERENCES `category` (`id`)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    PRIMARY KEY (`id`),
-    UNIQUE (`id_number`),
-    UNIQUE (`name`)
-);
+CREATE TABLE `quiz`.`category` (
+  `category_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category_name` VARCHAR(45) NOT NULL,
+  `parent_id` INT UNSIGNED,
+  `course_count` INT NULL,
+  `id_number` INT UNSIGNED NOT NULL,
+  `category_info` VARCHAR(255) NULL,
+  PRIMARY KEY (`category_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
-INSERT INTO `category` (`id`, `name`, `parent_id`, `course_count`, `id_number`) VALUES
+CREATE TABLE `quiz`.`question` (
+  `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `question_content` VARCHAR(255) NOT NULL,
+  `category_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`question_id`),
+  INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
+  CONSTRAINT `category_id`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `quiz`.`category` (`category_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE `quiz`.`answer` (
+  `answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `answer_content` VARCHAR(255) NOT NULL,
+  `answer_is_correct` TINYINT NOT NULL,
+  `answer_grade` INT NULL,
+  `question_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`answer_id`),
+  INDEX `question_id_idx` (`question_id` ASC) VISIBLE,
+  CONSTRAINT `question_id`
+    FOREIGN KEY (`question_id`)
+    REFERENCES `quiz`.`question` (`question_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+INSERT INTO `category` (`category_id`, `category_name`, `parent_id`, `course_count`, `id_number`) VALUES
 (1, 'Course IT', NULL, 0, 1),
 (2, 'Top for IT', 1, 0, 2),
 (3, 'C câu hỏi dễ', 2, 256, 3),
@@ -39,16 +64,6 @@ INSERT INTO `category` (`id`, `name`, `parent_id`, `course_count`, `id_number`) 
 (18, 'Tin học GK2 L7', 2, 94, 18),
 (19, 'Vật lý GK2 L7', 2, 121, 19);
 
-
--- CREATE TABLE `questions` (
---   `id` INT NOT NULL AUTO_INCREMENT,
---   `question` VARCHAR(255) NOT NULL,
---   `A` VARCHAR(255) NOT NULL,
---   `B` VARCHAR(255) NOT NULL,
---   `C` VARCHAR(255) NOT NULL,
---   `D` VARCHAR(255) NOT NULL,
---   `answer` VARCHAR(255) NOT NULL,
---   `created_at` DATETIME NOT NULL,
---   `updated_at` DATETIME NOT NULL,
---   PRIMARY KEY (`id`)
--- );
+INSERT INTO `question` (`question_id`, `question_content`, `category_id`) VALUES
+(1, 'Ay yo', 4),
+(2, 'do dat', 4);
