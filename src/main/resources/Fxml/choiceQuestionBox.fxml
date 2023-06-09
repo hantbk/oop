@@ -16,7 +16,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="25.0" prefWidth="109.0" />
+            <ComboBox fx:id="cbGrade" prefHeight="25.0" prefWidth="109.0" />
          </children>
       </HBox>
       <HBox layoutX="22.0" layoutY="44.0" prefHeight="45.0" prefWidth="309.0">

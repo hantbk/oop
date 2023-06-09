@@ -64,8 +64,8 @@ public class QuestionBankController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.MULTI_CHOICE));
         updateCategory();
+        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.MULTI_CHOICE));
         // configure btn_category
         btn_category.getParent().setOnMouseClicked(event -> category.setVisible(false));
         btn_category.setOnMouseClicked(event -> category.setVisible(!category.isVisible()));
@@ -105,7 +105,7 @@ public class QuestionBankController implements Initializable {
 
                             // question content
                             // test: System.out.println(item.getQuestion());
-                            Label label = new Label(item.getQuestion());
+                            Label label = new Label(item.getQuestionContent());
                             label.setPrefWidth(990);
                             label.setFont(new Font(15));
 
