@@ -54,4 +54,11 @@ public class ChoiceService {
             e.printStackTrace();
         }
     }
+
+    private void addChoice(List<Choice> choices, int question_id) {
+        for (Choice choice : choices) {
+            choice.setQuestion_id(question_id);
+            addChoice(choice);
+        }
+    }
 }

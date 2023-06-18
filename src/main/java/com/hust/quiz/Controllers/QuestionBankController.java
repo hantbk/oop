@@ -1,7 +1,10 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.AikenFormatChecker;
 import com.hust.quiz.Models.Category;
+
 import com.hust.quiz.Models.Question;
+import com.hust.quiz.Models.FileChecker;
 import com.hust.quiz.Services.CategoryService;
 import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
@@ -10,12 +13,26 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+import javafx.stage.FileChooser;
+
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.*;
+import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,9 +55,13 @@ public class QuestionBankController implements Initializable {
     @FXML
     private Label noticeAddCategory;
     @FXML
+
     private ScrollPane questionBankList;
     @FXML
     private AnchorPane pane_question_list;
+    @FXML
+    private Button btnChooseFile;
+
 
     private static void expandAll(TreeItem<?> item) {
         if (item != null && !item.isLeaf()) {
@@ -160,7 +181,33 @@ public class QuestionBankController implements Initializable {
                 }
             }
         });
+
+        btnChooseFile.setOnAction(actionEvent -> {
+            FileChooser filechooser = new FileChooser();
+            filechooser.setTitle("Open Aiken File");
+            File selectedfile = filechooser.showOpenDialog(null);
+
+            if(selectedfile != null) {
+                String directory = selectedfile.getAbsolutePath();
+                String new_directory = directory.replace("/", "//");
+                System.out.println(new_directory);
+                }else {
+                System.out.println("file is not valid");
+            }
+
+            if(selectedfile != null){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("File Selected");
+                alert.setHeaderText(null);
+                if (FileChecker.isTextFile(selectedfile.getAbsolutePath().replace("/", "//")))
+                    alert.setContentText(AikenFormatChecker.checkAikenFormat(selectedfile.getAbsolutePath().replace("/", "//")));
+                else
+                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(selectedfile.getAbsolutePath().replace("/", "//")));
+                alert.showAndWait();
+            }
+        });
     }
+
 
     public void setTabPane(int index) {
         tabPane.getSelectionModel().select(index);
@@ -193,3 +240,5 @@ public class QuestionBankController implements Initializable {
         category2.setShowRoot(false);
     }
 }
+
+
