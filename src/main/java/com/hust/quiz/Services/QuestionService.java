@@ -78,4 +78,20 @@ public class QuestionService {
         }
         return result;
     }
+
+    static public int getLastQuestionId(){
+        try(Connection conn = Utils.getConnection()){
+            String sql = "SELECT question_id FROM question ORDER BY question_id DESC LIMIT 1";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("question_id");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

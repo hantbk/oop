@@ -11,6 +11,10 @@ public class Question {
     private int category_id;
     private List<Choice> listChoice;
 
+    public Question(String question_text) {
+        this.question_text = question_text;
+    }
+
     public Question(String question_name, String question_text, int category_id) {
         this.question_name = question_name;
         this.question_text = question_text;
