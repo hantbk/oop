@@ -15,7 +15,8 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE `quiz`.`question` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `question_content` VARCHAR(255) NOT NULL,
+  `question_content` VARCHAR(255) ,
+  `question_name` VARCHAR(255) ,
   `category_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`question_id`),
   INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
@@ -27,13 +28,13 @@ CREATE TABLE `quiz`.`question` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `quiz`.`answer` (
-  `answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `answer_content` VARCHAR(255) NOT NULL,
-  `answer_is_correct` TINYINT NOT NULL,
-  `answer_grade` INT NULL,
+CREATE TABLE `quiz`.`choice` (
+  `choice_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `choice_content` VARCHAR(255) NOT NULL,
+  `choice_is_correct` TINYINT NOT NULL,
+  `choice_grade` INT NULL,
   `question_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`answer_id`),
+  PRIMARY KEY (`choice_id`),
   INDEX `question_id_idx` (`question_id` ASC) VISIBLE,
   CONSTRAINT `question_id`
     FOREIGN KEY (`question_id`)
