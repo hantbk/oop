@@ -1,7 +1,7 @@
 package com.hust.quiz.Models;
 
 public class Category {
-    private int id;
+    private int id; //
     private String name;
     private int parent_id = 0;
     private int course_count;
@@ -27,6 +27,14 @@ public class Category {
         this.course_count = course_count;
         this.id_number = id_number;
         this.category_info = category_info;
+    }
+
+    public static String getName(String category_name) {
+        int openParenIndex = category_name.indexOf(" (");
+        if (openParenIndex < 0) { // If we have no " ("
+            openParenIndex = category_name.length();
+        }
+        return category_name.substring(0, openParenIndex);
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.CategoryService;
 import com.hust.quiz.Services.QuestionService;
-import com.hust.quiz.Services.Utils;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,11 +12,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import java.net.URL;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.*;
 
 public class QuestionBankController implements Initializable {
@@ -79,12 +77,8 @@ public class QuestionBankController implements Initializable {
                     // add questions found in scrollPane by adding in listView
                     QuestionService questionService = new QuestionService();
                     // Get category_name
-                    String btn_content = btn_category.getValue();
-                    int openParenIndex = btn_content.indexOf(" (");
-                    if (openParenIndex < 0) { // If we have no " ("
-                        openParenIndex = btn_content.length();
-                    }
-                    String category_name = btn_content.substring(0, openParenIndex);
+                    // String btn_content = btn_category.getValue();
+                    String category_name = selectedItem.getValue();
                     // Get the correct category_name: System.out.println(category_name);
                     // Find ID of the category
                     CategoryService categoryService = new CategoryService();
@@ -210,7 +204,6 @@ public class QuestionBankController implements Initializable {
 
         category.setRoot(rootNode);
         category.setShowRoot(false);
-
 
         category2.setRoot(rootNode);
         category2.setShowRoot(false);
