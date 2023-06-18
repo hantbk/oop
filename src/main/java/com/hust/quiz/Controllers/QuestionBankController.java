@@ -131,7 +131,7 @@ public class QuestionBankController implements Initializable {
 
         btnChooseFile.setOnAction(actionEvent -> {
             FileChooser filechooser = new FileChooser();
-            filechooser.setTitle("Choose Quiz");
+            filechooser.setTitle("Open Aiken File");
             File selectedfile = filechooser.showOpenDialog(null);
 
             if(selectedfile != null) {
