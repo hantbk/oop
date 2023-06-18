@@ -21,8 +21,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddQuestionController implements Initializable {
+    private final List<ChoiceBoxController> listChoiceBoxController = new ArrayList<>();
     @FXML
-    private Button btn_blankchoice;
+    private Button btn_blankChoice;
     @FXML
     private VBox vBoxAddChoiceBox;
     @FXML
@@ -30,46 +31,40 @@ public class AddQuestionController implements Initializable {
     @FXML
     private Label errorMessage;
     @FXML
-    private Button btn_SaveAndContinueEditting;
+    private Button btn_SaveAndContinueEditing;
     @FXML
     private ComboBox<String> kindOfCategory;
-
     @FXML
     private Button btn_SaveChanges;
     @FXML
     private TextField text_QuestionName;
-
     @FXML
     private TextArea text_QuestionText;
     @FXML
     private TextField text_DefaultMark;
     private int countChoice = 0;
-    private List<ChoiceBoxController> listChoiceBoxController = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //add 2 choiceBox
         addTwoChoiceBox();
-        //add list catergoty to comboBox
+        //add list category to comboBox
         updateCategory();
 
         //Luu cac thong tin va day len csdl
-        btn_SaveAndContinueEditting.setOnAction(event -> {
+        btn_SaveAndContinueEditing.setOnAction(event -> {
             if ((text_QuestionText != null) && (text_QuestionName != null) && (kindOfCategory.getValue() != null)) {
-                CategoryService categoryService = new CategoryService();
-                QuestionService questionService = new QuestionService();
-                String categoryName = Category.getName(kindOfCategory.getValue());
+                String categoryName = kindOfCategory.getValue();
                 Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText(),
-                        categoryService.getID(categoryName));
-                questionService.addQuestion(newQuestion);
+                        CategoryService.getID(categoryName));
+                QuestionService.addQuestion(newQuestion);
 
-                ChoiceService choiceService = new ChoiceService();
-                int id = questionService.getId(newQuestion.getQuestion_name());
-                List<Choice> listChoice = new ArrayList<>();
+                int id = QuestionService.getId(newQuestion.getQuestion_name());
+
                 for (ChoiceBoxController controller : listChoiceBoxController) {
                     if (controller.getChoiceText() != null) {
                         Choice newChoice = new Choice(controller.getChoiceText(), false, controller.getGrade(), id);
-                        choiceService.addChoice(newChoice);
+                        ChoiceService.addChoice(newChoice);
                     }
                 }
 
@@ -81,23 +76,18 @@ public class AddQuestionController implements Initializable {
                 text_QuestionText.setText(null);
                 text_DefaultMark.setText(null);
             } else {
-                errorMessage.setText("Add falled! You need to fill all infor about question!");
+                errorMessage.setText("Add failed! You need to fill all information about question!");
             }
         });
 
         //bam vao save changes de luu thong len csdl va quay ve Question_Bank
-        btn_SaveChanges.setOnAction(event -> {
-
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
-        });
+        btn_SaveChanges.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK));
 
         //nhan vao cancel de ve QuestionBank
-        btn_Cancel.setOnAction(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
-        });
+        btn_Cancel.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK));
 
         //them 3 choice sau khi nhan vao btn
-        btn_blankchoice.setOnAction(event -> {
+        btn_blankChoice.setOnAction(event -> {
             if (countChoice < 5) {
                 try {
                     //add choiceBox3
@@ -152,21 +142,18 @@ public class AddQuestionController implements Initializable {
         }
     }
 
-    //ham update category vao combobox
+    //ham update category vao combo-box
     public void updateCategory() {
-        CategoryService categoryService = new CategoryService();
-        List<Category> listCategory = categoryService.getCategories();
+        List<Category> listCategory = CategoryService.getCategories();
         for (Category category : listCategory) {
             kindOfCategory.getItems().add(category.toString());
         }
     }
 
-    //testaddchoice
+    //test add choice
     public void testAddChoice(String nameOfQuestion) {
-        QuestionService questionService = new QuestionService();
-        ChoiceService choiceService = new ChoiceService();
-        int idQuestion = questionService.getId(nameOfQuestion);
-        List<Choice> listChoice = choiceService.getChoice(idQuestion);
+        int idQuestion = QuestionService.getId(nameOfQuestion);
+        List<Choice> listChoice = ChoiceService.getChoice(idQuestion);
         for (Choice choice : listChoice) {
             System.out.println(choice.getContent() + "\n");
         }
