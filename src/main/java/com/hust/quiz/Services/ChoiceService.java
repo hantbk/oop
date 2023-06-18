@@ -1,7 +1,7 @@
 package com.hust.quiz.Services;
 
-import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Choice;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChoiceService {
-    public List<Choice> getChoice(int question_id) {
+    public static List<Choice> getChoice(int question_id) {
         List<Choice> result = new ArrayList<>();
-        try (Connection conn = Utils.getConnection()){
+        try (Connection conn = Utils.getConnection()) {
             // write query
             String sql = "SELECT * FROM choice WHERE question_id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -23,8 +23,8 @@ public class ChoiceService {
 
             // add questions found to list
             while (rs.next()) {
-               Choice choice = new Choice(rs.getInt("choice_id"), rs.getString("choice_content"),
-                       rs.getBoolean("choice_is_correct"), rs.getInt("choice_grade"), question_id);
+                Choice choice = new Choice(rs.getInt("choice_id"), rs.getString("choice_content"),
+                        rs.getBoolean("choice_is_correct"), rs.getInt("choice_grade"), question_id);
                 result.add(choice);
             }
             // close
@@ -38,8 +38,8 @@ public class ChoiceService {
     }
 
     //add  choice to sql
-    public void addChoice(Choice choice) {
-        try(Connection conn = Utils.getConnection()){
+    public static void addChoice(Choice choice) {
+        try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO choice (choice_content, choice_is_correct, choice_grade, question_id)" +
                     " VALUES (?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -49,15 +49,14 @@ public class ChoiceService {
             pst.setInt(4, choice.getQuestion_id());
             pst.executeUpdate();
             pst.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void addChoice(List<Choice> choices, int question_id) {
+    public static void addChoice(List<Choice> choices) {
         for (Choice choice : choices) {
-            choice.setQuestion_id(question_id);
             addChoice(choice);
         }
     }

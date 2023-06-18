@@ -3,29 +3,30 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.AikenFormatChecker;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.FileChecker;
+import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.CategoryService;
+import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.*;
-import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class QuestionBankController implements Initializable {
-    private Map<Integer, TreeItem<String>> treeItems;
-    private int parent_id = 0;
+    private int parent_id = -1;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -41,18 +42,13 @@ public class QuestionBankController implements Initializable {
     @FXML
     private Label noticeAddCategory;
     @FXML
+
+    private ScrollPane questionBankList;
+    @FXML
+    private AnchorPane pane_question_list;
+    @FXML
     private Button btnChooseFile;
 
-    // https://stackoverflow.com/questions/1383797/java-hashmap-how-to-get-key-from-value
-    public static <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
-        Set<T> keys = new HashSet<>();
-        for (Map.Entry<T, E> entry : map.entrySet()) {
-            if (Objects.equals(value, entry.getValue())) {
-                keys.add(entry.getKey());
-            }
-        }
-        return keys;
-    }
 
     private static void expandAll(TreeItem<?> item) {
         if (item != null && !item.isLeaf()) {
@@ -65,17 +61,62 @@ public class QuestionBankController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.MULTI_CHOICE));
         updateCategory();
+
+        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUESTION));
+
         // configure btn_category
         btn_category.getParent().setOnMouseClicked(event -> category.setVisible(false));
         btn_category.setOnMouseClicked(event -> category.setVisible(!category.isVisible()));
+        // double-click on item -> show question list
         category.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
                     btn_category.setValue(selectedItem.getValue());
                     category.setVisible(!category.isVisible());
+                    // add questions found in scrollPane by adding in listView
+                    String category_name = selectedItem.getValue();
+                    // Find ID of the category
+                    int id = CategoryService.getID(category_name);
+
+                    // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
+                    List<Question> questionList = QuestionService.getQuestions(id);
+                    // Check if category has questions or not
+                    if (!questionList.isEmpty()) {
+                        ListView<HBox> listView = new ListView<>();
+                        listView.setPrefSize(1089, 143);
+
+                        // put every question in the list in listView
+                        for (Question item : questionList) {
+                            // checkbox first
+                            CheckBox checkBox = new CheckBox();
+                            checkBox.setPadding(new Insets(0, 10, 0, 0));
+
+                            // question content
+                            // test: System.out.println(item.getQuestion());
+                            Label label = new Label(item.getQuestionContent());
+                            label.setPrefWidth(990);
+                            label.setFont(new Font(15));
+
+                            // Button needs to edit: NOT DONE
+                            Button btn_edit = new Button("edit");
+                            btn_edit.setFont(Font.font(15));
+                            btn_edit.setStyle("-fx-border-style: none; -fx-text-fill: #19a7ce");
+
+                            // hBox contains all things CENTER_LEFT
+                            HBox hBox = new HBox(checkBox, label, btn_edit);
+                            hBox.setAlignment(Pos.CENTER_LEFT);
+
+                            // adding hBox into listView
+                            listView.getItems().add(hBox);
+                        }
+                        // show list
+                        questionBankList.setContent(listView);
+                        pane_question_list.setVisible(true);
+                    } else {
+                        pane_question_list.setVisible(false);
+                    }
                 }
             }
         });
@@ -86,7 +127,7 @@ public class QuestionBankController implements Initializable {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category2.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
-                    parent_id = getKeysByValue(treeItems, selectedItem).iterator().next();
+                    parent_id = CategoryService.getParentID(selectedItem.getValue());
                     System.out.println(parent_id);
                     btn_category2.setValue(selectedItem.getValue());
                     category2.setVisible(!category2.isVisible());
@@ -95,18 +136,17 @@ public class QuestionBankController implements Initializable {
         });
 
         btnAddCategory.setOnAction(actionEvent -> {
-            CategoryService s = new CategoryService();
             String name = nameCategory.getText();
             String info = categoryInfo.getText();
             if (name.equals("") || idNewCategory.getText().equals("")) {
                 noticeAddCategory.setText("Please fill in all fields required!");
-            } else if (parent_id == 0) {
+            } else if (parent_id < 0) {
                 noticeAddCategory.setText("Please choose a parent category!");
             } else {
                 int id = Integer.parseInt(idNewCategory.getText());
-                Category c = new Category(name, parent_id, 0, id, info);
+                Category c = new Category(id, name, parent_id, 0, info);
                 try {
-                    s.addCategory(c);
+                    CategoryService.addCategory(c);
                     updateCategory();
                     noticeAddCategory.setText("Add category successfully!");
                 } catch (SQLException e) {
@@ -115,7 +155,7 @@ public class QuestionBankController implements Initializable {
                     if (errorMessage.contains("Duplicate entry")) {
                         String[] parts = errorMessage.split("'");
                         String columnName = parts[3]; // Lấy tên của cột bị trùng lặp
-                        if (columnName.contains("id_number")) {
+                        if (columnName.contains("category_id")) {
                             noticeAddCategory.setText("ID is already existed!");
                         } else if (columnName.contains("name")) {
                             noticeAddCategory.setText("Name is already existed!");
@@ -132,45 +172,43 @@ public class QuestionBankController implements Initializable {
         btnChooseFile.setOnAction(actionEvent -> {
             FileChooser filechooser = new FileChooser();
             filechooser.setTitle("Open Aiken File");
-            File selectedfile = filechooser.showOpenDialog(null);
+            File selectedFile = filechooser.showOpenDialog(null);
 
-            if(selectedfile != null) {
-                String directory = selectedfile.getAbsolutePath();
+            if (selectedFile != null) {
+                String directory = selectedFile.getAbsolutePath();
                 String new_directory = directory.replace("/", "//");
                 System.out.println(new_directory);
-                }else {
-                System.out.println("file is not valid");
-            }
 
-            if(selectedfile != null){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("File Selected");
                 alert.setHeaderText(null);
-                if (FileChecker.isTextFile(selectedfile.getAbsolutePath().replace("/", "//")))
-                    alert.setContentText(AikenFormatChecker.checkAikenFormat(selectedfile.getAbsolutePath().replace("/", "//")));
+                if (FileChecker.isTextFile(new_directory))
+                    alert.setContentText(AikenFormatChecker.checkAikenFormat(new_directory));
                 else
-                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(selectedfile.getAbsolutePath().replace("/", "//")));
+                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(new_directory));
                 alert.showAndWait();
+            } else {
+                System.out.println("file is not valid");
             }
+
         });
     }
 
 
     public void setTabPane(int index) {
-        SelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-        selectionModel.clearSelection();
-        selectionModel.select(index);
+        tabPane.getSelectionModel().select(index);
     }
 
     private void updateCategory() {
-        CategoryService s = new CategoryService();
-        List<Category> categories = s.getCategories();
+        List<Category> categories = CategoryService.getCategories();
+        // create TreeItem
         TreeItem<String> rootNode = new TreeItem<>("Root Node");
-        treeItems = new HashMap<>();
+        Map<Integer, TreeItem<String>> treeItems = new HashMap<>();
 
         for (Category c : categories) {
-            TreeItem<String> treeItem = new TreeItem<>(c.toString());
-            treeItems.put(c.getId(), treeItem);
+            TreeItem<String> treeItem = new TreeItem<>(c.toString()); // line 33 - Category.java
+            treeItems.put(c.getId(), treeItem); // treeItem is return of toString()
+            // btn_category.getValue() return treeItem
             int parent_id = c.getParent_id();
             if (parent_id == 0) {
                 rootNode.getChildren().add(treeItem);
@@ -183,7 +221,6 @@ public class QuestionBankController implements Initializable {
 
         category.setRoot(rootNode);
         category.setShowRoot(false);
-
 
         category2.setRoot(rootNode);
         category2.setShowRoot(false);

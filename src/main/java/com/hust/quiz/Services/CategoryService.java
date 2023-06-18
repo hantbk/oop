@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService {
-    static public List<Category> getCategories() {
+    public static List<Category> getCategories() {
         List<Category> results = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
             Statement st = conn.createStatement();
@@ -25,7 +25,7 @@ public class CategoryService {
         return results;
     }
 
-    static public void addCategory(Category c) throws SQLException {
+    public static void addCategory(Category c) throws SQLException {
         try (Connection conn = Utils.getConnection()) {
             Statement st = conn.createStatement();
             String sql = "INSERT INTO category (category_id, category_name, parent_id, course_count, category_info) VALUES ('" + c.getId() +
@@ -35,7 +35,28 @@ public class CategoryService {
         }
     }
 
-    static public int getID(String category_name) {
+    // create when import file
+    public static int addCategory(String category_name) {
+        int id = 0;
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "INSERT INTO category (category_name, course_count) VALUES (?, ?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, category_name);
+            pst.setInt(2, 0);
+
+            pst.executeUpdate();
+
+            // get id of the category
+            id = getID(category_name);
+            pst.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static int getID(String category_name) {
         int id = 0;
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name
@@ -57,7 +78,7 @@ public class CategoryService {
         return id;
     }
 
-    static public int getParentID(String category_name) {
+    public static int getParentID(String category_name) {
         int parent_id = 0;
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name

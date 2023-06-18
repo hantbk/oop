@@ -12,7 +12,7 @@ import java.util.List;
 public class QuestionService {
 
     //lấy id bằng question_name
-    static public int getId(String question_name) {
+    public static int getId(String question_name) {
         int question_id = 0;
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name
@@ -35,7 +35,7 @@ public class QuestionService {
     }
 
     //add question to database
-    static public void addQuestion(Question question) {
+    public static void addQuestion(Question question) {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO question (question_name, question_text, category_id)" +
                     " VALUES (?, ?, ?)";
@@ -51,8 +51,15 @@ public class QuestionService {
         }
     }
 
+    public static void addQuestion(List<Question> questions, int category_id) {
+        for (Question question : questions) {
+            question.setCategory_id(category_id);
+            addQuestion(question);
+        }
+    }
+
     //lay danh dach cau hoi tu csdl co category_id
-    static public List<Question> getQuestions(int category_id) {
+    public static List<Question> getQuestions(int category_id) {
         List<Question> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
             // write query
@@ -79,12 +86,12 @@ public class QuestionService {
         return result;
     }
 
-    static public int getLastQuestionId(){
-        try(Connection conn = Utils.getConnection()){
+    public static int getLastQuestionId() {
+        try (Connection conn = Utils.getConnection()) {
             String sql = "SELECT question_id FROM question ORDER BY question_id DESC LIMIT 1";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("question_id");
             }
             ps.close();

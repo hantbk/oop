@@ -15,7 +15,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE `quiz`.`question` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `question_name` VARCHAR(255),
-  `question_text` VARCHAR(500),
+  `question_text` VARCHAR(500) NOT NULL,
   `category_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`question_id`),
   INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
