@@ -15,8 +15,8 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE `quiz`.`question` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `question_content` VARCHAR(255) ,
-  `question_name` VARCHAR(255) ,
+  `question_name` VARCHAR(255),
+  `question_text` VARCHAR(500),
   `category_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`question_id`),
   INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
@@ -65,6 +65,6 @@ INSERT INTO `category` (`category_id`, `category_name`, `parent_id`, `course_cou
 (18, 'Tin học GK2 L7', 2, 94, 18),
 (19, 'Vật lý GK2 L7', 2, 121, 19);
 
-INSERT INTO `question` (`question_id`, `question_content`, `category_id`) VALUES
+INSERT INTO `question` (`question_id`, `question_text`, `category_id`) VALUES
 (1, 'Ay yo', 4),
 (2, 'do dat', 4);
