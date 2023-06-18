@@ -224,7 +224,7 @@
                                                                 vgrow="SOMETIMES"/>
                                             </rowConstraints>
                                             <children>
-                                                <Button fx:id="btn_blankchoice" mnemonicParsing="false"
+                                                <Button fx:id="btn_blankChoice" mnemonicParsing="false"
                                                         prefHeight="45.0" prefWidth="361.0"
                                                         style="-fx-background-color: #19A7CE;" styleClass="bluebutton"
                                                         stylesheets="@../Styles/style.css"
@@ -233,7 +233,7 @@
                                                         <Font name="System Bold" size="20.0"/>
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="btn_SaveAndContinueEditting" mnemonicParsing="false"
+                                                <Button fx:id="btn_SaveAndContinueEditing" mnemonicParsing="false"
                                                         prefHeight="45.0" prefWidth="544.0"
                                                         style="-fx-background-color: #19A7CE;" styleClass="bluebutton"
                                                         stylesheets="@../Styles/style.css"

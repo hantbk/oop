@@ -35,9 +35,7 @@ public class HomeController implements Initializable {
         });
 
         // configure btn_turn_editing_on
-        btn_turn_editing_on.setOnAction(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ);
-        });
+        btn_turn_editing_on.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ));
 
         // configure btn_question, btn_category, btn_import, btn_export
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
