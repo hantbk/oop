@@ -1,5 +1,6 @@
 package com.hust.quiz.Views;
 
+import com.hust.quiz.Controllers.HomeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,13 +20,14 @@ public class ViewFactory {
         stage = new Stage();
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
-        FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
         FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
 
         try {
             homeScene = new Scene(home.load());
-            questionBankScene = new Scene(questionBankView.load());
+            // because we need to access to QuestionBankController in HomeController to set TabPane
+            HomeController homeController = home.getController();
+            questionBankScene = new Scene(homeController.getQuestionBankView());
             addQuestion = new Scene(multipleChoiceView.load());
             addQuizScene = new Scene(addQuizView.load());
 
