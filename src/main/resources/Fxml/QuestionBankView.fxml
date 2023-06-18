@@ -459,7 +459,7 @@
                                                                   <Insets right="10.0" />
                                                                </HBox.margin>
                                                             </ImageView>
-                                                            <Button mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: #19A7CE;" text="CHOOSE A FILE" textFill="WHITE">
+                                                            <Button fx:id="btnChooseFile" mnemonicParsing="false" prefWidth="200.0" style="-fx-background-color: #19A7CE;" text="CHOOSE A FILE" textFill="WHITE">
                                                                <font>
                                                                   <Font size="20.0" />
                                                                </font>
