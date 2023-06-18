@@ -1,0 +1,13 @@
+Thủ đô của Việt Nam là?
+A. Hà Nội
+B. Thành phố Hồ Chí Minh
+C. Ninh Bình
+D. Thái Nguyên
+ANSWER: A
+
+What is an example of dynamic binding?
+A. any method
+B. method overloading
+C. method overriding
+D. Blabla
+ANSWER: A

@@ -13,6 +13,7 @@ public class Question {
 
     public Question(String question_text) {
         this.question_text = question_text;
+        category_id = 0;
     }
 
     public Question(String question_name, String question_text, int category_id) {
@@ -68,6 +69,10 @@ public class Question {
 
     public int getCategory_id() {
         return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     //test add choice

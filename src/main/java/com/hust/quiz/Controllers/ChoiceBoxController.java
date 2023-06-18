@@ -26,6 +26,11 @@ public class ChoiceBoxController implements Initializable {
         return choiceTextField.getText();
     }
 
+    public void reset() {
+        choiceTextField.setText("");
+        cbGrade.setValue("None");
+    }
+
     public int getGrade() {
         if (Objects.equals(cbGrade.getValue(), "None"))
             return 0;

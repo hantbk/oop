@@ -29,8 +29,6 @@ public class AddQuestionController implements Initializable {
     @FXML
     private Button btn_Cancel;
     @FXML
-    private Label errorMessage;
-    @FXML
     private Button btn_SaveAndContinueEditing;
     @FXML
     private ComboBox<String> kindOfCategory;
@@ -42,18 +40,34 @@ public class AddQuestionController implements Initializable {
     private TextArea text_QuestionText;
     @FXML
     private TextField text_DefaultMark;
+    @FXML
+    private Label labelAlert;
     private int countChoice = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //add 2 choiceBox
-        addTwoChoiceBox();
         //add list category to comboBox
         updateCategory();
+        //add 2 choiceBox
+        addTwoChoiceBox();
+
 
         //Luu cac thong tin va day len csdl
         btn_SaveAndContinueEditing.setOnAction(event -> {
-            if ((text_QuestionText != null) && (text_QuestionName != null) && (kindOfCategory.getValue() != null)) {
+            labelAlert.setText("");
+            if (text_QuestionName.getText().equals("")) {
+                labelAlert.setText("Question name is empty!");
+            } else if (text_QuestionText.getText().equals("")) {
+                labelAlert.setText("Question text is empty!");
+            } else if (text_DefaultMark.getText().equals("")) {
+                labelAlert.setText("Default mark is empty!");
+            } else if (kindOfCategory.getValue() == null) {
+                labelAlert.setText("Category is empty!");
+            } else if (listChoiceBoxController.get(0).getChoiceText().equals("")) {
+                labelAlert.setText("Choice 1 is empty!");
+            } else if (listChoiceBoxController.get(1).getChoiceText().equals("")) {
+                labelAlert.setText("Choice 2 is empty!");
+            } else {
                 String categoryName = kindOfCategory.getValue();
                 Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText(),
                         CategoryService.getID(categoryName));
@@ -65,18 +79,16 @@ public class AddQuestionController implements Initializable {
                     if (controller.getChoiceText() != null) {
                         Choice newChoice = new Choice(controller.getChoiceText(), false, controller.getGrade(), id);
                         ChoiceService.addChoice(newChoice);
+                        controller.reset();
                     }
                 }
-
-                //test addChoice
-                testAddChoice(text_QuestionName.getText());
 
                 //xoa cac thong tin vua add tranh add 2 lan bi trung lap
                 text_QuestionName.setText(null);
                 text_QuestionText.setText(null);
                 text_DefaultMark.setText(null);
-            } else {
-                errorMessage.setText("Add failed! You need to fill all information about question!");
+                kindOfCategory.setValue(null);
+                labelAlert.setText("Add question successfully!");
             }
         });
 
@@ -119,7 +131,6 @@ public class AddQuestionController implements Initializable {
         });
     }
 
-    //ham add 2 choiceBox
     public void addTwoChoiceBox() {
         try {
             //add choiceBox1
@@ -147,15 +158,6 @@ public class AddQuestionController implements Initializable {
         List<Category> listCategory = CategoryService.getCategories();
         for (Category category : listCategory) {
             kindOfCategory.getItems().add(category.toString());
-        }
-    }
-
-    //test add choice
-    public void testAddChoice(String nameOfQuestion) {
-        int idQuestion = QuestionService.getId(nameOfQuestion);
-        List<Choice> listChoice = ChoiceService.getChoice(idQuestion);
-        for (Choice choice : listChoice) {
-            System.out.println(choice.getContent() + "\n");
         }
     }
 }
