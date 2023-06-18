@@ -33,10 +33,13 @@ import java.util.regex.Pattern;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class QuestionBankController implements Initializable {
-    private Map<Integer, TreeItem<String>> treeItems;
-    private int parent_id = 0;
+    private int parent_id = -1;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -60,17 +63,6 @@ public class QuestionBankController implements Initializable {
     private Button btnChooseFile;
 
 
-    // https://stackoverflow.com/questions/1383797/java-hashmap-how-to-get-key-from-value
-    public static <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
-        Set<T> keys = new HashSet<>();
-        for (Map.Entry<T, E> entry : map.entrySet()) {
-            if (Objects.equals(value, entry.getValue())) {
-                keys.add(entry.getKey());
-            }
-        }
-        return keys;
-    }
-
     private static void expandAll(TreeItem<?> item) {
         if (item != null && !item.isLeaf()) {
             item.setExpanded(true);
@@ -83,7 +75,9 @@ public class QuestionBankController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateCategory();
-        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.MULTI_CHOICE));
+
+        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUESTION));
+
         // configure btn_category
         btn_category.getParent().setOnMouseClicked(event -> category.setVisible(false));
         btn_category.setOnMouseClicked(event -> category.setVisible(!category.isVisible()));
@@ -96,14 +90,10 @@ public class QuestionBankController implements Initializable {
                     category.setVisible(!category.isVisible());
                     // add questions found in scrollPane by adding in listView
                     QuestionService questionService = new QuestionService();
-                    // Get category_name
-                    // String btn_content = btn_category.getValue();
                     String category_name = selectedItem.getValue();
-                    // Get the correct category_name: System.out.println(category_name);
                     // Find ID of the category
-                    CategoryService categoryService = new CategoryService();
-                    int id = categoryService.getID(category_name);
-                    // Get the correct ID: System.out.println(id);
+                    int id = CategoryService.getID(category_name);
+
                     // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
                     List<Question> questionList = questionService.getQuestions(id);
                     // Check if category has questions or not
@@ -151,7 +141,7 @@ public class QuestionBankController implements Initializable {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category2.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
-                    parent_id = getKeysByValue(treeItems, selectedItem).iterator().next();
+                    parent_id = CategoryService.getParentID(selectedItem.getValue());
                     System.out.println(parent_id);
                     btn_category2.setValue(selectedItem.getValue());
                     category2.setVisible(!category2.isVisible());
@@ -160,18 +150,17 @@ public class QuestionBankController implements Initializable {
         });
 
         btnAddCategory.setOnAction(actionEvent -> {
-            CategoryService s = new CategoryService();
             String name = nameCategory.getText();
             String info = categoryInfo.getText();
             if (name.equals("") || idNewCategory.getText().equals("")) {
                 noticeAddCategory.setText("Please fill in all fields required!");
-            } else if (parent_id == 0) {
+            } else if (parent_id < 0) {
                 noticeAddCategory.setText("Please choose a parent category!");
             } else {
                 int id = Integer.parseInt(idNewCategory.getText());
-                Category c = new Category(name, parent_id, 0, id, info);
+                Category c = new Category(id, name, parent_id, 0, info);
                 try {
-                    s.addCategory(c);
+                    CategoryService.addCategory(c);
                     updateCategory();
                     noticeAddCategory.setText("Add category successfully!");
                 } catch (SQLException e) {
@@ -228,11 +217,10 @@ public class QuestionBankController implements Initializable {
     }
 
     private void updateCategory() {
-        CategoryService s = new CategoryService();
-        List<Category> categories = s.getCategories();
+        List<Category> categories = CategoryService.getCategories();
         // create TreeItem
         TreeItem<String> rootNode = new TreeItem<>("Root Node");
-        treeItems = new HashMap<>(); // private Map<Integer, TreeItem<String>> treeItems; - line 24
+        Map<Integer, TreeItem<String>> treeItems = new HashMap<>();
 
         for (Category c : categories) {
             TreeItem<String> treeItem = new TreeItem<>(c.toString()); // line 33 - Category.java

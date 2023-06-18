@@ -14,8 +14,6 @@ public class AddQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btn_cancel.setOnAction(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
-        });
+        btn_cancel.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
     }
 }
