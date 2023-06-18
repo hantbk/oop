@@ -11,9 +11,8 @@ public class ViewFactory {
     private final Stage stage;
     private Scene homeScene;
     private Scene questionBankScene;
-    private Scene multipleChoiceScene;
+    private Scene addQuestion;
     private Scene addQuizScene;
-    //private Scene choiceQuestionView;
 
     // singleton design pattern
     private ViewFactory() {
@@ -21,13 +20,13 @@ public class ViewFactory {
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
-        FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/MultipleChoiceQuestion.fxml"));
+        FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
 
         try {
             homeScene = new Scene(home.load());
             questionBankScene = new Scene(questionBankView.load());
-            multipleChoiceScene = new Scene(multipleChoiceView.load());
+            addQuestion = new Scene(multipleChoiceView.load());
             addQuizScene = new Scene(addQuizView.load());
 
         } catch (IOException e) {
@@ -35,7 +34,6 @@ public class ViewFactory {
             e.printStackTrace();
         }
 
-        //stage.setScene(multipleChoiceQuestionScene);
         stage.setScene(homeScene);
         stage.setResizable(false);
         stage.setTitle("Quiz App");
@@ -60,7 +58,7 @@ public class ViewFactory {
                 break;
             }
             case MULTI_CHOICE: {
-                stage.setScene(multipleChoiceScene);
+                stage.setScene(addQuestion);
                 break;
             }
             case ADD_QUIZ: {
