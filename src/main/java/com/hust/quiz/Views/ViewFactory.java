@@ -57,7 +57,7 @@ public class ViewFactory {
                 stage.setScene(questionBankScene);
                 break;
             }
-            case MULTI_CHOICE: {
+            case ADD_QUESTION: {
                 stage.setScene(addQuestion);
                 break;
             }
@@ -74,7 +74,7 @@ public class ViewFactory {
     public enum SCENES {
         HOME,
         QUESTION_BANK,
-        MULTI_CHOICE,
+        ADD_QUESTION,
         ADD_QUIZ
     }
 }
