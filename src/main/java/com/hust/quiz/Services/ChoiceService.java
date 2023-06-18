@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChoiceService {
-    static public List<Choice> getChoice(int question_id) {
+    public static List<Choice> getChoice(int question_id) {
         List<Choice> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
             // write query
@@ -38,7 +38,7 @@ public class ChoiceService {
     }
 
     //add  choice to sql
-    static public void addChoice(Choice choice) {
+    public static void addChoice(Choice choice) {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO choice (choice_content, choice_is_correct, choice_grade, question_id)" +
                     " VALUES (?, ?, ?, ?)";
@@ -55,9 +55,8 @@ public class ChoiceService {
         }
     }
 
-    private void addChoice(List<Choice> choices, int question_id) {
+    public static void addChoice(List<Choice> choices) {
         for (Choice choice : choices) {
-            choice.setQuestion_id(question_id);
             addChoice(choice);
         }
     }

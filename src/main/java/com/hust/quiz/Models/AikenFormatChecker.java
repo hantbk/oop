@@ -1,128 +1,104 @@
 package com.hust.quiz.Models;
 
+import com.hust.quiz.Services.CategoryService;
+import com.hust.quiz.Services.ChoiceService;
+import com.hust.quiz.Services.QuestionService;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.hust.quiz.Services.Utils;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import java.time.LocalDate;
-import com.hust.quiz.Services.QuestionService;
-
 
 public class AikenFormatChecker {
-    public static void main(String[] args) {
-        String filePath = "D:\\questions.txt"; // Thay bằng đường dẫn phù hợp
-        String fileName = "D:\\questions.doc"; // Thay bằng đường dẫn phù hợp
-
-        checkAikenFormat(filePath);
-        checkAikenFormat(fileName);
-    }
 
     public static String checkAikenFormat(String filePath) {
         int quest_id = QuestionService.getLastQuestionId();
-        //System.out.println("Last question id: " + quest_id);
+
         List<Question> questions = new ArrayList<>();
         List<Choice> choices = new ArrayList<>();
         String output = null;
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int lineCount = 0;
             int questionCount = 0;
-            boolean isValidFormat = true;
+
             Pattern answerPattern = Pattern.compile("^[A-Z]\\. .+");
             Set<String> validAnswers = new HashSet<>();
-            boolean isQuestion = true;
-            boolean hasCorrectAnswer = false;
-            boolean hasBlankLine = false;
-            int answerLineCount = 0;
 
             while ((line = br.readLine()) != null) {
                 lineCount++;
                 line = line.trim();
 
                 if (line.isEmpty()) {
-                    if (!isQuestion) {
-                        if (!hasCorrectAnswer || !hasBlankLine || answerLineCount < 2) {
-                            // Không đúng AikenFormat
-                            isValidFormat = false;
-                            break;
-                        }
-                        isQuestion = true;
-                        hasCorrectAnswer = false;
-                        hasBlankLine = false;
-                        answerLineCount = 0; // Reset answer line count
-                    }
                     continue;
                 }
 
                 Matcher answerMatcher = answerPattern.matcher(line);
-                //System.out.println(answerMatcher.matches());
 
-                if (isQuestion) {
-                    //System.out.println("Line " + lineCount + ": " + line);
-                    // First line of a new question
+                if (answerMatcher.matches()) {
+                    Choice choice = new Choice(line.substring(3), false, 0, quest_id);
+                    choices.add(choice);
+
+                    validAnswers.add(line.substring(0, 1));
+
+                } else if (line.startsWith("ANSWER: ")) {
+                    String correctAnswer = line.substring(8).trim();
+
+                    if (!validAnswers.contains(correctAnswer)) {
+                        output = "Invalid correct answer at line " + lineCount;
+                        return output;
+                    }
+
+                    if (validAnswers.size() < 2) {
+                        output = "Not enough answers at line " + lineCount;
+                        return output;
+                    }
+
+                    // index of correct answer in choices
+                    // index = total number of choices - number of invalid answers in this question + index of correct answer
+                    int index = choices.size() - validAnswers.size() + correctAnswer.charAt(0) - 'A';
+                    choices.get(index).setIsCorrect(true);
+                } else {
                     quest_id++;
                     Question question = new Question(line);
                     questions.add(question);
                     questionCount++;
-                    isQuestion = false;
-                    hasCorrectAnswer = false;
-                    hasBlankLine = false;
-                    answerLineCount = 0; // Reset answer line count
-                } else if (answerMatcher.matches()) {
-                    //System.out.println(line.substring(3));
-                        Choice choice = new Choice(line.substring(3), false, 0, quest_id);
-                        //System.out.println(line.substring(3));
-                        choices.add(choice);
-                        System.out.println(choice.getQuestion_id());
-                        String answer = answerMatcher.group();
-                        validAnswers.add(answer.substring(0, 1));
-                        answerLineCount++;
-                    // print choices
 
-                    // Answer line within a question
-                    validAnswers.add(line.substring(0, 1));
-                    hasBlankLine = false;
-                    answerLineCount++; // Increment answer line count
-                } else if (line.startsWith("ANSWER: ")) {
-                    // Correct answer line within a question
-                    String correctAnswer = line.substring(8).trim();
-
-
-                    if (!validAnswers.contains(correctAnswer)) {
-                        // Invalid correct answer
-                        isValidFormat = false;
-                        break;
-                    }
-
-                    hasCorrectAnswer = true;
-                    hasBlankLine = false;
-                } else {
-                    // Invalid line within a question
-                    isValidFormat = false;
-                    break;
+                    validAnswers.clear(); // Reset valid answers
                 }
-
-                hasBlankLine = true; // Set the flag when a non-empty line is encountered
             }
-
-            if (isValidFormat && questionCount > 0 && hasCorrectAnswer && answerLineCount >= 2) {
-                output = "Success: " + questionCount + " question(s) found";
+            if (validAnswers.size() < 2) {
+                output = "Not enough answers at line " + lineCount;
+                return output;
+            } else if (questionCount == 0) {
+                output = "No question found";
+                return output;
             } else {
-                output = "Error at line " + lineCount;
+                output = "Success: " + questionCount + " question(s) found";
+
+                int category_id = CategoryService.addCategory(getTime());
+                QuestionService.addQuestion(questions, category_id);
+                ChoiceService.addChoice(choices);
+
+                return output;
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return output;
     }
 
@@ -219,7 +195,7 @@ public class AikenFormatChecker {
         return false;
     }
 
-    public static String getTime(){
+    private static String getTime() {
         LocalDate currentDate = LocalDate.now();
         int year = currentDate.getYear();
         int month = currentDate.getMonthValue();
