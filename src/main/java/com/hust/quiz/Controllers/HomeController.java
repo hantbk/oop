@@ -18,6 +18,8 @@ public class HomeController implements Initializable {
     @FXML
     private AnchorPane second_pane, first_pane;
 
+    private Parent questionBankView;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // configure btn_add, btn_back
@@ -38,32 +40,36 @@ public class HomeController implements Initializable {
         btn_turn_editing_on.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ));
 
         // configure btn_question, btn_category, btn_import, btn_export
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
+        FXMLLoader questionBankView = new FXMLLoader(getClass().getResource("/Fxml/QuestionBankView.fxml"));
         try {
-            Parent root = loader.load();
+            this.questionBankView = questionBankView.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error loading QuestionBankView.fxml");
         }
-        QuestionBankController controller = loader.getController();
+        QuestionBankController controller = questionBankView.getController();
 
         btn_question.setOnAction(event -> {
-            controller.setTabPane(0);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
+            controller.setTabPane(0);
         });
 
         btn_category.setOnAction(event -> {
-            controller.setTabPane(1);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
+            controller.setTabPane(1);
         });
 
         btn_import.setOnAction(event -> {
-            controller.setTabPane(2);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
+            controller.setTabPane(2);
         });
 
         btn_export.setOnAction(event -> {
-            controller.setTabPane(3);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
+            controller.setTabPane(3);
         });
+    }
+
+    public Parent getQuestionBankView() {
+        return questionBankView;
     }
 }

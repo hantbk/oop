@@ -68,13 +68,12 @@ public class QuestionBankController implements Initializable {
                     btn_category.setValue(selectedItem.getValue());
                     category.setVisible(!category.isVisible());
                     // add questions found in scrollPane by adding in listView
-                    QuestionService questionService = new QuestionService();
                     String category_name = selectedItem.getValue();
                     // Find ID of the category
                     int id = CategoryService.getID(category_name);
 
                     // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
-                    List<Question> questionList = questionService.getQuestions(id);
+                    List<Question> questionList = QuestionService.getQuestions(id);
                     // Check if category has questions or not
                     if (!questionList.isEmpty()) {
                         ListView<HBox> listView = new ListView<>();
@@ -164,9 +163,7 @@ public class QuestionBankController implements Initializable {
     }
 
     public void setTabPane(int index) {
-        SelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-        selectionModel.clearSelection();
-        selectionModel.select(index);
+        tabPane.getSelectionModel().select(index);
     }
 
     private void updateCategory() {
