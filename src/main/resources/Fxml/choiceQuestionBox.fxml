@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -7,27 +8,35 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="206.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.ChoiceBoxController">
+<AnchorPane prefHeight="130.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.ChoiceBoxController">
    <children>
-      <HBox alignment="CENTER" layoutX="22.0" layoutY="115.0" prefHeight="35.0" prefWidth="309.0">
+      <AnchorPane style="-fx-background-color: #EEEEEE;">
          <children>
-            <Label alignment="CENTER" prefHeight="27.0" prefWidth="92.0" text="Grade">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="cbGrade" prefHeight="25.0" prefWidth="109.0" />
+            <HBox prefHeight="46.0" prefWidth="339.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label fx:id="choiceNumberLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="123.0" text="Choice">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="choiceTextField" prefHeight="45.0" prefWidth="166.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutY="60.0" prefHeight="35.0" prefWidth="339.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="123.0" text="Grade">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbGrade" prefHeight="25.0" prefWidth="109.0" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </HBox>
          </children>
-      </HBox>
-      <HBox layoutX="22.0" layoutY="44.0" prefHeight="45.0" prefWidth="309.0">
-         <children>
-            <Label fx:id="choiceNumberLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="123.0" text="Choice">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="choiceTextField" prefHeight="45.0" prefWidth="166.0" />
-         </children>
-      </HBox>
+      </AnchorPane>
+      <Label layoutY="108.0" prefWidth="339.0" />
    </children>
 </AnchorPane>
