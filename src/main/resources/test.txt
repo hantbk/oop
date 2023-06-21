@@ -1,0 +1,27 @@
+Thủ đô của Việt Nam là?
+A. Hà Nội
+B. Thành phố Hồ Chí Minh
+C. Ninh Bình
+D. Thái Nguyên
+ANSWER: A
+
+What is an example of dynamic binding?
+A. any method
+B. method overloading
+C. method overriding
+D. compiling
+ANSWER: A
+
+For which case would the use of a static attribute be appropriate?
+A. the number of people in each house in a small neighborhood
+B. the lot size for each house in a small neighborhood
+C. the color of each house in a small neighborhood
+D. the weather conditions for each house in a small neighborhood
+ANSWER: D
+
+Why would you create an abstract class, if it can have no real instances?
+A. to avoid redundant coding in children
+B. to explore a hypothetical class
+C. to prevent unwanted method implementation
+D. to reserve memory for an unspecified class type
+ANSWER: A
