@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -22,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class AddQuestionController implements Initializable {
     private final List<ChoiceBoxController> listChoiceBoxController = new ArrayList<>();
+    @FXML
+    private ImageView btn_menu_return; // return to home
     @FXML
     private Button btn_blankChoice;
     @FXML
@@ -46,6 +49,11 @@ public class AddQuestionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // configure btn_menu_return
+        btn_menu_return.setOnMouseClicked(event -> {
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
+
         //add list category to comboBox
         updateCategory();
         //add 2 choiceBox
