@@ -20,7 +20,7 @@
             <children>
                 <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
                     <children>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../Img/menu.png" />
                             </image>

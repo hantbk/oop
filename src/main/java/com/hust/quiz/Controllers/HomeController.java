@@ -49,21 +49,45 @@ public class HomeController implements Initializable {
         QuestionBankController controller = questionBankView.getController();
 
         btn_question.setOnAction(event -> {
+            // reset home status
+            second_pane.setVisible(false);
+            first_pane.setVisible(true);
+            first_pane.setOpacity(1);
+            first_pane.setDisable(false);
+            // switch to question tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             controller.setTabPane(0);
         });
 
         btn_category.setOnAction(event -> {
+            // reset home status
+            second_pane.setVisible(false);
+            first_pane.setVisible(true);
+            first_pane.setOpacity(1);
+            first_pane.setDisable(false);
+            // switch to category tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             controller.setTabPane(1);
         });
 
         btn_import.setOnAction(event -> {
+            // reset home status
+            second_pane.setVisible(false);
+            first_pane.setVisible(true);
+            first_pane.setOpacity(1);
+            first_pane.setDisable(false);
+            // switch to import tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             controller.setTabPane(2);
         });
 
         btn_export.setOnAction(event -> {
+            // reset home status
+            second_pane.setVisible(false);
+            first_pane.setVisible(true);
+            first_pane.setOpacity(1);
+            first_pane.setDisable(false);
+            // switch to export tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             controller.setTabPane(3);
         });

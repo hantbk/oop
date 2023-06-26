@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -27,6 +28,10 @@ import java.util.ResourceBundle;
 
 public class QuestionBankController implements Initializable {
     private int parent_id = -1;
+    @FXML
+    private ImageView btn_menu_return;
+    @FXML
+    public Button btn_turn_editing_on;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -61,6 +66,16 @@ public class QuestionBankController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // # configure btn_menu_return - comeback to home
+        btn_menu_return.setOnMouseClicked(event -> {
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
+
+        // # configure btn_turn_editing_on - add quiz scene
+        btn_turn_editing_on.setOnAction(event -> {
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ);
+        });
+
         updateCategory();
 
         btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUESTION));
