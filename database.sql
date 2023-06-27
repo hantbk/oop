@@ -43,6 +43,22 @@ CREATE TABLE `quiz`.`choice` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+-- TODO: fix this shit
+CREATE TABLE `quiz`.`quiz` (
+  `quiz_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `quiz_name` VARCHAR(255) NOT NULL,
+  `quiz_description` VARCHAR(255) NULL,
+  `quiz_open_date` DATETIME NOT NULL,
+  `quiz_close_date` DATETIME NULL,
+  `quiz_time_limit` INT UNSIGNED NULL,
+  PRIMARY KEY (`quiz_id`),
+  UNIQUE INDEX `quiz_id_UNIQUE` (`quiz_id` ASC) VISIBLE,
+  UNIQUE INDEX `quiz_name_UNIQUE` (`quiz_name` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+-- TODO: add list of question_id into quiz?
+
 INSERT INTO `category` (`category_id`, `category_name`, `parent_id`, `course_count`) VALUES
 (1, 'Course IT', NULL, 0),
 (2, 'Top for IT', 1, 0),

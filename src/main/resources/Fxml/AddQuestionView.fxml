@@ -26,7 +26,7 @@
                         <Font size="60.0" />
                     </font>
                 </Label>
-                <HBox layoutX="40.0" layoutY="100.0" prefHeight="50.0" prefWidth="853.0">
+                <HBox layoutX="40.0" layoutY="100.0" prefHeight="50.0">
                     <children>
                         <Label prefHeight="50.0" text="Home" textFill="RED">
                             <font>
