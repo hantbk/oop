@@ -110,7 +110,7 @@
                                                 <Image url="@../Img/icons8-error-64.png" />
                                              </image>
                                           </ImageView>
-                                          <TextField layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
+                                          <TextField fx:id="text_quiz_name" layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -124,7 +124,7 @@
                                     </Label>
                                     <AnchorPane prefHeight="50.0" prefWidth="1013.0">
                                        <children>
-                                          <TextField alignment="TOP_LEFT" layoutX="230.0" layoutY="5.0" prefHeight="170.0" prefWidth="400.0">
+                                          <TextField fx:id="text_quiz_description" alignment="TOP_LEFT" layoutX="230.0" layoutY="5.0" prefHeight="170.0" prefWidth="400.0">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
@@ -137,12 +137,12 @@
                                  <children>
                                     <AnchorPane prefHeight="50.0" prefWidth="1013.0">
                                        <children>
-                                          <CheckBox layoutX="544.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="255.0" text="Display description on course page ">
+                                          <CheckBox fx:id="check_display_description" layoutX="544.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" text="Display description on course page ">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </CheckBox>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="795.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="810.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../Img/icons8-question-30.png" />
                                              </image>
@@ -185,7 +185,7 @@
                                                 <Image url="@../Img/icons8-question-30.png" />
                                              </image>
                                           </ImageView>
-                                          <DatePicker layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
+                                          <DatePicker fx:id="date_open" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
                                           <CheckBox layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
                                        </children>
                                     </AnchorPane>
@@ -200,7 +200,7 @@
                                     </Label>
                                     <AnchorPane prefHeight="50.0" prefWidth="1013.0">
                                        <children>
-                                          <DatePicker layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
+                                          <DatePicker fx:id="date_close" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
                                           <CheckBox layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
                                        </children>
                                     </AnchorPane>
@@ -215,13 +215,13 @@
                                     </Label>
                                     <AnchorPane prefHeight="50.0" prefWidth="1013.0">
                                        <children>
-                                          <Spinner layoutX="290.0" layoutY="2.0" prefHeight="40.0" />
+                                          <Spinner fx:id="spinner_time_format" layoutX="290.0" layoutY="2.0" prefHeight="40.0" />
                                           <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../Img/icons8-question-30.png" />
                                              </image>
                                           </ImageView>
-                                          <TextField layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="50.0" />
+                                          <TextField fx:id="text_time_limit" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="50.0" />
                                           <CheckBox layoutX="460.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
                                        </children>
                                     </AnchorPane>
@@ -241,7 +241,7 @@
                                                 <Image url="@../Img/icons8-question-30.png" />
                                              </image>
                                           </ImageView>
-                                          <Spinner editable="true" layoutX="230.0" layoutY="2.0" prefHeight="40.0" />
+                                          <Spinner fx:id="spinner_time_expire" editable="true" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="300.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -250,7 +250,7 @@
                                  <children>
                                     <AnchorPane prefHeight="50.0" prefWidth="1141.0">
                                        <children>
-                                          <Button layoutX="460.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="SAVE" textFill="WHITE">
+                                          <Button fx:id="btn_save" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="SAVE" textFill="WHITE">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
@@ -260,6 +260,11 @@
                                                 <Font size="20.0" />
                                              </font>
                                           </Button>
+                                          <Label fx:id="alert_missing_name" layoutX="660.0" layoutY="18.0" text="Please enter the quiz's name!" textFill="RED" visible="false">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </AnchorPane>
                                  </children>

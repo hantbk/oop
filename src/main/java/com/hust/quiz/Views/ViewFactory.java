@@ -14,6 +14,7 @@ public class ViewFactory {
     private Scene questionBankScene;
     private Scene addQuestion;
     private Scene addQuizScene;
+    private Scene quizViewScene;
 
     // singleton design pattern
     private ViewFactory() {
@@ -22,7 +23,7 @@ public class ViewFactory {
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
-
+        FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
             // because we need to access to QuestionBankController in HomeController to set TabPane
@@ -30,6 +31,7 @@ public class ViewFactory {
             questionBankScene = new Scene(homeController.getQuestionBankView());
             addQuestion = new Scene(multipleChoiceView.load());
             addQuizScene = new Scene(addQuizView.load());
+            quizViewScene = new Scene(quizView.load());
 
         } catch (IOException e) {
             System.out.println("Error to load fxml");
@@ -67,6 +69,10 @@ public class ViewFactory {
                 stage.setScene(addQuizScene);
                 break;
             }
+            case QUIZ_VIEW: {
+                stage.setScene(quizViewScene);
+                break;
+            }
             default: {
                 stage.setScene(homeScene);
             }
@@ -77,6 +83,7 @@ public class ViewFactory {
         HOME,
         QUESTION_BANK,
         ADD_QUESTION,
-        ADD_QUIZ
+        ADD_QUIZ,
+        QUIZ_VIEW
     }
 }
