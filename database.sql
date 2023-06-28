@@ -80,6 +80,6 @@ INSERT INTO `category` (`category_id`, `category_name`, `parent_id`, `course_cou
 (18, 'Tin học GK2 L7', 2, 94),
 (19, 'Vật lý GK2 L7', 2, 121);
 
-INSERT INTO `question` (`question_id`, `question_text`, `category_id`) VALUES
-(1, 'Ay yo', 4),
-(2, 'do dat', 4);
+INSERT INTO `question` (`question_id`, `question_name`,`question_text`, `category_id`) VALUES
+(1, 'Ay yo', 'abcd', 4),
+(2, 'do dat', 'efgh', 4);
