@@ -14,7 +14,7 @@ public class CategoryService {
             ResultSet rs = st.executeQuery("SELECT * FROM category");
             while (rs.next()) {
                 Category c = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getInt("parent_id"),
-                        rs.getInt("course_count"), rs.getString("category_info"));
+                        rs.getInt("question_count"), rs.getString("category_info"));
                 results.add(c);
             }
             rs.close();
@@ -28,8 +28,8 @@ public class CategoryService {
     public static void addCategory(Category c) throws SQLException {
         try (Connection conn = Utils.getConnection()) {
             Statement st = conn.createStatement();
-            String sql = "INSERT INTO category (category_id, category_name, parent_id, course_count, category_info) VALUES ('" + c.getId() +
-                    c.getName() + "', " + c.getParent_id() + ", " + c.getCourse_count() + ", " + ", '" + c.getCategory_info() + "')";
+            String sql = "INSERT INTO category (category_id, category_name, parent_id, question_count, category_info) VALUES ('" + c.getId() +
+                    c.getName() + "', " + c.getParent_id() + ", " + c.getQuestion_count() + ", " + ", '" + c.getCategory_info() + "')";
             st.executeUpdate(sql);
             st.close();
         }
@@ -39,10 +39,9 @@ public class CategoryService {
     public static int addCategory(String category_name) {
         int id = 0;
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO category (category_name, course_count) VALUES (?, ?)";
+            String sql = "INSERT INTO category (category_name) VALUES (?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, category_name);
-            pst.setInt(2, 0);
 
             pst.executeUpdate();
 
