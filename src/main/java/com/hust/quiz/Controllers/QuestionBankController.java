@@ -27,17 +27,17 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class QuestionBankController implements Initializable {
+    @FXML
+    private TreeView<String> category, category2;
+    @FXML
+    private Button btn_turn_editing_on;
     private int parent_id = -1;
     @FXML
     private ImageView btn_menu_return;
     @FXML
-    public Button btn_turn_editing_on;
-    @FXML
     private TabPane tabPane;
     @FXML
     private ComboBox<String> btn_category, btn_category2;
-    @FXML
-    private TreeView<String> category, category2;
     @FXML
     private Button btnCreateQuestion, btnAddCategory;
     @FXML
@@ -54,7 +54,6 @@ public class QuestionBankController implements Initializable {
     @FXML
     private Button btnChooseFile;
 
-
     private static void expandAll(TreeItem<?> item) {
         if (item != null && !item.isLeaf()) {
             item.setExpanded(true);
@@ -64,21 +63,44 @@ public class QuestionBankController implements Initializable {
         }
     }
 
+    private void updateCategory() {
+        List<Category> categories = CategoryService.getCategories();
+        // create TreeItem
+        TreeItem<String> rootNode = new TreeItem<>("Root Node");
+        Map<Integer, TreeItem<String>> treeItems = new HashMap<>();
+
+        for (Category c : categories) {
+            TreeItem<String> treeItem = new TreeItem<>(c.toString()); // line 33 - Category.java
+            treeItems.put(c.getId(), treeItem); // treeItem is return of toString()
+            // btn_category.getValue() return treeItem
+            int parent_id = c.getParent_id();
+            if (parent_id == 0) {
+                rootNode.getChildren().add(treeItem);
+            } else {
+                treeItems.get(parent_id).getChildren().add(treeItem);
+            }
+        }
+        rootNode.setExpanded(true);
+        expandAll(rootNode);
+
+        category.setRoot(rootNode);
+        category.setShowRoot(false);
+
+        category2.setRoot(rootNode);
+        category2.setShowRoot(false);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // # configure btn_menu_return - comeback to home
-        btn_menu_return.setOnMouseClicked(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
-        });
+        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
 
         // # configure btn_turn_editing_on - add quiz scene
-        btn_turn_editing_on.setOnAction(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ);
-        });
-
-        updateCategory();
+        btn_turn_editing_on.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ));
 
         btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUESTION));
+
+        updateCategory();
 
         // configure btn_category
         btn_category.getParent().setOnMouseClicked(event -> category.setVisible(false));
@@ -209,36 +231,12 @@ public class QuestionBankController implements Initializable {
         });
     }
 
-
     public void setTabPane(int index) {
         tabPane.getSelectionModel().select(index);
     }
 
-    private void updateCategory() {
-        List<Category> categories = CategoryService.getCategories();
-        // create TreeItem
-        TreeItem<String> rootNode = new TreeItem<>("Root Node");
-        Map<Integer, TreeItem<String>> treeItems = new HashMap<>();
-
-        for (Category c : categories) {
-            TreeItem<String> treeItem = new TreeItem<>(c.toString()); // line 33 - Category.java
-            treeItems.put(c.getId(), treeItem); // treeItem is return of toString()
-            // btn_category.getValue() return treeItem
-            int parent_id = c.getParent_id();
-            if (parent_id == 0) {
-                rootNode.getChildren().add(treeItem);
-            } else {
-                treeItems.get(parent_id).getChildren().add(treeItem);
-            }
-        }
-        rootNode.setExpanded(true);
-        expandAll(rootNode);
-
-        category.setRoot(rootNode);
-        category.setShowRoot(false);
-
-        category2.setRoot(rootNode);
-        category2.setShowRoot(false);
+    public void load() {
+        updateCategory();
     }
 }
 

@@ -1,6 +1,7 @@
 package com.hust.quiz.Views;
 
 import com.hust.quiz.Controllers.HomeController;
+import com.hust.quiz.Controllers.QuestionBankController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,6 +16,7 @@ public class ViewFactory {
     private Scene addQuestion;
     private Scene addQuizScene;
     private Scene quizViewScene;
+    private QuestionBankController questionBankController;
 
     // singleton design pattern
     private ViewFactory() {
@@ -28,6 +30,7 @@ public class ViewFactory {
             homeScene = new Scene(home.load());
             // because we need to access to QuestionBankController in HomeController to set TabPane
             HomeController homeController = home.getController();
+            questionBankController = homeController.getQuestionBankController();
             questionBankScene = new Scene(homeController.getQuestionBankView());
             addQuestion = new Scene(multipleChoiceView.load());
             addQuizScene = new Scene(addQuizView.load());
@@ -58,6 +61,7 @@ public class ViewFactory {
                 break;
             }
             case QUESTION_BANK: {
+                questionBankController.load();
                 stage.setScene(questionBankScene);
                 break;
             }

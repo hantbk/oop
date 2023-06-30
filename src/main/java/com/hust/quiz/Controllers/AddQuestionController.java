@@ -95,6 +95,8 @@ public class AddQuestionController implements Initializable {
                 text_DefaultMark.setText(null);
                 kindOfCategory.setValue(null);
                 labelAlert.setText("Add question successfully!");
+
+//                QuestionBankController.updateCategory();
             }
         });
 
