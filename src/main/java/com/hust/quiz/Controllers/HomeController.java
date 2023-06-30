@@ -13,11 +13,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
+    QuestionBankController questionBankController;
     @FXML
     private Button btn_add, btn_back, btn_question, btn_category, btn_import, btn_export, btn_turn_editing_on;
     @FXML
     private AnchorPane second_pane, first_pane;
-
     private Parent questionBankView;
 
     @Override
@@ -46,7 +46,7 @@ public class HomeController implements Initializable {
         } catch (IOException e) {
             System.out.println("Error loading QuestionBankView.fxml");
         }
-        QuestionBankController controller = questionBankView.getController();
+        questionBankController = questionBankView.getController();
 
         btn_question.setOnAction(event -> {
             // reset home status
@@ -56,7 +56,7 @@ public class HomeController implements Initializable {
             first_pane.setDisable(false);
             // switch to question tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
-            controller.setTabPane(0);
+            questionBankController.setTabPane(0);
         });
 
         btn_category.setOnAction(event -> {
@@ -67,7 +67,7 @@ public class HomeController implements Initializable {
             first_pane.setDisable(false);
             // switch to category tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
-            controller.setTabPane(1);
+            questionBankController.setTabPane(1);
         });
 
         btn_import.setOnAction(event -> {
@@ -78,7 +78,7 @@ public class HomeController implements Initializable {
             first_pane.setDisable(false);
             // switch to import tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
-            controller.setTabPane(2);
+            questionBankController.setTabPane(2);
         });
 
         btn_export.setOnAction(event -> {
@@ -89,11 +89,15 @@ public class HomeController implements Initializable {
             first_pane.setDisable(false);
             // switch to export tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
-            controller.setTabPane(3);
+            questionBankController.setTabPane(3);
         });
     }
 
     public Parent getQuestionBankView() {
         return questionBankView;
+    }
+
+    public QuestionBankController getQuestionBankController() {
+        return questionBankController;
     }
 }
