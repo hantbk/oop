@@ -23,6 +23,12 @@ public class QuizViewController implements Initializable {
     @FXML
     private ImageView btn_menu_return; // return to homeView
 
+    public void displayInfo(String quizName, String quizInfo) {
+        label_quiz_name_IT.setText(quizName);
+        label_quiz_name_view.setText(quizName);
+        label_quiz_description.setText(quizInfo);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // TODO: update quiz_name, description
