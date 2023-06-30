@@ -4,14 +4,14 @@ public class Category {
     private int id_number;
     private String name;
     private int parent_id = 0;
-    private int course_count;
+    private int question_count;
     private String category_info;
 
-    public Category(int id_number, String name, int parent_id, int course_count, String category_info) {
+    public Category(int id_number, String name, int parent_id, int question_count, String category_info) {
         this.id_number = id_number;
         this.name = name;
         this.parent_id = parent_id;
-        this.course_count = course_count;
+        this.question_count = question_count;
         this.category_info = category_info;
     }
 
@@ -25,10 +25,10 @@ public class Category {
 
     @Override
     public String toString() {
-        if (course_count == 0) {
+        if (question_count == 0) {
             return name;
         } else {
-            return name + " (" + course_count + ")";
+            return name + " (" + question_count + ")";
         }
     }
 
@@ -48,7 +48,7 @@ public class Category {
         return category_info;
     }
 
-    public int getCourse_count() {
-        return course_count;
+    public int getQuestion_count() {
+        return question_count;
     }
 }
