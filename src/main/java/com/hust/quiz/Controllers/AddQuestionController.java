@@ -50,9 +50,7 @@ public class AddQuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // configure btn_menu_return
-        btn_menu_return.setOnMouseClicked(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
-        });
+        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
 
         //add list category to comboBox
         updateCategory();
