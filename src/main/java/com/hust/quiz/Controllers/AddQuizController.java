@@ -4,9 +4,16 @@ import com.hust.quiz.Models.Quiz;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +43,11 @@ public class AddQuizController implements Initializable {
     @FXML
     private Label alert_missing_name;
 
+    private Scene quizView;
+    private Stage stage;
+    private Parent root;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // default time expire - fixed - no change
@@ -54,14 +66,30 @@ public class AddQuizController implements Initializable {
         // configure btn_save - save quiz
         btn_save.setOnAction(event -> {
             String quizName = text_quiz_name.getText();
+            String quizDescription = text_quiz_description.getText();
             if (quizName.isEmpty()) {
                 // alert pop-up if didn't fill name box
                 alert_missing_name.setVisible(true);
             } else {
                 // turn off alert
                 alert_missing_name.setVisible(false);
+
+                // update info to quizViewScene
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                QuizViewController quizViewController = loader.getController();
+                quizViewController.displayInfo(quizName, quizDescription);
+
                 // TODO: have not push on database yet
-                ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                // ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                quizView = new Scene(root);
+                stage.setScene(quizView);
+                stage.show();
             }
         });
     }
