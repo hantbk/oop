@@ -31,7 +31,6 @@ public class QuizViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO: update quiz_name, description
         btn_menu_return.setOnMouseClicked(event -> {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
