@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
     <children>
         <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
             <children>
@@ -186,7 +186,7 @@
                                              </image>
                                           </ImageView>
                                           <DatePicker fx:id="date_open" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
-                                          <CheckBox layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
+                                          <CheckBox fx:id="checkbox_enable_open" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -201,7 +201,7 @@
                                     <AnchorPane prefHeight="50.0" prefWidth="1013.0">
                                        <children>
                                           <DatePicker fx:id="date_close" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
-                                          <CheckBox layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
+                                          <CheckBox fx:id="checkbox_enable_close" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -222,7 +222,7 @@
                                              </image>
                                           </ImageView>
                                           <TextField fx:id="text_time_limit" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="50.0" />
-                                          <CheckBox layoutX="460.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
+                                          <CheckBox fx:id="checkbox_enable_time_limit" layoutX="460.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
                                        </children>
                                     </AnchorPane>
                                  </children>
