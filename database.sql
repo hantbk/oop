@@ -82,9 +82,9 @@ CREATE TABLE `quiz` (
   `quiz_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `quiz_name` VARCHAR(255) NOT NULL,
   `quiz_description` VARCHAR(255) NULL,
-  `quiz_open_date` DATETIME NOT NULL,
-  `quiz_close_date` DATETIME NULL,
-  `quiz_time_limit` INT UNSIGNED NULL,
+  `quiz_open_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `quiz_close_date` DATETIME,
+  `quiz_time_limit` INT UNSIGNED,
   PRIMARY KEY (`quiz_id`),
   UNIQUE INDEX `quiz_id_UNIQUE` (`quiz_id` ASC) VISIBLE,
   UNIQUE INDEX `quiz_name_UNIQUE` (`quiz_name` ASC) VISIBLE)
@@ -92,6 +92,27 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+--
+-- Table structure for table `quiz_question`
+--
+CREATE TABLE `quiz_question` (
+   `quiz_id` INT UNSIGNED NOT NULL,
+   `question_id` INT UNSIGNED NOT NULL,
+   `question_order` INT UNSIGNED NOT NULL,
+   PRIMARY KEY (`quiz_id`, `question_id`),
+   INDEX `question_id_idx` (`question_id` ASC) VISIBLE,
+   CONSTRAINT `quiz_id`
+     FOREIGN KEY (`quiz_id`)
+     REFERENCES `quiz` (`quiz_id`)
+     ON DELETE CASCADE
+     ON UPDATE CASCADE,
+   CONSTRAINT `fk_question_id`
+     FOREIGN KEY (`question_id`)
+     REFERENCES `question` (`question_id`)
+     ON DELETE CASCADE
+     ON UPDATE CASCADE)
+ ENGINE = InnoDB
+ DEFAULT CHARACTER SET = utf8mb4;
 
 --
 -- Insert data
