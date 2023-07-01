@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
     <children>
         <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
             <children>
@@ -250,7 +250,7 @@
                                  <children>
                                     <AnchorPane prefHeight="50.0" prefWidth="1141.0">
                                        <children>
-                                          <Button fx:id="btn_save" layoutX="460.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="SAVE" textFill="WHITE">
+                                          <Button fx:id="btn_create" layoutX="428.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="CREATE" textFill="WHITE">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
