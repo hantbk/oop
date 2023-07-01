@@ -2,6 +2,7 @@ package com.hust.quiz.Views;
 
 import com.hust.quiz.Controllers.HomeController;
 import com.hust.quiz.Controllers.QuestionBankController;
+import com.hust.quiz.Controllers.QuizViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ public class ViewFactory {
     private Scene addQuizScene;
     private Scene quizViewScene;
     private QuestionBankController questionBankController;
+    private QuizViewController quizViewController;
 
     // singleton design pattern
     private ViewFactory() {
@@ -24,18 +26,22 @@ public class ViewFactory {
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
-        FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
+        FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
+
             // because we need to access to QuestionBankController in HomeController to set TabPane
             HomeController homeController = home.getController();
             questionBankController = homeController.getQuestionBankController();
             questionBankScene = new Scene(homeController.getQuestionBankView());
-            addQuestion = new Scene(multipleChoiceView.load());
-            addQuizScene = new Scene(addQuizView.load());
-            quizViewScene = new Scene(quizView.load());
 
+            addQuestion = new Scene(multipleChoiceView.load());
+
+            quizViewScene = new Scene(quizView.load());
+            quizViewController = quizView.getController();
+
+            addQuizScene = new Scene(addQuizView.load());
         } catch (IOException e) {
             System.out.println("Error to load fxml");
             e.printStackTrace();
@@ -52,6 +58,10 @@ public class ViewFactory {
             instance = new ViewFactory();
         }
         return instance;
+    }
+
+    public void updateQuizView(String quizName, String quizInfo) {
+        quizViewController.displayInfo(quizName, quizInfo);
     }
 
     public void routes(SCENES scene) {
