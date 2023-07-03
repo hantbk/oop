@@ -2,9 +2,10 @@ package com.hust.quiz.Controllers;
 
 import com.hust.quiz.Models.AikenFormatChecker;
 import com.hust.quiz.Models.Category;
-import com.hust.quiz.Models.FileChecker;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.CategoryService;
+import com.hust.quiz.Services.LoaderDocxService;
+import com.hust.quiz.Services.LoaderTextService;
 import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
@@ -53,6 +54,10 @@ public class QuestionBankController implements Initializable {
     private AnchorPane pane_question_list;
     @FXML
     private Button btnChooseFile;
+    @FXML
+    private Button btnImport;
+
+    String directory;
 
     private static void expandAll(TreeItem<?> item) {
         if (item != null && !item.isLeaf()) {
@@ -208,24 +213,44 @@ public class QuestionBankController implements Initializable {
 
         btnChooseFile.setOnAction(actionEvent -> {
             FileChooser filechooser = new FileChooser();
-            filechooser.setTitle("Open Aiken File");
-            File selectedFile = filechooser.showOpenDialog(null);
-
-            if (selectedFile != null) {
-                String directory = selectedFile.getAbsolutePath();
-                String new_directory = directory.replace("/", "//");
-                System.out.println(new_directory);
-
+            filechooser.setTitle("Choose Quiz");
+            File selectedfile = filechooser.showOpenDialog(null);
+            if(selectedfile != null) {
+                directory = selectedfile.getAbsolutePath();
+            }
+        });
+        btnImport.setOnAction(actionEvent -> {
+            if((!directory.endsWith(".txt")) && (!directory.endsWith(".docx"))){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("File Selected");
+                alert.setTitle("WARNING");
                 alert.setHeaderText(null);
-                if (FileChecker.isTextFile(new_directory))
-                    alert.setContentText(AikenFormatChecker.checkAikenFormat(new_directory));
-                else
-                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(new_directory));
+                alert.setContentText("WRONG FORMAT");
                 alert.showAndWait();
-            } else {
-                System.out.println("file is not valid");
+
+            }
+            else if((!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success")) ||
+                    (!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success"))){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("WARNING");
+                alert.setHeaderText(null);
+                if(directory.endsWith(".txt")){
+                    alert.setContentText(AikenFormatChecker.checkAikenFormat(directory));}
+                else{
+                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(directory));
+                }
+                alert.showAndWait();
+            }
+            else{
+                if(directory.endsWith(".txt")){
+                    LoaderTextService.importfile(directory);}
+                else{
+                    LoaderDocxService.importFile(directory);
+                }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText("File is imported sucessfully");
+                alert.showAndWait();
             }
 
         });
