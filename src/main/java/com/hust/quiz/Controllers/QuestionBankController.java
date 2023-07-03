@@ -228,8 +228,8 @@ public class QuestionBankController implements Initializable {
                 alert.showAndWait();
 
             }
-            else if((!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success")) ||
-                    (!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success"))){
+            else if(((directory.endsWith(".txt"))&&(!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success"))) ||
+                    ((directory.endsWith(".docx"))&&(!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success")))){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("WARNING");
                 alert.setHeaderText(null);
@@ -242,7 +242,7 @@ public class QuestionBankController implements Initializable {
             }
             else{
                 if(directory.endsWith(".txt")){
-                    LoaderTextService.importfile(directory);}
+                    LoaderTextService.importFile(directory);}
                 else{
                     LoaderDocxService.importFile(directory);
                 }
