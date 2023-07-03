@@ -1,5 +1,6 @@
 package com.hust.quiz.Views;
 
+import com.hust.quiz.Controllers.EditQuizController;
 import com.hust.quiz.Controllers.HomeController;
 import com.hust.quiz.Controllers.QuestionBankController;
 import com.hust.quiz.Controllers.QuizViewController;
@@ -17,9 +18,10 @@ public class ViewFactory {
     private Scene addQuestion;
     private Scene addQuizScene;
     private Scene quizViewScene;
+    private Scene editQuizScene;
     private QuestionBankController questionBankController;
     private QuizViewController quizViewController;
-
+    private EditQuizController editQuizController;
     // singleton design pattern
     private ViewFactory() {
         stage = new Stage();
@@ -28,6 +30,7 @@ public class ViewFactory {
         FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
+        FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
 
@@ -42,6 +45,9 @@ public class ViewFactory {
             quizViewController = quizView.getController();
 
             addQuizScene = new Scene(addQuizView.load());
+
+            editQuizScene = new Scene(editQuizView.load());
+            editQuizController = editQuizView.getController();
         } catch (IOException e) {
             System.out.println("Error to load fxml");
             e.printStackTrace();
@@ -62,6 +68,10 @@ public class ViewFactory {
 
     public void updateQuizView(String quizName, String quizInfo) {
         quizViewController.displayInfo(quizName, quizInfo);
+    }
+
+    public void updateEditQuizView(String quizName) {
+        editQuizController.editQuizDisplayInfo(quizName);
     }
 
     public void routes(SCENES scene) {
@@ -87,6 +97,10 @@ public class ViewFactory {
                 stage.setScene(quizViewScene);
                 break;
             }
+            case EDIT_QUIZ: {
+                stage.setScene(editQuizScene);
+                break;
+            }
             default: {
                 stage.setScene(homeScene);
             }
@@ -98,6 +112,7 @@ public class ViewFactory {
         QUESTION_BANK,
         ADD_QUESTION,
         ADD_QUIZ,
-        QUIZ_VIEW
+        QUIZ_VIEW,
+        EDIT_QUIZ
     }
 }
