@@ -34,5 +34,11 @@ public class QuizViewController implements Initializable {
         btn_menu_return.setOnMouseClicked(event -> {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
+
+        btn_edit_quiz.setOnMouseClicked(event -> {
+            // TODO: Update quiz
+            ViewFactory.getInstance().updateEditQuizView(label_quiz_name_IT.getText());
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.EDIT_QUIZ);
+        });
     }
 }

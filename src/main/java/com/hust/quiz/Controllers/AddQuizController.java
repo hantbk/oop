@@ -6,11 +6,8 @@ import com.hust.quiz.Views.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,11 +37,6 @@ public class AddQuizController implements Initializable {
     private Button btn_cancel; // Cancel create quiz
     @FXML
     private Label alert_missing_name;
-
-    private Scene quizView;
-    private Stage stage;
-    private Parent root;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,6 +69,7 @@ public class AddQuizController implements Initializable {
                 QuizService.addQuiz(new Quiz(quizName, quizDescription));
 
                 ViewFactory.getInstance().updateQuizView(quizName, quizDescription);
+                // ViewFactory.getInstance().updateEditQuizView(quizName);
                 ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
             }
         });
