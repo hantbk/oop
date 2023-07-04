@@ -29,7 +29,7 @@ public class AddQuizController implements Initializable {
     @FXML
     private TextField text_time_limit; // Time limit
     @FXML
-    private Spinner<Integer> spinner_time_format;
+    private Spinner<String> spinner_time_format;
     @FXML
     private Spinner<String> spinner_time_expire;
     @FXML
@@ -41,14 +41,6 @@ public class AddQuizController implements Initializable {
     @FXML
     private Label alert_missing_name;
 
-    @FXML
-    private CheckBox checkbox_enable_close;
-
-    @FXML
-    private CheckBox checkbox_enable_open;
-
-    @FXML
-    private CheckBox checkbox_enable_time_limit;
     private Scene quizView;
     private Stage stage;
     private Parent root;
@@ -56,8 +48,16 @@ public class AddQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //set cac setting ban dau cho cac thanh phan
-        setInit();
+        // default time expire - fixed - no change
+        spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
+        // default counter format is minute - fixed - no change
+        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Minutes")));
+
+        // configure btn_menu_return - back to home
+        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+
+        // configure btn_cancel - back to home
+        btn_cancel.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
 
         // configure btn_save - save quiz
         btn_create.setOnAction(event -> {
@@ -80,55 +80,5 @@ public class AddQuizController implements Initializable {
                 ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
             }
         });
-
-        // configure btn_menu_return - back to home
-        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
-
-        // configure btn_cancel - back to home
-        btn_cancel.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
-
-
-        //tick enable để có thể set open date
-        checkbox_enable_open.setOnAction(event -> {
-            if(checkbox_enable_open.isSelected()){
-                date_open.setDisable(false);
-            }else{
-                date_open.setDisable(true);
-            }
-        });
-
-        //tick enable để có thể set close date
-        checkbox_enable_close.setOnAction(event -> {
-            if(checkbox_enable_close.isSelected()){
-                date_close.setDisable(false);
-            }else{
-                date_close.setDisable(true);
-            }
-        });
-
-        //tick enable để có thể set time limit
-        checkbox_enable_time_limit.setOnAction(event -> {
-            if(checkbox_enable_time_limit.isSelected()){
-                text_time_limit.setDisable(false);
-                spinner_time_format.setDisable(false);
-            }else{
-                text_time_limit.setDisable(true);
-                spinner_time_format.setDisable(true);
-            }
-        });
-    }
-
-    public void setInit(){
-        //ban đầu các thành phần này sẽ không điền được nếu không chọn enable
-        date_open.setDisable(true);
-        date_close.setDisable(true);
-        text_time_limit.setDisable(true);
-        spinner_time_format.setDisable(true);
-
-        //set gia tri ban dau chon spiner chon minute
-        spinner_time_format.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0, 5));
-        // default time expire - fixed - no change
-        spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
-
     }
 }
