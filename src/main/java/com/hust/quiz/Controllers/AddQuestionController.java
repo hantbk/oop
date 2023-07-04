@@ -161,6 +161,13 @@ public class AddQuestionController implements Initializable {
         }
     }
 
+    //ham update cac thong tin question vao cac o khi bam edit trong question_bank
+    public void setInfor(Question oldQuestion, String category_name){
+        text_QuestionName.setText(oldQuestion.getQuestion_name());
+        text_QuestionText.setText(oldQuestion.getQuestion_text());
+        kindOfCategory.setValue(category_name);
+    }
+
     //ham update category vao combo-box
     public void updateCategory() {
         List<Category> listCategory = CategoryService.getCategories();

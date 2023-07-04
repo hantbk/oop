@@ -177,7 +177,10 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <ScrollPane fx:id="questionBankList" hbarPolicy="NEVER" layoutY="40.0" prefHeight="143.0" prefWidth="1089.0" />
+                                    <ScrollPane fx:id="questionBankList" hbarPolicy="NEVER" layoutY="40.0" prefHeight="143.0" prefWidth="1089.0">
+                                       <content>
+                                          <VBox fx:id="listQuestion_vbox" prefHeight="42.0" prefWidth="1090.0" />
+                                       </content></ScrollPane>
                                  </children>
                               </AnchorPane>
                               <ComboBox fx:id="btn_category" layoutX="183.0" layoutY="60.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />

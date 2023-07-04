@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChoiceService {
+    //get choice from database with question_id
     public static List<Choice> getChoice(int question_id) {
         List<Choice> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
