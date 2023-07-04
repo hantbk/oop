@@ -127,7 +127,6 @@ public class QuestionBankController implements Initializable {
 //                        listView.setPrefSize(1089, 143);
 
                         // put every question in the list in listView
-                        List<QuestionInforController> listQuestionInforController = new ArrayList<QuestionInforController>();
                         FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
                         int i = 0;
                         for (Question item : questionList) {
