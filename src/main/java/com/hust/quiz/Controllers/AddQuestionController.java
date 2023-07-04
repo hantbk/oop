@@ -3,20 +3,24 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
-import com.hust.quiz.Services.CategoryService;
-import com.hust.quiz.Services.ChoiceService;
-import com.hust.quiz.Services.QuestionService;
+import com.hust.quiz.Services.*;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,7 +49,12 @@ public class AddQuestionController implements Initializable {
     private TextField text_DefaultMark;
     @FXML
     private Label labelAlert;
+    //@FXML
+    private ImageView myImageView;
+    //@FXML
+    private Button btn_AddImage;
     private int countChoice = 0;
+    private File selectedfile;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,6 +98,13 @@ public class AddQuestionController implements Initializable {
                     }
                 }
 
+                //Luu thong tin anh cua cau hoi len csdl
+                try {
+                    ImageService.addImage(selectedfile,id);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
                 //xoa cac thong tin vua add tranh add 2 lan bi trung lap
                 text_QuestionName.setText(null);
                 text_QuestionText.setText(null);
@@ -98,6 +114,19 @@ public class AddQuestionController implements Initializable {
 
 //                QuestionBankController.updateCategory();
             }
+        });
+
+        //chen anh vao cau hoi
+        btn_AddImage.setOnAction(event -> {
+                    FileChooser filechooser = new FileChooser();
+                    selectedfile = filechooser.showOpenDialog(null);
+            Image image = null;
+            try {
+                image = new Image(new FileInputStream(selectedfile));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            myImageView.setImage(image);
         });
 
         //bam vao save changes de luu thong len csdl va quay ve Question_Bank
