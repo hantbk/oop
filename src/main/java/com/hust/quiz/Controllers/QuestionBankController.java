@@ -112,6 +112,9 @@ public class QuestionBankController implements Initializable {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
+                    //remove old_list_question
+                    listQuestion_vbox.getChildren().clear();
+
                     btn_category.setValue(selectedItem.getValue());
                     category.setVisible(!category.isVisible());
                     // add questions found in scrollPane by adding in listView
@@ -125,7 +128,6 @@ public class QuestionBankController implements Initializable {
                     if (!questionList.isEmpty()) {
 //                        ListView<HBox> listView = new ListView<>();
 //                        listView.setPrefSize(1089, 143);
-
                         // put every question in the list in listView
                         FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
                         int i = 0;
@@ -138,9 +140,9 @@ public class QuestionBankController implements Initializable {
                                 listQuestion_vbox.getChildren().add(root);
 
                             } catch (IOException e) {
-                                throw new RuntimeException(e);
+                                e.printStackTrace();
+                                System.out.print("At "+this.getClass());
                             }
-
                         }
                         // show list
                         pane_question_list.setVisible(true);
