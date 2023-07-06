@@ -50,7 +50,10 @@ public class AddQuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // configure btn_menu_return
-        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+        btn_menu_return.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
 
         //add list category to comboBox
         updateCategory();
@@ -90,10 +93,7 @@ public class AddQuestionController implements Initializable {
                 }
 
                 //xoa cac thong tin vua add tranh add 2 lan bi trung lap
-                text_QuestionName.setText(null);
-                text_QuestionText.setText(null);
-                text_DefaultMark.setText(null);
-                kindOfCategory.setValue(null);
+               this.reset();
                 labelAlert.setText("Add question successfully!");
 
 //                QuestionBankController.updateCategory();
@@ -101,10 +101,48 @@ public class AddQuestionController implements Initializable {
         });
 
         //bam vao save changes de luu thong len csdl va quay ve Question_Bank
-        btn_SaveChanges.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK));
+        btn_SaveChanges.setOnAction(event -> {
+            labelAlert.setText("");
+            if (text_QuestionName.getText().equals("")) {
+                labelAlert.setText("Question name is empty!");
+            } else if (text_QuestionText.getText().equals("")) {
+                labelAlert.setText("Question text is empty!");
+            } else if (text_DefaultMark.getText().equals("")) {
+                labelAlert.setText("Default mark is empty!");
+            } else if (kindOfCategory.getValue() == null) {
+                labelAlert.setText("Category is empty!");
+            } else if (listChoiceBoxController.get(0).getChoiceText().equals("")) {
+                labelAlert.setText("Choice 1 is empty!");
+            } else if (listChoiceBoxController.get(1).getChoiceText().equals("")) {
+                labelAlert.setText("Choice 2 is empty!");
+            } else {
+                String categoryName = kindOfCategory.getValue();
+                Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText(),
+                        CategoryService.getID(categoryName));
+                QuestionService.addQuestion(newQuestion);
+
+                int id = QuestionService.getId(newQuestion.getQuestion_name());
+
+                for (ChoiceBoxController controller : listChoiceBoxController) {
+                    if (controller.getChoiceText() != null) {
+                        Choice newChoice = new Choice(controller.getChoiceText(), false, controller.getGrade(), id);
+                        ChoiceService.addChoice(newChoice);
+                        controller.reset();
+                    }
+                }
+                //xoa cac thong tin vua add tranh add 2 lan bi trung lap
+                this.reset();
+                labelAlert.setText("Add question successfully!");
+                ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
+            }
+
+        });
 
         //nhan vao cancel de ve QuestionBank
-        btn_Cancel.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK));
+        btn_Cancel.setOnAction(event -> {
+            this.reset();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
+        });
 
         //them 3 choice sau khi nhan vao btn
         btn_blankChoice.setOnAction(event -> {
@@ -159,6 +197,21 @@ public class AddQuestionController implements Initializable {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    }
+
+    //ham update cac thong tin question vao cac o khi bam edit trong question_bank
+    public void setInfor(Question oldQuestion, String category_name){
+        text_QuestionName.setText(oldQuestion.getQuestion_name());
+        text_QuestionText.setText(oldQuestion.getQuestion_text());
+        kindOfCategory.setValue(category_name);
+    }
+
+    //ham reset các ô điền về trống
+    public void reset(){
+        text_QuestionName.setText(null);
+        text_QuestionText.setText(null);
+        text_DefaultMark.setText(null);
+        kindOfCategory.setValue(null);
     }
 
     //ham update category vao combo-box

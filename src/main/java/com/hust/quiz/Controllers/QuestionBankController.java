@@ -58,6 +58,8 @@ public class QuestionBankController implements Initializable {
     private Button btnChooseFile;
     @FXML
     private Button btnImport;
+    @FXML
+    private CheckBox showSubcategoryQuestionCheckbox;
 
     String directory;
 
@@ -129,10 +131,11 @@ public class QuestionBankController implements Initializable {
 
                     // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
                     List<Question> questionList = QuestionService.getQuestions(idCategory);
+                    List<Question> subcategoryQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
+                    List<Question> listQuestion = new ArrayList<>();
+                    listQuestion.addAll(questionList);
                     // Check if category has questions or not
                     if (!questionList.isEmpty()) {
-//                        ListView<HBox> listView = new ListView<>();
-//                        listView.setPrefSize(1089, 143);
                         // put every question in the list in listView
                         FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
                         int i = 0;
@@ -143,7 +146,6 @@ public class QuestionBankController implements Initializable {
                                 QuestionInforController controller = listFXMLInforQuestion[i].getController();
                                 controller.updateInforQuestion(item, category_name);
                                 listQuestion_vbox.getChildren().add(root);
-
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 System.out.print("At "+this.getClass());
@@ -154,9 +156,52 @@ public class QuestionBankController implements Initializable {
                     } else {
                         pane_question_list.setVisible(false);
                     }
+
+                    //tick checkbox show subcategory
+                    showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
+                        if (showSubcategoryQuestionCheckbox.isSelected()) {
+                            if (subcategoryQuestions != null) {
+                                questionList.clear();
+                                questionList.addAll(subcategoryQuestions);
+                            }
+                            if (subcategoryQuestions.isEmpty()) {
+                                questionList.clear();
+                                questionList.addAll(listQuestion);
+                            }
+                        }
+                        if (!showSubcategoryQuestionCheckbox.isSelected()) {
+                            questionList.clear();
+                            questionList.addAll(listQuestion);
+                        }
+                        if (!questionList.isEmpty()) {
+                            // put every question in the list in listView
+                            FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
+                            if(!showSubcategoryQuestionCheckbox.isSelected())
+                                listQuestion_vbox.getChildren().clear();
+                            int i = 0;
+                            for (Question item : questionList) {
+                                listFXMLInforQuestion[i] = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
+                                try {
+                                    Parent root = listFXMLInforQuestion[i].load();
+                                    QuestionInforController controller = listFXMLInforQuestion[i].getController();
+                                    controller.updateInforQuestion(item, category_name);
+                                    listQuestion_vbox.getChildren().add(root);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    System.out.print("At "+this.getClass());
+                                }
+                            }
+                            // show list
+                            pane_question_list.setVisible(true);
+                        } else {
+                            pane_question_list.setVisible(false);
+                        }
+                    });
                 }
             }
         });
+
+
 
         category2.getParent().setOnMouseClicked(event -> category2.setVisible(false));
         btn_category2.setOnMouseClicked(event -> category2.setVisible(!category2.isVisible()));

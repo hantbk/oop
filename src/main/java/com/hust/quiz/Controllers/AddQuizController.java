@@ -86,6 +86,7 @@ public class AddQuizController implements Initializable {
             if(checkbox_enable_open.isSelected()){
                 date_open.setDisable(false);
             }else{
+                date_open.setValue(null);
                 date_open.setDisable(true);
             }
         });
@@ -95,6 +96,7 @@ public class AddQuizController implements Initializable {
             if(checkbox_enable_close.isSelected()){
                 date_close.setDisable(false);
             }else{
+                date_close.setValue(null);
                 date_close.setDisable(true);
             }
         });
@@ -105,28 +107,42 @@ public class AddQuizController implements Initializable {
                 text_time_limit.setDisable(false);
                 spinner_time_format.setDisable(false);
             }else{
+                text_time_limit.clear();
+                spinner_time_format.getValueFactory().setValue(null);
                 text_time_limit.setDisable(true);
                 spinner_time_format.setDisable(true);
             }
         });
 
         // configure btn_menu_return - back to home
-        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+        btn_menu_return.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
 
         // configure btn_cancel - back to home
-        btn_cancel.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+        btn_cancel.setOnAction(event -> {
+            this.reset();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
     }
-public void setInit(){
-        //ban đầu các thành phần này sẽ không điền được nếu không chọn enable
-        date_open.setDisable(true);
-        date_close.setDisable(true);
-        text_time_limit.setDisable(true);
-        spinner_time_format.setDisable(true);
+    public void setInit(){
+            //ban đầu các thành phần này sẽ không điền được nếu không chọn enable
+            date_open.setDisable(true);
+            date_close.setDisable(true);
+            text_time_limit.setDisable(true);
+            spinner_time_format.setDisable(true);
 
-        //set gia tri ban dau chon spiner chon minute
-        spinner_time_format.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0, 5));
-        // default time expire - fixed - no change
-        spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
+            //set gia tri ban dau chon spiner chon minute
+            spinner_time_format.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0, 5));
+            // default time expire - fixed - no change
+            spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
+    }
 
-        }
+    public void reset(){
+        date_open.setValue(null);
+        date_close.setValue(null);
+        text_time_limit.setText(null);
+        spinner_time_format.getValueFactory().setValue(null);
+    }
 }
