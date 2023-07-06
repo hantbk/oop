@@ -21,10 +21,7 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class QuestionBankController implements Initializable {
     @FXML
@@ -47,7 +44,6 @@ public class QuestionBankController implements Initializable {
     @FXML
     private Label noticeAddCategory;
     @FXML
-
     private ScrollPane questionBankList;
     @FXML
     private AnchorPane pane_question_list;
@@ -116,7 +112,6 @@ public class QuestionBankController implements Initializable {
                     String category_name = selectedItem.getValue();
                     // Find ID of the category
                     int id = CategoryService.getID(category_name);
-
                     // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
                     List<Question> questionList = QuestionService.getQuestions(id);
                     // Check if category has questions or not

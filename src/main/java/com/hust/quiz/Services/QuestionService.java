@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class QuestionService {
 
@@ -100,5 +101,35 @@ public class QuestionService {
             throw new RuntimeException(e);
         }
         return 0;
+    }
+
+    public static List<Question> getQuestionFromSubcategory(int categoryId){
+        List<Integer> subcategoryIds = new ArrayList<>();
+
+        try (Connection conn = Utils.getConnection()){
+            String query = "SELECT category_id FROM category WHERE parent_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                subcategoryIds.add(rs.getInt("category_id"));
+            }
+            query = "SELECT * FROM question WHERE category_id IN (" + String.join(",", Collections.nCopies(subcategoryIds.size(), "?")) + ")";
+            stmt = conn.prepareStatement(query);
+            for(int i = 0; i < subcategoryIds.size(); i++) {
+                stmt.setInt(i + 1, subcategoryIds.get(i));
+            }
+            rs = stmt.executeQuery();
+            List<Question> questions = new ArrayList<>();
+            while(rs.next()){
+                Question question = new Question(rs.getInt("question_id"),rs.getString("question_name"),
+                        rs.getString("question_text"), rs.getInt("category_id"));
+                questions.add(question);
+            }
+            return questions;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
