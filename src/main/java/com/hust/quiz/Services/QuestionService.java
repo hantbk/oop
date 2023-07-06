@@ -103,33 +103,45 @@ public class QuestionService {
         return 0;
     }
 
-    public static List<Question> getQuestionFromSubcategory(int categoryId){
+    public static List<Question> getQuestionFromSubcategory(int categoryId) {
         List<Integer> subcategoryIds = new ArrayList<>();
 
-        try (Connection conn = Utils.getConnection()){
+        try (Connection conn = Utils.getConnection()) {
             String query = "SELECT category_id FROM category WHERE parent_id = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, categoryId);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 subcategoryIds.add(rs.getInt("category_id"));
             }
-            query = "SELECT * FROM question WHERE category_id IN (" + String.join(",", Collections.nCopies(subcategoryIds.size(), "?")) + ")";
-            stmt = conn.prepareStatement(query);
-            for(int i = 0; i < subcategoryIds.size(); i++) {
-                stmt.setInt(i + 1, subcategoryIds.get(i));
+
+            if (!subcategoryIds.isEmpty()) {
+                query = "SELECT * FROM question WHERE category_id IN (" + String.join(",", Collections.nCopies(subcategoryIds.size(), "?")) + ")";
+                stmt = conn.prepareStatement(query);
+                for (int i = 0; i < subcategoryIds.size(); i++) {
+                    stmt.setInt(i + 1, subcategoryIds.get(i));
+                }
+                rs = stmt.executeQuery();
+                List<Question> questions = new ArrayList<>();
+                while (rs.next()) {
+                    Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
+                            rs.getString("question_text"), rs.getInt("category_id"));
+                    questions.add(question);
+                }
+                return questions;
+            } else {
+                return null; // trả về null nếu không có danh mục con
             }
-            rs = stmt.executeQuery();
-            List<Question> questions = new ArrayList<>();
-            while(rs.next()){
-                Question question = new Question(rs.getInt("question_id"),rs.getString("question_name"),
-                        rs.getString("question_text"), rs.getInt("category_id"));
-                questions.add(question);
-            }
-            return questions;
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 }
+
+
+
+
+
+
+
