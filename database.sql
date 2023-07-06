@@ -65,6 +65,8 @@ CREATE TABLE `choice` (
   `choice_is_correct` TINYINT NOT NULL,
   `choice_grade` INT NULL,
   `question_id` INT UNSIGNED NOT NULL,
+  `image_data` LONGBLOB,
+
   PRIMARY KEY (`choice_id`),
   INDEX `question_id_idx` (`question_id` ASC) VISIBLE,
   CONSTRAINT `question_id`

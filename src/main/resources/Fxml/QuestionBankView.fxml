@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1280.0">
          <children>
@@ -515,7 +515,7 @@
                                        <children>
                                           <VBox alignment="TOP_CENTER" prefWidth="1100.0">
                                              <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
+                                                <Button fx:id="btnImport" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>

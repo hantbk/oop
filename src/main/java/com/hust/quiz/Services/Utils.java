@@ -9,7 +9,6 @@ public class Utils {
     static final String username = "root";
     static final String password = "Vanhao23102003"; // fixed
 
-
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
