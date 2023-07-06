@@ -4,9 +4,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -14,15 +17,10 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFPicture;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 
-
-public class LoaderDocxService{
+public class LoaderDocxService {
 
     private static StringBuilder questionText = new StringBuilder();
-    private static StringBuilder optionA = new StringBuilder();
-    private static StringBuilder optionB = new StringBuilder();
-    private static StringBuilder optionC = new StringBuilder();
-    private static StringBuilder optionD = new StringBuilder();
-    private static StringBuilder optionE = new StringBuilder();
+    private static List<String> options = new ArrayList<>();
     private static StringBuilder correctOption = new StringBuilder();
     private static byte[] imageData = null;
     private static List<Question> questionList = new ArrayList<>();
@@ -34,47 +32,35 @@ public class LoaderDocxService{
             List<XWPFParagraph> paragraphs = doc.getParagraphs();
 
             for (XWPFParagraph paragraph : paragraphs) {
-                List<XWPFRun> runs = paragraph.getRuns();
-                for (XWPFRun run : runs) {
-                    List<XWPFPicture> pictures = run.getEmbeddedPictures();
-                    for (XWPFPicture picture : pictures) {
-                        XWPFPictureData pictureData = picture.getPictureData();
-                        imageData = pictureData.getData();
-                    }
-                }
-
                 String text = paragraph.getText().trim();
+
                 if (!text.isEmpty()) {
                     if (text.startsWith("ANSWER: ")) {
                         correctOption.append(text.substring(8));
-                    } else if (questionText.length() == 0) {
-                        questionText.append(text);
-                    } else if (optionA.length() == 0) {
-                        optionA.append(text);
-                    } else if (optionB.length() == 0) {
-                        optionB.append(text);
-                    } else if (optionC.length() == 0) {
-                        optionC.append(text);
-                    } else if (optionD.length() == 0) {
-                        optionD.append(text);
-                    } else if (optionE.length() == 0) {
-                        optionE.append(text);
+                    } else {
+                        if (questionText.length() > 0) {
+                            options.add(text);
+                        } else {
+                            questionText.append(text);
+                        }
                     }
-                } else if (isQuestionComplete()) {
-                    // Add the question to the list
-                    Question question = new Question(questionText.toString(), optionA.toString(), optionB.toString(),
-                            optionC.toString(), optionD.toString(), optionE.toString(), correctOption.toString(), imageData);
-                    questionList.add(question);
+                } else {
+                    if (isQuestionComplete()) {
+                        // Add the question to the list
+                        Question question = new Question(questionText.toString(), new ArrayList<>(options),
+                                correctOption.toString(), imageData);
+                        questionList.add(question);
 
-                    // Reset the question-related variables
-                    resetQuestionVariables();
+                        // Reset the question-related variables
+                        resetQuestionVariables();
+                    }
                 }
             }
 
-            // Insert the last question if it is not followed by a blank line and is complete
+            // Insert the last question if it is complete
             if (isQuestionComplete()) {
-                Question question = new Question(questionText.toString(), optionA.toString(), optionB.toString(),
-                        optionC.toString(), optionD.toString(), optionE.toString(), correctOption.toString(), imageData);
+                Question question = new Question(questionText.toString(), new ArrayList<>(options),
+                        correctOption.toString(), imageData);
                 questionList.add(question);
             }
         } catch (IOException e) {
@@ -86,70 +72,136 @@ public class LoaderDocxService{
     }
 
     private static boolean isQuestionComplete() {
-        return !questionText.toString().isEmpty() && !optionA.toString().isEmpty()
-                && !optionB.toString().isEmpty();
+        return questionText.length() > 0 && !options.isEmpty();
     }
 
     private static void resetQuestionVariables() {
         questionText.setLength(0);
-        optionA.setLength(0);
-        optionB.setLength(0);
-        optionC.setLength(0);
-        optionD.setLength(0);
-        optionE.setLength(0);
+        options.clear();
         correctOption.setLength(0);
         imageData = null;
     }
 
     private static void saveQuestionsToDatabase() {
         Connection conn = null;
+        PreparedStatement questionStatement = null;
+        PreparedStatement choiceStatement = null;
+        PreparedStatement categoryStatement = null;
         PreparedStatement statement = null;
-
+        int questionCount = LoaderDocxService.getNumberOfQuestions();
+        Random random = new Random();
+        int category_id = random.nextInt(1,19);
         try {
             conn = Utils.getConnection();
-            String query = "INSERT INTO questions (question_text, option_a, option_b, option_c, option_d, option_e, correct_option, image_data) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            conn.setAutoCommit(false);
 
-            statement = conn.prepareStatement(query);
+            // Check if the category_id exists in the category table
+            String checkQuery = "SELECT category_id FROM category WHERE category_id = ?";
+            categoryStatement = conn.prepareStatement(checkQuery);
+            categoryStatement.setInt(1, category_id);
+            ResultSet resultSet = categoryStatement.executeQuery();
 
-            for (Question question : questionList) {
-                statement.setString(1, question.getQuestionText());
-                statement.setString(2, question.getOptionA());
-                statement.setString(3, question.getOptionB());
-                statement.setString(4, question.getOptionC());
-                statement.setString(5, question.getOptionD());
-                statement.setString(6, question.getOptionE());
-                statement.setString(7, question.getCorrectOption());
-                statement.setBytes(8, question.getImageData());
 
-                statement.addBatch();
+            if (resultSet.next()) {
+                //Update number of question in category
+                String categoryQuery = "UPDATE category SET question_count = ? WHERE category_id = ?";
+                statement = conn.prepareStatement(categoryQuery);
+                statement.setInt(1, questionCount);
+                statement.setInt(2, category_id);
+                statement.executeUpdate();
+
+                // The category_id exists, so update the question_count using triggers
+                String questionQuery = "INSERT INTO question (question_name, question_text, category_id) " +
+                        "VALUES (?, ?, ?)";
+
+                questionStatement = conn.prepareStatement(questionQuery, Statement.RETURN_GENERATED_KEYS);
+
+                String choiceQuery = "INSERT INTO choice (choice_content, choice_is_correct, question_id, image_data) " +
+                        "VALUES (?, ?, ?, ?)";
+
+                choiceStatement = conn.prepareStatement(choiceQuery);
+
+                for (Question question : questionList) {
+                    // Insert question into the question table
+                    questionStatement.setString(1, question.getQuestionText());
+                    questionStatement.setString(2, question.getQuestionText());
+                    questionStatement.setInt(3, category_id);
+
+                    int affectedRows = questionStatement.executeUpdate();
+
+                    if (affectedRows == 0) {
+                        throw new SQLException("Creating question failed, no rows affected.");
+                    }
+
+                    try (ResultSet generatedKeys = questionStatement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int questionId = generatedKeys.getInt(1);
+
+                            // Insert choices into the choice table
+                            List<String> options = question.getOptions();
+                            for (int i = 0; i < options.size(); i++) {
+                                String option = options.get(i);
+                                String Option = String.valueOf(option.charAt(0));
+
+                                choiceStatement.setString(1, option);
+                                choiceStatement.setBoolean(2, Option.equals(question.getCorrectOption()) );
+                                choiceStatement.setInt(3, questionId);
+                                choiceStatement.setBytes(4, question.getImageData());
+
+                                choiceStatement.addBatch();
+                            }
+                        } else {
+                            throw new SQLException("Creating question failed, no ID obtained.");
+                        }
+                    }
+                }
+            } else {
+                throw new IllegalArgumentException("Invalid category_id: " + category_id);
             }
 
-            statement.executeBatch();
+            // Execute the choice batch insert
+            choiceStatement.executeBatch();
+            conn.commit();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (choiceStatement != null) {
+                    choiceStatement.close();
+                }
+                if (questionStatement != null) {
+                    questionStatement.close();
+                }
+                if (categoryStatement != null) {
+                    categoryStatement.close();
+                }
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                // Handle the exception
+            }
         }
     }
 
-
     public static class Question {
         private String questionText;
-        private String optionA;
-        private String optionB;
-        private String optionC;
-        private String optionD;
-        private String optionE;
+        private List<String> options;
         private String correctOption;
         private byte[] imageData;
 
-        public Question(String questionText, String optionA, String optionB, String optionC,
-                        String optionD, String optionE, String correctOption, byte[] imageData) {
+        public Question(String questionText, List<String> options, String correctOption, byte[] imageData) {
             this.questionText = questionText;
-            this.optionA = optionA;
-            this.optionB = optionB;
-            this.optionC = optionC;
-            this.optionD = optionD;
-            this.optionE = optionE;
+            this.options = options;
             this.correctOption = correctOption;
             this.imageData = imageData;
         }
@@ -158,24 +210,8 @@ public class LoaderDocxService{
             return questionText;
         }
 
-        public String getOptionA() {
-            return optionA;
-        }
-
-        public String getOptionB() {
-            return optionB;
-        }
-
-        public String getOptionC() {
-            return optionC;
-        }
-
-        public String getOptionD() {
-            return optionD;
-        }
-
-        public String getOptionE() {
-            return optionE;
+        public List<String> getOptions() {
+            return options;
         }
 
         public String getCorrectOption() {
@@ -186,6 +222,8 @@ public class LoaderDocxService{
             return imageData;
         }
     }
+
+    public static int getNumberOfQuestions() {
+        return questionList.size();
+    }
 }
-
-

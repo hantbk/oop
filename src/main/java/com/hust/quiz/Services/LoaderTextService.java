@@ -3,11 +3,10 @@ package com.hust.quiz.Services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class LoaderTextService {
 
@@ -64,33 +63,111 @@ public class LoaderTextService {
 
     private static void saveQuestionsToDatabase() {
         Connection conn = null;
+        PreparedStatement questionStatement = null;
+        PreparedStatement choiceStatement = null;
+        PreparedStatement categoryStatement = null;
         PreparedStatement statement = null;
-
+        int questionCount = LoaderDocxService.getNumberOfQuestions();
+        Random random = new Random();
+        int category_id = random.nextInt(1,19); // select a random category_id
         try {
             conn = Utils.getConnection();
-            String query = "INSERT INTO questions (question_text, option_a, option_b, option_c, option_d, option_e, correct_option) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            conn.setAutoCommit(false);
 
-            statement = conn.prepareStatement(query);
+            // Check if the category_id exists in the category table
+            String checkQuery = "SELECT category_id FROM category WHERE category_id = ?";
+            categoryStatement = conn.prepareStatement(checkQuery);
+            categoryStatement.setInt(1, category_id);
+            ResultSet resultSet = categoryStatement.executeQuery();
 
-            for (Question question : questionList) {
-                statement.setString(1, question.getQuestionText());
-                List<String> options = question.getOptions();
-                for (int i = 0; i < 5; i++) {
-                    if (i < options.size()) {
-                        statement.setString(i + 2, options.get(i));
-                    } else {
-                        statement.setString(i + 2, null);
+
+            if (resultSet.next()) {
+                //Update number of question in category
+                String categoryQuery = "UPDATE category SET question_count = ? WHERE category_id = ?";
+                statement = conn.prepareStatement(categoryQuery);
+                statement.setInt(1, questionCount);
+                statement.setInt(2, category_id);
+                statement.executeUpdate();
+
+                // The category_id exists, so update the question_count using triggers
+                String questionQuery = "INSERT INTO question (question_name, question_text, category_id) " +
+                        "VALUES (?, ?, ?)";
+
+                questionStatement = conn.prepareStatement(questionQuery, Statement.RETURN_GENERATED_KEYS);
+
+                String choiceQuery = "INSERT INTO choice (choice_content, choice_is_correct, question_id) " +
+                        "VALUES (?, ?, ?)";
+
+                choiceStatement = conn.prepareStatement(choiceQuery);
+
+                for (LoaderTextService.Question question : questionList) {
+                    // Insert question into the question table
+                    questionStatement.setString(1, question.getQuestionText());
+                    questionStatement.setString(2, question.getQuestionText());
+                    questionStatement.setInt(3, category_id);
+
+                    int affectedRows = questionStatement.executeUpdate();
+
+                    if (affectedRows == 0) {
+                        throw new SQLException("Creating question failed, no rows affected.");
+                    }
+
+                    try (ResultSet generatedKeys = questionStatement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int questionId = generatedKeys.getInt(1);
+
+                            // Insert choices into the choice table
+                            List<String> options = question.getOptions();
+                            for (int i = 0; i < options.size(); i++) {
+                                String option = options.get(i);
+                                String Option = String.valueOf(option.charAt(0));
+
+                                choiceStatement.setString(1, option);
+                                choiceStatement.setBoolean(2, Option.equals(question.getCorrectOption()) );
+                                choiceStatement.setInt(3, questionId);
+
+                                choiceStatement.addBatch();
+                            }
+                        } else {
+                            throw new SQLException("Creating question failed, no ID obtained.");
+                        }
                     }
                 }
-                statement.setString(7, question.getCorrectOption());
-
-                statement.addBatch();
+            } else {
+                throw new IllegalArgumentException("Invalid category_id: " + category_id);
             }
 
-            statement.executeBatch();
+            // Execute the choice batch insert
+            choiceStatement.executeBatch();
+            conn.commit();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (choiceStatement != null) {
+                    choiceStatement.close();
+                }
+                if (questionStatement != null) {
+                    questionStatement.close();
+                }
+                if (categoryStatement != null) {
+                    categoryStatement.close();
+                }
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                // Handle the exception
+            }
         }
     }
 
@@ -116,5 +193,9 @@ public class LoaderTextService {
         public String getCorrectOption() {
             return correctOption;
         }
+    }
+
+    public static int getNumberOfQuestions() {
+        return questionList.size();
     }
 }
