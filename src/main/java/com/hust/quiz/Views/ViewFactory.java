@@ -1,12 +1,14 @@
 package com.hust.quiz.Views;
 
 import com.hust.quiz.Controllers.*;
+import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ViewFactory {
     private static ViewFactory instance;
@@ -75,7 +77,7 @@ public class ViewFactory {
     }
 
     //ham nay de dien thong tin question vao cac o khi bam vao edit ow questionBank
-    public void updateInforEditQuestion(Question question, String category_name){ addQuestionController.setInfor(question, category_name);}
+    public void updateInforEditQuestion(Question question, String category_name, List<Choice> listChoice){ addQuestionController.setInfor(question, category_name, listChoice);}
 
     public void routes(SCENES scene) {
         switch (scene) {

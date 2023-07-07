@@ -1,5 +1,6 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.Choice;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -35,8 +36,15 @@ public class ChoiceBoxController implements Initializable {
         if (Objects.equals(cbGrade.getValue(), "None"))
             return 0;
         else {
-            return 1;
+            String grade = this.cbGrade.getValue();
+            int intGrade =  Integer.valueOf( grade.substring(0, grade.length() - 1) );
+            return intGrade;
         }
+    }
+
+    public void setChoice(Choice choice){
+        this.choiceTextField.setText(choice.getContent());
+        this.cbGrade.setValue(choice.getChoiceGrade() +"%");
     }
 
     @Override

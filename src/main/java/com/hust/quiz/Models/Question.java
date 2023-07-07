@@ -75,8 +75,4 @@ public class Question {
         this.category_id = category_id;
     }
 
-    //test add choice
-    public void getDetailQuestion(int id) {
-
-    }
 }

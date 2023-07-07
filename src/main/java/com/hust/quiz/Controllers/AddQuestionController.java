@@ -60,7 +60,6 @@ public class AddQuestionController implements Initializable {
         //add 2 choiceBox
         addTwoChoiceBox();
 
-
         //Luu cac thong tin va day len csdl
         btn_SaveAndContinueEditing.setOnAction(event -> {
             labelAlert.setText("");
@@ -144,37 +143,40 @@ public class AddQuestionController implements Initializable {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
         });
 
-        //them 3 choice sau khi nhan vao btn
+        //them 3 choice sau khi nhan vao btn blank....
         btn_blankChoice.setOnAction(event -> {
-            if (countChoice < 5) {
-                try {
-                    //add choiceBox3
-                    FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
-                    Parent root3 = loader3.load();
-                    ChoiceBoxController choiceBoxController3 = loader3.getController();
-                    choiceBoxController3.setNumberChoice(countChoice + 1);   //set numberChoice de thay doi choice so i, ChoiceBoxController.
-                    listChoiceBoxController.add(choiceBoxController3);      //lay controller de co the lay cac thuoc tinh trong box ve sau
-                    vBoxAddChoiceBox.getChildren().add(countChoice++, root3);   //add vao Vbox
-                    //add choiceBox4
-                    FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
-                    Parent root4 = loader4.load();
-                    ChoiceBoxController choiceBoxController4 = loader4.getController();
-                    choiceBoxController4.setNumberChoice(countChoice + 1);
-                    listChoiceBoxController.add(choiceBoxController4);
-                    vBoxAddChoiceBox.getChildren().add(countChoice++, root4);
-                    //add choiceBox5
-                    FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
-                    Parent root5 = loader5.load();
-                    ChoiceBoxController choiceBoxController5 = loader5.getController();
-                    choiceBoxController5.setNumberChoice(countChoice + 1);
-                    listChoiceBoxController.add(choiceBoxController5);
-                    vBoxAddChoiceBox.getChildren().add(countChoice++, root5);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
+            this.addThreeCHoiceBox();
         });
+    }
+
+    public void addThreeCHoiceBox(){
+        if (countChoice < 5) {
+            try {
+                //add choiceBox3
+                FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
+                Parent root3 = loader3.load();
+                ChoiceBoxController choiceBoxController3 = loader3.getController();
+                choiceBoxController3.setNumberChoice(countChoice + 1);   //set numberChoice de thay doi choice so i, ChoiceBoxController.
+                listChoiceBoxController.add(choiceBoxController3);      //lay controller de co the lay cac thuoc tinh trong box ve sau
+                vBoxAddChoiceBox.getChildren().add(countChoice++, root3);   //add vao Vbox
+                //add choiceBox4
+                FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
+                Parent root4 = loader4.load();
+                ChoiceBoxController choiceBoxController4 = loader4.getController();
+                choiceBoxController4.setNumberChoice(countChoice + 1);
+                listChoiceBoxController.add(choiceBoxController4);
+                vBoxAddChoiceBox.getChildren().add(countChoice++, root4);
+                //add choiceBox5
+                FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
+                Parent root5 = loader5.load();
+                ChoiceBoxController choiceBoxController5 = loader5.getController();
+                choiceBoxController5.setNumberChoice(countChoice + 1);
+                listChoiceBoxController.add(choiceBoxController5);
+                vBoxAddChoiceBox.getChildren().add(countChoice++, root5);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void addTwoChoiceBox() {
@@ -200,10 +202,22 @@ public class AddQuestionController implements Initializable {
     }
 
     //ham update cac thong tin question vao cac o khi bam edit trong question_bank
-    public void setInfor(Question oldQuestion, String category_name){
+    public void setInfor(Question oldQuestion, String category_name, List<Choice> listChoice){
         text_QuestionName.setText(oldQuestion.getQuestion_name());
         text_QuestionText.setText(oldQuestion.getQuestion_text());
         kindOfCategory.setValue(category_name);
+        if(!listChoice.isEmpty()){
+            if(listChoice.size() <= 2 ){
+                for(int i = 0; i < listChoice.size(); i++){
+                    listChoiceBoxController.get(i).setChoice(listChoice.get(i));
+                }
+            }else{
+                this.addThreeCHoiceBox();
+                for(int i = 0; i < listChoice.size(); i++){
+                    listChoiceBoxController.get(i).setChoice(listChoice.get(i));
+                }
+            }
+        }
     }
 
     //ham reset các ô điền về trống
