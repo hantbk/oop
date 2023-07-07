@@ -9,23 +9,24 @@ import com.hust.quiz.Services.LoaderTextService;
 import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class QuestionBankController implements Initializable {
     @FXML
@@ -48,14 +49,17 @@ public class QuestionBankController implements Initializable {
     @FXML
     private Label noticeAddCategory;
     @FXML
-
     private ScrollPane questionBankList;
+    @FXML
+    private VBox listQuestion_vbox;
     @FXML
     private AnchorPane pane_question_list;
     @FXML
     private Button btnChooseFile;
     @FXML
     private Button btnImport;
+    @FXML
+    private CheckBox showSubcategoryQuestionCheckbox;
 
     String directory;
 
@@ -115,53 +119,89 @@ public class QuestionBankController implements Initializable {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
+                    //remove old_list_question
+                    listQuestion_vbox.getChildren().clear();
+
                     btn_category.setValue(selectedItem.getValue());
                     category.setVisible(!category.isVisible());
                     // add questions found in scrollPane by adding in listView
                     String category_name = selectedItem.getValue();
                     // Find ID of the category
-                    int id = CategoryService.getID(category_name);
+                    int idCategory = CategoryService.getID(category_name);
 
                     // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
-                    List<Question> questionList = QuestionService.getQuestions(id);
+                    List<Question> questionList = QuestionService.getQuestions(idCategory);
+                    List<Question> subcategoryQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
+                    List<Question> listQuestion = new ArrayList<>();
+                    listQuestion.addAll(questionList);
                     // Check if category has questions or not
                     if (!questionList.isEmpty()) {
-                        ListView<HBox> listView = new ListView<>();
-                        listView.setPrefSize(1089, 143);
-
                         // put every question in the list in listView
+                        FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
+                        int i = 0;
                         for (Question item : questionList) {
-                            // checkbox first
-                            CheckBox checkBox = new CheckBox();
-                            checkBox.setPadding(new Insets(0, 10, 0, 0));
-
-                            // question content
-                            // test: System.out.println(item.getQuestion());
-                            Label label = new Label(item.getQuestionContent());
-                            label.setPrefWidth(990);
-                            label.setFont(new Font(15));
-
-                            // Button needs to edit: NOT DONE
-                            Button btn_edit = new Button("edit");
-                            btn_edit.setFont(Font.font(15));
-                            btn_edit.setStyle("-fx-border-style: none; -fx-text-fill: #19a7ce");
-
-                            // hBox contains all things CENTER_LEFT
-                            HBox hBox = new HBox(checkBox, label, btn_edit);
-                            hBox.setAlignment(Pos.CENTER_LEFT);
-
-                            // adding hBox into listView
-                            listView.getItems().add(hBox);
+                            listFXMLInforQuestion[i] = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
+                            try {
+                                Parent root = listFXMLInforQuestion[i].load();
+                                QuestionInforController controller = listFXMLInforQuestion[i].getController();
+                                controller.updateInforQuestion(item, category_name);
+                                listQuestion_vbox.getChildren().add(root);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                System.out.print("At "+this.getClass());
+                            }
                         }
                         // show list
-                        questionBankList.setContent(listView);
                         pane_question_list.setVisible(true);
                     } else {
                         pane_question_list.setVisible(false);
                     }
+
+                    //tick checkbox show subcategory
+                    showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
+                        if (showSubcategoryQuestionCheckbox.isSelected()) {
+                            if (subcategoryQuestions != null) {
+                                questionList.clear();
+                                questionList.addAll(subcategoryQuestions);
+                            }
+                            if (subcategoryQuestions.isEmpty()) {
+                                questionList.clear();
+                                questionList.addAll(listQuestion);
+                            }
+                        }
+                        if (!showSubcategoryQuestionCheckbox.isSelected()) {
+                            questionList.clear();
+                            questionList.addAll(listQuestion);
+                        }
+                        if (!questionList.isEmpty()) {
+                            // put every question in the list in listView
+                            FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
+                            if(!showSubcategoryQuestionCheckbox.isSelected())
+                                listQuestion_vbox.getChildren().clear();
+                            int i = 0;
+                            for (Question item : questionList) {
+                                listFXMLInforQuestion[i] = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
+                                try {
+                                    Parent root = listFXMLInforQuestion[i].load();
+                                    QuestionInforController controller = listFXMLInforQuestion[i].getController();
+                                    controller.updateInforQuestion(item, category_name);
+                                    listQuestion_vbox.getChildren().add(root);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    System.out.print("At "+this.getClass());
+                                }
+                            }
+                            // show list
+                            pane_question_list.setVisible(true);
+                        } else {
+                            pane_question_list.setVisible(false);
+                        }
+                    });
                 }
             }
         });
+
+
 
         category2.getParent().setOnMouseClicked(event -> category2.setVisible(false));
         btn_category2.setOnMouseClicked(event -> category2.setVisible(!category2.isVisible()));

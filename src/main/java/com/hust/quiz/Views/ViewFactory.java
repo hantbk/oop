@@ -1,14 +1,14 @@
 package com.hust.quiz.Views;
 
-import com.hust.quiz.Controllers.EditQuizController;
-import com.hust.quiz.Controllers.HomeController;
-import com.hust.quiz.Controllers.QuestionBankController;
-import com.hust.quiz.Controllers.QuizViewController;
+import com.hust.quiz.Controllers.*;
+import com.hust.quiz.Models.Choice;
+import com.hust.quiz.Models.Question;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ViewFactory {
     private static ViewFactory instance;
@@ -22,12 +22,13 @@ public class ViewFactory {
     private QuestionBankController questionBankController;
     private QuizViewController quizViewController;
     private EditQuizController editQuizController;
+    private AddQuestionController addQuestionController;
     // singleton design pattern
     private ViewFactory() {
         stage = new Stage();
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
-        FXMLLoader multipleChoiceView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
+        FXMLLoader addQuestionView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
@@ -39,7 +40,8 @@ public class ViewFactory {
             questionBankController = homeController.getQuestionBankController();
             questionBankScene = new Scene(homeController.getQuestionBankView());
 
-            addQuestion = new Scene(multipleChoiceView.load());
+            addQuestion = new Scene(addQuestionView.load());
+            addQuestionController = addQuestionView.getController();
 
             quizViewScene = new Scene(quizView.load());
             quizViewController = quizView.getController();
@@ -73,6 +75,9 @@ public class ViewFactory {
     public void updateEditQuizView(String quizName) {
         editQuizController.editQuizDisplayInfo(quizName);
     }
+
+    //ham nay de dien thong tin question vao cac o khi bam vao edit ow questionBank
+    public void updateInforEditQuestion(Question question, String category_name, List<Choice> listChoice){ addQuestionController.setInfor(question, category_name, listChoice);}
 
     public void routes(SCENES scene) {
         switch (scene) {
