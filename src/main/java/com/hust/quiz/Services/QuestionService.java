@@ -128,6 +128,9 @@ public class QuestionService {
                             rs.getString("question_text"), rs.getInt("category_id"));
                     questions.add(question);
                 }
+                if (questions.isEmpty()){
+                    return null;
+                }
                 return questions;
             } else {
                 return null; // trả về null nếu không có danh mục con
