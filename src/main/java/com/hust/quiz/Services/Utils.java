@@ -8,7 +8,6 @@ public class Utils {
     static final String url = "jdbc:mysql://localhost:3306/quiz";
     static final String username = "root";
     static final String password = "root"; // fixed
-
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
