@@ -19,12 +19,12 @@ C. Ký thay khách hàng.
 D. Hưởng hoa hồng và các quyền, lợi ích hợp pháp khác từ hoạt động đại lý bảo hiểm.
 ANSWER: C
 
-4. Anh A 33 tuổi tham gia một hợp đồng Bảo Hiểm Ung Thư 360 vào ngày 01/05/2019 với STBH 01 tỷ đồng. Trong thời gian hợp đồng có hiệu lực, anh A lần lượt gặp các rủi ro sau: Ngày 04/07/2025: được chẩn đoán mắc ung thư dạ dày giai đoạn sớm.  Ngày 30/10/2025: phẫu thuật tái tạo hình dạng dạ dày (Phẫu Thuật Phục Hồi). Ngày 07/09/2028: tử vong do tai nạn. Giả sử các sự kiện trên đều được Manulife chấp thuận chi trả, tổng số tiền mà anh A sẽ nhận được là: 
-A. 1,7 tỷ đồng. 
-B. 2,7 tỷ đồng. 
-C. 1,5 tỷ đồng. 
+4. Anh A 33 tuổi tham gia một hợp đồng Bảo Hiểm Ung Thư 360 vào ngày 01/05/2019 với STBH 01 tỷ đồng. Trong thời gian hợp đồng có hiệu lực, anh A lần lượt gặp các rủi ro sau: Ngày 04/07/2025: được chẩn đoán mắc ung thư dạ dày giai đoạn sớm.  Ngày 30/10/2025: phẫu thuật tái tạo hình dạng dạ dày (Phẫu Thuật Phục Hồi). Ngày 07/09/2028: tử vong do tai nạn. Giả sử các sự kiện trên đều được Manulife chấp thuận chi trả, tổng số tiền mà anh A sẽ nhận được là:
+A. 1,7 tỷ đồng.
+B. 2,7 tỷ đồng.
+C. 1,5 tỷ đồng.
 D. 2,5 tỷ đồng.
-ANSWER: A 
+ANSWER: A
 
 5. Khách hàng A tham gia Sản phẩm Bảo hiểm Ung Thư 360 vào ngày 1/1/2019 với số tiền bảo hiểm là 500 triệu đồng. Ngày 17/03/2019, khách hàng A được chẩn đoán mắc ung thư giai đoạn sớm. Quyền lợi ung thư giai đoạn sớm khách hàng A nhận được là:
 A. 250 triệu đồng
@@ -42,8 +42,8 @@ ANSWER: C
 7. Doanh nghiệp bảo hiểm có quyền từ chối trả tiền bảo hiểm cho người thụ hưởng hoặc từ chối bồi thường cho người được bảo hiểm trong trường hợp:
 A. Sự kiện bảo hiểm xảy ra không thuộc phạm vi trách nhiệm bảo hiểm theo thỏa thuận trong hợp đồng bảo hiểm (A).
 B. Sự kiện bảo hiểm xảy ra thuộc các trường hợp loại trừ trách nhiệm bảo hiểm theo thỏa thuận trong hợp đồng bảo hiểm (B).
-C. Sự kiện bảo hiểm xảy ra trong thời gian gia hạn nộp phí bảo hiểm.  
-D. A, B đúng. 
+C. Sự kiện bảo hiểm xảy ra trong thời gian gia hạn nộp phí bảo hiểm.
+D. A, B đúng.
 ANSWER: D
 
 8. Đối với hợp đồng bảo hiểm con người, trường hợp một hoặc một số người thụ hưởng cố ý gây ra cái chết hoặc thương tật vĩnh viễn cho người được bảo hiểm thì:
@@ -101,16 +101,16 @@ B. Thời hạn doanh nghiệp bảo hiểm phải trả tiền bảo hiểm ho�
 C. Thời hạn yêu cầu trả tiền bảo hiểm hoặc bồi thường theo hợp đồng bảo hiểm, kể từ ngày xảy ra sự kiện bảo hiểm.
 ANSWER: B
 
-16.  Chọn 1 phương án đúng về đặc điểm của nghiệp vụ bảo hiểm trọn đời:
+16.  Chọn 1 phương án đúng về đặc điểm của nghiệp vụ bảo hiểm trọn đời:
 A. Doanh nghiệp bảo hiểm trả tiền bảo hiểm cho người thụ hưởng khi bên mua bảo hiểm chết ở bất kỳ thời điểm nào trong suốt cuộc đời của người đó
 B. Doanh nghiệp bảo hiểm trả tiền bảo hiểm cho người thụ hưởng khi người được bảo hiểm vẫn sống tại thời điểm kết thúc hiệu lực hợp đồng
 C. Doanh nghiệp bảo hiểm trả tiền bảo hiểm cho người thụ hưởng khi người được bảo hiểm chết vào bất kỳ thời điểm nào trong suốt cuộc đời của người đó
 ANSWER: C
 
-17. Trong trường hợp NĐBH của Sản phẩm Bảo hiểm Ung Thư 360 tử vong và Manulife đã chi trả QLBH Trợ Cấp Thu Nhập vượt quá thời điểm này, Manulife sẽ: 
-A. Không cấn trừ số tiền đã chi trả dư vào quyền lợi Tử Vong. 
-B. Cấn trừ số tiền đã chi trả dư vào quyền lợi Tử Vong. 
-C. Cả hai đáp án trên đều đúng. 
+17. Trong trường hợp NĐBH của Sản phẩm Bảo hiểm Ung Thư 360 tử vong và Manulife đã chi trả QLBH Trợ Cấp Thu Nhập vượt quá thời điểm này, Manulife sẽ:
+A. Không cấn trừ số tiền đã chi trả dư vào quyền lợi Tử Vong.
+B. Cấn trừ số tiền đã chi trả dư vào quyền lợi Tử Vong.
+C. Cả hai đáp án trên đều đúng.
 ANSWER: B
 
 18. Chọn phương án sai về trường hợp Hợp đồng bảo hiểm vô hiệu:
@@ -207,7 +207,7 @@ ANSWER: D
 31. Trong trường hợp bên mua bảo hiểm chứng minh được rằng họ không biết thời điểm xảy ra sự kiện bảo hiểm thì thời hạn yêu cầu trả tiền bảo hiểm hoặc bồi thường là:
 A. 1 năm kể từ ngày xảy ra sự kiện bảo hiểm.
 B. 1 năm kể từ ngày bên mua bảo hiểm biết việc xảy ra sự kiện bảo hiểm.
-C.  2 năm kể từ ngày xảy ra sự kiện bảo hiểm.
+C. 2 năm kể từ ngày xảy ra sự kiện bảo hiểm.
 D. 2 năm kể từ ngày bên mua bảo hiểm biết việc xảy ra sự kiện bảo hiểm.
 ANSWER: B
 
@@ -218,17 +218,17 @@ C. Nhận lại toàn bộ phí bảo hiểm đã đóng
 ANSWER: A
 
 33. Quỹ bảo vệ người được bảo hiểm được thành lập tại doanh nghiệp bảo hiểm nhằm bảo vệ quyền lợi của người được bảo hiểm trong trường hợp nào sau đây:
-A. Người được bảo hiểm bị thất nghiệp 
+A. Người được bảo hiểm bị thất nghiệp
 B. Doanh nghiệp bảo hiểm phá sản hoặc mất khả năng thanh toán
 C. Người được bảo hiểm gặp khó khăn về tài chính, không có khả năng đóng phí bảo hiểm
 D. Người được bảo hiểm gặp rủi ro do chiến tranh, động đất
 ANSWER: B
 
-34. Phát biểu nào sau đây là đúng về QLBH Ung Thư Chi Phí Lớn của Sản phẩm Bảo hiểm Ung Thư 360: 
-A. Chi trả 100% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH này sẽ chấm dứt ngay sau khi Manulife chi trả quyền lợi Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối. 
-B. Chi trả 100% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH nàysẽ chấm dứt ngay sau khi Manulife chi trả QLBH Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối. 
-C. Chi trả 50% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH này sẽ chấm dứt ngay sau khi Manulife chấp nhận chi trả hoặc khi QLBH Ung Thư Giai Đoạn Cuối đã được chi trả. 
-D. Chi trả 50% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH này sẽ chấm dứt ngay sau khi Manulife chi trả QLBH Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối. 
+34. Phát biểu nào sau đây là đúng về QLBH Ung Thư Chi Phí Lớn của Sản phẩm Bảo hiểm Ung Thư 360:
+A. Chi trả 100% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH này sẽ chấm dứt ngay sau khi Manulife chi trả quyền lợi Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối.
+B. Chi trả 100% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH nàysẽ chấm dứt ngay sau khi Manulife chi trả QLBH Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối.
+C. Chi trả 50% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH này sẽ chấm dứt ngay sau khi Manulife chấp nhận chi trả hoặc khi QLBH Ung Thư Giai Đoạn Cuối đã được chi trả.
+D. Chi trả 50% STBH khi NĐBH được chẩn đoán Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối thuộc danh sách bệnh Ung Thư Chi Phí Lớn. QLBH này sẽ chấm dứt ngay sau khi Manulife chi trả QLBH Ung Thư Giai Đoạn Sớm hoặc Ung Thư Giai Đoạn Cuối.
 ANSWER: C
 
 35. Luật kinh doanh bảo hiểm quy định Bên mua bảo hiểm đóng phí bảo hiểm nhân thọ theo cách:
@@ -239,10 +239,10 @@ D. A, B, C sai
 ANSWER: C
 
 36. Ngày 1/1/2019, khách hàng A tham gia Sản phẩm Bảo hiểm Ung Thư 360. Đến 31/5/2020, khách hàng A được chẩn đoán mắc ung thư giai đoạn cuối, thuộc danh mục ung thư chi phí lớn, các quyền lợi mà khách hàng A nhận được là:
-A. 150% số tiền bảo hiểm + quyền lợi miễn đóng phí +  quyền lợi trợ cấp thu nhập + quyền lợi miễn phí dành cho con
+A. 150% số tiền bảo hiểm + quyền lợi miễn đóng phí +  quyền lợi trợ cấp thu nhập + quyền lợi miễn phí dành cho con
 B. 150% số tiền bảo hiểm + quyền lợi miễn đóng phí + quyền lợi miễn phí dành cho con
 C. 105% số tiền bảo hiểm + quyền lợi miễn đóng phí + quyền lợi trợ cấp thu nhập + quyền lợi miễn phí dành cho con
-D. 160% số tiền bảo hiểm + quyền lợi miễn đóng phí + quyền lợi trợ cấp thu nhập + quyền lợi miễn phí dành cho con 
+D. 160% số tiền bảo hiểm + quyền lợi miễn đóng phí + quyền lợi trợ cấp thu nhập + quyền lợi miễn phí dành cho con
 ANSWER: D
 
 37. Theo quy định của Pháp luật, phát biểu nào dưới đây sai:
@@ -271,7 +271,6 @@ B. Tuổi bảo hiểm tối đa là 30 tuổi
 C. Đáp án A hoặc B tùy thời điểm nào đến trước
 ANSWER: C
 
-
 1. Giá trị hoàn lại của một hợp đồng bảo hiểm liên kết chung được xác định:
 A. Là giá trị hợp đồng đó trong quỹ liên kết chung vào ngày hủy bỏ hợp đồng bảo hiểm trừ đi phí quản lý hợp đồng bảo hiểm.
 B. Là giá trị hợp đồng đó trong quỹ liên kết chung vào ngày kết thúc hợp đồng bảo hiểm
@@ -293,10 +292,10 @@ C. Chi đào tạo ban đầu và thi cấp chứng chỉ đại lý.
 D. Chi hoa hồng bảo hiểm.
 ANSWER: D
 
-4. Thời hạn đóng phí và thời hạn hợp đồng của Sản phẩm Bảo hiểm Ung Thư 360 là: 
-A. Thời hạn đóng phí 10 năm; Thời hạn hợp đồng 10 năm 
-B. Thời hạn đóng phí 10 năm; Thời hạn hợp đồng đến khi NĐBH 99 tuổi 
-C. Thời hạn đóng phí 10 năm; Thời hạn hợp đồng 12 năm 
+4. Thời hạn đóng phí và thời hạn hợp đồng của Sản phẩm Bảo hiểm Ung Thư 360 là:
+A. Thời hạn đóng phí 10 năm; Thời hạn hợp đồng 10 năm
+B. Thời hạn đóng phí 10 năm; Thời hạn hợp đồng đến khi NĐBH 99 tuổi
+C. Thời hạn đóng phí 10 năm; Thời hạn hợp đồng 12 năm
 D. Thời hạn đóng phí 12 năm; Thời hạn hợp đồng đến khi NĐBH 99 tuổi
 ANSWER: A
 
@@ -315,8 +314,8 @@ ANSWER: B
 7. Trong trường hợp không có thỏa thuận về thời hạn, doanh nghiệp bảo hiểm phải trả tiền bảo hiểm hoặc bồi thường cho người được bảo hiểm trong vòng:
 A. 60 ngày kể từ ngày nhận được đầy đủ hồ sơ hợp lệ về yêu cầu trả tiền bảo hiểm hoặc bồi thường.
 B. 45 ngày kể từ ngày nhận được đầy đủ hồ sơ hợp lệ về yêu cầu trả tiền bảo hiểm hoặc bồi thường.
-C. 30 ngày kể từ ngày nhận được đầy đủ hồ sơ hợp lệ về yêu cầu trả tiền bảo hiểm hoặc bồi thường. 
-D. 15 ngày kể từ ngày nhận được đầy đủ hồ sơ hợp lệ về yêu cầu trả tiền bảo hiểm hoặc bồi thường. 
+C. 30 ngày kể từ ngày nhận được đầy đủ hồ sơ hợp lệ về yêu cầu trả tiền bảo hiểm hoặc bồi thường.
+D. 15 ngày kể từ ngày nhận được đầy đủ hồ sơ hợp lệ về yêu cầu trả tiền bảo hiểm hoặc bồi thường.
 ANSWER: D
 
 8. Trường hợp nào dưới đây doanh nghiệp bảo hiểm phải trả tiền bảo hiểm trong hợp đồng bảo hiểm con người:
@@ -333,11 +332,11 @@ C. Hỗ trợ giảm phí bảo hiểm hoặc khuyến mại khách hàng tham g
 D. A, B đúng.
 ANSWER: C
 
-10. Phát biểu nào sau đây là đúng về quyền lợi Hỗ Trợ Trượt Giá của Sản phẩm Bảo hiểm Ung Thư 360: 
-A. Tương đương 5% STBH từ năm hợp đồng đầu tiên, mỗi năm sau đó cộng thêm 5% STBH (A). 
-B. Được chi trả cùng với quyền lợi Ung Thư Giai Đoạn Cuối (B). 
-C. Mỗi đầu năm hợp đồng, BMBH cần cung cấp bằng chứng NĐBH còn sống. Quyền lợi này sẽ chấm dứt sau khi Manulife đã chi trả đủ 60 lần, hoặc sau khi NĐBH tử vong. 
-D. A và B là đáp án đúng. 
+10. Phát biểu nào sau đây là đúng về quyền lợi Hỗ Trợ Trượt Giá của Sản phẩm Bảo hiểm Ung Thư 360:
+A. Tương đương 5% STBH từ năm hợp đồng đầu tiên, mỗi năm sau đó cộng thêm 5% STBH (A).
+B. Được chi trả cùng với quyền lợi Ung Thư Giai Đoạn Cuối (B).
+C. Mỗi đầu năm hợp đồng, BMBH cần cung cấp bằng chứng NĐBH còn sống. Quyền lợi này sẽ chấm dứt sau khi Manulife đã chi trả đủ 60 lần, hoặc sau khi NĐBH tử vong.
+D. A và B là đáp án đúng.
 ANSWER: D
 
 11. Ngày 1/1/2019, khách hàng A tham gia Sản phẩm Bảo hiểm Ung Thư 360. Đến 31/5/2020, khách hàng A được chẩn đoán mắc ung thư giai đoạn cuối, thuộc danh mục ung thư chi phí lớn. Ngày 9/6/2020, khách hàng A tử vong. Các quyền lợi mà khách hàng A nhận được là:
@@ -350,7 +349,7 @@ ANSWER: D
 12. Đại lý bảo hiểm là:
 A. Người được doanh nghiệp bảo hiểm ủy quyền thực hiện tất cả các công việc liên quan đến nghiệp vụ bảo hiểm.
 B. Tổ chức, cá nhân được doanh nghiệp bảo hiểm ủy quyền trên cơ sở hợp đồng đại lý bảo hiểm để thực hiện hoạt động đại lý bảo hiểm theo quy định của pháp luật.
-C.  Người đại diện cho khách hàng.
+C. Người đại diện cho khách hàng.
 D. A, B, C đúng.
 ANSWER: B
 
@@ -364,7 +363,7 @@ ANSWER: C
 14. Đại lý bảo hiểm không được doanh nghiệp bảo hiểm uỷ quyền tiến hành hoạt động nào dưới đây:
 A. Thu xếp giải quyết bồi thường, trả tiền bảo hiểm khi xảy ra sự kiện bảo hiểm.
 B. Đánh giá rủi ro.
-C. Giới thiệu, chào bán bảo hiểm. 
+C. Giới thiệu, chào bán bảo hiểm.
 D. Thu phí bảo hiểm.
 ANSWER: B
 
@@ -382,11 +381,11 @@ C. Người được bảo hiểm chết vào bất kỳ thời điểm nào tro
 D. A, B đúng
 ANSWER: D
 
-17. Với Sản phẩm Bảo hiểm Ung Thư 360, khách hàng có những lựa chọn gói Bảo hiểm nào sau đây: 
-A. Một trong bốn gói với STBH tương ứng: 200 triệu, 400 triệu, 600 triệu và 800 triệu đồng. 
-B. Số tiền bảo hiểm tối đa 10 tỷ đồng. 
-C. Một trong bốn gói với STBH tương ứng: 500 triệu; 01 tỷ; 1,5 tỷ và 2 tỷ đồng. 
-D. Một trong bốn gói với STBH tương ứng: 300 triệu, 500 triệu, 700 triệu, 01 tỷ đồng; và gói tùy chọn với STBH tối thiểu 100 triệu đồng, tối đa 01 tỷ đồng. 
+17. Với Sản phẩm Bảo hiểm Ung Thư 360, khách hàng có những lựa chọn gói Bảo hiểm nào sau đây:
+A. Một trong bốn gói với STBH tương ứng: 200 triệu, 400 triệu, 600 triệu và 800 triệu đồng.
+B. Số tiền bảo hiểm tối đa 10 tỷ đồng.
+C. Một trong bốn gói với STBH tương ứng: 500 triệu; 01 tỷ; 1,5 tỷ và 2 tỷ đồng.
+D. Một trong bốn gói với STBH tương ứng: 300 triệu, 500 triệu, 700 triệu, 01 tỷ đồng; và gói tùy chọn với STBH tối thiểu 100 triệu đồng, tối đa 01 tỷ đồng.
 ANSWER: D
 
 18. Theo Luật kinh doanh bảo hiểm, ngoài các nghiệp vụ bảo hiểm đặc thù do Chính phủ qui định, các nghiệp vụ bảo hiểm được chia thành:
@@ -409,18 +408,18 @@ B. Bên mua bảo hiểm có thể chuyển nhượng hợp đồng bảo hiểm
 C. Bên mua bảo hiểm có thể chuyển nhượng hợp đồng bảo hiểm cho bất kỳ người nào
 ANSWER: B
 
-21. Với Sản phẩm Bảo hiểm Ung Thư 360, số tiền bảo hiểm tối thiểu của một Hợp Đồng là: 
-A. 200 triệu đồng. 
-B. 250 triệu đồng. 
-C. 150 triệu đồng. 
-D. 100 triệu đồng. 
+21. Với Sản phẩm Bảo hiểm Ung Thư 360, số tiền bảo hiểm tối thiểu của một Hợp Đồng là:
+A. 200 triệu đồng.
+B. 250 triệu đồng.
+C. 150 triệu đồng.
+D. 100 triệu đồng.
 ANSWER: D
 
 22. Chọn phương án sai về khái niệm sau:
 A. Người được bảo hiểm có thể đồng thời là người thụ hưởng
 B. Bên mua bảo hiểm có thể đồng thời là người được bảo hiểm và người thụ hưởng.
-C. Người thụ hưởng là người được doanh nghiệp bảo hiểm chỉ định để nhận tiền bảo hiểm theo hợp đồng bảo hiểm con người.   
-D. Người thụ hưởng là người được bên mua bảo hiểm chỉ định để nhận tiền bảo hiểm theo hợp đồng bảo hiểm con người.   
+C. Người thụ hưởng là người được doanh nghiệp bảo hiểm chỉ định để nhận tiền bảo hiểm theo hợp đồng bảo hiểm con người.
+D. Người thụ hưởng là người được bên mua bảo hiểm chỉ định để nhận tiền bảo hiểm theo hợp đồng bảo hiểm con người.
 ANSWER: C
 
 23. Theo Luật kinh doanh bảo hiểm, trường hợp doanh nghiệp bảo hiểm không phải bồi thường hoặc không phải trả tiền bảo hiểm khi xảy ra sự kiện bảo hiểm thì:
@@ -432,18 +431,18 @@ ANSWER: A
 
 24. Bên mua bảo hiểm có thể được giảm phí bảo hiểm khi mua bảo hiểm nhân thọ, bảo hiểm sức khỏe trong trường hợp:
 A. Mua bảo hiểm trực tiếp từ doanh nghiệp bảo hiểm và doanh nghiệp bảo hiểm không phải chi trả hoa hồng bảo hiểm cho đại lý bảo hiểm hoặc doanh nghiệp môi giới bảo hiểm
-B. Mua bảo hiểm thông qua đại lý bảo hiểm 
+B. Mua bảo hiểm thông qua đại lý bảo hiểm
 C. A, B đúng
 ANSWER: A
 
-25.  Quyền lợi bảo hiểm rủi ro của sản phẩm bảo hiểm hưu trí phải bao gồm tối thiểu các quyền lợi nào?
+25.  Quyền lợi bảo hiểm rủi ro của sản phẩm bảo hiểm hưu trí phải bao gồm tối thiểu các quyền lợi nào?
 A. Quyền lợi trợ cấp mai táng, quyền lợi chăm sóc y tế, quyền lợi hỗ trợ nằm viện.
 B. Quyền lợi chăm sóc y tế.
 C. Quyền lợi trợ cấp mai táng, quyền lợi tử vong hoặc thương tật toàn bộ vĩnh viễn, quyền lợi bảo hiểm thất nghiệp.
 D. Quyền lợi trợ cấp mai táng, quyền lợi tử vong hoặc thương tật toàn bộ vĩnh viễn.
 ANSWER: D
 
-26. Chọn phương án đúng khi nói về đại lý bảo hiểm: 
+26. Chọn phương án đúng khi nói về đại lý bảo hiểm:
 A. Đại lý bảo hiểm chịu sự kiểm tra giám sát của cơ quan nhà nước có thẩm quyền và thực hiện đầy đủ nghĩa vụ tài chính theo quy định của pháp luật (A).
 B. Đại lý bảo hiểm thực hiện hợp đồng bảo hiểm theo phạm vi được ủy quyền trong hợp đồng đại lý bảo hiểm (B).
 C. Đại lý bảo hiểm có thể đem phí bảo hiểm đi đầu tư và trả một phần lãi cho doanh nghiệp bảo hiểm (C).
@@ -458,10 +457,10 @@ D. 15%
 ANSWER: C
 
 28. Theo Luật kinh doanh bảo hiểm, bảo hiểm nhân thọ hỗn hợp là nghiệp vụ bảo hiểm kết hợp:
-A. Bảo hiểm tử kỳ và bảo hiểm hưu trí. 
-B. Bảo hiểm trọn đời và bảo hiểm hưu trí. 
-C. Bảo hiểm sinh kỳ và bảo hiểm trọn đời. 
-D. Bảo hiểm sinh kỳ và bảo hiểm tử kỳ. 
+A. Bảo hiểm tử kỳ và bảo hiểm hưu trí.
+B. Bảo hiểm trọn đời và bảo hiểm hưu trí.
+C. Bảo hiểm sinh kỳ và bảo hiểm trọn đời.
+D. Bảo hiểm sinh kỳ và bảo hiểm tử kỳ.
 ANSWER: D
 
 29. Đơn vị nào dưới đây được phép kinh doanh bảo hiểm sức khỏe?
@@ -487,7 +486,7 @@ ANSWER: D
 
 32. Thông thường một hợp đồng bảo hiểm nhân thọ bị chấm dứt vì không tiếp tục đóng phí bảo hiểm, có thể khôi phục:
 A. Trong vòng 2 năm kể từ khi mất hiệu lực và bên mua bảo hiểm đã đóng đủ phí bảo hiểm còn thiếu.
-B. Tại bất kỳ thời điểm nào kể từ khi mất hiệu lực và bên mua bảo hiểm đã đóng đủ phí bảo hiểm còn thiếu.  
+B. Tại bất kỳ thời điểm nào kể từ khi mất hiệu lực và bên mua bảo hiểm đã đóng đủ phí bảo hiểm còn thiếu.
 C. Trong vòng 4 năm kể từ khi mất hiệu lực và bên mua bảo hiểm đã đóng đủ phí bảo hiểm còn thiếu.
 D. Trong vòng 3 năm kể từ khi mất hiệu lực và bên mua bảo hiểm đã đóng đủ phí bảo hiểm còn thiếu.
 ANSWER: A
@@ -513,10 +512,10 @@ D. Câu A và B đều sai
 ANSWER: A
 
 36. Trong Sản phẩm Bảo hiểm Ung Thư 360, thời hạn tối đa để con của Người Được Bảo Hiểm hoặc người giám hộ hợp pháp của con của Người Được Bảo Hiểm gửi yêu cầu và hoàn thành hồ sơ yêu cầu Manulife cấp quyền lợi Bảo Hiểm Miễn Phí Dành Cho Con Của NĐBH là:
-A. 07 ngày kể từ ngày  Manulife chấp nhận chi trả Quyền lợi Ung Thư Giai Đoạn Cuối.
+A. 07 ngày kể từ ngày  Manulife chấp nhận chi trả Quyền lợi Ung Thư Giai Đoạn Cuối.
 B. 60 ngày kể từ ngày Manulife chấp nhận chi trả Quyền lợi Ung Thư Giai Đoạn Cuối.
 C. 90 ngày kể từ ngày Manulife chấp nhận chi trả Quyền lợi Ung Thư Giai Đoạn Cuối.
-D. 30 ngày kể từ ngày  Manulife chấp nhận chi trả Quyền lợi Ung Thư Giai Đoạn Cuối.
+D. 30 ngày kể từ ngày  Manulife chấp nhận chi trả Quyền lợi Ung Thư Giai Đoạn Cuối.
 ANSWER: C
 
 37. Theo Luật kinh doanh bảo hiểm, kinh doanh bảo hiểm là:
