@@ -51,8 +51,8 @@ public class AddQuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // configure btn_menu_return
         btn_menu_return.setOnMouseClicked(event -> {
-                this.reset();
-                ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+            this.reset();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
         //add list category to comboBox
@@ -91,9 +91,12 @@ public class AddQuestionController implements Initializable {
                         controller.reset();
                     }
                 }
+
                 //xoa cac thong tin vua add tranh add 2 lan bi trung lap
-                this.reset();
+               this.reset();
                 labelAlert.setText("Add question successfully!");
+
+//                QuestionBankController.updateCategory();
             }
         });
 
@@ -210,6 +213,7 @@ public class AddQuestionController implements Initializable {
         text_DefaultMark.setText(null);
         kindOfCategory.setValue(null);
     }
+
     //ham update category vao combo-box
     public void updateCategory() {
         List<Category> listCategory = CategoryService.getCategories();
@@ -217,6 +221,5 @@ public class AddQuestionController implements Initializable {
             kindOfCategory.getItems().add(category.toString());
         }
     }
-
 }
 

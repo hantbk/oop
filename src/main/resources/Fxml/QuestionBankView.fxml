@@ -515,7 +515,7 @@
                                        <children>
                                           <VBox alignment="TOP_CENTER" prefWidth="1100.0">
                                              <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
+                                                <Button fx:id="btnImport" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
