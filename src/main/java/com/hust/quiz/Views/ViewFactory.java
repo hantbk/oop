@@ -19,10 +19,12 @@ public class ViewFactory {
     private Scene addQuizScene;
     private Scene quizViewScene;
     private Scene editQuizScene;
+    private Scene startQuizScene;
     private QuestionBankController questionBankController;
     private QuizViewController quizViewController;
     private EditQuizController editQuizController;
     private AddQuestionController addQuestionController;
+    private StartViewController startViewController;
     // singleton design pattern
     private ViewFactory() {
         stage = new Stage();
@@ -32,6 +34,7 @@ public class ViewFactory {
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
+        FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartView.fxml"));
         try {
             homeScene = new Scene(home.load());
 
@@ -50,6 +53,8 @@ public class ViewFactory {
 
             editQuizScene = new Scene(editQuizView.load());
             editQuizController = editQuizView.getController();
+
+            startQuizScene = new Scene(startQuizView.load());
         } catch (IOException e) {
             System.out.println("Error to load fxml");
             e.printStackTrace();
@@ -106,6 +111,10 @@ public class ViewFactory {
                 stage.setScene(editQuizScene);
                 break;
             }
+            case START_QUIZ: {
+                stage.setScene(startQuizScene);
+                break;
+            }
             default: {
                 stage.setScene(homeScene);
             }
@@ -118,6 +127,7 @@ public class ViewFactory {
         ADD_QUESTION,
         ADD_QUIZ,
         QUIZ_VIEW,
-        EDIT_QUIZ
+        EDIT_QUIZ,
+        START_QUIZ
     }
 }
