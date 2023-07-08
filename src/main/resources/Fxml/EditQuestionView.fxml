@@ -219,8 +219,9 @@
                                 <ComboBox fx:id="kindOfCategory" prefHeight="46.0" prefWidth="436.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
-                        <VBox fx:id="vBoxAddChoiceBox" layoutX="375.0" layoutY="510.0" prefHeight="200.0">
-                            <children>
+                  <VBox layoutX="375.0" layoutY="510.0" prefHeight="200.0" prefWidth="770.0">
+                     <children>
+                              <VBox fx:id="vBoxAddChoiceBox" prefHeight="200.0" />
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
                                         <GridPane id="gridAddChoice" layoutX="125.0" prefHeight="200.0" prefWidth="652.0">
@@ -275,8 +276,8 @@
                                         </GridPane>
                                     </children>
                                 </AnchorPane>
-                            </children>
-                        </VBox>
+                     </children>
+                  </VBox>
                     </children>
                 </AnchorPane>
             </content>

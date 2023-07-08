@@ -47,8 +47,6 @@ public class QuestionBankController implements Initializable {
     @FXML
     private Label noticeAddCategory;
     @FXML
-    private ScrollPane questionBankList;
-    @FXML
     private VBox listQuestion_vbox;
     @FXML
     private AnchorPane pane_question_list;
@@ -58,65 +56,6 @@ public class QuestionBankController implements Initializable {
     private VBox container;
     @FXML
     private Label message;
-
-    private void expandAll(TreeItem<?> item) {
-        if (item != null && !item.isLeaf()) {
-            item.setExpanded(true);
-            for (TreeItem<?> child : item.getChildren()) {
-                expandAll(child);
-            }
-        }
-    }
-
-    private void updateCategory() {
-        List<Category> categories = CategoryService.getCategories();
-        // create TreeItem
-        TreeItem<String> rootNode = new TreeItem<>("Root Node");
-        Map<Integer, TreeItem<String>> treeItems = new HashMap<>();
-
-        for (Category c : categories) {
-            TreeItem<String> treeItem = new TreeItem<>(c.toString()); // line 33 - Category.java
-            treeItems.put(c.getId(), treeItem); // treeItem is return of toString()
-            // btn_category.getValue() return treeItem
-            int parent_id = c.getParent_id();
-            if (parent_id == 0) {
-                rootNode.getChildren().add(treeItem);
-            } else {
-                treeItems.get(parent_id).getChildren().add(treeItem);
-            }
-        }
-        rootNode.setExpanded(true);
-        expandAll(rootNode);
-
-        category.setRoot(rootNode);
-        category.setShowRoot(false);
-
-        category2.setRoot(rootNode);
-        category2.setShowRoot(false);
-    }
-
-    private void addToQuestionList(List<Question> questions, String category_name) {
-        listQuestion_vbox.getChildren().clear();
-
-        if (!questions.isEmpty()) {
-            //add new_list_question
-            for (Question q : questions) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
-                    Parent questionInfor = loader.load();
-                    QuestionInforController controller = loader.getController();
-                    controller.updateInforQuestion(q, category_name);
-                    listQuestion_vbox.getChildren().add(questionInfor);
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-            pane_question_list.setVisible(true);
-        } else {
-            pane_question_list.setVisible(false);
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -143,7 +82,7 @@ public class QuestionBankController implements Initializable {
                     String category_name = selectedItem.getValue();
 
                     btn_category.setValue(category_name);
-                    category.setVisible(!category.isVisible());
+                    category.setVisible(false);
 
                     // Find ID of the category
                     int idCategory = CategoryService.getID(category_name);
@@ -152,11 +91,13 @@ public class QuestionBankController implements Initializable {
                     List<Question> listQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
 
                     listQuestion_vbox.getChildren().clear();
-                    // check checkbox show subcategory is selected or not before select category
+                    // check checkbox show subcategory is selected or not BEFORE select category
                     if (showSubcategoryQuestionCheckbox.isSelected()) {
                         if (listQuestions != null && !listQuestions.isEmpty()) {
                             listQuestions.addAll(currentCategoryQuestions);
                             addToQuestionList(listQuestions, category_name);
+                        } else if (!currentCategoryQuestions.isEmpty()) {
+                            addToQuestionList(currentCategoryQuestions, category_name);
                         } else {
                             pane_question_list.setVisible(false);
                         }
@@ -164,7 +105,7 @@ public class QuestionBankController implements Initializable {
                         addToQuestionList(currentCategoryQuestions, category_name);
                     }
 
-                    // check checkbox show subcategory is selected or not after select category
+                    // check checkbox show subcategory is selected or not AFTER select category
                     showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
                         if (showSubcategoryQuestionCheckbox.isSelected()) {
                             if (listQuestions != null && !listQuestions.isEmpty()) {
@@ -189,7 +130,7 @@ public class QuestionBankController implements Initializable {
                     parent_id = CategoryService.getParentID(selectedItem.getValue());
                     System.out.println(parent_id);
                     btn_category2.setValue(selectedItem.getValue());
-                    category2.setVisible(!category2.isVisible());
+                    category2.setVisible(false);
                 }
             }
         });
@@ -271,6 +212,65 @@ public class QuestionBankController implements Initializable {
         });
     }
 
+    private void expandAll(TreeItem<?> item) {
+        if (item != null && !item.isLeaf()) {
+            item.setExpanded(true);
+            for (TreeItem<?> child : item.getChildren()) {
+                expandAll(child);
+            }
+        }
+    }
+
+    private void updateCategory() {
+        List<Category> categories = CategoryService.getCategories();
+        // create TreeItem
+        TreeItem<String> rootNode = new TreeItem<>("Root Node");
+        Map<Integer, TreeItem<String>> treeItems = new HashMap<>();
+
+        for (Category c : categories) {
+            TreeItem<String> treeItem = new TreeItem<>(c.toString()); // line 33 - Category.java
+            treeItems.put(c.getId(), treeItem); // treeItem is return of toString()
+            // btn_category.getValue() return treeItem
+            int parent_id = c.getParent_id();
+            if (parent_id == 0) {
+                rootNode.getChildren().add(treeItem);
+            } else {
+                treeItems.get(parent_id).getChildren().add(treeItem);
+            }
+        }
+        rootNode.setExpanded(true);
+        expandAll(rootNode);
+
+        category.setRoot(rootNode);
+        category.setShowRoot(false);
+
+        category2.setRoot(rootNode);
+        category2.setShowRoot(false);
+    }
+
+    private void addToQuestionList(List<Question> questions, String category_name) {
+        listQuestion_vbox.getChildren().clear();
+
+        if (!questions.isEmpty()) {
+            //add new_list_question
+            for (Question q : questions) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
+                    Parent questionInfo = loader.load();
+                    QuestionInforController controller = loader.getController();
+                    controller.updateInfoQuestion(q, category_name);
+                    listQuestion_vbox.getChildren().add(questionInfo);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            pane_question_list.setVisible(true);
+        } else {
+            pane_question_list.setVisible(false);
+        }
+    }
+
     public void setTabPane(int index) {
         tabPane.getSelectionModel().select(index);
     }
@@ -280,6 +280,8 @@ public class QuestionBankController implements Initializable {
         listQuestion_vbox.getChildren().clear();
         pane_question_list.setVisible(false);
         showSubcategoryQuestionCheckbox.setSelected(false);
+        category.setVisible(false);
+        category2.setVisible(false);
         if (!container.getChildren().contains(message))
             container.getChildren().add(0, message);
         updateCategory();

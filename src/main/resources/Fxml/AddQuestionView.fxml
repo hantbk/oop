@@ -181,7 +181,10 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="text_QuestionName" prefHeight="50.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <TextField fx:id="text_QuestionName" prefHeight="50.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font></TextField>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
@@ -196,7 +199,10 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="text_QuestionText" prefHeight="203.0" prefWidth="562.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <TextArea fx:id="text_QuestionText" prefHeight="203.0" prefWidth="562.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="14.0" />
+                           </font></TextArea>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
@@ -213,7 +219,10 @@
                                 </Label>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <TextField fx:id="text_DefaultMark" layoutY="10.0" prefHeight="40.0" prefWidth="125.0" />
+                                        <TextField fx:id="text_DefaultMark" layoutY="10.0" prefHeight="40.0" prefWidth="125.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
                                     </children>
                                 </AnchorPane>
                                 <ComboBox fx:id="kindOfCategory" prefHeight="46.0" prefWidth="436.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />

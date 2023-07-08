@@ -2,10 +2,7 @@ package com.hust.quiz.Services;
 
 import com.hust.quiz.Models.Question;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +11,6 @@ public class QuestionService {
 
     //lấy id bằng question_name
     public static int getId(String question_name) {
-        int question_id = 0;
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name
             String sql = "SELECT question_id FROM question WHERE question_name = ?";
@@ -24,7 +20,7 @@ public class QuestionService {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 // return ID of the category
-                question_id = rs.getInt("question_id");
+                return rs.getInt("question_id");
             } else {
                 System.out.println("No ID found");
             }
@@ -32,21 +28,19 @@ public class QuestionService {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        return question_id;
+        return -1;
     }
-
-    // add question to database return new question_id
-
 
     //add question to database
     public static void addQuestion(Question question) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO question (question_name, question_text, category_id)" +
-                    " VALUES (?, ?, ?)";
+            String sql = "INSERT INTO question (question_name, question_text, mark, category_id)" +
+                    " VALUES (?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, question.getQuestion_name());
             pst.setString(2, question.getQuestion_text());
-            pst.setString(3, String.valueOf(question.getCategory_id()));
+            pst.setInt(3, question.getMark());
+            pst.setString(4, String.valueOf(question.getCategory_id()));
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -56,9 +50,27 @@ public class QuestionService {
     }
 
     public static void addQuestion(List<Question> questions, int category_id) {
-        for (Question question : questions) {
-            question.setCategory_id(category_id);
-            addQuestion(question);
+        // Avoid create connection many times
+        try {
+            Connection conn = Utils.getConnection();
+            Statement stmt = conn.createStatement();
+
+            String sql = "INSERT INTO question (question_name, question_text, mark, category_id)" +
+                    " VALUES (?, ?, ?, ?)";
+            for (Question question : questions) {
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, question.getQuestion_name());
+                pst.setString(2, question.getQuestion_text());
+                pst.setInt(3, question.getMark());
+                pst.setString(4, String.valueOf(category_id));
+                pst.executeUpdate();
+                pst.close();
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -82,7 +94,7 @@ public class QuestionService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"), rs.getInt("category_id"));
+                        rs.getString("question_text"), rs.getInt("mark"), rs.getInt("category_id"));
                 result.add(question);
             }
             // close
@@ -95,6 +107,11 @@ public class QuestionService {
         return result;
     }
 
+    /**
+     * Get last question id
+     *
+     * @return int
+     */
     public static int getLastQuestionId() {
         try (Connection conn = Utils.getConnection()) {
             String sql = "SELECT question_id FROM question ORDER BY question_id DESC LIMIT 1";
@@ -139,7 +156,7 @@ public class QuestionService {
                 List<Question> questions = new ArrayList<>();
                 while (rs.next()) {
                     Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                            rs.getString("question_text"), rs.getInt("category_id"));
+                            rs.getString("question_text"), rs.getInt("mark"), rs.getInt("category_id"));
                     questions.add(question);
                 }
                 return questions;
@@ -151,4 +168,28 @@ public class QuestionService {
             return null;
         }
     }
+
+    public static void updateQuestion(Question question) {
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "UPDATE question SET question_name = ?, question_text = ?, mark = ?, category_id = ? WHERE question_id = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, question.getQuestion_name());
+            pst.setString(2, question.getQuestion_text());
+            pst.setInt(3, question.getMark());
+            pst.setString(4, String.valueOf(question.getCategory_id()));
+            pst.setString(5, String.valueOf(question.getQuestion_id()));
+            pst.executeUpdate();
+            pst.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+
+
+
+

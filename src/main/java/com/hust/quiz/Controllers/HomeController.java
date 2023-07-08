@@ -39,9 +39,7 @@ public class HomeController implements Initializable {
             first_pane.setDisable(true);
         });
 
-        btn_back.setOnAction(e -> {
-            reset();
-        });
+        btn_back.setOnAction(e -> reset());
 
         // configure btn_turn_editing_on
         btn_turn_editing_on.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ));

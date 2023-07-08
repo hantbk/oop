@@ -27,7 +27,7 @@ public class ChoiceService {
             // add questions found to list
             while (rs.next()) {
                 Choice choice = new Choice(rs.getInt("choice_id"), rs.getString("choice_content"),
-                        rs.getBoolean("choice_is_correct"), rs.getInt("choice_grade"), question_id);
+                        rs.getInt("choice_grade"), question_id);
                 result.add(choice);
             }
             // close
@@ -44,13 +44,12 @@ public class ChoiceService {
     //add  choice to sql
     public static void addChoice(Choice choice) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO choice (choice_content, choice_is_correct, choice_grade, question_id)" +
-                    " VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO choice (choice_content, choice_grade, question_id)" +
+                    " VALUES (?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, choice.getContent());
-            pst.setBoolean(2, choice.getIsCorrect());
-            pst.setInt(3, choice.getChoiceGrade());
-            pst.setInt(4, choice.getQuestion_id());
+            pst.setDouble(2, choice.getChoiceGrade());
+            pst.setInt(3, choice.getQuestion_id());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -71,8 +70,27 @@ public class ChoiceService {
 
             Statement st = conn.createStatement();
             for (Choice choice : choices) {
-                String sql = "INSERT INTO choice (choice_content, choice_is_correct, choice_grade, question_id)" +
-                        " VALUES ('" + choice.getContent() + "', " + choice.getIsCorrect() + ", " + choice.getChoiceGrade() + ", " + choice.getQuestion_id() + ")";
+                String sql = "INSERT INTO choice (choice_content, choice_grade, question_id)" +
+                        " VALUES ('" + choice.getContent() + "', " + choice.getChoiceGrade() + ", " + choice.getQuestion_id() + ")";
+                st.executeUpdate(sql);
+            }
+            st.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateChoice(List<Choice> choices) {
+        // Avoid create connection many times
+        try {
+            Connection conn = Utils.getConnection();
+
+            Statement st = conn.createStatement();
+            for (Choice choice : choices) {
+                String sql = "UPDATE choice SET choice_content = '" + choice.getContent()
+                        + "', choice_grade = " + choice.getChoiceGrade() + " WHERE choice_id = " + choice.getId();
                 st.executeUpdate(sql);
             }
             st.close();

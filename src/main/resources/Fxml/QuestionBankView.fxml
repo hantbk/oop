@@ -170,7 +170,7 @@
                                                 <Insets left="5.0" />
                                              </padding>
                                           </HBox>
-                                          <ScrollPane fx:id="questionBankList" hbarPolicy="NEVER" layoutY="40.0" prefHeight="181.0" prefWidth="1090.0">
+                                          <ScrollPane hbarPolicy="NEVER" layoutY="40.0" prefHeight="181.0" prefWidth="1090.0">
                                              <content>
                                                 <VBox fx:id="listQuestion_vbox" prefHeight="42.0" prefWidth="1090.0" />
                                              </content>

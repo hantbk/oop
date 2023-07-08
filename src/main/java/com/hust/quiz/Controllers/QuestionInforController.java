@@ -15,7 +15,7 @@ public class QuestionInforController implements Initializable {
     @FXML
     private Button edit_button;
     @FXML
-    private Label inforQuestion_label;
+    private Label infoQuestion_label;
     @FXML
     private CheckBox select_checkbox;
     private Question question;
@@ -29,8 +29,8 @@ public class QuestionInforController implements Initializable {
         });
     }
 
-    public void updateInforQuestion(Question question, String category_name) {
-        inforQuestion_label.setText(question.getQuestionContent());
+    public void updateInfoQuestion(Question question, String category_name) {
+        infoQuestion_label.setText(question.getQuestionContent());
         this.question = question;
         this.category_name = category_name;
     }

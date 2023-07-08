@@ -24,16 +24,8 @@ public class Quiz {
         return quiz_name;
     }
 
-    public void setQuiz_name(String quiz_name) {
-        this.quiz_name = quiz_name;
-    }
-
     public String getQuiz_description() {
         return quiz_description;
-    }
-
-    public void setQuiz_description(String quiz_description) {
-        this.quiz_description = quiz_description;
     }
 
     public List<Question> getListQuestion() {
