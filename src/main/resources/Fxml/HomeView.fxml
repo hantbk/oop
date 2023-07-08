@@ -166,7 +166,7 @@
                                                 </ImageView>
                                             </graphic>
                                         </Button>
-                                        <Label prefHeight="70.0" text="Kiểm tra cuối kỳ môn IT4895Q">
+                                        <Label fx:id="button_exam" prefHeight="70.0" text="Kiểm tra cuối kỳ môn IT4895Q">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -175,7 +175,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                        <Button fx:id="button_exam_baohiem" mnemonicParsing="false" prefHeight="74.0" prefWidth="213.0" style="-fx-background-color: rgba(0,0,0,0);" text="Bảo hiểm ">
                                             <graphic>
                                                 <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -183,12 +183,10 @@
                                                     </image>
                                                 </ImageView>
                                             </graphic>
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
                                         </Button>
-                                        <Label prefHeight="70.0" text="Thi thử KTLT">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
                                     </children>
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">

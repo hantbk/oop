@@ -24,7 +24,7 @@ public class ViewFactory {
     private QuizViewController quizViewController;
     private EditQuizController editQuizController;
     private AddQuestionController addQuestionController;
-    private StartViewController startViewController;
+    private StartQuizController startQuizController;
     // singleton design pattern
     private ViewFactory() {
         stage = new Stage();
@@ -34,7 +34,7 @@ public class ViewFactory {
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
-        FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartView.fxml"));
+        FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartQuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
 
@@ -55,6 +55,8 @@ public class ViewFactory {
             editQuizController = editQuizView.getController();
 
             startQuizScene = new Scene(startQuizView.load());
+            startQuizController = startQuizView.getController();
+
         } catch (IOException e) {
             System.out.println("Error to load fxml");
             e.printStackTrace();
@@ -83,6 +85,9 @@ public class ViewFactory {
 
     //ham nay de dien thong tin question vao cac o khi bam vao edit ow questionBank
     public void updateInforEditQuestion(Question question, String category_name, List<Choice> listChoice){ addQuestionController.setInfor(question, category_name, listChoice);}
+    public void updateQuestionQuiz(List<Question> listQuestion, String quizName){
+        startQuizController.updateQuestion(listQuestion, quizName);
+    }
 
     public void routes(SCENES scene) {
         switch (scene) {
