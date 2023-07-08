@@ -35,6 +35,9 @@ public class QuestionService {
         return question_id;
     }
 
+    // add question to database return new question_id
+
+
     //add question to database
     public static void addQuestion(Question question) {
         try (Connection conn = Utils.getConnection()) {
@@ -59,7 +62,12 @@ public class QuestionService {
         }
     }
 
-    //lay danh dach cau hoi tu csdl co category_id
+    /**
+     * Get questions by category_id
+     *
+     * @param category_id int
+     * @return List of questions
+     */
     public static List<Question> getQuestions(int category_id) {
         List<Question> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
@@ -103,6 +111,12 @@ public class QuestionService {
         return 0;
     }
 
+    /**
+     * Get questions from subcategory
+     *
+     * @param categoryId id of parent category
+     * @return List of questions
+     */
     public static List<Question> getQuestionFromSubcategory(int categoryId) {
         List<Integer> subcategoryIds = new ArrayList<>();
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddQuestionController implements Initializable {
+public class EditQuestionController implements Initializable {
     private final List<ChoiceBoxController> listChoiceBoxController = new ArrayList<>();
     @FXML
     private ImageView btn_menu_return; // return to home
@@ -32,9 +32,11 @@ public class AddQuestionController implements Initializable {
     @FXML
     private ComboBox<String> kindOfCategory;
     @FXML
-    private TextField text_QuestionName, text_DefaultMark;
+    private TextField text_QuestionName;
     @FXML
     private TextArea text_QuestionText;
+    @FXML
+    private TextField text_DefaultMark;
     @FXML
     private Label labelAlert;
     private int countChoice = 0;
@@ -87,6 +89,8 @@ public class AddQuestionController implements Initializable {
                 //xoa cac thong tin vua add tranh add 2 lan bi trung lap
                 this.reset();
                 labelAlert.setText("Add question successfully!");
+
+//                QuestionBankController.updateCategory();
             }
         });
 
@@ -162,6 +166,7 @@ public class AddQuestionController implements Initializable {
                     e.printStackTrace();
                 }
             }
+
         });
     }
 
@@ -188,9 +193,14 @@ public class AddQuestionController implements Initializable {
     }
 
     //ham update cac thong tin question vao cac o khi bam edit trong question_bank
+    public void setInfor(Question oldQuestion, String category_name) {
+        text_QuestionName.setText(oldQuestion.getQuestion_name());
+        text_QuestionText.setText(oldQuestion.getQuestion_text());
+        kindOfCategory.setValue(category_name);
+    }
 
     //ham reset các ô điền về trống
-    private void reset() {
+    public void reset() {
         text_QuestionName.setText(null);
         text_QuestionText.setText(null);
         text_DefaultMark.setText(null);

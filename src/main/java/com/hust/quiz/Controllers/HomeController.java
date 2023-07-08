@@ -13,12 +13,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-    QuestionBankController questionBankController;
     @FXML
     private Button btn_add, btn_back, btn_question, btn_category, btn_import, btn_export, btn_turn_editing_on;
     @FXML
     private AnchorPane second_pane, first_pane;
     private Parent questionBankView;
+    private QuestionBankController questionBankController;
+
+    /**
+     * Reset home status
+     */
+    private void reset() {
+        second_pane.setVisible(false);
+        first_pane.setVisible(true);
+        first_pane.setOpacity(1);
+        first_pane.setDisable(false);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -30,10 +40,7 @@ public class HomeController implements Initializable {
         });
 
         btn_back.setOnAction(e -> {
-            second_pane.setVisible(false);
-            first_pane.setVisible(true);
-            first_pane.setOpacity(1);
-            first_pane.setDisable(false);
+            reset();
         });
 
         // configure btn_turn_editing_on
@@ -60,33 +67,21 @@ public class HomeController implements Initializable {
         });
 
         btn_category.setOnAction(event -> {
-            // reset home status
-            second_pane.setVisible(false);
-            first_pane.setVisible(true);
-            first_pane.setOpacity(1);
-            first_pane.setDisable(false);
+            reset();
             // switch to category tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             questionBankController.setTabPane(1);
         });
 
         btn_import.setOnAction(event -> {
-            // reset home status
-            second_pane.setVisible(false);
-            first_pane.setVisible(true);
-            first_pane.setOpacity(1);
-            first_pane.setDisable(false);
+            reset();
             // switch to import tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             questionBankController.setTabPane(2);
         });
 
         btn_export.setOnAction(event -> {
-            // reset home status
-            second_pane.setVisible(false);
-            first_pane.setVisible(true);
-            first_pane.setOpacity(1);
-            first_pane.setDisable(false);
+            reset();
             // switch to export tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             questionBankController.setTabPane(3);

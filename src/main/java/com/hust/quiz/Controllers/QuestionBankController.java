@@ -11,37 +11,35 @@ import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class QuestionBankController implements Initializable {
+    private String directory;
+    private int parent_id = -1;
     @FXML
     private TreeView<String> category, category2;
     @FXML
-    private Button btn_turn_editing_on;
-    private int parent_id = -1;
+    private Button btn_turn_editing_on, btnCreateQuestion, btnAddCategory, btnChooseFile, btnImport;
     @FXML
     private ImageView btn_menu_return;
     @FXML
     private TabPane tabPane;
     @FXML
     private ComboBox<String> btn_category, btn_category2;
-    @FXML
-    private Button btnCreateQuestion, btnAddCategory;
     @FXML
     private TextField nameCategory, idNewCategory;
     @FXML
@@ -55,15 +53,13 @@ public class QuestionBankController implements Initializable {
     @FXML
     private AnchorPane pane_question_list;
     @FXML
-    private Button btnChooseFile;
-    @FXML
-    private Button btnImport;
-    @FXML
     private CheckBox showSubcategoryQuestionCheckbox;
+    @FXML
+    private VBox container;
+    @FXML
+    private Label message;
 
-    String directory;
-
-    private static void expandAll(TreeItem<?> item) {
+    private void expandAll(TreeItem<?> item) {
         if (item != null && !item.isLeaf()) {
             item.setExpanded(true);
             for (TreeItem<?> child : item.getChildren()) {
@@ -99,6 +95,29 @@ public class QuestionBankController implements Initializable {
         category2.setShowRoot(false);
     }
 
+    private void addToQuestionList(List<Question> questions, String category_name) {
+        listQuestion_vbox.getChildren().clear();
+
+        if (!questions.isEmpty()) {
+            //add new_list_question
+            for (Question q : questions) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
+                    Parent questionInfor = loader.load();
+                    QuestionInforController controller = loader.getController();
+                    controller.updateInforQuestion(q, category_name);
+                    listQuestion_vbox.getChildren().add(questionInfor);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            pane_question_list.setVisible(true);
+        } else {
+            pane_question_list.setVisible(false);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // # configure btn_menu_return - comeback to home
@@ -119,88 +138,46 @@ public class QuestionBankController implements Initializable {
             if (event.getClickCount() == 2) {
                 TreeItem<String> selectedItem = category.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
-                    //remove old_list_question
-                    listQuestion_vbox.getChildren().clear();
+                    container.getChildren().remove(message);
 
-                    btn_category.setValue(selectedItem.getValue());
-                    category.setVisible(!category.isVisible());
-                    // add questions found in scrollPane by adding in listView
                     String category_name = selectedItem.getValue();
+
+                    btn_category.setValue(category_name);
+                    category.setVisible(!category.isVisible());
+
                     // Find ID of the category
                     int idCategory = CategoryService.getID(category_name);
 
-                    // DONE: using getQuestions(String category) in QuestionService: waiting for updating sql file
-                    List<Question> questionList = QuestionService.getQuestions(idCategory);
-                    List<Question> subcategoryQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
-                    List<Question> listQuestion = new ArrayList<>();
-                    listQuestion.addAll(questionList);
-                    // Check if category has questions or not
-                    if (!questionList.isEmpty()) {
-                        // put every question in the list in listView
-                        FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
-                        int i = 0;
-                        for (Question item : questionList) {
-                            listFXMLInforQuestion[i] = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
-                            try {
-                                Parent root = listFXMLInforQuestion[i].load();
-                                QuestionInforController controller = listFXMLInforQuestion[i].getController();
-                                controller.updateInforQuestion(item, category_name);
-                                listQuestion_vbox.getChildren().add(root);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                System.out.print("At "+this.getClass());
-                            }
-                        }
-                        // show list
-                        pane_question_list.setVisible(true);
-                    } else {
-                        pane_question_list.setVisible(false);
-                    }
+                    List<Question> currentCategoryQuestions = QuestionService.getQuestions(idCategory);
+                    List<Question> listQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
 
-                    //tick checkbox show subcategory
-                    showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
-                        if (showSubcategoryQuestionCheckbox.isSelected()) {
-                            if (subcategoryQuestions != null) {
-                                questionList.clear();
-                                questionList.addAll(subcategoryQuestions);
-                            }
-                            if (subcategoryQuestions.isEmpty()) {
-                                questionList.clear();
-                                questionList.addAll(listQuestion);
-                            }
-                        }
-                        if (!showSubcategoryQuestionCheckbox.isSelected()) {
-                            questionList.clear();
-                            questionList.addAll(listQuestion);
-                        }
-                        if (!questionList.isEmpty()) {
-                            // put every question in the list in listView
-                            FXMLLoader[] listFXMLInforQuestion = new FXMLLoader[questionList.size()];
-                            if(!showSubcategoryQuestionCheckbox.isSelected())
-                                listQuestion_vbox.getChildren().clear();
-                            int i = 0;
-                            for (Question item : questionList) {
-                                listFXMLInforQuestion[i] = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfor.fxml"));
-                                try {
-                                    Parent root = listFXMLInforQuestion[i].load();
-                                    QuestionInforController controller = listFXMLInforQuestion[i].getController();
-                                    controller.updateInforQuestion(item, category_name);
-                                    listQuestion_vbox.getChildren().add(root);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                    System.out.print("At "+this.getClass());
-                                }
-                            }
-                            // show list
-                            pane_question_list.setVisible(true);
+                    listQuestion_vbox.getChildren().clear();
+                    // check checkbox show subcategory is selected or not before select category
+                    if (showSubcategoryQuestionCheckbox.isSelected()) {
+                        if (listQuestions != null && !listQuestions.isEmpty()) {
+                            listQuestions.addAll(currentCategoryQuestions);
+                            addToQuestionList(listQuestions, category_name);
                         } else {
                             pane_question_list.setVisible(false);
+                        }
+                    } else {
+                        addToQuestionList(currentCategoryQuestions, category_name);
+                    }
+
+                    // check checkbox show subcategory is selected or not after select category
+                    showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
+                        if (showSubcategoryQuestionCheckbox.isSelected()) {
+                            if (listQuestions != null && !listQuestions.isEmpty()) {
+                                listQuestions.addAll(currentCategoryQuestions);
+                                addToQuestionList(listQuestions, category_name);
+                            }
+                        } else {
+                            addToQuestionList(currentCategoryQuestions, category_name);
                         }
                     });
                 }
             }
         });
-
 
 
         category2.getParent().setOnMouseClicked(event -> category2.setVisible(false));
@@ -255,35 +232,33 @@ public class QuestionBankController implements Initializable {
             FileChooser filechooser = new FileChooser();
             filechooser.setTitle("Choose Quiz");
             File selectedfile = filechooser.showOpenDialog(null);
-            if(selectedfile != null) {
+            if (selectedfile != null) {
                 directory = selectedfile.getAbsolutePath();
             }
         });
         btnImport.setOnAction(actionEvent -> {
-            if((!directory.endsWith(".txt")) && (!directory.endsWith(".docx"))){
+            if ((!directory.endsWith(".txt")) && (!directory.endsWith(".docx"))) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("WARNING");
                 alert.setHeaderText(null);
                 alert.setContentText("WRONG FORMAT");
                 alert.showAndWait();
 
-            }
-            else if(((directory.endsWith(".txt"))&&(!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success"))) ||
-                    ((directory.endsWith(".docx"))&&(!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success")))){
+            } else if (((directory.endsWith(".txt")) && (!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success"))) ||
+                    ((directory.endsWith(".docx")) && (!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success")))) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("WARNING");
                 alert.setHeaderText(null);
-                if(directory.endsWith(".txt")){
-                    alert.setContentText(AikenFormatChecker.checkAikenFormat(directory));}
-                else{
+                if (directory.endsWith(".txt")) {
+                    alert.setContentText(AikenFormatChecker.checkAikenFormat(directory));
+                } else {
                     alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(directory));
                 }
                 alert.showAndWait();
-            }
-            else{
-                if(directory.endsWith(".txt")){
-                    LoaderTextService.importFile(directory);}
-                else{
+            } else {
+                if (directory.endsWith(".txt")) {
+                    LoaderTextService.importFile(directory);
+                } else {
                     LoaderDocxService.importFile(directory);
                 }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -300,7 +275,13 @@ public class QuestionBankController implements Initializable {
         tabPane.getSelectionModel().select(index);
     }
 
-    public void load() {
+    public void reset() {
+        btn_category.setValue("Default");
+        listQuestion_vbox.getChildren().clear();
+        pane_question_list.setVisible(false);
+        showSubcategoryQuestionCheckbox.setSelected(false);
+        if (!container.getChildren().contains(message))
+            container.getChildren().add(0, message);
         updateCategory();
     }
 }

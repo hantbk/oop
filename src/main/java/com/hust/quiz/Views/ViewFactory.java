@@ -14,19 +14,22 @@ public class ViewFactory {
     private Scene homeScene;
     private Scene questionBankScene;
     private Scene addQuestion;
+    private Scene editQuestion;
     private Scene addQuizScene;
     private Scene quizViewScene;
     private Scene editQuizScene;
     private QuestionBankController questionBankController;
     private QuizViewController quizViewController;
     private EditQuizController editQuizController;
-    private AddQuestionController addQuestionController;
+    private EditQuestionController editQuestionController;
+
     // singleton design pattern
     private ViewFactory() {
         stage = new Stage();
 
         FXMLLoader home = new FXMLLoader(getClass().getResource("/Fxml/HomeView.fxml"));
         FXMLLoader addQuestionView = new FXMLLoader(getClass().getResource("/Fxml/AddQuestionView.fxml"));
+        FXMLLoader editQuestionView = new FXMLLoader(getClass().getResource("/Fxml/EditQuestionView.fxml"));
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
@@ -39,7 +42,9 @@ public class ViewFactory {
             questionBankScene = new Scene(homeController.getQuestionBankView());
 
             addQuestion = new Scene(addQuestionView.load());
-            addQuestionController = addQuestionView.getController();
+
+            editQuestion = new Scene(editQuestionView.load());
+            editQuestionController = editQuestionView.getController();
 
             quizViewScene = new Scene(quizView.load());
             quizViewController = quizView.getController();
@@ -49,7 +54,7 @@ public class ViewFactory {
             editQuizScene = new Scene(editQuizView.load());
             editQuizController = editQuizView.getController();
         } catch (IOException e) {
-            System.out.println("Error to load fxml");
+            System.out.println("Error to load fxml in ViewFactory");
             e.printStackTrace();
         }
 
@@ -75,7 +80,9 @@ public class ViewFactory {
     }
 
     //ham nay de dien thong tin question vao cac o khi bam vao edit ow questionBank
-    public void updateInforEditQuestion(Question question, String category_name){ addQuestionController.setInfor(question, category_name);}
+    public void updateEditQuestionView(Question question, String category_name) {
+        editQuestionController.setInfor(question, category_name);
+    }
 
     public void routes(SCENES scene) {
         switch (scene) {
@@ -84,12 +91,16 @@ public class ViewFactory {
                 break;
             }
             case QUESTION_BANK: {
-                questionBankController.load();
+                questionBankController.reset();
                 stage.setScene(questionBankScene);
                 break;
             }
             case ADD_QUESTION: {
                 stage.setScene(addQuestion);
+                break;
+            }
+            case EDIT_QUESTION: {
+                stage.setScene(editQuestion);
                 break;
             }
             case ADD_QUIZ: {
@@ -114,6 +125,7 @@ public class ViewFactory {
         HOME,
         QUESTION_BANK,
         ADD_QUESTION,
+        EDIT_QUESTION,
         ADD_QUIZ,
         QUIZ_VIEW,
         EDIT_QUIZ

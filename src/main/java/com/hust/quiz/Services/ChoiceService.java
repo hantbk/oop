@@ -2,15 +2,17 @@ package com.hust.quiz.Services;
 
 import com.hust.quiz.Models.Choice;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChoiceService {
-    //get choice from database with question_id
+    /**
+     * Get all choice from database with question_id
+     *
+     * @param question_id int
+     * @return List of choice
+     */
     public static List<Choice> getChoice(int question_id) {
         List<Choice> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
@@ -38,6 +40,7 @@ public class ChoiceService {
         return result;
     }
 
+
     //add  choice to sql
     public static void addChoice(Choice choice) {
         try (Connection conn = Utils.getConnection()) {
@@ -56,9 +59,27 @@ public class ChoiceService {
         }
     }
 
+    /**
+     * Add list of choice to database
+     *
+     * @param choices List of choice
+     */
     public static void addChoice(List<Choice> choices) {
-        for (Choice choice : choices) {
-            addChoice(choice);
+        // Avoid create connection many times
+        try {
+            Connection conn = Utils.getConnection();
+
+            Statement st = conn.createStatement();
+            for (Choice choice : choices) {
+                String sql = "INSERT INTO choice (choice_content, choice_is_correct, choice_grade, question_id)" +
+                        " VALUES ('" + choice.getContent() + "', " + choice.getIsCorrect() + ", " + choice.getChoiceGrade() + ", " + choice.getQuestion_id() + ")";
+                st.executeUpdate(sql);
+            }
+            st.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
