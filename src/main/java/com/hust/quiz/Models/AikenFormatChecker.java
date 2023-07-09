@@ -48,11 +48,10 @@ public class AikenFormatChecker {
                 Matcher answerMatcher = answerPattern.matcher(line);
 
                 if (answerMatcher.matches()) {
-                    Choice choice = new Choice(line.substring(3), false, 0, quest_id);
+                    Choice choice = new Choice(line.substring(3), 0, quest_id);
                     choices.add(choice);
 
                     validAnswers.add(line.substring(0, 1));
-
                 } else if (line.startsWith("ANSWER: ")) {
                     String correctAnswer = line.substring(8).trim();
 
@@ -69,7 +68,7 @@ public class AikenFormatChecker {
                     // index of correct answer in choices
                     // index = total number of choices - number of invalid answers in this question + index of correct answer
                     int index = choices.size() - validAnswers.size() + correctAnswer.charAt(0) - 'A';
-                    choices.get(index).setIsCorrect(true);
+                    choices.get(index).setChoiceGrade(100);
                 } else {
                     quest_id++;
                     Question question = new Question(line);

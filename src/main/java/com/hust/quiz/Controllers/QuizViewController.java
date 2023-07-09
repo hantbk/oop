@@ -49,9 +49,7 @@ public class QuizViewController implements Initializable {
         anchor_blur.setVisible(false);
         anchor_confirm.setVisible(false);
 
-        btn_menu_return.setOnMouseClicked(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
-        });
+        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
 
         btn_edit_quiz.setOnMouseClicked(event -> {
             // TODO: Update quiz

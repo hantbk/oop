@@ -14,267 +14,264 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuizController">
     <children>
-        <AnchorPane fx:id="first_pane" prefHeight="800.0" prefWidth="1280.0">
-            <children>
-                <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
-                    <children>
-                        <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Img/menu.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Img/male_user.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Img/whitearrowdown.png" />
-                            </image>
-                        </ImageView>
-                        <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="700.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+          <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
+              <children>
+                  <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../Img/menu.png" />
+                      </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../Img/male_user.png" />
+                      </image>
+                  </ImageView>
+                  <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../Img/whitearrowdown.png" />
+                      </image>
+                  </ImageView>
+                  <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+                      <font>
+                          <Font size="19.0" />
+                      </font>
+                  </Label>
+              </children>
+          </AnchorPane>
+          <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="700.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="1160.0">
                <children>
-                  <HBox prefHeight="60.0" prefWidth="1160.0">
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/filecheck.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="60.0" text="Adding a new Quiz" textFill="RED">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/icons8-question-30.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" top="25.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <AnchorPane layoutX="57.0" layoutY="52.0" prefHeight="641.0" prefWidth="1140.0">
+               <children>
+                  <VBox>
                      <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Img/filecheck.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="60.0" text="Adding a new Quiz" textFill="RED">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/bluearrowdown.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="15.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefHeight="50.0" text="General" textFill="RED">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <padding>
                               <Insets top="5.0" />
                            </padding>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Img/icons8-question-30.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="5.0" top="25.0" />
-                           </HBox.margin>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <AnchorPane layoutX="57.0" layoutY="52.0" prefHeight="641.0" prefWidth="1140.0">
-                     <children>
-                        <VBox>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
                            <children>
-                              <HBox prefHeight="50.0" prefWidth="200.0">
+                              <Label prefHeight="50.0" prefWidth="500.0" text="Name">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
                                  <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Img/bluearrowdown.png" />
+                                          <Image url="@../Img/icons8-error-64.png" />
                                        </image>
-                                       <HBox.margin>
-                                          <Insets right="10.0" top="15.0" />
-                                       </HBox.margin>
                                     </ImageView>
-                                    <Label prefHeight="50.0" text="General" textFill="RED">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
+                                    <TextField fx:id="text_quiz_name" layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
                                  </children>
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <Label prefHeight="50.0" prefWidth="500.0" text="Name">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Img/icons8-error-64.png" />
-                                             </image>
-                                          </ImageView>
-                                          <TextField fx:id="text_quiz_name" layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <Label prefHeight="50.0" prefWidth="500.0" text="Description">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <TextField fx:id="text_quiz_description" alignment="TOP_LEFT" layoutX="230.0" layoutY="5.0" prefHeight="170.0" prefWidth="400.0">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <CheckBox fx:id="check_display_description" layoutX="544.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" text="Display description on course page ">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                          </CheckBox>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="810.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Img/icons8-question-30.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Img/bluearrowdown.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets right="10.0" top="15.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <Label prefHeight="50.0" text="Timing" textFill="RED">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <Label prefHeight="50.0" prefWidth="500.0" text="Open the quiz">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Img/icons8-question-30.png" />
-                                             </image>
-                                          </ImageView>
-                                          <DatePicker fx:id="date_open" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
-                                          <CheckBox fx:id="checkbox_enable_open" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <Label prefHeight="50.0" prefWidth="500.0" text="Close the quiz">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <DatePicker fx:id="date_close" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
-                                          <CheckBox fx:id="checkbox_enable_close" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <Label prefHeight="50.0" prefWidth="500.0" text="Time limit">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <Spinner fx:id="spinner_time_format" layoutX="290.0" layoutY="2.0" prefHeight="40.0" />
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Img/icons8-question-30.png" />
-                                             </image>
-                                          </ImageView>
-                                          <TextField fx:id="text_time_limit" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="50.0" />
-                                          <CheckBox fx:id="checkbox_enable_time_limit" layoutX="460.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <Label prefHeight="50.0" prefWidth="500.0" text="When time expires">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1013.0">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Img/icons8-question-30.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Spinner fx:id="spinner_time_expire" editable="true" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="300.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="50.0" prefWidth="1140.0">
-                                 <children>
-                                    <AnchorPane prefHeight="50.0" prefWidth="1141.0">
-                                       <children>
-                                          <Button fx:id="btn_create" layoutX="428.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="CREATE" textFill="WHITE">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Button>
-                                          <Button fx:id="btn_cancel" layoutX="543.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="CANCEL" textFill="WHITE">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Button>
-                                          <Label fx:id="alert_missing_name" layoutX="660.0" layoutY="18.0" text="Please enter the quiz's name!" textFill="RED" visible="false">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
+                              </AnchorPane>
                            </children>
-                        </VBox>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="500.0" text="Description">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                 <children>
+                                    <TextField fx:id="text_quiz_description" alignment="TOP_LEFT" layoutX="230.0" layoutY="5.0" prefHeight="170.0" prefWidth="400.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                 <children>
+                                    <CheckBox fx:id="check_display_description" layoutX="544.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" text="Display description on course page ">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="810.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/icons8-question-30.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/bluearrowdown.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="15.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label prefHeight="50.0" text="Timing" textFill="RED">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="500.0" text="Open the quiz">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/icons8-question-30.png" />
+                                       </image>
+                                    </ImageView>
+                                    <DatePicker fx:id="date_open" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
+                                    <CheckBox fx:id="checkbox_enable_open" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="500.0" text="Close the quiz">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                 <children>
+                                    <DatePicker fx:id="date_close" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="245.0" />
+                                    <CheckBox fx:id="checkbox_enable_close" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="500.0" text="Time limit">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                 <children>
+                                    <Spinner fx:id="spinner_time_format" layoutX="290.0" layoutY="2.0" prefHeight="40.0" />
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/icons8-question-30.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField fx:id="text_time_limit" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="50.0" />
+                                    <CheckBox fx:id="checkbox_enable_time_limit" layoutX="460.0" layoutY="15.0" mnemonicParsing="false" text="Enable" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="500.0" text="When time expires">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="50.0" prefWidth="1013.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/icons8-question-30.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Spinner fx:id="spinner_time_expire" editable="true" layoutX="230.0" layoutY="2.0" prefHeight="40.0" prefWidth="300.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="1140.0">
+                           <children>
+                              <AnchorPane prefHeight="50.0" prefWidth="1141.0">
+                                 <children>
+                                    <Button fx:id="btn_create" layoutX="428.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="CREATE" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="btn_cancel" layoutX="543.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="CANCEL" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="alert_missing_name" layoutX="660.0" layoutY="18.0" text="Please enter the quiz's name!" textFill="RED" visible="false">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
                      </children>
-                  </AnchorPane>
-               </children></AnchorPane>
-            </children>
-        </AnchorPane>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

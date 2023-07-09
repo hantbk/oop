@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService {
+
+    /**
+     * Get all categories from database
+     *
+     * @return List of categories
+     */
     public static List<Category> getCategories() {
         List<Category> results = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
@@ -25,6 +31,12 @@ public class CategoryService {
         return results;
     }
 
+    /**
+     * Add a category to database
+     *
+     * @param c Category
+     * @throws SQLException if error
+     */
     public static void addCategory(Category c) throws SQLException {
         try (Connection conn = Utils.getConnection()) {
             Statement st = conn.createStatement();
@@ -35,7 +47,13 @@ public class CategoryService {
         }
     }
 
-    // create when import file
+    /**
+     * Create a category with name and parent_id = null
+     * Most commonly used when importing files.
+     *
+     * @param category_name String
+     * @return id of the new category
+     */
     public static int addCategory(String category_name) {
         int id = 0;
         try (Connection conn = Utils.getConnection()) {
@@ -55,6 +73,12 @@ public class CategoryService {
         return id;
     }
 
+    /**
+     * Get id of a category by name
+     *
+     * @param category_name String
+     * @return id of the category
+     */
     public static int getID(String category_name) {
         int id = 0;
         try (Connection conn = Utils.getConnection()) {
@@ -77,6 +101,12 @@ public class CategoryService {
         return id;
     }
 
+    /**
+     * Get parent_id of a category by name
+     *
+     * @param category_name String
+     * @return parent_id of the category
+     */
     public static int getParentID(String category_name) {
         int parent_id = 0;
         try (Connection conn = Utils.getConnection()) {

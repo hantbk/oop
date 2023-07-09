@@ -1,11 +1,12 @@
 package com.hust.quiz.Models;
 
 public class Category {
-    private int id_number;
-    private String name;
-    private int parent_id = 0;
-    private int question_count;
-    private String category_info;
+    // final because we don't have any setter
+    private final int id_number;
+    private final String name;
+    private final int parent_id;
+    private final int question_count;
+    private final String category_info;
 
     public Category(int id_number, String name, int parent_id, int question_count, String category_info) {
         this.id_number = id_number;
