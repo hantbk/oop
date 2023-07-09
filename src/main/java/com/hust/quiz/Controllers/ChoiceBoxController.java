@@ -41,7 +41,6 @@ public class ChoiceBoxController implements Initializable {
             if (totalGrade < 0) {
                 totalGrade = 0;
             }
-            System.out.println(totalGrade);
         });
     }
 

@@ -117,7 +117,7 @@ public class AddQuestionController implements Initializable {
     private void addQuestion() {
         // add question
         String categoryName = kindOfCategory.getValue();
-        Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText(),
+        Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText(), null,
                 Integer.parseInt(text_DefaultMark.getText()), CategoryService.getID(categoryName));
         QuestionService.addQuestion(newQuestion);
 

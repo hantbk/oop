@@ -1,9 +1,11 @@
 package com.hust.quiz.Controllers;
 
-import com.hust.quiz.Models.AikenFormatChecker;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Question;
-import com.hust.quiz.Services.*;
+import com.hust.quiz.Services.CategoryService;
+import com.hust.quiz.Services.LoadeDocxService;
+import com.hust.quiz.Services.LoaderTextService;
+import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,46 +27,69 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class QuestionBankController implements Initializable {
-    private String directory;
-    private int parent_id = -1;
     @FXML
-    private TreeView<String> category, category2;
-    @FXML
-    private Button btn_turn_editing_on, btnCreateQuestion, btnAddCategory, btnChooseFile, btnImport;
+    private Button btn_turn_editing_on;
     @FXML
     private ImageView btn_menu_return;
     @FXML
     private TabPane tabPane;
+
+    // TAB QUESTION
     @FXML
-    private ComboBox<String> btn_category, btn_category2;
+    private VBox container;
+    @FXML
+    private Label message;
+    @FXML
+    private CheckBox showSubcategoryQuestionCheckbox;
+    @FXML
+    private AnchorPane pane_question_list;
+    @FXML
+    private Button btnCreateQuestion;
+    @FXML
+    private TreeView<String> category;
+    @FXML
+    private ComboBox<String> btn_category;
+    @FXML
+    private VBox listQuestion_vbox;
+
+    // TAB CATEGORY
+    private int parent_id = -1;
+    @FXML
+    private TreeView<String> category2;
+    @FXML
+    private ComboBox<String> btn_category2;
+    @FXML
+    private Button btnAddCategory;
     @FXML
     private TextField nameCategory, idNewCategory;
     @FXML
     private TextArea categoryInfo;
     @FXML
     private Label noticeAddCategory;
+
+    // TAB IMPORT
+    private String directory;
     @FXML
-    private VBox listQuestion_vbox;
+    private VBox file_not_found;
     @FXML
-    private AnchorPane pane_question_list;
+    private Label file_name;
     @FXML
-    private CheckBox showSubcategoryQuestionCheckbox;
-    @FXML
-    private VBox container;
-    @FXML
-    private Label message;
+    private Button btnChooseFile, btnImport;
+
+    // TAB EXPORT
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // # configure btn_menu_return - comeback to home
         btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
-
         // # configure btn_turn_editing_on - add quiz scene
         btn_turn_editing_on.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ));
 
-        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUESTION));
-
         updateCategory();
+
+        // TAB QUESTION
+        btnCreateQuestion.setOnAction(actionEvent -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUESTION));
 
         // configure btn_category
         btn_category.getParent().setOnMouseClicked(event -> category.setVisible(false));
@@ -117,7 +142,7 @@ public class QuestionBankController implements Initializable {
             }
         });
 
-
+        // TAB CATEGORY
         category2.getParent().setOnMouseClicked(event -> category2.setVisible(false));
         btn_category2.setOnMouseClicked(event -> category2.setVisible(!category2.isVisible()));
         category2.setOnMouseClicked(event -> {
@@ -166,46 +191,45 @@ public class QuestionBankController implements Initializable {
             }
         });
 
+        // TAB IMPORT
         btnChooseFile.setOnAction(actionEvent -> {
             FileChooser filechooser = new FileChooser();
             filechooser.setTitle("Choose Quiz");
-            File selectedfile = filechooser.showOpenDialog(null);
-            if (selectedfile != null) {
-                directory = selectedfile.getAbsolutePath();
+            File selectedFile = filechooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                directory = selectedFile.getAbsolutePath();
+                file_name.setText(selectedFile.getName());
+                file_not_found.setVisible(false);
+            } else {
+                file_not_found.setVisible(true);
+                file_name.setText("");
             }
         });
         btnImport.setOnAction(actionEvent -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             if ((!directory.endsWith(".txt")) && (!directory.endsWith(".docx"))) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("WARNING");
                 alert.setHeaderText(null);
                 alert.setContentText("WRONG FORMAT");
                 alert.showAndWait();
 
-            } else if (((directory.endsWith(".txt")) && (!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success"))) ||
-                    ((directory.endsWith(".docx")) && (!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success")))) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("WARNING");
-                alert.setHeaderText(null);
-                if (directory.endsWith(".txt")) {
-                    alert.setContentText(AikenFormatChecker.checkAikenFormat(directory));
-                } else {
-                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(directory));
-                }
-                alert.showAndWait();
             } else {
+                String message;
                 if (directory.endsWith(".txt")) {
-                    LoaderTextService.importFile(directory);
+                    message = LoaderTextService.importFile(directory);
                 } else {
-                    LoaderDocxService.importFile(directory);
+                    message = LoadeDocxService.importFile(directory);
                 }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle(null);
                 alert.setHeaderText(null);
-                alert.setContentText("File is imported sucessfully");
+                alert.setContentText(message);
                 alert.showAndWait();
+                file_not_found.setVisible(true);
+                file_name.setText("");
+                if (message != null && message.startsWith("Success")) {
+                    updateCategory();
+                }
             }
-
         });
     }
 
@@ -282,6 +306,8 @@ public class QuestionBankController implements Initializable {
         if (!container.getChildren().contains(message))
             container.getChildren().add(0, message);
         updateCategory();
+        file_not_found.setVisible(true);
+        file_name.setText("");
     }
 }
 

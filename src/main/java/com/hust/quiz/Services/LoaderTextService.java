@@ -1,250 +1,97 @@
 package com.hust.quiz.Services;
 
+import com.hust.quiz.Models.Choice;
+import com.hust.quiz.Models.Question;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoaderTextService {
 
-    private static StringBuilder questionText = new StringBuilder();
-    private static List<String> options = new ArrayList<>();
-    private static StringBuilder correctOption = new StringBuilder();
-    private static List<Question> questionList = new ArrayList<>();
+    public static String importFile(String filePath) {
+        int quest_id = QuestionService.getLastQuestionId();
 
-    public static void importFile(String filename) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
+        List<Question> questions = new ArrayList<>();
+        List<Choice> choices = new ArrayList<>();
+
+        String line;
+        int lineCount = 0;
+        int questionCount = 0;
+
+        Pattern answerPattern = Pattern.compile("^[A-Z]\\. .+");
+        Set<String> validAnswers = new HashSet<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
+                lineCount++;
                 line = line.trim();
-                if (!line.isEmpty()) {
-                    if (line.startsWith("ANSWER: ")) {
-                        correctOption.append(line.substring(8));
-                    } else {
-                        if (questionText.length() > 0) {
-                            options.add(line);
-                        } else {
-                            questionText.append(line);
-                        }
-                    }
-                } else {
-                    if (isQuestionComplete()) {
-                        // Add the question to the list
-                        Question question = new Question(questionText.toString(), new ArrayList<>(options),
-                                correctOption.toString());
-                        questionList.add(question);
 
-                        // Reset the question-related variables
-                        resetQuestionVariables();
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                Matcher answerMatcher = answerPattern.matcher(line);
+
+                if (answerMatcher.matches()) {
+                    Choice choice = new Choice(line.substring(3), 0, quest_id);
+                    choices.add(choice);
+
+                    validAnswers.add(line.substring(0, 1));
+                } else if (line.startsWith("ANSWER: ")) {
+                    String[] answers = line.substring(8).split(",");
+                    int index;
+                    double grade = 100.0 / answers.length;
+
+                    for (String answer : answers) {
+                        if (!validAnswers.contains(answer) || answer.length() > 1) {
+                            return "Invalid correct answer at line " + lineCount;
+                        }
+                        // index of correct answer in choices
+                        // index = total number of choices - number of invalid answers in this question + index of correct answer
+                        index = choices.size() - validAnswers.size() + answer.charAt(0) - 'A';
+                        choices.get(index).setChoiceGrade(grade);
                     }
+
+                    if (validAnswers.size() < 2) {
+                        return "Not enough answers at line " + lineCount;
+                    }
+
+                    validAnswers.clear(); // Reset valid answers
+                } else {
+                    quest_id++;
+                    Question question = new Question(quest_id, line, null);
+                    questions.add(question);
+                    questionCount++;
                 }
             }
+            if (questionCount == 0) {
+                return "No question found";
+            } else {
+                int category_id = CategoryService.addCategory(getTime());
+                QuestionService.addQuestion(questions, category_id);
+                ChoiceService.addChoice(choices);
 
-            // Insert the last question if it is complete
-            if (isQuestionComplete()) {
-                Question question = new Question(questionText.toString(), new ArrayList<>(options),
-                        correctOption.toString());
-                questionList.add(question);
+                return "Success: " + questionCount + " question(s) found";
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Save the questions to the database
-        saveQuestionsToDatabase();
+        return null;
     }
 
-    private static boolean isQuestionComplete() {
-        return questionText.length() > 0 && !options.isEmpty();
-    }
-
-    private static void resetQuestionVariables() {
-        questionText.setLength(0);
-        options.clear();
-        correctOption.setLength(0);
-    }
-
-    private static void saveQuestionsToDatabase() {
-        Connection conn = null;
-        PreparedStatement categoryStatement = null;
-        PreparedStatement questionStatement = null;
-        PreparedStatement choiceStatement = null;
-        int questionCount = LoaderTextService.getNumberOfQuestions();
-        Random random = new Random();
-
-        try {
-            conn = Utils.getConnection();
-            conn.setAutoCommit(false);
-            int categoryId = 0;
-
-            // Check if the category table is empty
-            String checkCategoryQuery = "SELECT COUNT(*) AS category_count FROM category";
-            categoryStatement = conn.prepareStatement(checkCategoryQuery);
-            ResultSet categoryResultSet = categoryStatement.executeQuery();
-            categoryResultSet.next();
-            int categoryCount = categoryResultSet.getInt("category_count");
-
-            if (categoryCount == 0) {
-                // If the category table is empty, create a new category with the current date as the category_name
-                String currentDate = getCurrentDate(); // Helper method to get the current date in the desired format
-                String createCategoryQuery = "INSERT INTO category (category_name, question_count) VALUES (?, ?)";
-                categoryStatement = conn.prepareStatement(createCategoryQuery, Statement.RETURN_GENERATED_KEYS);
-                categoryStatement.setString(1, currentDate);
-                categoryStatement.setInt(2, questionCount);
-                categoryStatement.executeUpdate();
-
-                try (ResultSet generatedKeys = categoryStatement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        categoryId = generatedKeys.getInt(1);
-                    } else {
-                        throw new SQLException("Creating category failed, no ID obtained.");
-                    }
-                }
-            } else {
-                // If the category table is not empty, randomly select a category ID
-                String selectCategoryIdQuery = "SELECT category_id FROM category";
-                categoryStatement = conn.prepareStatement(selectCategoryIdQuery);
-                ResultSet categoryIdResultSet = categoryStatement.executeQuery();
-                List<Integer> categoryIds = new ArrayList<>();
-                while (categoryIdResultSet.next()) {
-                    categoryIds.add(categoryIdResultSet.getInt("category_id"));
-                }
-                int randomIndex = random.nextInt(categoryIds.size());
-                categoryId = categoryIds.get(randomIndex);
-
-                // Update the question count for the selected category
-                String updateQuestionCountQuery = "UPDATE category SET question_count = ? WHERE category_id = ?";
-                categoryStatement = conn.prepareStatement(updateQuestionCountQuery);
-                categoryStatement.setInt(1, questionCount);
-                categoryStatement.setInt(2, categoryId);
-                categoryStatement.executeUpdate();
-            }
-
-            // Get the category_name for the current category_id
-            String getCategoryNameQuery = "SELECT category_name FROM category WHERE category_id = ?";
-            PreparedStatement categoryNameStatement = conn.prepareStatement(getCategoryNameQuery);
-            categoryNameStatement.setInt(1, categoryId);
-            ResultSet categoryNameResultSet = categoryNameStatement.executeQuery();
-            categoryNameResultSet.next();
-            String categoryName = categoryNameResultSet.getString("category_name");
-
-            // Insert questions and choices
-            String questionQuery = "INSERT INTO question (question_name, question_text, category_id) VALUES (?, ?, ?)";
-            questionStatement = conn.prepareStatement(questionQuery, Statement.RETURN_GENERATED_KEYS);
-            String choiceQuery = "INSERT INTO choice (choice_content, choice_is_correct, question_id) VALUES (?, ?, ?)";
-            choiceStatement = conn.prepareStatement(choiceQuery);
-
-            for (int i = 0; i < questionList.size(); i++) {
-                Question question = questionList.get(i);
-
-                // Generate the question_name by combining category_name and question index
-                String questionName = categoryName + " " + (i + 1);
-
-                // Insert question into the question table
-                questionStatement.setString(1, questionName);
-                questionStatement.setString(2, question.getQuestionText());
-                questionStatement.setInt(3, categoryId);
-
-                int affectedRows = questionStatement.executeUpdate();
-
-                if (affectedRows == 0) {
-                    throw new SQLException("Creating question failed, no rows affected.");
-                }
-
-                try (ResultSet generatedKeys = questionStatement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int questionId = generatedKeys.getInt(1);
-
-                        // Insert choices into the choice table
-                        List<String> options = question.getOptions();
-                        for (int j = 0; j < options.size(); j++) {
-                            String option = options.get(j);
-
-                            choiceStatement.setString(1, option);
-                            choiceStatement.setBoolean(2, option.equals(question.getCorrectOption()));
-                            choiceStatement.setInt(3, questionId);
-
-                            choiceStatement.addBatch();
-                        }
-                    } else {
-                        throw new SQLException("Creating question failed, no ID obtained.");
-                    }
-                }
-            }
-
-            // Execute the choice batch insert
-            choiceStatement.executeBatch();
-            conn.commit();
-
-        } catch (SQLException e) {
-            if (conn != null) {
-                try {
-                    conn.rollback();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (choiceStatement != null) {
-                    choiceStatement.close();
-                }
-                if (questionStatement != null) {
-                    questionStatement.close();
-                }
-                if (categoryStatement != null) {
-                    categoryStatement.close();
-                }
-                if (conn != null) {
-                    conn.setAutoCommit(true);
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                // Handle the exception
-            }
-        }
-    }
-
-    public static class Question {
-        private String questionText;
-        private List<String> options;
-        private String correctOption;
-        private byte[] imageData;
-
-        public Question(String questionText, List<String> options, String correctOption) {
-            this.questionText = questionText;
-            this.options = options;
-            this.correctOption = correctOption;
-        }
-
-        public String getQuestionText() {
-            return questionText;
-        }
-
-        public List<String> getOptions() {
-            return options;
-        }
-
-        public String getCorrectOption() {
-            return correctOption;
-        }
-
-
-    }
-
-    public static int getNumberOfQuestions() {
-        return questionList.size();
-    }
-
-    private static String getCurrentDate() {
+    private static String getTime() {
         LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return currentDate.format(formatter);
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+        return day + "-" + month + "-" + year;
     }
 }

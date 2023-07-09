@@ -21,7 +21,8 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE `question` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `question_name` VARCHAR(100),
-  `question_text` VARCHAR(500) NOT NULL,
+  `question_text` VARCHAR(1000) NOT NULL,
+  `question_image` VARCHAR(255) DEFAULT NULL,
   `mark` INT UNSIGNED NOT NULL DEFAULT 1,
   `category_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`question_id`),
@@ -62,7 +63,7 @@ DELIMITER ;
 --
 CREATE TABLE `choice` (
   `choice_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `choice_content` VARCHAR(255) NOT NULL,
+  `choice_content` VARCHAR(1000) NOT NULL,
   `choice_grade` DOUBLE,
   `question_id` INT UNSIGNED NOT NULL,
   `image_data` LONGBLOB,
