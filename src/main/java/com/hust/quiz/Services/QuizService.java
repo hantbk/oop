@@ -33,7 +33,7 @@ public class QuizService {
         int quiz_id = 0;
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name
-            String sql = "SELECT quiz_id FROM quizz WHERE quiz_name = ?";
+            String sql = "SELECT quiz_id FROM quiz WHERE quiz_name = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, quizName);
 
@@ -65,7 +65,7 @@ public class QuizService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"), rs.getInt("category_id"));
+                        rs.getString("question_text"), 1,  rs.getInt("category_id"));
                 result.add(question);
             }
             // close
