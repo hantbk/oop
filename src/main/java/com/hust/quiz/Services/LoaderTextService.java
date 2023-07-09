@@ -1,120 +1,97 @@
 package com.hust.quiz.Services;
 
+import com.hust.quiz.Models.Choice;
+import com.hust.quiz.Models.Question;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoaderTextService {
 
-    private static StringBuilder questionText = new StringBuilder();
-    private static List<String> options = new ArrayList<>();
-    private static StringBuilder correctOption = new StringBuilder();
-    private static List<Question> questionList = new ArrayList<>();
+    public static String importFile(String filePath) {
+        int quest_id = QuestionService.getLastQuestionId();
 
-    public static void importFile(String filename) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
+        List<Question> questions = new ArrayList<>();
+        List<Choice> choices = new ArrayList<>();
+
+        String line;
+        int lineCount = 0;
+        int questionCount = 0;
+
+        Pattern answerPattern = Pattern.compile("^[A-Z]\\. .+");
+        Set<String> validAnswers = new HashSet<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
+                lineCount++;
                 line = line.trim();
-                if (!line.isEmpty()) {
-                    if (line.startsWith("ANSWER: ")) {
-                        correctOption.append(line.substring(8));
-                    } else if (questionText.length() == 0) {
-                        questionText.append(line);
-                    } else if (options.size() < 5) {
-                        options.add(line);
-                    }
-                } else {
-                    // Add the question to the list
-                    if (questionText.length() > 0) {
-                        Question question = new Question(questionText.toString(), new ArrayList<>(options),
-                                correctOption.toString());
-                        questionList.add(question);
+
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                Matcher answerMatcher = answerPattern.matcher(line);
+
+                if (answerMatcher.matches()) {
+                    Choice choice = new Choice(line.substring(3), 0, quest_id);
+                    choices.add(choice);
+
+                    validAnswers.add(line.substring(0, 1));
+                } else if (line.startsWith("ANSWER: ")) {
+                    String[] answers = line.substring(8).split(",");
+                    int index;
+                    double grade = 100.0 / answers.length;
+
+                    for (String answer : answers) {
+                        if (!validAnswers.contains(answer) || answer.length() > 1) {
+                            return "Invalid correct answer at line " + lineCount;
+                        }
+                        // index of correct answer in choices
+                        // index = total number of choices - number of invalid answers in this question + index of correct answer
+                        index = choices.size() - validAnswers.size() + answer.charAt(0) - 'A';
+                        choices.get(index).setChoiceGrade(grade);
                     }
 
-                    // Reset the question-related variables
-                    resetQuestionVariables();
+                    if (validAnswers.size() < 2) {
+                        return "Not enough answers at line " + lineCount;
+                    }
+
+                    validAnswers.clear(); // Reset valid answers
+                } else {
+                    quest_id++;
+                    Question question = new Question(quest_id, line, null);
+                    questions.add(question);
+                    questionCount++;
                 }
             }
+            if (questionCount == 0) {
+                return "No question found";
+            } else {
+                int category_id = CategoryService.addCategory(getTime());
+                QuestionService.addQuestion(questions, category_id);
+                ChoiceService.addChoice(choices);
 
-            // Insert the last question
-            if (questionText.length() > 0) {
-                Question question = new Question(questionText.toString(), new ArrayList<>(options),
-                        correctOption.toString());
-                questionList.add(question);
+                return "Success: " + questionCount + " question(s) found";
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Save the questions to the database
-        saveQuestionsToDatabase();
+        return null;
     }
 
-    private static void resetQuestionVariables() {
-        questionText.setLength(0);
-        options.clear();
-        correctOption.setLength(0);
-    }
-
-    private static void saveQuestionsToDatabase() {
-        Connection conn = null;
-        PreparedStatement statement = null;
-
-        try {
-            conn = Utils.getConnection();
-            String query = "INSERT INTO questions (question_text, option_a, option_b, option_c, option_d, option_e, correct_option) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            statement = conn.prepareStatement(query);
-
-            for (Question question : questionList) {
-                statement.setString(1, question.getQuestionText());
-                List<String> options = question.getOptions();
-                for (int i = 0; i < 5; i++) {
-                    if (i < options.size()) {
-                        statement.setString(i + 2, options.get(i));
-                    } else {
-                        statement.setString(i + 2, null);
-                    }
-                }
-                statement.setString(7, question.getCorrectOption());
-
-                statement.addBatch();
-            }
-
-            statement.executeBatch();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static class Question {
-        private String questionText;
-        private List<String> options;
-        private String correctOption;
-
-        public Question(String questionText, List<String> options, String correctOption) {
-            this.questionText = questionText;
-            this.options = options;
-            this.correctOption = correctOption;
-        }
-
-        public String getQuestionText() {
-            return questionText;
-        }
-
-        public List<String> getOptions() {
-            return options;
-        }
-
-        public String getCorrectOption() {
-            return correctOption;
-        }
+    private static String getTime() {
+        LocalDate currentDate = LocalDate.now();
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+        return day + "-" + month + "-" + year;
     }
 }

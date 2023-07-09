@@ -1,10 +1,9 @@
 package com.hust.quiz.Controllers;
 
-import com.hust.quiz.Models.AikenFormatChecker;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.CategoryService;
-import com.hust.quiz.Services.LoaderDocxService;
+import com.hust.quiz.Services.LoadeDocxService;
 import com.hust.quiz.Services.LoaderTextService;
 import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
@@ -214,26 +213,22 @@ public class QuestionBankController implements Initializable {
                 alert.setContentText("WRONG FORMAT");
                 alert.showAndWait();
 
-            } else if (((directory.endsWith(".txt")) && (!AikenFormatChecker.checkAikenFormat(directory).startsWith("Success"))) ||
-                    ((directory.endsWith(".docx")) && (!AikenFormatChecker.checkAikenFormatDoc(directory).startsWith("Success")))) {
-                alert.setTitle("WARNING");
-                alert.setHeaderText(null);
-                if (directory.endsWith(".txt")) {
-                    alert.setContentText(AikenFormatChecker.checkAikenFormat(directory));
-                } else {
-                    alert.setContentText(AikenFormatChecker.checkAikenFormatDoc(directory));
-                }
-                alert.showAndWait();
             } else {
+                String message;
                 if (directory.endsWith(".txt")) {
-                    LoaderTextService.importFile(directory);
+                    message = LoaderTextService.importFile(directory);
                 } else {
-                    LoaderDocxService.importFile(directory);
+                    message = LoadeDocxService.importFile(directory);
                 }
                 alert.setTitle(null);
                 alert.setHeaderText(null);
-                alert.setContentText("File is imported successfully");
+                alert.setContentText(message);
                 alert.showAndWait();
+                file_not_found.setVisible(true);
+                file_name.setText("");
+                if (message != null && message.startsWith("Success")) {
+                    updateCategory();
+                }
             }
         });
     }

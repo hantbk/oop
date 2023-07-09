@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class QuizService {
+
+
+
     public static void addQuiz(Quiz quiz) {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO quiz (quiz_name, quiz_description) VALUES (?, ?)";
