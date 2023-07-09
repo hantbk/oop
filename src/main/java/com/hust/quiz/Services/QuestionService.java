@@ -34,13 +34,14 @@ public class QuestionService {
     //add question to database
     public static void addQuestion(Question question) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO question (question_name, question_text, mark, category_id)" +
-                    " VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO question (question_name, question_text, question_image, mark, category_id)" +
+                    " VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, question.getQuestion_name());
             pst.setString(2, question.getQuestion_text());
-            pst.setInt(3, question.getMark());
-            pst.setString(4, String.valueOf(question.getCategory_id()));
+            pst.setString(3, question.getQuestion_image());
+            pst.setInt(4, question.getMark());
+            pst.setString(5, String.valueOf(question.getCategory_id()));
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -55,14 +56,15 @@ public class QuestionService {
             Connection conn = Utils.getConnection();
             Statement stmt = conn.createStatement();
 
-            String sql = "INSERT INTO question (question_name, question_text, mark, category_id)" +
-                    " VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO question (question_name, question_text, question_image, mark, category_id)" +
+                    " VALUES (?, ?, ?, ?, ?)";
             for (Question question : questions) {
                 PreparedStatement pst = conn.prepareStatement(sql);
                 pst.setString(1, question.getQuestion_name());
                 pst.setString(2, question.getQuestion_text());
-                pst.setInt(3, question.getMark());
-                pst.setString(4, String.valueOf(category_id));
+                pst.setString(3, question.getQuestion_image());
+                pst.setInt(4, question.getMark());
+                pst.setString(5, String.valueOf(category_id));
                 pst.executeUpdate();
                 pst.close();
             }
@@ -94,7 +96,8 @@ public class QuestionService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"), rs.getInt("mark"), rs.getInt("category_id"));
+                        rs.getString("question_text"), rs.getString("question_image"),
+                        rs.getInt("mark"), rs.getInt("category_id"));
                 result.add(question);
             }
             // close
@@ -156,7 +159,8 @@ public class QuestionService {
                 List<Question> questions = new ArrayList<>();
                 while (rs.next()) {
                     Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                            rs.getString("question_text"), rs.getInt("mark"), rs.getInt("category_id"));
+                            rs.getString("question_text"), rs.getString("question_image"),
+                            rs.getInt("mark"), rs.getInt("category_id"));
                     questions.add(question);
                 }
                 return questions;

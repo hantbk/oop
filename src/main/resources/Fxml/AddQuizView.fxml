@@ -108,7 +108,10 @@
                                           <Image url="@../Img/icons8-error-64.png" />
                                        </image>
                                     </ImageView>
-                                    <TextField fx:id="text_quiz_name" layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0" />
+                                    <TextField fx:id="text_quiz_name" layoutX="230.0" layoutY="5.0" prefHeight="40.0" prefWidth="400.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></TextField>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -124,7 +127,7 @@
                                  <children>
                                     <TextField fx:id="text_quiz_description" alignment="TOP_LEFT" layoutX="230.0" layoutY="5.0" prefHeight="170.0" prefWidth="400.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </TextField>
                                  </children>

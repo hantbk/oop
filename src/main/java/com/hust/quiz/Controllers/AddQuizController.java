@@ -40,6 +40,12 @@ public class AddQuizController implements Initializable {
         //set cac setting ban dau cho cac thanh phan
         setInit();
 
+        // configure btn_menu_return - back to home
+        btn_menu_return.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
+
         // configure btn_save - save quiz
         btn_create.setOnAction(event -> {
             String quizName = text_quiz_name.getText();
@@ -91,12 +97,6 @@ public class AddQuizController implements Initializable {
                 text_time_limit.setDisable(true);
                 spinner_time_format.setDisable(true);
             }
-        });
-
-        // configure btn_menu_return - back to home
-        btn_menu_return.setOnMouseClicked(event -> {
-            this.reset();
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
         // configure btn_cancel - back to home

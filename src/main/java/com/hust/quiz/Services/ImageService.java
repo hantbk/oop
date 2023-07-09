@@ -1,44 +1,23 @@
 package com.hust.quiz.Services;
 
-import java.io.*;
-import java.sql.*;
+import java.io.File;
 
 public class ImageService {
-    public static void getImage( int question_id) {
-        try (Connection conn = Utils.getConnection()){
-            String sql = "select image_data from choice where question_id = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, String.valueOf(question_id));
-            ResultSet rs = statement.executeQuery();
-            File file = new File("image.jpg");
-            FileOutputStream fos = new FileOutputStream(file);
-            byte b[];
-            Blob blob;
+    public static final String PATH = "D:\\IntelliJ\\oop\\src\\main\\resources\\question_img\\";
 
-            while(rs.next()){
-                blob = rs.getBlob("image_data");
-                b = blob.getBytes(1,(int)blob.length());
-                fos.write(b);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    /**
+     * Get path of image
+     *
+     * @param question_id id of question
+     * @return String path of image
+     */
+    public static String getImage(int question_id) {
+        String filePath = PATH + "image_" + question_id + ".png";
+        // check if image exists
+        File file = new File(filePath);
+        if (file.exists()) {
+            return filePath;
         }
-    }
-    public static void addImage(File file, int question_id) throws SQLException{
-        try (Connection conn = Utils.getConnection()) {
-            String sql = "UPDATE choice SET image_data = ? WHERE question_id = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            FileInputStream fis = new FileInputStream(file);
-            statement.setInt(2, question_id);
-            statement.setBinaryStream(1,fis,(int)file.length());
-            statement.executeUpdate();
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
     }
 }

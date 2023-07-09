@@ -483,7 +483,7 @@
                                                                <graphic>
                                                                   <AnchorPane style="-fx-border-style: dashed; -fx-border-width: 1px;">
                                                                      <children>
-                                                                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="550.0">
+                                                                        <VBox fx:id="file_not_found" alignment="CENTER" prefHeight="100.0" prefWidth="550.0">
                                                                            <children>
                                                                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                                                  <image>
@@ -493,6 +493,11 @@
                                                                               <Label text="You can drag and drop files here to add them." />
                                                                            </children>
                                                                         </VBox>
+                                                                        <Label fx:id="file_name" layoutX="50.0" layoutY="35.0">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
                                                                      </children>
                                                                   </AnchorPane>
                                                                </graphic>
