@@ -7,7 +7,7 @@ USE `quiz`;
 --
 CREATE TABLE `category` (
   `category_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `category_name` VARCHAR(45) NOT NULL,
+  `category_name` VARCHAR(100) NOT NULL,
   `parent_id` INT UNSIGNED,
   `question_count` INT DEFAULT 0 NOT NULL,
   `category_info` VARCHAR(255) NULL,
@@ -20,8 +20,10 @@ DEFAULT CHARACTER SET = utf8mb4;
 --
 CREATE TABLE `question` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `question_name` VARCHAR(255),
-  `question_text` VARCHAR(500) NOT NULL,
+  `question_name` VARCHAR(100),
+  `question_text` VARCHAR(1000) NOT NULL,
+  `question_image` VARCHAR(255) DEFAULT NULL,
+  `mark` INT UNSIGNED NOT NULL DEFAULT 1,
   `category_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`question_id`),
   INDEX `category_id_idx` (`category_id` ASC) VISIBLE,
@@ -61,10 +63,11 @@ DELIMITER ;
 --
 CREATE TABLE `choice` (
   `choice_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `choice_content` VARCHAR(255) NOT NULL,
-  `choice_is_correct` TINYINT NOT NULL,
-  `choice_grade` INT NULL,
+  `choice_content` VARCHAR(1000) NOT NULL,
+  `choice_grade` DOUBLE,
   `question_id` INT UNSIGNED NOT NULL,
+  `image_data` LONGBLOB,
+
   PRIMARY KEY (`choice_id`),
   INDEX `question_id_idx` (`question_id` ASC) VISIBLE,
   CONSTRAINT `question_id`
@@ -141,3 +144,13 @@ INSERT INTO `category` (`category_id`, `category_name`, `parent_id`) VALUES
 INSERT INTO `question` (`question_id`, `question_name`,`question_text`, `category_id`) VALUES
 (1, 'Ay yo', 'abcd', 4),
 (2, 'do dat', 'efgh', 4);
+
+INSERT INTO `choice` (`choice_id`, `choice_content`, `choice_grade`, `question_id`, `image_data`) VALUES
+(1, 'a', 1, 1, NULL),
+(2, 'b', 0, 1, NULL),
+(3, 'c', 0, 1, NULL),
+(4, 'd', 0, 1, NULL),
+(5, 'e', 1, 2, NULL),
+(6, 'f', 0, 2, NULL),
+(7, 'g', 0, 2, NULL),
+(8, 'h', 0, 2, NULL);

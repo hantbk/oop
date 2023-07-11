@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="130.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.ChoiceBoxController">
+<AnchorPane prefHeight="130.0" prefWidth="339.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.ChoiceBoxController">
    <children>
       <AnchorPane style="-fx-background-color: #EEEEEE;">
          <children>
@@ -19,10 +19,10 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="choiceTextField" prefHeight="45.0" prefWidth="166.0" />
+                  <TextField fx:id="choiceTextField" prefHeight="40.0" prefWidth="166.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutY="60.0" prefHeight="35.0" prefWidth="339.0">
+            <HBox alignment="CENTER_LEFT" layoutY="60.0" prefHeight="32.0" prefWidth="339.0">
                <children>
                   <Label alignment="CENTER" prefHeight="45.0" prefWidth="123.0" text="Grade">
                      <font>

@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddQuestionController implements Initializable {
+public class EditQuestionController implements Initializable {
     private final List<ChoiceBoxController> listChoiceBoxController = new ArrayList<>();
     private int countChoice = 0;
+    private Question question;
+    private List<Choice> listChoice;
     @FXML
     private ImageView btn_menu_return; // return to home
     @FXML
@@ -43,9 +45,6 @@ public class AddQuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //add list category to comboBox
         updateCategory();
-        //add 2 choiceBox
-        addChoiceBox(2);
-        text_DefaultMark.setText("1");
 
         // configure btn_menu_return
         btn_menu_return.setOnMouseClicked(event -> {
@@ -53,7 +52,7 @@ public class AddQuestionController implements Initializable {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
-        //Luu cac thong tin va day len database
+        //Luu cac thong tin va day len csdl
         btn_SaveAndContinueEditing.setOnAction(event -> {
             labelAlert.setText("");
             if (text_QuestionName.getText().equals("")) {
@@ -71,11 +70,11 @@ public class AddQuestionController implements Initializable {
             } else if (ChoiceBoxController.getTotalGrade() != 100) {
                 labelAlert.setText("Total of grade must be 100!");
             } else {
-                addQuestion();
+                updateQuestion();
             }
         });
 
-        //bam vao save changes de luu thong len database va quay ve Question_Bank
+        //bam vao save changes de luu thong len csdl va quay ve Question_Bank
         btn_SaveChanges.setOnAction(event -> {
             labelAlert.setText("");
             if (text_QuestionName.getText().equals("")) {
@@ -93,7 +92,8 @@ public class AddQuestionController implements Initializable {
             } else if ((ChoiceBoxController.getTotalGrade()) != 100) {
                 labelAlert.setText("Total of grade must be 100!");
             } else {
-                addQuestion();
+                updateQuestion();
+                this.reset();
                 ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             }
         });
@@ -114,37 +114,40 @@ public class AddQuestionController implements Initializable {
         });
     }
 
-    private void addQuestion() {
-        // add question
+    private void updateQuestion() {
+        // update question
         String categoryName = kindOfCategory.getValue();
-        Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText(), null,
+
+        question.setInfo(text_QuestionName.getText(), text_QuestionText.getText(),
                 Integer.parseInt(text_DefaultMark.getText()), CategoryService.getID(categoryName));
-        QuestionService.addQuestion(newQuestion);
 
-        int id = QuestionService.getId(newQuestion.getQuestion_name());
-        if (id < 0) {
-            labelAlert.setText("Add question failed!");
-            return;
-        }
+        QuestionService.updateQuestion(question);
 
-        // add choice
-        List<Choice> listChoice = new ArrayList<>();
-        for (ChoiceBoxController controller : listChoiceBoxController) {
-            if (!controller.getChoiceText().equals("")) {
-                Choice newChoice = new Choice(controller.getChoiceText(), controller.getGrade(), id);
-                listChoice.add(newChoice);
+        // update choice
+        for (int i = 0; i < listChoice.size(); i++) {
+            String text = listChoiceBoxController.get(i).getChoiceText();
+            if (!text.equals("")) {
+                listChoice.get(i).setInfo(text, listChoiceBoxController.get(i).getGrade());
             }
         }
-        ChoiceService.addChoice(listChoice);
+        ChoiceService.updateChoice(listChoice);
 
-        //xoa cac thong tin vua add tranh add 2 lan bi trung lap
-        this.reset();
-        labelAlert.setText("Add question successfully!");
+        // add new choice if user add more choice
+        for (int i = listChoice.size(); i < countChoice; i++) {
+            String text = listChoiceBoxController.get(i).getChoiceText();
+            if (!text.equals("")) {
+                Choice newChoice = new Choice(listChoiceBoxController.get(i).getChoiceText(),
+                        listChoiceBoxController.get(i).getGrade(), question.getId());
+                ChoiceService.addChoice(newChoice);
+            }
+        }
+
+        labelAlert.setText("Update question successfully!");
     }
 
     private void addChoiceBox(int numberChoice) {
         try {
-            for (int i = 0; i < numberChoice; i++) {
+            for (int i = 0; i < numberChoice && countChoice < 5; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
                 Parent root = loader.load();
                 ChoiceBoxController choiceBoxController = loader.getController();
@@ -157,15 +160,33 @@ public class AddQuestionController implements Initializable {
         }
     }
 
+    private void addChoiceBox(List<Choice> listChoice) {
+        try {
+            for (Choice choice : listChoice) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
+                Parent root = loader.load();
+                ChoiceBoxController choiceBoxController = loader.getController();
+                choiceBoxController.setNumberChoice(countChoice + 1);
+                choiceBoxController.setInfo(choice.getContent(), choice.getChoiceGrade());
+                listChoiceBoxController.add(choiceBoxController);
+                vBoxAddChoiceBox.getChildren().add(countChoice++, root);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //ham reset các ô điền về trống
     private void reset() {
-        for (ChoiceBoxController controller : listChoiceBoxController) {
-            controller.reset();
-        }
+        listChoiceBoxController.get(0).reset();  // reset total grade = 0
+        listChoiceBoxController.clear();
+        vBoxAddChoiceBox.getChildren().clear();
+        countChoice = 0;
+
         labelAlert.setText("");
         text_QuestionName.setText(null);
         text_QuestionText.setText(null);
-        text_DefaultMark.setText("1");
+        text_DefaultMark.setText(null);
         kindOfCategory.setValue(null);
         updateCategory();
     }
@@ -185,6 +206,19 @@ public class AddQuestionController implements Initializable {
         } catch (NumberFormatException e) {
             return true;
         }
+    }
+
+    //ham update cac thong tin question vao cac o khi bam edit trong question_bank
+    public void setInfo(Question oldQuestion, String category_name) {
+        this.question = oldQuestion;
+        text_QuestionName.setText(oldQuestion.getQuestion_name());
+        text_QuestionText.setText(oldQuestion.getQuestion_text());
+        kindOfCategory.setValue(category_name);
+        text_DefaultMark.setText(String.valueOf(oldQuestion.getMark()));
+
+        //set cac choice vao cac o
+        listChoice = ChoiceService.getChoice(oldQuestion.getQuestion_id());
+        addChoiceBox(listChoice);
     }
 }
 

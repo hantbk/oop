@@ -10,15 +10,11 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
 public class EditQuizController implements Initializable {
     @FXML
     private ImageView btn_menu_return;
     @FXML
-    private Label label_quiz_name_IT;
-    @FXML
-    private Label label_quiz_name_edit;
+    private Label label_quiz_name_IT, label_quiz_name_edit;
     @FXML
     private Label number_of_questions;
     @FXML
@@ -34,13 +30,10 @@ public class EditQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btn_menu_return.setOnMouseClicked(event -> {
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
-        });
+        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+
         add_question_option.setVisible(false);
 
-        arrow_add.setOnMouseClicked(event -> {
-            add_question_option.setVisible(true);
-        });
+        arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(true));
     }
 }
