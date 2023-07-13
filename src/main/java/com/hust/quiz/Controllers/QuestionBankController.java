@@ -33,7 +33,6 @@ public class QuestionBankController implements Initializable {
     private ImageView btn_menu_return;
     @FXML
     private TabPane tabPane;
-
     // TAB QUESTION
     @FXML
     private VBox container;

@@ -178,7 +178,8 @@ public class EditQuestionController implements Initializable {
 
     //ham reset các ô điền về trống
     private void reset() {
-        listChoiceBoxController.get(0).reset();  // reset total grade = 0
+        if(!listChoiceBoxController.isEmpty())
+            listChoiceBoxController.get(0).reset();  // reset total grade = 0
         listChoiceBoxController.clear();
         vBoxAddChoiceBox.getChildren().clear();
         countChoice = 0;

@@ -41,7 +41,7 @@ public class CategoryService {
         try (Connection conn = Utils.getConnection()) {
             Statement st = conn.createStatement();
             String sql = "INSERT INTO category (category_id, category_name, parent_id, question_count, category_info) VALUES ('" + c.getId() +
-                    c.getName() + "', " + c.getParent_id() + ", " + c.getQuestion_count() + ", " + ", '" + c.getCategory_info() + "')";
+                    c.getName() + "', " + c.getParent_id() + ", " + c.getQuestion_count() + ", " + " '" + c.getCategory_info() + "')";
             st.executeUpdate(sql);
             st.close();
         }

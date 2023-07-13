@@ -1,5 +1,7 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.Question;
+import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -17,6 +21,10 @@ public class HomeController implements Initializable {
     private Button btn_add, btn_back, btn_question, btn_category, btn_import, btn_export, btn_turn_editing_on;
     @FXML
     private AnchorPane second_pane, first_pane;
+    @FXML
+    private Button button_exam_baohiem;
+    @FXML
+    private VBox vbox_quiz;
     private Parent questionBankView;
     private QuestionBankController questionBankController;
 
@@ -83,6 +91,14 @@ public class HomeController implements Initializable {
             // switch to export tab
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
             questionBankController.setTabPane(3);
+        });
+
+        //bam de lam bai thi
+        button_exam_baohiem.setOnAction(event -> {
+            ViewFactory.getInstance().updateQuizView(button_exam_baohiem.getText());
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+//            ViewFactory.getInstance().updateQuestionQuiz(button_exam_baohiem.getText());
+//            ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
         });
     }
 

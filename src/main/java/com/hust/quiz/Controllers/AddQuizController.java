@@ -61,7 +61,7 @@ public class AddQuizController implements Initializable {
 
                 QuizService.addQuiz(new Quiz(quizName, quizDescription));
 
-                ViewFactory.getInstance().updateQuizView(quizName, quizDescription);
+                ViewFactory.getInstance().updateQuizView(quizName);
                 ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
             }
         });
