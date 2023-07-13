@@ -88,6 +88,7 @@ CREATE TABLE `quiz` (
   `quiz_open_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `quiz_close_date` DATETIME,
   `quiz_time_limit` INT UNSIGNED,
+  `quiz_time_format` varchar(10) NOT NULL,
   PRIMARY KEY (`quiz_id`),
   UNIQUE INDEX `quiz_id_UNIQUE` (`quiz_id` ASC) VISIBLE,
   UNIQUE INDEX `quiz_name_UNIQUE` (`quiz_name` ASC) VISIBLE)

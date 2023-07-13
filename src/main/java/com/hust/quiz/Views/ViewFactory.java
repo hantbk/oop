@@ -73,8 +73,8 @@ public class ViewFactory {
         return instance;
     }
 
-    public void updateQuizView(String quizName) {
-        quizViewController.displayInfo(quizName);
+    public void updateQuizView(String quizName, String quizInfo, int timeLimit, String timeFormat) {
+        quizViewController.displayInfo(quizName, quizInfo, timeLimit, timeFormat);
     }
 
     public void updateEditQuizView(String quizName) {

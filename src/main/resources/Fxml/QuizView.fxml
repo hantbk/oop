@@ -22,7 +22,127 @@
                         <Font size="60.0" />
                      </font>
                   </Label>
-                  <HBox layoutX="40.0" layoutY="100.0" prefHeight="50.0">
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="50.0" text="My Courses">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="50.0" text="THI CUỐI KỲ" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="50.0" text="General" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label_quiz_name_IT" prefHeight="50.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="60.0" layoutY="250.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+         <children>
+            <AnchorPane layoutX="40.0" layoutY="20.0">
+               <children>
+                  <Label fx:id="label_quiz_name_view" prefHeight="58.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="btn_edit_quiz" fitHeight="20.0" fitWidth="20.0" layoutX="1050.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/setting.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" layoutX="1070.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/redarrowdown.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="label_quiz_description" layoutY="50.0" text="Label">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <VBox alignment="CENTER" layoutX="40.0" layoutY="120.0" prefWidth="1080.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="Time limit: ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="470.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="timeLimitLabel1" prefHeight="26.0" prefWidth="30.0" text="1 ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="timeFormatLabel1" text="hour">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label text="Grading method: Last attempt">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Label layoutX="40.0" layoutY="200.0" text="Summary of your previous attempts" textFill="RED">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <VBox layoutX="40.0" layoutY="250.0">
+               <children>
+                  <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #146C94;">
                      <children>
                         <Label prefHeight="50.0" text="Home" textFill="RED">
                            <font>
@@ -68,7 +188,72 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="50.0" text="/">
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <Button fx:id="btn_preview_quiz" layoutX="480.0" layoutY="380.0" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="PREVIEW QUIZ NOW" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
+         <children>
+            <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/menu.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/male_user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/whitearrowdown.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor_blur" opacity="0.5" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" />
+      <AnchorPane fx:id="anchor_confirm" layoutX="357.0" layoutY="300.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: WHITE;" visible="false">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="10.0" prefHeight="50.0">
+               <children>
+                  <Label text="Start attempt">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="380.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fx:id="btn_close_confirm" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/icons8-cancel-40.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Line endX="500.0" layoutX="100.0" layoutY="70.0" startX="-100.0" strokeWidth="0.3" />
+            <VBox layoutX="35.0" layoutY="80.0">
+               <children>
+                  <Label text="Time limit" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox>
+                     <children>
+                        <Label text="Your attempt will have a time limit of ">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -76,7 +261,12 @@
                               <Insets left="5.0" right="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="label_quiz_name_IT" prefHeight="50.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
+                        <Label fx:id="timeLimitLabel" prefHeight="26.0" prefWidth="30.0" text="1 ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="timeFormatLabel" text="hour">
                            <font>
                               <Font size="20.0" />
                            </font>
