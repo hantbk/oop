@@ -3,6 +3,10 @@ module com.hust.quiz {
     requires javafx.fxml;
     requires java.sql;
     requires mysql.connector.java;
+<<<<<<< Updated upstream
+=======
+    //requires org.apache.poi.ooxml;
+>>>>>>> Stashed changes
     requires poi.ooxml;
 
 
