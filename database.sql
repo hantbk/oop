@@ -88,6 +88,7 @@ CREATE TABLE `quiz` (
   `quiz_open_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `quiz_close_date` DATETIME,
   `quiz_time_limit` INT UNSIGNED,
+  `quiz_time_format` varchar(10) NOT NULL,
   PRIMARY KEY (`quiz_id`),
   UNIQUE INDEX `quiz_id_UNIQUE` (`quiz_id` ASC) VISIBLE,
   UNIQUE INDEX `quiz_name_UNIQUE` (`quiz_name` ASC) VISIBLE)
@@ -154,3 +155,43 @@ INSERT INTO `choice` (`choice_id`, `choice_content`, `choice_grade`, `question_i
 (6, 'f', 0, 2, NULL),
 (7, 'g', 0, 2, NULL),
 (8, 'h', 0, 2, NULL);
+
+-- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('1', 'OOP', 'Kiểm tra giữa kì');
+-- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('2', 'KTLT', 'Thi cuối kì ');
+-- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('3', 'Bảo Hiểm', 'Test BTL');
+
+
+-- INSERT INTO `quiz`.`quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES
+--  ('3', '3', '1'),
+--  ('3', '4', '2'),
+--  ('3', '5', '3'),
+--  ('3', '6', '4'),
+--  ('3', '7', '5'),
+--  ('3', '8', '6'),
+--  ('3', '9', '7'),
+--  ('3', '10', '8'),
+--  ('3', '11', '9'),
+--  ('3', '12', '10'),
+--  ('3', '13', '11'),
+--  ('3', '14', '12'),
+--  ('3', '15', '13'),
+--  ('3', '16', '14'),
+--  ('3', '17', '15'),
+--  ('3', '18', '16'),
+--  ('3', '19', '17'),
+--  ('3', '20', '18'),
+--  ('3', '21', '19'),
+--  ('3', '22', '20'),
+--  ('3', '23', '21'),
+--  ('3', '24', '22'),
+--  ('3', '25', '23'),
+--  ('3', '26', '24'),
+--  ('3', '27', '25'),
+--  ('3', '28', '26'),
+--  ('3', '29', '27'),
+--  ('3', '30', '28'),
+--  ('3', '31', '29'),
+--  ('3', '32', '30'),
+-- ('3', '33', '31'),
+-- ('3', '34', '32'),
+-- ('3', '35', '33');

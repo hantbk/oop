@@ -3,14 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
@@ -159,65 +162,30 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="40.0" layoutY="120.0">
-               <children>
-                  <HBox>
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="REPAGINATE" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="SELECT MULTIPLE ITEMS" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="900.0" prefHeight="40.0">
-                     <children>
-                        <Label text="Total of marks: ">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label text="0.00">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
             <AnchorPane layoutX="40.0" layoutY="180.0">
                <children>
                   <AnchorPane fx:id="add_question_option" layoutX="860.0" layoutY="65.0" prefHeight="120.0" prefWidth="210.0" style="-fx-background-color: #EEEEEE;">
                      <children>
                         <VBox prefHeight="120.0" prefWidth="216.0">
                            <children>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0">
+                              <HBox fx:id="add_new_question" alignment="CENTER_RIGHT" prefHeight="40.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Img/plus.png" />
                                        </image>
                                        <HBox.margin>
-                                          <Insets right="40.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </ImageView>
-                                    <Label text=" a new question">
+                                    <Label prefHeight="26.0" prefWidth="164.0" text=" a new question">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0">
+                              <HBox fx:id="add_from_bank" alignment="CENTER_RIGHT" prefHeight="40.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -231,17 +199,26 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0">
+                              <HBox fx:id="add_random" alignment="CENTER_RIGHT" prefHeight="40.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Img/plus.png" />
                                        </image>
+                                       <HBox.margin>
+                                          <Insets right="-5.0" />
+                                       </HBox.margin>
                                     </ImageView>
                                     <Label text="  a random question">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
                                     </Label>
                                  </children>
                               </HBox>
@@ -288,6 +265,41 @@
                   <ScrollPane layoutY="63.0" prefHeight="240.0" prefWidth="1074.0" visible="false" />
                </children>
             </AnchorPane>
+            <AnchorPane layoutX="40.0" layoutY="120.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="REPAGINATE" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="SELECT MULTIPLE ITEMS" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="900.0" prefHeight="40.0">
+                     <children>
+                        <Label text="Total of marks: ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="0.00">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
@@ -312,6 +324,132 @@
                   <Font size="19.0" />
                </font>
             </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor_blur" opacity="0.3" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" visible="false" />
+      <AnchorPane fx:id="anchor_add_question_bank" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE;">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0">
+               <children>
+                  <Label text="Add from the question bank at the end" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" right="590.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fx:id="btn_exit_add_bank" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/icons8-cancel-40.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Line endX="1000.0" layoutY="50.0" strokeWidth="0.3" />
+            <VBox layoutX="20.0" layoutY="120.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Search options" textFill="#146c94">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/bluearrowdown.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <CheckBox fx:id="showSubcategoryQuestionCheckbox" mnemonicParsing="false" text="Also show questions from sub-categories">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <CheckBox mnemonicParsing="false" text="Also show old quesitons">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <ScrollPane layoutX="20.0" layoutY="210.0" prefHeight="375.0" prefWidth="966.0">
+              <content>
+                <AnchorPane fx:id="pane_question_list" minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="950.0">
+                     <children>
+                        <CheckBox layoutX="20.0" mnemonicParsing="false" text="Questions">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </CheckBox>
+                        <VBox fx:id="listQuestion_vbox" layoutY="20.0" prefWidth="950.0">
+                           <children>
+                              <HBox prefHeight="21.6" prefWidth="950.4">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/plus.png" />
+                                       </image>
+                                    </ImageView>
+                                    <CheckBox mnemonicParsing="false" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Label text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <HBox layoutX="20.0" layoutY="70.0">
+               <children>
+                  <Label text="Select a category: ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <VBox>
+                     <children>
+                        <ComboBox fx:id="btn_category" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);">
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </ComboBox>
+                        <TreeView fx:id="tree_view_category" prefHeight="286.0" prefWidth="359.0" visible="false" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>

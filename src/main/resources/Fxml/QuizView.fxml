@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuizViewController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuizViewController">
    <children>
       <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
          <children>
@@ -111,14 +111,28 @@
             </AnchorPane>
             <VBox alignment="CENTER" layoutX="40.0" layoutY="120.0" prefWidth="1080.0">
                <children>
-                  <Label text="Time limit: 1 hour">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
+                  <HBox>
+                     <children>
+                        <Label text="Time limit: ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="470.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="timeLimitLabel1" prefHeight="26.0" prefWidth="30.0" text="1 ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="timeFormatLabel1" text="hour">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                   <Label text="Grading method: Last attempt">
                      <font>
                         <Font size="20.0" />
@@ -195,7 +209,7 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchor_blur" opacity="0.5" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" />
-      <AnchorPane fx:id="anchor_confirm" layoutX="357.0" layoutY="300.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: WHITE;">
+      <AnchorPane fx:id="anchor_confirm" layoutX="357.0" layoutY="300.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: WHITE;" visible="false">
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="10.0" prefHeight="50.0">
                <children>
@@ -229,7 +243,12 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="1 hour.">
+                        <Label fx:id="timeLimitLabel" prefHeight="26.0" prefWidth="30.0" text="1 ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="timeFormatLabel" text="hour">
                            <font>
                               <Font size="20.0" />
                            </font>

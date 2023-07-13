@@ -3,6 +3,7 @@ module com.hust.quiz {
     requires javafx.fxml;
     requires java.sql;
     requires mysql.connector.java;
+
 //    requires org.apache.poi.ooxml;
     requires poi.ooxml;
 

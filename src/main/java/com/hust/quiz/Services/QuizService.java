@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizService {
-    
+
     public static void addQuiz(Quiz quiz) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO quiz (quiz_name, quiz_description) VALUES (?, ?)";
+            String sql = "INSERT INTO quiz (quiz_name, quiz_description,quiz_time_limit,quiz_time_format) VALUES (?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, quiz.getQuiz_name());
             pst.setString(2, quiz.getQuiz_description());
+            pst.setInt(3, quiz.getTimeLimit());
+            pst.setString(4, quiz.getTimeFormat());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -63,8 +65,7 @@ public class QuizService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"), rs.getString("question_image"),
-                        1, rs.getInt("category_id"));
+                        rs.getString("question_text"),rs.getString("question_image"), 1, rs.getInt("category_id"));
                 result.add(question);
             }
             // close
@@ -74,6 +75,39 @@ public class QuizService {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+        return result;
+    }
+
+    //lấy quiz từ id
+    public static Quiz getQuiz(int quiz_id) {
+        Quiz result = new Quiz();
+        try (Connection conn = Utils.getConnection()) {
+            // write query
+            String sql = "SELECT * FROM quiz WHERE quiz_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, quiz_id);
+
+            // execute
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = new Quiz(rs.getInt("quiz_id"), rs.getString("quiz_name"),
+                        rs.getString("quiz_description"));
+            } else {
+                System.out.println("No Quiz found");
+            }
+
+            // close
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static Quiz getQuiz(String quiz_name) {
+        int id = QuizService.getId(quiz_name);
+        Quiz result = QuizService.getQuiz(id);
         return result;
     }
 }

@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ViewFactory {
     private static ViewFactory instance;
@@ -57,6 +56,7 @@ public class ViewFactory {
 
         } catch (IOException e) {
             System.out.println("Error to load fxml in ViewFactory");
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
@@ -73,8 +73,8 @@ public class ViewFactory {
         return instance;
     }
 
-    public void updateQuizView(String quizName, String quizInfo) {
-        quizViewController.displayInfo(quizName, quizInfo);
+    public void updateQuizView(String quizName, String quizInfo, int timeLimit, String timeFormat) {
+        quizViewController.displayInfo(quizName, quizInfo, timeLimit, timeFormat);
     }
 
     public void updateEditQuizView(String quizName) {
@@ -86,9 +86,12 @@ public class ViewFactory {
         editQuestionController.setInfo(question, category_name);
     }
 
-    public void updateQuestionQuiz(List<Question> listQuestion, String quizName) {
-        startQuizController.updateQuestion(listQuestion, quizName);
+    public void updateQuestionQuiz(String quizName) {
+        startQuizController.updateQuestion(quizName);
     }
+//    public void updateQuestionQuiz(List<Question> listQuestion, String quizName) {
+//        startQuizController.updateQuestion(listQuestion, quizName);
+//    }
 
     public void routes(SCENES scene) {
         switch (scene) {

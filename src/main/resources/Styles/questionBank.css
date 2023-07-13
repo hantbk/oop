@@ -33,3 +33,11 @@
   -fx-background-color: blue;
   -fx-text-fill: white;
 }
+
+.myTextArea {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: rgba(0, 0, 0, 0);
+    -fx-border-radius: 0;
+}

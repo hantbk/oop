@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInStartController">
+<AnchorPane prefHeight="212.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInStartController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" style="-fx-border-color: #146C94;">
          <children>
@@ -68,7 +68,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="10.0" prefWidth="720.0" style="-fx-background-color: #EEEEEE;">
+      <AnchorPane layoutX="150.0" layoutY="10.0" style="-fx-background-color: #EEEEEE;">
          <children>
             <VBox prefWidth="720.0" spacing="10.0">
                <children>
@@ -77,14 +77,34 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="rButton_A" mnemonicParsing="false" prefHeight="38.0" prefWidth="720.0" text="Choice A">
+                  <RadioButton fx:id="rButton_A" mnemonicParsing="false" text="Choice A" wrapText="true">
                      <toggleGroup>
                         <ToggleGroup fx:id="Choice" />
                      </toggleGroup>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
                   </RadioButton>
-                  <RadioButton fx:id="rButton_B" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="720.0" text="Choice B" toggleGroup="$Choice" />
-                  <RadioButton fx:id="rButton_C" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="720.0" text="Choice C" toggleGroup="$Choice" />
-                  <RadioButton fx:id="rButton_D" layoutX="10.0" layoutY="116.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="720.0" text="Choice D" toggleGroup="$Choice" />
+                  <RadioButton fx:id="rButton_B" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" text="Choice B" toggleGroup="$Choice" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="rButton_C" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" text="Choice C" toggleGroup="$Choice" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="rButton_D" layoutX="10.0" layoutY="116.0" mnemonicParsing="false" text="Choice D" toggleGroup="$Choice" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="rButton_E" layoutX="10.0" layoutY="194.0" mnemonicParsing="false" text="Choice E" wrapText="true">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Choice1" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </RadioButton>
                </children></VBox>
          </children>
       </AnchorPane>

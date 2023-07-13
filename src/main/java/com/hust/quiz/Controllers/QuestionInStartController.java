@@ -36,34 +36,54 @@ public class QuestionInStartController implements Initializable {
 
     @FXML
     private RadioButton rButton_D;
+    @FXML
+    private RadioButton rButton_E;
 
+    private Question questionInBox; //cau hoi chua trong box
+    private List<Choice> listChoiceInBox = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
     public void setInforQuestion(Question question, int questiomNum) {
+        this.questionInBox = question;
         this.label_questionNum.setText(String.valueOf(questiomNum));
         this.label_questionContent.setText(question.getQuestion_text());
         List<Choice> listChoice = new ArrayList<>();
         listChoice.addAll(ChoiceService.getChoice(question.getQuestion_id()));
+        listChoiceInBox = listChoice;
         int numChoice = listChoice.size();
         if (!listChoice.isEmpty()) {
-            if(numChoice == 1){
-                rButton_A.setText(listChoice.get(0).getContent());
-            }else if( numChoice == 2){
-                rButton_A.setText(listChoice.get(0).getContent());
-                rButton_B.setText(listChoice.get(1).getContent());
+            if( numChoice == 2){
+                rButton_A.setText("A: " + listChoice.get(0).getContent());
+                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_C.setVisible(false);
+                rButton_D.setVisible(false);
+                rButton_E.setVisible(false);
             }else if(numChoice == 3){
-                rButton_A.setText(listChoice.get(0).getContent());
-                rButton_B.setText(listChoice.get(1).getContent());
-                rButton_C.setText(listChoice.get(2).getContent());
+                rButton_A.setText("A: " + listChoice.get(0).getContent());
+                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_C.setText("C: " + listChoice.get(2).getContent());
+                rButton_D.setVisible(false);
+                rButton_E.setVisible(false);
             }else if(numChoice == 4){
-                rButton_A.setText(listChoice.get(0).getContent());
-                rButton_B.setText(listChoice.get(1).getContent());
-                rButton_C.setText(listChoice.get(2).getContent());
-                rButton_D.setText(listChoice.get(3).getContent());
+                rButton_A.setText("A: " + listChoice.get(0).getContent());
+                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_C.setText("C: " + listChoice.get(2).getContent());
+                rButton_D.setText("D: " + listChoice.get(3).getContent());
+                rButton_E.setVisible(false);
+            }else if(numChoice == 5){
+                rButton_A.setText("A: " + listChoice.get(0).getContent());
+                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_C.setText("C: " + listChoice.get(2).getContent());
+                rButton_D.setText("D: " + listChoice.get(3).getContent());
+                rButton_E.setText("E: " + listChoice.get(4).getContent());
             }
         }
+    }
+
+    public void getGrade(){
+
     }
 }

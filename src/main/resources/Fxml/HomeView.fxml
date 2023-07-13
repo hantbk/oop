@@ -153,96 +153,56 @@
                 </AnchorPane>
                 <AnchorPane layoutX="60.0" layoutY="259.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
                     <children>
-                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="350.0" prefWidth="356.0">
+                        <VBox fx:id="vbox_quiz" layoutX="20.0" layoutY="20.0" prefHeight="350.0" prefWidth="785.0">
                             <children>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
-                                            <graphic>
-                                                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../Img/filecheck.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                        <Label fx:id="button_exam" prefHeight="70.0" text="Kiểm tra cuối kỳ môn IT4895Q">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <Button fx:id="button_exam_baohiem" mnemonicParsing="false" prefHeight="74.0" prefWidth="213.0" style="-fx-background-color: rgba(0,0,0,0);" text="Bảo hiểm">
-                                            <graphic>
-                                                <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../Img/filecheck.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                                        </Button>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
-                                            <graphic>
-                                                <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../Img/filecheck.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                        <Label prefHeight="70.0" text="Thi GK2 Tin học 7">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
-                                            <graphic>
-                                                <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../Img/filecheck.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                        <Label prefHeight="70.0" text="Thi GK2 Sử Địa 7">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
-                                            <graphic>
-                                                <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../Img/filecheck.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                        <Label prefHeight="70.0" text="Thi giữa kỳ 2 môn Công nghệ">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
+                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Kiểm tra cuối kỳ môn IT4895Q">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/filecheck.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_exam_baohiem" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Bảo Hiểm">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/filecheck.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Thi GK2 Sử Địa 7">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/filecheck.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Thi giữa kỳ 2 môn Công nghệ">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/filecheck.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
                             </children>
                         </VBox>
                     </children>

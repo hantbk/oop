@@ -1,6 +1,7 @@
 package com.hust.quiz.Controllers;
 
 import com.hust.quiz.Models.Question;
+import com.hust.quiz.Services.QuizService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,18 +36,20 @@ public class StartQuizController implements Initializable {
     private GridPane grid_num_question;
     @FXML
     private ScrollPane scrollPane_quizView;
+    private List<QuestionInStartController> listController = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
     //update cac cau hoi trong quiz vao vBox
-    public void updateQuestion(List<Question> listQuestion, String quiz_name) {
+    public void updateQuestion(String quiz_name) {
+        int quiz_id = QuizService.getId(quiz_name);
+        List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
         this.label_quiz_name_1.setText(quiz_name);
         this.label_quiz_name_2.setText(quiz_name);
         int i = 1;
         FXMLLoader[] listFXMLQuestionQuiz = new FXMLLoader[listQuestion.size() +1];
-        List<QuestionInStartController> listController = new ArrayList<>();
         for(Question question : listQuestion){
             listFXMLQuestionQuiz[i] = new FXMLLoader(getClass().getResource("/FXML/QuestionInStart.fxml"));
             try {
@@ -78,6 +81,8 @@ public class StartQuizController implements Initializable {
 
     //reset all
     public void reset(){
+        if(!listController.isEmpty())
+            listController.clear();
         this.vbox_question.getChildren().removeAll();
         this.grid_num_question.getChildren().removeAll();
     }
