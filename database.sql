@@ -156,9 +156,9 @@ INSERT INTO `choice` (`choice_id`, `choice_content`, `choice_grade`, `question_i
 (7, 'g', 0, 2, NULL),
 (8, 'h', 0, 2, NULL);
 
-INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('1', 'OOP', 'Kiểm tra giữa kì');
-INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('2', 'KTLT', 'Thi cuối kì ');
-INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('3', 'Bảo Hiểm', 'Test BTL');
+-- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('1', 'OOP', 'Kiểm tra giữa kì');
+-- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('2', 'KTLT', 'Thi cuối kì ');
+-- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('3', 'Bảo Hiểm', 'Test BTL');
 
 
 -- INSERT INTO `quiz`.`quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES
