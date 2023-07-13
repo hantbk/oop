@@ -18,6 +18,7 @@ public class ViewFactory {
     private EditQuizController editQuizController;
     private EditQuestionController editQuestionController;
     private StartQuizController startQuizController;
+    private HomeController homeController1;
 
     // singleton design pattern
     private ViewFactory() {
@@ -32,6 +33,7 @@ public class ViewFactory {
         FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartQuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
+            homeController1 = home.getController();
 
             // because we need to access to QuestionBankController in HomeController to set TabPane
             HomeController homeController = home.getController();
@@ -73,8 +75,8 @@ public class ViewFactory {
         return instance;
     }
 
-    public void updateQuizView(String quizName, String quizInfo, int timeLimit, String timeFormat) {
-        quizViewController.displayInfo(quizName, quizInfo, timeLimit, timeFormat);
+    public void updateQuizView(String quizName) {
+        quizViewController.displayInfo(quizName);
     }
 
     public void updateEditQuizView(String quizName) {
@@ -92,6 +94,9 @@ public class ViewFactory {
 //    public void updateQuestionQuiz(List<Question> listQuestion, String quizName) {
 //        startQuizController.updateQuestion(listQuestion, quizName);
 //    }
+
+    //update quiz trong home
+    public void updateQuizHome(){ homeController1.updateQuiz(); };
 
     public void routes(SCENES scene) {
         switch (scene) {

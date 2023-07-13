@@ -81,7 +81,11 @@ public class QuestionBankController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // # configure btn_menu_return - comeback to home
-        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+        btn_menu_return.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().updateQuizHome();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
         // # configure btn_turn_editing_on - add quiz scene
         btn_turn_editing_on.setOnAction(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.ADD_QUIZ));
 

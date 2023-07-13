@@ -43,6 +43,7 @@ public class AddQuizController implements Initializable {
         // configure btn_menu_return - back to home
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
+            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
@@ -51,18 +52,32 @@ public class AddQuizController implements Initializable {
             String quizName = text_quiz_name.getText();
             String quizDescription = Objects.equals(text_quiz_description.getText(), "")
                     ? "No description" : text_quiz_description.getText();
-            int timeLimit = Integer.parseInt(text_time_limit.getText());
-            String time_format = spinner_time_format.getValue();
+            int timeLimit;
+            String time_format = null;
+
             if (quizName.isEmpty()) {
                 // alert pop-up if didn't fill name box
                 alert_missing_name.setVisible(true);
             } else {
-                // turn off alert
-                alert_missing_name.setVisible(false);
+                if(checkbox_enable_time_limit.isSelected()){
+                    timeLimit = Integer.parseInt(text_time_limit.getText());
+                    time_format = spinner_time_format.getValue();
+                    // turn off alert
+                    alert_missing_name.setVisible(false);
 
-                QuizService.addQuiz(new Quiz(quizName, quizDescription,timeLimit,time_format));
-                ViewFactory.getInstance().updateQuizView(quizName, quizDescription,timeLimit,time_format);
-                ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                    QuizService.addQuiz(new Quiz(quizName, quizDescription, timeLimit, time_format));
+                    ViewFactory.getInstance().updateQuizView(quizName);
+                    this.reset();
+                    ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                }else {
+                    // turn off alert
+                    alert_missing_name.setVisible(false);
+
+                    QuizService.addQuiz(new Quiz(quizName, quizDescription, 0, time_format));
+                    ViewFactory.getInstance().updateQuizView(quizName);
+                    this.reset();
+                    ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                }
             }
         });
 
@@ -120,6 +135,8 @@ public class AddQuizController implements Initializable {
     }
 
     private void reset() {
+        text_quiz_name.setText(null);
+        text_quiz_description.setText(null);
         date_open.setValue(null);
         date_close.setValue(null);
         text_time_limit.setText(null);
@@ -134,7 +151,4 @@ public class AddQuizController implements Initializable {
         setInit();
     }
 
-    private void updateQuiz(){
-
-    }
 }

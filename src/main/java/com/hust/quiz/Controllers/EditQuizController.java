@@ -66,7 +66,10 @@ public class EditQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
+        btn_menu_return.setOnMouseClicked(event -> {
+            ViewFactory.getInstance().updateQuizHome();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
 
         add_question_option.setVisible(false);
         anchor_blur.setVisible(false);

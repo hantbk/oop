@@ -1,5 +1,7 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.Quiz;
+import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +30,8 @@ public class QuizViewController implements Initializable {
     @FXML
     private Label timeLimitLabel1;
     @FXML
+    private Label timeLimitLabel2;
+    @FXML
     private ImageView btn_edit_quiz; // click jump to EditQuizView - NOT done
     @FXML
     private Button btn_preview_quiz;
@@ -37,9 +41,9 @@ public class QuizViewController implements Initializable {
     @FXML
     private AnchorPane first_pane;
     @FXML
-    private AnchorPane anchor_confirm;
+    private AnchorPane second_pane;
     @FXML
-    private AnchorPane anchor_blur;
+    private AnchorPane blur_pane;
     @FXML
     private ImageView btn_close_confirm;
     @FXML
@@ -49,20 +53,35 @@ public class QuizViewController implements Initializable {
     @FXML
     private Label lb_timelimit_confirm;
 
-    public void displayInfo(String quizName, String quizInfo, int timeLimit, String timeFormat) {
-        label_quiz_name_IT.setText(quizName);
-        label_quiz_name_view.setText(quizName);
-        label_quiz_description.setText(quizInfo);
-        timeLimitLabel.setText(String.valueOf(timeLimit));
-        timeFormatLabel.setText(timeFormat);
-        timeLimitLabel1.setText(String.valueOf(timeLimit));
-        timeFormatLabel1.setText(timeFormat);
+    public void displayInfo(String quizName) {
+        Quiz quiz = QuizService.getQuiz(quizName);
+        label_quiz_name_IT.setText(quiz.getQuiz_name());
+        label_quiz_name_view.setText(quiz.getQuiz_name());
+        label_quiz_description.setText(quiz.getQuiz_description());
+        if(quiz.getTimeLimit()  > 0){
+            timeLimitLabel.setText(String.valueOf(quiz.getTimeLimit()));
+        }else{
+            timeLimitLabel.setText(" Unlimit!");
+        }
+//        timeFormatLabel.setText(timeFormat);
+        if(quiz.getTimeLimit()  > 0){
+            timeLimitLabel1.setText(String.valueOf(quiz.getTimeLimit()));
+        }else{
+            timeLimitLabel1.setText(" Unlimit!");
+        }
+//        timeFormatLabel1.setText(timeFormat);
+        if(quiz.getTimeLimit()  > 0){
+            timeLimitLabel2.setText(String.valueOf(quiz.getTimeLimit()));
+        }else{
+            timeLimitLabel2.setText(" Unlimit!");
+        }
+//        timeFormatLabel1.setText(timeFormat);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        anchor_confirm.setVisible(false);
-        anchor_blur.setVisible(false);
+        second_pane.setVisible(false);
+        blur_pane.setVisible(false);
 
         btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
 
@@ -74,20 +93,21 @@ public class QuizViewController implements Initializable {
 
         // configure confirm attempt window
         btn_preview_quiz.setOnAction(event -> {
-            anchor_blur.setVisible(true);
-            anchor_confirm.setVisible(true);
+
+            blur_pane.setVisible(true);
+            second_pane.setVisible(true);
         });
         btn_close_confirm.setOnMouseClicked(event -> {
-            anchor_blur.setVisible(false);
-            anchor_confirm.setVisible(false);
+            blur_pane.setVisible(false);
+            second_pane.setVisible(false);
         });
         btn_cancel_attempt.setOnAction(event -> {
-            anchor_blur.setVisible(false);
-            anchor_confirm.setVisible(false);
+            blur_pane.setVisible(false);
+            second_pane.setVisible(false);
         });
         btn_start_attempt.setOnAction(event -> {
-            anchor_blur.setVisible(false);
-            anchor_confirm.setVisible(false);
+            blur_pane.setVisible(false);
+            second_pane.setVisible(false);
             ViewFactory.getInstance().updateQuestionQuiz(label_quiz_name_view.getText());
             ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
         });

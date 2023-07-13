@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -151,62 +152,30 @@
                         </HBox>
                     </children>
                 </AnchorPane>
-                <AnchorPane layoutX="60.0" layoutY="259.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
-                    <children>
-                        <VBox fx:id="vbox_quiz" layoutX="20.0" layoutY="20.0" prefHeight="350.0" prefWidth="785.0">
-                            <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Kiểm tra cuối kỳ môn IT4895Q">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/filecheck.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="button_exam_baohiem" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Bảo Hiểm">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/filecheck.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Thi GK2 Sử Địa 7">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/filecheck.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Thi giữa kỳ 2 môn Công nghệ">
-                           <graphic>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/filecheck.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                            </children>
-                        </VBox>
-                    </children>
-                </AnchorPane>
+            <ScrollPane layoutX="60.0" layoutY="259.0" prefHeight="466.0" prefWidth="1162.0">
+               <content>
+                      <AnchorPane prefHeight="822.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+                          <children>
+                              <VBox fx:id="vbox_quiz" layoutX="20.0" layoutY="20.0" prefHeight="350.0" prefWidth="785.0" spacing="5.0">
+                                  <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Kiểm tra cuối kỳ môn IT4895Q">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Img/filecheck.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                                  </children>
+                              </VBox>
+                          </children>
+                      </AnchorPane>
+               </content>
+            </ScrollPane>
             </children>
         </AnchorPane>
     </children>

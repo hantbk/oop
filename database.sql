@@ -88,7 +88,7 @@ CREATE TABLE `quiz` (
   `quiz_open_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `quiz_close_date` DATETIME,
   `quiz_time_limit` INT UNSIGNED,
-  `quiz_time_format` varchar(10) NOT NULL,
+  `quiz_time_format` varchar(10) NULL,
   PRIMARY KEY (`quiz_id`),
   UNIQUE INDEX `quiz_id_UNIQUE` (`quiz_id` ASC) VISIBLE,
   UNIQUE INDEX `quiz_name_UNIQUE` (`quiz_name` ASC) VISIBLE)
@@ -156,9 +156,10 @@ INSERT INTO `choice` (`choice_id`, `choice_content`, `choice_grade`, `question_i
 (7, 'g', 0, 2, NULL),
 (8, 'h', 0, 2, NULL);
 
--- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('1', 'OOP', 'Kiểm tra giữa kì');
--- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('2', 'KTLT', 'Thi cuối kì ');
--- INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`) VALUES ('3', 'Bảo Hiểm', 'Test BTL');
+INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`, `quiz_time_limit`, `quiz_time_format`) VALUES 
+('1', 'OOP', 'Kiểm tra giữa kì', '120', 'minutes'),
+('2', 'KTLT', 'Thi cuối kì ', '90', 'minutes'),
+('3', 'Bảo Hiểm', 'Test BTL', '2', 'hours');
 
 
 -- INSERT INTO `quiz`.`quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES
