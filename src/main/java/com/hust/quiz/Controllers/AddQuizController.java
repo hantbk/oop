@@ -23,7 +23,7 @@ public class AddQuizController implements Initializable {
     @FXML
     private TextField text_time_limit; // Time limit
     @FXML
-    private Spinner<Integer> spinner_time_format;
+    private Spinner<String> spinner_time_format;
     @FXML
     private Spinner<String> spinner_time_expire;
     @FXML
@@ -51,7 +51,8 @@ public class AddQuizController implements Initializable {
             String quizName = text_quiz_name.getText();
             String quizDescription = Objects.equals(text_quiz_description.getText(), "")
                     ? "No description" : text_quiz_description.getText();
-
+            int timeLimit = Integer.parseInt(text_time_limit.getText());
+            String time_format = spinner_time_format.getValue();
             if (quizName.isEmpty()) {
                 // alert pop-up if didn't fill name box
                 alert_missing_name.setVisible(true);
@@ -59,9 +60,9 @@ public class AddQuizController implements Initializable {
                 // turn off alert
                 alert_missing_name.setVisible(false);
 
-                QuizService.addQuiz(new Quiz(quizName, quizDescription));
+                QuizService.addQuiz(new Quiz(quizName, quizDescription,timeLimit,time_format));
 
-                ViewFactory.getInstance().updateQuizView(quizName, quizDescription);
+                ViewFactory.getInstance().updateQuizView(quizName, quizDescription,timeLimit,time_format);
                 ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
             }
         });
@@ -114,7 +115,7 @@ public class AddQuizController implements Initializable {
         spinner_time_format.setDisable(true);
 
         //set gia tri ban dau chon spiner chon minute
-        spinner_time_format.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0, 5));
+        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("minutes", "hours", "days")));
         // default time expire - fixed - no change
         spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
     }
