@@ -77,4 +77,37 @@ public class QuizService {
         }
         return result;
     }
+
+    //lấy quiz từ id
+    public static Quiz getQuiz(int quiz_id) {
+        Quiz result = new Quiz();
+        try (Connection conn = Utils.getConnection()) {
+            // write query
+            String sql = "SELECT * FROM quiz WHERE quiz_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, quiz_id);
+
+            // execute
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = new Quiz(rs.getInt("quiz_id"), rs.getString("quiz_name"),
+                        rs.getString("quiz_description"));
+            } else {
+                System.out.println("No Quiz found");
+            }
+
+            // close
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static Quiz getQuiz(String quiz_name) {
+        int id = QuizService.getId(quiz_name);
+        Quiz result = QuizService.getQuiz(id);
+        return result;
+    }
 }

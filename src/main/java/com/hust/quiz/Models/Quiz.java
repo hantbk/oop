@@ -44,12 +44,20 @@ public class Quiz {
         this.time_open = time_open;
     }
 
+    public Quiz(int quiz_id, String quiz_name, String quiz_description) {
+        this.quiz_id = quiz_id;
+        this.quiz_name = quiz_name;
+        this.quiz_description = quiz_description;
+    }
+
     public Quiz(String quiz_name, String quiz_description, LocalDate time_close, LocalDate time_open) {
         this.quiz_name = quiz_name;
         this.quiz_description = quiz_description;
         this.time_close = time_close;
         this.time_open = time_open;
     }
+
+    public Quiz(){};
 
     public String getQuiz_name() {
         return quiz_name;

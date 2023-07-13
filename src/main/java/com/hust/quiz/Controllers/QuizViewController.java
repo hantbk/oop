@@ -1,5 +1,7 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.Quiz;
+import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,9 +29,11 @@ public class QuizViewController implements Initializable {
     private ImageView btn_menu_return; // return to homeView
 
     @FXML
-    private AnchorPane anchor_blur;
+    private AnchorPane first_pane;
     @FXML
-    private AnchorPane anchor_confirm;
+    private AnchorPane second_pane;
+    @FXML
+    private AnchorPane blur_pane;
     @FXML
     private ImageView btn_close_confirm;
     @FXML
@@ -40,16 +44,17 @@ public class QuizViewController implements Initializable {
     private Label lb_timelimit_confirm;
 
 
-    public void displayInfo(String quizName, String quizInfo) {
-        label_quiz_name_IT.setText(quizName);
-        label_quiz_name_view.setText(quizName);
-        label_quiz_description.setText(quizInfo);
+    public void displayInfo(String quizName) {
+        Quiz quiz = QuizService.getQuiz(quizName);
+        label_quiz_name_IT.setText(quiz.getQuiz_name());
+        label_quiz_name_view.setText(quiz.getQuiz_name());
+        label_quiz_description.setText(quiz.getQuiz_description());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        anchor_blur.setVisible(false);
-        anchor_confirm.setVisible(false);
+        second_pane.setVisible(false);
+        blur_pane.setVisible(false);
 
         btn_menu_return.setOnMouseClicked(event -> ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME));
 
@@ -61,20 +66,21 @@ public class QuizViewController implements Initializable {
 
         // configure confirm attempt window
         btn_preview_quiz.setOnAction(event -> {
-            anchor_blur.setVisible(true);
-            anchor_confirm.setVisible(true);
+            blur_pane.setVisible(true);
+            second_pane.setVisible(true);
         });
         btn_close_confirm.setOnMouseClicked(event -> {
-            anchor_blur.setVisible(false);
-            anchor_confirm.setVisible(false);
+            blur_pane.setVisible(false);
+            second_pane.setVisible(false);
         });
         btn_cancel_attempt.setOnAction(event -> {
-            anchor_blur.setVisible(false);
-            anchor_confirm.setVisible(false);
+            blur_pane.setVisible(false);
+            second_pane.setVisible(false);
         });
         btn_start_attempt.setOnAction(event -> {
-            anchor_blur.setVisible(false);
-            anchor_confirm.setVisible(false);
+            blur_pane.setVisible(false);
+            second_pane.setVisible(false);
+            ViewFactory.getInstance().updateQuestionQuiz(label_quiz_name_view.getText());
             ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
         });
     }

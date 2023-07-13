@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,8 @@ public class HomeController implements Initializable {
     private AnchorPane second_pane, first_pane;
     @FXML
     private Button button_exam_baohiem;
+    @FXML
+    private VBox vbox_quiz;
     private Parent questionBankView;
     private QuestionBankController questionBankController;
 
@@ -92,10 +95,10 @@ public class HomeController implements Initializable {
 
         //bam de lam bai thi
         button_exam_baohiem.setOnAction(event -> {
-            int quiz_id = QuizService.getId(button_exam_baohiem.getText());
-            List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
-            ViewFactory.getInstance().updateQuestionQuiz(button_exam_baohiem.getText());
-            ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
+            ViewFactory.getInstance().updateQuizView(button_exam_baohiem.getText());
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+//            ViewFactory.getInstance().updateQuestionQuiz(button_exam_baohiem.getText());
+//            ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
         });
     }
 
