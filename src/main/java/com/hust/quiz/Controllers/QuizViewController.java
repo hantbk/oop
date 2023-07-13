@@ -30,6 +30,8 @@ public class QuizViewController implements Initializable {
     @FXML
     private Label timeLimitLabel1;
     @FXML
+    private Label timeLimitLabel2;
+    @FXML
     private ImageView btn_edit_quiz; // click jump to EditQuizView - NOT done
     @FXML
     private Button btn_preview_quiz;
@@ -51,14 +53,29 @@ public class QuizViewController implements Initializable {
     @FXML
     private Label lb_timelimit_confirm;
 
-    public void displayInfo(String quizName, String quizInfo,int timeLimit, String timeFormat) {
-        label_quiz_name_IT.setText(quizName);
-        label_quiz_name_view.setText(quizName);
-        label_quiz_description.setText(quizInfo);
-        timeLimitLabel.setText(String.valueOf(timeLimit));
-        timeFormatLabel.setText(timeFormat);
-        timeLimitLabel1.setText(String.valueOf(timeLimit));
-        timeFormatLabel1.setText(timeFormat);
+    public void displayInfo(String quizName) {
+        Quiz quiz = QuizService.getQuiz(quizName);
+        label_quiz_name_IT.setText(quiz.getQuiz_name());
+        label_quiz_name_view.setText(quiz.getQuiz_name());
+        label_quiz_description.setText(quiz.getQuiz_description());
+        if(quiz.getTimeLimit()  > 0){
+            timeLimitLabel.setText(String.valueOf(quiz.getTimeLimit()));
+        }else{
+            timeLimitLabel.setText(" Unlimit!");
+        }
+//        timeFormatLabel.setText(timeFormat);
+        if(quiz.getTimeLimit()  > 0){
+            timeLimitLabel1.setText(String.valueOf(quiz.getTimeLimit()));
+        }else{
+            timeLimitLabel1.setText(" Unlimit!");
+        }
+//        timeFormatLabel1.setText(timeFormat);
+        if(quiz.getTimeLimit()  > 0){
+            timeLimitLabel2.setText(String.valueOf(quiz.getTimeLimit()));
+        }else{
+            timeLimitLabel2.setText(" Unlimit!");
+        }
+//        timeFormatLabel1.setText(timeFormat);
     }
 
     @Override
@@ -76,6 +93,7 @@ public class QuizViewController implements Initializable {
 
         // configure confirm attempt window
         btn_preview_quiz.setOnAction(event -> {
+
             blur_pane.setVisible(true);
             second_pane.setVisible(true);
         });

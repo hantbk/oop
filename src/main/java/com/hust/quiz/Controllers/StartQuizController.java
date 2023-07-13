@@ -2,6 +2,7 @@ package com.hust.quiz.Controllers;
 
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.QuizService;
+import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,7 +40,11 @@ public class StartQuizController implements Initializable {
     private List<QuestionInStartController> listController = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        btn_menu_return.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().updateQuizHome();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
     }
 
     //update cac cau hoi trong quiz vao vBox
@@ -83,7 +88,7 @@ public class StartQuizController implements Initializable {
     public void reset(){
         if(!listController.isEmpty())
             listController.clear();
-        this.vbox_question.getChildren().removeAll();
-        this.grid_num_question.getChildren().removeAll();
+        this.vbox_question.getChildren().clear();
+        this.grid_num_question.getChildren().clear();
     }
 }

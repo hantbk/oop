@@ -16,7 +16,7 @@ public class QuizService {
 
     public static void addQuiz(Quiz quiz) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO quiz (quiz_name, quiz_description,quiz_time_limit,quiz_time_format) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO quiz (quiz_name, quiz_description, quiz_time_limit, quiz_time_format) VALUES (?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, quiz.getQuiz_name());
             pst.setString(2, quiz.getQuiz_description());
@@ -93,7 +93,7 @@ public class QuizService {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 result = new Quiz(rs.getInt("quiz_id"), rs.getString("quiz_name"),
-                        rs.getString("quiz_description"));
+                        rs.getString("quiz_description"), rs.getInt("quiz_time_limit"));
             } else {
                 System.out.println("No Quiz found");
             }
@@ -110,6 +110,28 @@ public class QuizService {
     public static Quiz getQuiz(String quiz_name) {
         int id = QuizService.getId(quiz_name);
         Quiz result = QuizService.getQuiz(id);
+        return result;
+    }
+
+    public static List<String> getAllQuiz(){
+        List<String> result = new ArrayList<>();
+        try (Connection conn = Utils.getConnection()) {
+            // write query
+            String sql = "SELECT quiz_name FROM quiz";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // execute
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                result.add(rs.getString("quiz_name"));
+            }
+            // close
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
         return result;
     }
 }

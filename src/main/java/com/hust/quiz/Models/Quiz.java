@@ -18,11 +18,24 @@ public class Quiz {
         this.quiz_description = quiz_description;
     }
 
-    public Quiz(String quiz_name, String quiz_description, int timeLimit,String time_format) {
+    public Quiz(String quiz_name, String quiz_description, int timeLimit, String time_format) {
         this.quiz_name = quiz_name;
         this.quiz_description = quiz_description;
         this.timeLimit = timeLimit;
         this.time_format = time_format;
+    }
+    public Quiz(String quiz_name, String quiz_description, int timeLimit/*, String time_format*/) {
+        this.quiz_name = quiz_name;
+        this.quiz_description = quiz_description;
+        this.timeLimit = timeLimit;
+//        this.time_format = time_format;
+    }
+
+    public Quiz(int quiz_id, String quiz_name, String quiz_description, int timeLimit) {
+        this.quiz_id = quiz_id;
+        this.quiz_name = quiz_name;
+        this.quiz_description = quiz_description;
+        this.timeLimit = timeLimit;
     }
 
     public Quiz(String quiz_name, String quiz_description, int timeLimit, LocalDate time_close, LocalDate time_open) {

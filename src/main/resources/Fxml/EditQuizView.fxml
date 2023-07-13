@@ -391,7 +391,7 @@
             </VBox>
             <ScrollPane layoutX="20.0" layoutY="210.0" prefHeight="375.0" prefWidth="966.0">
               <content>
-                <AnchorPane fx:id="pane_question_list" minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="950.0">
+                <AnchorPane fx:id="pane_question_list" minHeight="0.0" minWidth="0.0" prefWidth="950.0">
                      <children>
                         <CheckBox layoutX="20.0" mnemonicParsing="false" text="Questions">
                            <font>
@@ -400,19 +400,19 @@
                         </CheckBox>
                         <VBox fx:id="listQuestion_vbox" layoutY="20.0" prefWidth="950.0">
                            <children>
-                              <HBox prefHeight="21.6" prefWidth="950.4">
+                              <HBox prefHeight="21.6" prefWidth="950.4" spacing="5.0">
                                  <children>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Img/plus.png" />
                                        </image>
                                     </ImageView>
-                                    <CheckBox mnemonicParsing="false" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
+                                    <CheckBox maxWidth="470.0" mnemonicParsing="false" prefHeight="21.0" text="Question name">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </CheckBox>
-                                    <Label text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
+                                    <Label text="Question content">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

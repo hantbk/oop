@@ -49,6 +49,7 @@ public class EditQuestionController implements Initializable {
         // configure btn_menu_return
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
+            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 

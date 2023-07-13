@@ -120,9 +120,9 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <ScrollPane layoutX="60.0" layoutY="250.0" prefHeight="600.0" prefWidth="1200.0">
+        <ScrollPane layoutX="60.0" layoutY="250.0" prefHeight="520.0" prefWidth="1200.0">
             <content>
-                <AnchorPane prefHeight="954.0" prefWidth="1160.0">
+                <AnchorPane prefHeight="1082.0" prefWidth="1160.0">
                     <children>
                         <Label text="Adding a Multiple choice question" textFill="#dd1515" AnchorPane.topAnchor="10.0">
                             <font>
