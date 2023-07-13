@@ -135,6 +135,8 @@ public class AddQuizController implements Initializable {
     }
 
     private void reset() {
+        text_quiz_name.setText(null);
+        text_quiz_description.setText(null);
         date_open.setValue(null);
         date_close.setValue(null);
         text_time_limit.setText(null);
