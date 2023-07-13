@@ -124,7 +124,17 @@ public class AddQuizController implements Initializable {
         date_close.setValue(null);
         text_time_limit.setText(null);
         spinner_time_format.getValueFactory().setValue(null);
+        if(checkbox_enable_open.isSelected())
+            checkbox_enable_open.setSelected(false);
+        if(checkbox_enable_close.isSelected())
+            checkbox_enable_close.setSelected(false);
+        if(checkbox_enable_time_limit.isSelected())
+            checkbox_enable_time_limit.setSelected(false);
 
         setInit();
+    }
+
+    private void updateQuiz(){
+
     }
 }
