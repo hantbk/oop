@@ -74,7 +74,7 @@ public class LoadeDocxService {
                         validAnswers.clear(); // Reset valid answers
                     } else { // if line is question
                         quest_id++;
-                        Question question = new Question(quest_id, line, null);
+                        Question question = new Question(quest_id,getTime() + " " + String.valueOf(quest_id), line, null);
                         questions.add(question);
                         questionCount++;
                     }
