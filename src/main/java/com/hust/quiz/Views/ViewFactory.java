@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ViewFactory {
     private static ViewFactory instance;
@@ -59,6 +58,7 @@ public class ViewFactory {
 
         } catch (IOException e) {
             System.out.println("Error to load fxml in ViewFactory");
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
@@ -87,9 +87,13 @@ public class ViewFactory {
     public void updateEditQuestionView(Question question, String category_name) {
         editQuestionController.setInfo(question, category_name);
     }
-    public void updateQuestionQuiz(String quizName){
+
+    public void updateQuestionQuiz(String quizName) {
         startQuizController.updateQuestion(quizName);
     }
+//    public void updateQuestionQuiz(List<Question> listQuestion, String quizName) {
+//        startQuizController.updateQuestion(listQuestion, quizName);
+//    }
 
     //update quiz trong home
     public void updateQuizHome(){ homeController1.updateQuiz(); };

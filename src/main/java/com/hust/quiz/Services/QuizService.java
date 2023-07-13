@@ -12,8 +12,6 @@ import java.util.List;
 
 public class QuizService {
 
-
-
     public static void addQuiz(Quiz quiz) {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO quiz (quiz_name, quiz_description, quiz_time_limit, quiz_time_format) VALUES (?, ?, ?, ?)";
@@ -31,7 +29,7 @@ public class QuizService {
     }
 
     //lay id tu ten quiz
-    public static int getId(String quizName){
+    public static int getId(String quizName) {
         int quiz_id = 0;
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name
@@ -54,7 +52,7 @@ public class QuizService {
     }
 
     //lấy danh sách câu hỏi của quiz
-    public static List<Question> getQuestionQuiz(int quiz_id){
+    public static List<Question> getQuestionQuiz(int quiz_id) {
         List<Question> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
             String sql = "SELECT * FROM question JOIN quiz_question ON question.question_id = quiz_question.question_id WHERE quiz_question.quiz_id = ?;";
@@ -67,7 +65,7 @@ public class QuizService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"),rs.getString("question_image"), 1,  rs.getInt("category_id"));
+                        rs.getString("question_text"),rs.getString("question_image"), 1, rs.getInt("category_id"));
                 result.add(question);
             }
             // close
