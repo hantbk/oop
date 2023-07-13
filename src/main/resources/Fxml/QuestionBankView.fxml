@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionBankController">
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1280.0">
          <children>
@@ -30,7 +30,7 @@
                         <Font size="60.0" />
                      </font>
                   </Label>
-                  <AnchorPane layoutX="1064.0" prefHeight="150.0" prefWidth="90.0">
+                  <AnchorPane layoutX="1064.0" layoutY="4.0" prefHeight="34.0" prefWidth="92.0">
                      <children>
                         <Button layoutX="45.0" layoutY="6.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" AnchorPane.rightAnchor="9.400000000000006">
                            <graphic>
@@ -48,7 +48,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="998.0" layoutY="100.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="170.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="21.0">
+                  <Button fx:id="btn_turn_editing_on" layoutX="969.0" layoutY="96.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" style="-fx-background-color: #146C94;" text="Turn editing on" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -93,11 +93,11 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <TabPane fx:id="tabPane" layoutX="60.0" layoutY="250.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="150.0" tabMinHeight="35.0" tabMinWidth="88.0">
+            <TabPane fx:id="tabPane" layoutX="61.0" layoutY="250.0" prefHeight="533.0" prefWidth="1159.0" style="-fx-border-color: #AFD3E2;" stylesheets="@../Styles/questionBank.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMaxWidth="150.0" tabMinHeight="35.0" tabMinWidth="88.0">
                <tabs>
                   <Tab text="Questions">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1194.0" style="-fx-border-color: #19A7CE;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="1118.0" style="-fx-border-color: #19A7CE;">
                            <children>
                               <Label layoutX="25.0" layoutY="14.0" text="Question bank" textFill="RED">
                                  <font>
@@ -109,78 +109,81 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="25.0" layoutY="105.0" text="The default category for question shared in context">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <CheckBox layoutX="25.0" layoutY="135.0" mnemonicParsing="false" text="Also show question from subcategories">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </CheckBox>
-                              <CheckBox layoutX="25.0" layoutY="160.0" mnemonicParsing="false" text="Also show old questions">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </CheckBox>
-                              <Button fx:id="btnCreateQuestion" layoutX="25.0" layoutY="190.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Button>
-                              <TreeView fx:id="category" layoutX="183.0" layoutY="91.0" prefHeight="286.0" prefWidth="359.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
-                              <AnchorPane fx:id="pane_question_list" layoutX="25.0" layoutY="235.0" visible="false">
+                              <VBox fx:id="container" layoutX="25.0" layoutY="105.0" prefHeight="367.0" prefWidth="1095.0" spacing="7.0">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT">
+                                    <Label fx:id="message" text="The default category for question shared in context">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckBox fx:id="showSubcategoryQuestionCheckbox" mnemonicParsing="false" prefHeight="22.0" prefWidth="1099.0" text="Also show question from subcategories">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox mnemonicParsing="false" text="Also show old questions">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <Button fx:id="btnCreateQuestion" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #19A7CE;" text="CREATE A NEW QUESTION" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <AnchorPane fx:id="pane_question_list" prefHeight="205.0" prefWidth="1095.0" visible="false">
                                        <children>
-                                          <CheckBox mnemonicParsing="false">
-                                             <padding>
-                                                <Insets right="10.0" />
-                                             </padding>
-                                          </CheckBox>
-                                          <VBox prefWidth="1000.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="1074.0" spacing="10.0">
                                              <children>
-                                                <Label prefWidth="300.0" text="Question">
+                                                <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="14.0">
+                                                   <padding>
+                                                      <Insets right="10.0" />
+                                                   </padding>
+                                                </CheckBox>
+                                                <VBox prefHeight="39.0" prefWidth="947.0">
+                                                   <children>
+                                                      <Label prefWidth="300.0" text="Question">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <HBox>
+                                                         <children>
+                                                            <Label text="Question name" textFill="#19a7ce" />
+                                                            <Label text="/">
+                                                               <HBox.margin>
+                                                                  <Insets left="3.0" right="3.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label prefWidth="300.0" text="ID number" textFill="#19a7ce" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <Label text="Actions">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <HBox>
-                                                   <children>
-                                                      <Label text="Question name" textFill="#19a7ce">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label text="/">
-                                                         <HBox.margin>
-                                                            <Insets left="3.0" right="3.0" />
-                                                         </HBox.margin>
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefWidth="300.0" text="ID number" textFill="#19a7ce">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
                                              </children>
-                                          </VBox>
-                                          <Label text="Actions">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                          </Label>
+                                             <padding>
+                                                <Insets left="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <ScrollPane hbarPolicy="NEVER" layoutY="40.0" prefHeight="181.0" prefWidth="1090.0">
+                                             <content>
+                                                <VBox fx:id="listQuestion_vbox" prefHeight="42.0" prefWidth="1090.0" />
+                                             </content>
+                                          </ScrollPane>
                                        </children>
-                                    </HBox>
-                                    <ScrollPane fx:id="questionBankList" hbarPolicy="NEVER" layoutY="40.0" prefHeight="143.0" prefWidth="1089.0" />
+                                    </AnchorPane>
                                  </children>
-                              </AnchorPane>
-                              <ComboBox fx:id="btn_category" layoutX="183.0" layoutY="60.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);" />
+                              </VBox>
+                              <TreeView fx:id="category" layoutX="183.0" layoutY="91.0" prefHeight="286.0" prefWidth="359.0" style="-fx-border-color: rgba(0, 0, 0, 0.7);" visible="false" />
+                              <ComboBox fx:id="btn_category" layoutX="183.0" layoutY="60.0" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-background-color: transparent; -fx-border-color: rgba(0, 0, 0, 0.7);">
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding></ComboBox>
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -480,7 +483,7 @@
                                                                <graphic>
                                                                   <AnchorPane style="-fx-border-style: dashed; -fx-border-width: 1px;">
                                                                      <children>
-                                                                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="550.0">
+                                                                        <VBox fx:id="file_not_found" alignment="CENTER" prefHeight="100.0" prefWidth="550.0">
                                                                            <children>
                                                                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                                                  <image>
@@ -490,6 +493,11 @@
                                                                               <Label text="You can drag and drop files here to add them." />
                                                                            </children>
                                                                         </VBox>
+                                                                        <Label fx:id="file_name" layoutX="50.0" layoutY="35.0">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
                                                                      </children>
                                                                   </AnchorPane>
                                                                </graphic>
@@ -512,7 +520,7 @@
                                        <children>
                                           <VBox alignment="TOP_CENTER" prefWidth="1100.0">
                                              <children>
-                                                <Button mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
+                                                <Button fx:id="btnImport" mnemonicParsing="false" style="-fx-background-color: #dd1515;" text="IMPORT" textFill="WHITE">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
@@ -556,7 +564,29 @@
                   </Tab>
                </tabs>
             </TabPane>
-            <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #19A7CE;" />
+            <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
+               <children>
+                  <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/menu.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/male_user.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/whitearrowdown.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
          </children>
       </AnchorPane>
    </children>

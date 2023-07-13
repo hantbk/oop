@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="760.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.AddQuestionController">
+<AnchorPane prefHeight="760.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuestionController">
     <children>
         <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
             <children>
@@ -124,7 +124,7 @@
             <content>
                 <AnchorPane prefHeight="954.0" prefWidth="1160.0">
                     <children>
-                        <Label text="Adding a Multiple choice question" textFill="#dd1515" AnchorPane.topAnchor="10.0">
+                        <Label text="Editing a Multiple choice question" textFill="#dd1515" AnchorPane.topAnchor="10.0">
                             <font>
                                 <Font size="35.0" />
                             </font>
@@ -181,10 +181,7 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="text_QuestionName" prefHeight="50.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="14.0" />
-                           </font></TextField>
+                                <TextField fx:id="text_QuestionName" prefHeight="50.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
@@ -199,10 +196,7 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="text_QuestionText" prefHeight="203.0" prefWidth="562.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="14.0" />
-                           </font></TextArea>
+                                <TextArea fx:id="text_QuestionText" prefHeight="203.0" prefWidth="562.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
@@ -219,17 +213,15 @@
                                 </Label>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <TextField fx:id="text_DefaultMark" layoutY="10.0" prefHeight="40.0" prefWidth="125.0">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font></TextField>
+                                        <TextField fx:id="text_DefaultMark" layoutY="10.0" prefHeight="40.0" prefWidth="125.0" />
                                     </children>
                                 </AnchorPane>
                                 <ComboBox fx:id="kindOfCategory" prefHeight="46.0" prefWidth="436.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>
-                        <VBox fx:id="vBoxAddChoiceBox" layoutX="375.0" layoutY="510.0" prefHeight="200.0">
-                            <children>
+                  <VBox layoutX="375.0" layoutY="510.0" prefHeight="200.0" prefWidth="770.0">
+                     <children>
+                              <VBox fx:id="vBoxAddChoiceBox" prefHeight="200.0" />
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
                                         <GridPane id="gridAddChoice" layoutX="125.0" prefHeight="200.0" prefWidth="652.0">
@@ -284,8 +276,8 @@
                                         </GridPane>
                                     </children>
                                 </AnchorPane>
-                            </children>
-                        </VBox>
+                     </children>
+                  </VBox>
                     </children>
                 </AnchorPane>
             </content>
