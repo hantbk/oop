@@ -22,6 +22,14 @@ public class QuizViewController implements Initializable {
     @FXML
     private Label label_quiz_description;
     @FXML
+    private Label timeFormatLabel;
+    @FXML
+    private Label timeLimitLabel;
+    @FXML
+    private Label timeFormatLabel1;
+    @FXML
+    private Label timeLimitLabel1;
+    @FXML
     private ImageView btn_edit_quiz; // click jump to EditQuizView - NOT done
     @FXML
     private Button btn_preview_quiz;
@@ -43,12 +51,14 @@ public class QuizViewController implements Initializable {
     @FXML
     private Label lb_timelimit_confirm;
 
-
-    public void displayInfo(String quizName) {
-        Quiz quiz = QuizService.getQuiz(quizName);
-        label_quiz_name_IT.setText(quiz.getQuiz_name());
-        label_quiz_name_view.setText(quiz.getQuiz_name());
-        label_quiz_description.setText(quiz.getQuiz_description());
+    public void displayInfo(String quizName, String quizInfo,int timeLimit, String timeFormat) {
+        label_quiz_name_IT.setText(quizName);
+        label_quiz_name_view.setText(quizName);
+        label_quiz_description.setText(quizInfo);
+        timeLimitLabel.setText(String.valueOf(timeLimit));
+        timeFormatLabel.setText(timeFormat);
+        timeLimitLabel1.setText(String.valueOf(timeLimit));
+        timeFormatLabel1.setText(timeFormat);
     }
 
     @Override

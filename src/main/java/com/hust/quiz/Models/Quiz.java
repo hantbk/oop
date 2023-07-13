@@ -7,6 +7,7 @@ public class Quiz {
     private int quiz_id;
     private String quiz_name;
     private String quiz_description;
+    private String time_format;
     private int timeLimit;
     private LocalDate time_close;
     private LocalDate time_open;
@@ -17,10 +18,11 @@ public class Quiz {
         this.quiz_description = quiz_description;
     }
 
-    public Quiz(String quiz_name, String quiz_description, int timeLimit) {
+    public Quiz(String quiz_name, String quiz_description, int timeLimit,String time_format) {
         this.quiz_name = quiz_name;
         this.quiz_description = quiz_description;
         this.timeLimit = timeLimit;
+        this.time_format = time_format;
     }
 
     public Quiz(String quiz_name, String quiz_description, int timeLimit, LocalDate time_close, LocalDate time_open) {
@@ -76,4 +78,9 @@ public class Quiz {
     }
     public void setTime_close(LocalDate time_close){ this.time_close = time_close; }
     public void setTime_open(LocalDate time_open) { this.time_open = time_open; }
+    public void setTimeLimit(int timeLimit) { this.timeLimit = timeLimit; }
+    public void setTime_format(String time_format) { this.time_format = time_format; }
+    public String getTimeFormat() { return time_format; }
+    public int getTimeLimit() { return timeLimit; }
+
 }

@@ -162,41 +162,6 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="40.0" layoutY="120.0">
-               <children>
-                  <HBox>
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="REPAGINATE" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="SELECT MULTIPLE ITEMS" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="900.0" prefHeight="40.0">
-                     <children>
-                        <Label text="Total of marks: ">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label text="0.00">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
             <AnchorPane layoutX="40.0" layoutY="180.0">
                <children>
                   <AnchorPane fx:id="add_question_option" layoutX="860.0" layoutY="65.0" prefHeight="120.0" prefWidth="210.0" style="-fx-background-color: #EEEEEE;">
@@ -210,10 +175,10 @@
                                           <Image url="@../Img/plus.png" />
                                        </image>
                                        <HBox.margin>
-                                          <Insets right="40.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </ImageView>
-                                    <Label text=" a new question">
+                                    <Label prefHeight="26.0" prefWidth="164.0" text=" a new question">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -240,11 +205,20 @@
                                        <image>
                                           <Image url="@../Img/plus.png" />
                                        </image>
+                                       <HBox.margin>
+                                          <Insets right="-5.0" />
+                                       </HBox.margin>
                                     </ImageView>
                                     <Label text="  a random question">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
                                     </Label>
                                  </children>
                               </HBox>
@@ -289,6 +263,41 @@
                      </children>
                   </AnchorPane>
                   <ScrollPane layoutY="63.0" prefHeight="240.0" prefWidth="1074.0" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="40.0" layoutY="120.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="REPAGINATE" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #146C94;" text="SELECT MULTIPLE ITEMS" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="900.0" prefHeight="40.0">
+                     <children>
+                        <Label text="Total of marks: ">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="0.00">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>
