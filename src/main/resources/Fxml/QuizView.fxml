@@ -229,7 +229,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="1 hour.">
+                        <Label fx:id="lb_timelimit_confirm" text="1 hour.">
                            <font>
                               <Font size="20.0" />
                            </font>

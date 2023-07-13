@@ -94,7 +94,7 @@ public class HomeController implements Initializable {
         button_exam_baohiem.setOnAction(event -> {
             int quiz_id = QuizService.getId(button_exam_baohiem.getText());
             List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
-            ViewFactory.getInstance().updateQuestionQuiz(listQuestion, button_exam_baohiem.getText());
+            ViewFactory.getInstance().updateQuestionQuiz(button_exam_baohiem.getText());
             ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
         });
     }

@@ -85,8 +85,8 @@ public class ViewFactory {
     public void updateEditQuestionView(Question question, String category_name) {
         editQuestionController.setInfo(question, category_name);
     }
-    public void updateQuestionQuiz(List<Question> listQuestion, String quizName){
-        startQuizController.updateQuestion(listQuestion, quizName);
+    public void updateQuestionQuiz(String quizName){
+        startQuizController.updateQuestion(quizName);
     }
 
     public void routes(SCENES scene) {

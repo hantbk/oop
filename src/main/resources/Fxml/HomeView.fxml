@@ -175,7 +175,7 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="button_exam_baohiem" mnemonicParsing="false" prefHeight="74.0" prefWidth="213.0" style="-fx-background-color: rgba(0,0,0,0);" text="Bảo hiểm">
+                                        <Button fx:id="button_exam_baohiem" mnemonicParsing="false" prefHeight="74.0" prefWidth="213.0" style="-fx-background-color: rgba(0,0,0,0);" text="Bảo Hiểm">
                                             <graphic>
                                                 <ImageView fitHeight="60.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
                                                     <image>

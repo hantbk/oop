@@ -36,6 +36,8 @@ public class QuizViewController implements Initializable {
     private Button btn_start_attempt;
     @FXML
     private Button btn_cancel_attempt;
+    @FXML
+    private Label lb_timelimit_confirm;
 
 
     public void displayInfo(String quizName, String quizInfo) {

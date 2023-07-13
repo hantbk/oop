@@ -65,7 +65,7 @@ public class QuizService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"), 1,  rs.getInt("category_id"));
+                        rs.getString("question_text"),rs.getString("question_image"), 1,  rs.getInt("category_id"));
                 result.add(question);
             }
             // close

@@ -37,21 +37,23 @@ public class QuestionInStartController implements Initializable {
     @FXML
     private RadioButton rButton_D;
 
+    private Question questionInBox; //cau hoi chua trong box
+    private List<Choice> listChoiceInBox = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
     public void setInforQuestion(Question question, int questiomNum) {
+        this.questionInBox = question;
         this.label_questionNum.setText(String.valueOf(questiomNum));
         this.label_questionContent.setText(question.getQuestion_text());
         List<Choice> listChoice = new ArrayList<>();
         listChoice.addAll(ChoiceService.getChoice(question.getQuestion_id()));
+        listChoiceInBox = listChoice;
         int numChoice = listChoice.size();
         if (!listChoice.isEmpty()) {
-            if(numChoice == 1){
-                rButton_A.setText(listChoice.get(0).getContent());
-            }else if( numChoice == 2){
+            if( numChoice == 2){
                 rButton_A.setText(listChoice.get(0).getContent());
                 rButton_B.setText(listChoice.get(1).getContent());
             }else if(numChoice == 3){
@@ -65,5 +67,9 @@ public class QuestionInStartController implements Initializable {
                 rButton_D.setText(listChoice.get(3).getContent());
             }
         }
+    }
+
+    public void getGrade(){
+
     }
 }
