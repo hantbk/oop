@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="21.6" prefWidth="950.4" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInfoFromBankController">
+   <children>
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/plus.png" />
+         </image>
+      </ImageView>
+      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </CheckBox>
+      <Label fx:id="question_content" text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
+</HBox>
