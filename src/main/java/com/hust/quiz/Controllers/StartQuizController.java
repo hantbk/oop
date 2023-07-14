@@ -25,10 +25,10 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class StartQuizController implements Initializable {
-
     private static int sec;
     private static int quizTimeLimit;
     private static String quizTimeFormat;
+    private final List<QuestionInStartController> listController = new ArrayList<>();
     @FXML
     private AnchorPane quiz_pane;
     @FXML
@@ -47,7 +47,6 @@ public class StartQuizController implements Initializable {
     private AnchorPane attempt_pane;
     @FXML
     private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt;
-    private List<QuestionInStartController> listController = new ArrayList<>();
 
     public static void setQuizTime(int quizTimeLimit, String quizTimeFormat) {
         StartQuizController.quizTimeLimit = quizTimeLimit;
@@ -72,31 +71,31 @@ public class StartQuizController implements Initializable {
 
     public void endQuiz() {
         //quiz_pane.setDisable(true);
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
+
         btn_finish_attempt.setOnMouseClicked(event -> {
             quiz_pane.setDisable(true);
             quiz_pane.opacityProperty().setValue(0.5);
             attempt_pane.setVisible(true);
             attempt_pane.setDisable(false);
         });
+
         btn_cancel_finish.setOnMouseClicked(event -> {
             quiz_pane.setDisable(false);
             quiz_pane.opacityProperty().setValue(1);
             attempt_pane.setVisible(false);
             attempt_pane.setDisable(true);
         });
+
         btn_submit_quiz.setOnMouseClicked(event -> {
             this.reset();
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
         });
     }
@@ -122,7 +121,7 @@ public class StartQuizController implements Initializable {
             }
             i++;
         }
-        List<Button> listButton = new ArrayList<>();
+
         for (int j = 0; j < listQuestion.size(); j++) {
             final int question_index = j + 1;
             Button button = new Button(String.valueOf(question_index));
@@ -139,7 +138,7 @@ public class StartQuizController implements Initializable {
     }
 
     //reset all
-    public void reset() {
+    private void reset() {
         if (!listController.isEmpty())
             listController.clear();
         this.vbox_question.getChildren().clear();

@@ -1,7 +1,7 @@
 package com.hust.quiz.Controllers;
 
-import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Choice;
+import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.ChoiceService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,22 +18,16 @@ import java.util.ResourceBundle;
 public class QuestionInStartController implements Initializable {
     @FXML
     private ToggleGroup Choice;
-
     @FXML
     private Label label_questionContent;
-
     @FXML
     private Label label_questionNum;
-
     @FXML
     private RadioButton rButton_A;
-
     @FXML
     private RadioButton rButton_B;
-
     @FXML
     private RadioButton rButton_C;
-
     @FXML
     private RadioButton rButton_D;
     @FXML
@@ -41,6 +35,7 @@ public class QuestionInStartController implements Initializable {
 
     private Question questionInBox; //cau hoi chua trong box
     private List<Choice> listChoiceInBox = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -55,27 +50,27 @@ public class QuestionInStartController implements Initializable {
         listChoiceInBox = listChoice;
         int numChoice = listChoice.size();
         if (!listChoice.isEmpty()) {
-            if( numChoice == 2){
+            if (numChoice == 2) {
                 rButton_A.setText("A: " + listChoice.get(0).getContent());
-                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_B.setText("B: " + listChoice.get(1).getContent());
                 rButton_C.setVisible(false);
                 rButton_D.setVisible(false);
                 rButton_E.setVisible(false);
-            }else if(numChoice == 3){
+            } else if (numChoice == 3) {
                 rButton_A.setText("A: " + listChoice.get(0).getContent());
-                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_B.setText("B: " + listChoice.get(1).getContent());
                 rButton_C.setText("C: " + listChoice.get(2).getContent());
                 rButton_D.setVisible(false);
                 rButton_E.setVisible(false);
-            }else if(numChoice == 4){
+            } else if (numChoice == 4) {
                 rButton_A.setText("A: " + listChoice.get(0).getContent());
-                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_B.setText("B: " + listChoice.get(1).getContent());
                 rButton_C.setText("C: " + listChoice.get(2).getContent());
                 rButton_D.setText("D: " + listChoice.get(3).getContent());
                 rButton_E.setVisible(false);
-            }else if(numChoice == 5){
+            } else if (numChoice == 5) {
                 rButton_A.setText("A: " + listChoice.get(0).getContent());
-                rButton_B.setText("B: "+ listChoice.get(1).getContent());
+                rButton_B.setText("B: " + listChoice.get(1).getContent());
                 rButton_C.setText("C: " + listChoice.get(2).getContent());
                 rButton_D.setText("D: " + listChoice.get(3).getContent());
                 rButton_E.setText("E: " + listChoice.get(4).getContent());
@@ -83,7 +78,8 @@ public class QuestionInStartController implements Initializable {
         }
     }
 
-    public void getGrade(){
+    public void getGrade() {
 
     }
+
 }

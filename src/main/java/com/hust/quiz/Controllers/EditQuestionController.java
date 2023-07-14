@@ -213,7 +213,6 @@ public class EditQuestionController implements Initializable {
         listChoiceBoxController.clear();
         vBoxAddChoiceBox.getChildren().clear();
         countChoice = 0;
-        System.out.println(ChoiceBoxController.getCountChoice());
 
         labelAlert.setText("");
         updateCategory();

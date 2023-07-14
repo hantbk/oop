@@ -40,7 +40,7 @@ public class AddQuizController implements Initializable {
 
         // configure btn_menu_return - back to home
         btn_menu_return.setOnMouseClicked(event -> {
-            this.reset();
+            reset();
             ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
