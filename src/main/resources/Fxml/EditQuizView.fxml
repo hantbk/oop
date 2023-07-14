@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
    <children>
       <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
          <children>
@@ -148,7 +148,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="100.0">
+                        <TextField editable="false" prefHeight="40.0" prefWidth="100.0">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -171,7 +171,7 @@
                      <children>
                         <VBox prefHeight="120.0" prefWidth="216.0">
                            <children>
-                              <HBox fx:id="add_new_question" alignment="CENTER_RIGHT" prefHeight="40.0">
+                              <HBox fx:id="add_new_question" alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -188,7 +188,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox fx:id="add_from_bank" alignment="CENTER_RIGHT" prefHeight="40.0">
+                              <HBox fx:id="add_from_bank" alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -202,7 +202,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox fx:id="add_random" alignment="CENTER_RIGHT" prefHeight="40.0">
+                              <HBox fx:id="add_random" alignment="CENTER_LEFT" prefHeight="40.0">
                                  <children>
                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -330,7 +330,7 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchor_blur" opacity="0.3" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" visible="false" />
-      <AnchorPane fx:id="anchor_add_question_bank" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE;">
+      <AnchorPane fx:id="anchor_add_question_bank" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE;" visible="false">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0">
                <children>

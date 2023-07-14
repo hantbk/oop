@@ -5,6 +5,7 @@ import com.hust.quiz.Models.Question;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -46,7 +47,7 @@ public class LoadeDocxService {
 
                     Matcher answerMatcher = answerPattern.matcher(line);
                     if (answerMatcher.matches()) { // if line is answer
-                        Choice choice = new Choice(line.substring(3), 0, quest_id);
+                        Choice choice = new Choice(line.substring(3), 0, null, quest_id);
                         choices.add(choice);
 
                         validAnswers.add(line.substring(0, 1));
@@ -74,7 +75,7 @@ public class LoadeDocxService {
                         validAnswers.clear(); // Reset valid answers
                     } else { // if line is question
                         quest_id++;
-                        Question question = new Question(quest_id,getTime() + " " + String.valueOf(quest_id), line, null);
+                        Question question = new Question(quest_id, getTime() + " " + String.valueOf(quest_id), line, null);
                         questions.add(question);
                         questionCount++;
                     }
@@ -91,7 +92,7 @@ public class LoadeDocxService {
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found" + path);
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -102,11 +103,11 @@ public class LoadeDocxService {
             for (XWPFPicture picture : run.getEmbeddedPictures()) {
                 XWPFPictureData pictureData = picture.getPictureData();
                 String fileName = "image_" + imageIndex + ".png";
-                File imageFile = new File(ImageService.PATH + fileName);
+                File imageFile = new File(ImageService.PATH_QUESTION + fileName);
                 FileOutputStream fos = new FileOutputStream(imageFile);
                 fos.write(pictureData.getData());
                 fos.close();
-                return ImageService.PATH + fileName;
+                return ImageService.PATH_QUESTION + fileName;
             }
         }
         return null;

@@ -2,8 +2,10 @@ package com.hust.quiz.Controllers;
 
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Question;
+import com.hust.quiz.Models.Quiz;
 import com.hust.quiz.Services.CategoryService;
 import com.hust.quiz.Services.QuestionService;
+import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,17 +28,11 @@ public class EditQuizController implements Initializable {
     @FXML
     private ImageView btn_menu_return;
     @FXML
-    private Label label_quiz_name_IT, label_quiz_name_edit;
-    @FXML
-    private Label number_of_questions;
+    private Label label_quiz_name_IT, label_quiz_name_edit, number_of_questions;
     @FXML
     private AnchorPane add_question_option;
     @FXML
-    private HBox add_new_question;
-    @FXML
-    private HBox add_from_bank;
-    @FXML
-    private HBox add_random;
+    private HBox add_new_question, add_from_bank, add_random;
     @FXML
     private ImageView arrow_add;
 
@@ -80,10 +76,15 @@ public class EditQuizController implements Initializable {
     @FXML
     private AnchorPane list_question_pane_random;
 
-    public void editQuizDisplayInfo(String quizName) {
-        // TODO: Update num
-        label_quiz_name_IT.setText(quizName);
-        label_quiz_name_edit.setText(quizName);
+    private Quiz quiz;
+    private List<Question> questionList;
+
+    public void editQuizDisplayInfo(Quiz quiz) {
+        this.quiz = quiz;
+        label_quiz_name_IT.setText(quiz.getQuiz_name());
+        label_quiz_name_edit.setText(quiz.getQuiz_name());
+        questionList = QuizService.getQuestionQuiz(quiz.getQuiz_id());
+        number_of_questions.setText(questionList.size() + " questions");
     }
 
     @Override
@@ -99,6 +100,7 @@ public class EditQuizController implements Initializable {
         anchor_add_question_random.setVisible(false);
 
         arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(true));
+
 
         // TODO: configure add a new question
         add_new_question.setOnMouseClicked(event -> {
@@ -249,6 +251,7 @@ public class EditQuizController implements Initializable {
             }
         }
     }
+
     private void updateCategory() {
         List<Category> categories = CategoryService.getCategories();
         // create TreeItem

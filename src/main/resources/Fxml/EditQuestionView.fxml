@@ -120,9 +120,9 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <ScrollPane layoutX="60.0" layoutY="250.0" prefHeight="518.0" prefWidth="1156.0">
+        <ScrollPane layoutX="60.0" layoutY="250.0" prefHeight="520.0" prefWidth="1200.0">
             <content>
-                <AnchorPane prefHeight="954.0" prefWidth="1160.0">
+                <AnchorPane prefHeight="1082.0" prefWidth="1160.0">
                     <children>
                         <Label text="Editing a Multiple choice question" textFill="#dd1515" AnchorPane.topAnchor="10.0">
                             <font>
@@ -167,45 +167,48 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/icons8-error-64.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                    <children>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../Img/icons8-error-64.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </AnchorPane>
                                 <Label text="Question name" GridPane.rowIndex="2">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="text_QuestionName" prefHeight="50.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/icons8-error-64.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
-                                <Label text="Question text" GridPane.rowIndex="3">
+                                <TextField fx:id="text_QuestionName" prefHeight="50.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <font>
-                                        <Font size="20.0" />
+                                        <Font size="14.0" />
                                     </font>
-                                </Label>
-                                <TextArea fx:id="text_QuestionText" prefHeight="203.0" prefWidth="562.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Img/icons8-error-64.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
+                                </TextField>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                    <children>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../Img/icons8-error-64.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutY="20.0" text="Question text">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                    <children>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="410.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../Img/icons8-error-64.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </AnchorPane>
                                 <Label text="Default mark" GridPane.rowIndex="4">
                                     <font>
                                         <Font size="20.0" />
@@ -213,15 +216,46 @@
                                 </Label>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <TextField fx:id="text_DefaultMark" layoutY="10.0" prefHeight="40.0" prefWidth="125.0" />
+                                        <TextField fx:id="text_DefaultMark" layoutY="10.0" prefHeight="40.0" prefWidth="125.0">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </TextField>
                                     </children>
                                 </AnchorPane>
                                 <ComboBox fx:id="kindOfCategory" prefHeight="46.0" prefWidth="436.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                                            <children>
+                                                <VBox>
+                                                    <children>
+                                                        <Button fx:id="btn_image_question" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);">
+                                                            <graphic>
+                                                                <ImageView fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../Img/add-picture-48.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                            </graphic>
+                                                        </Button>
+                                                        <ImageView fx:id="image_question" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                                        <TextArea fx:id="text_QuestionText" prefHeight="193.0" prefWidth="560.0" promptText="This is text area !!!!!!!!!!" styleClass="myTextArea" stylesheets="@../Styles/questionBank.css" text="&#10;">
+                                                            <font>
+                                                                <Font size="14.0" />
+                                                            </font>
+                                                        </TextArea>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </ScrollPane>
                             </children>
                         </GridPane>
-                  <VBox layoutX="375.0" layoutY="510.0" prefHeight="200.0" prefWidth="770.0">
-                     <children>
-                              <VBox fx:id="vBoxAddChoiceBox" prefHeight="200.0" />
+                        <VBox layoutX="375.0" layoutY="510.0" prefHeight="200.0">
+                            <children>
+                        <VBox fx:id="vBoxAddChoiceBox" prefHeight="200.0" prefWidth="100.0" />
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
                                         <GridPane id="gridAddChoice" layoutX="125.0" prefHeight="200.0" prefWidth="652.0">
@@ -232,7 +266,7 @@
                                                 <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="145.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
                                                 <Button fx:id="btn_blankChoice" mnemonicParsing="false" prefHeight="45.0" prefWidth="361.0" style="-fx-background-color: #19A7CE;" styleClass="bluebutton" stylesheets="@../Styles/style.css" text="BLANK FOR 3 MORE CHOICE " textFill="WHITE" GridPane.rowIndex="1">
@@ -251,60 +285,61 @@
                                                             <font>
                                                                 <Font name="System Bold" size="20.0" />
                                                             </font>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
+                                                            <HBox.margin>
+                                                                <Insets />
+                                                            </HBox.margin>
                                                         </Button>
                                                         <Button fx:id="btn_Cancel" mnemonicParsing="false" styleClass="blue_button" stylesheets="@../Styles/style.css" text="CANCEL">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin></Button>
+                                                            <HBox.margin>
+                                                                <Insets />
+                                                            </HBox.margin>
+                                                        </Button>
                                                     </children>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
                                                 </HBox>
-                                                  <Label fx:id="labelAlert" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="353.0" textFill="#ef0404">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
+                                                <Label fx:id="labelAlert" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="353.0" textFill="#ef0404">
+                                                    <GridPane.margin>
+                                                        <Insets />
+                                                    </GridPane.margin>
+                                                    <font>
+                                                        <Font size="18.0" />
+                                                    </font>
+                                                </Label>
                                             </children>
                                         </GridPane>
                                     </children>
                                 </AnchorPane>
-                     </children>
-                  </VBox>
+                            </children>
+                        </VBox>
                     </children>
                 </AnchorPane>
             </content>
         </ScrollPane>
         <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
-         <children>
-            <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Img/menu.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Img/male_user.png" />
-               </image>
-            </ImageView>
-            <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Img/whitearrowdown.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+            <children>
+                <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/menu.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/male_user.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/whitearrowdown.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

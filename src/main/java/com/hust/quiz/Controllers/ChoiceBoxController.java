@@ -2,17 +2,22 @@ package com.hust.quiz.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ChoiceBoxController implements Initializable {
     private static double totalGrade = 0;
+    private static int countChoice = 0;
     private final String[] gradeList = {"None", "100%", "83.333333%", "80%", "75%", "70%", "66,66667%", "60%", "50%", "40%",
             "33,33333%", "30%", "25%", "20%", "16.66667%", "14.28571%", "12.5%", "11.11111%", "10%", "5%", "0%"};
     @FXML
@@ -21,9 +26,18 @@ public class ChoiceBoxController implements Initializable {
     private TextArea choiceTextField;
     @FXML
     private ComboBox<String> cbGrade;
+    @FXML
+    private Button btn_image_choice;
+    @FXML
+    private ImageView image_choice;
+    private String imagePath = null;
 
     public static int getTotalGrade() {
         return (int) totalGrade;
+    }
+
+    public static int getCountChoice() {
+        return countChoice;
     }
 
     @Override
@@ -34,13 +48,37 @@ public class ChoiceBoxController implements Initializable {
         cbGrade.setValue("None");
         cbGrade.getItems().addAll(gradeList);
 
-        choiceTextField.textProperty().addListener((observableValue, oldValue, newValue)
-                -> cbGrade.setDisable(newValue.equals("")));
+        choiceTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            cbGrade.setDisable(newValue.equals(""));
+            if (oldValue.equals("") && !newValue.equals("")) {
+                countChoice++;
+            } else if (!oldValue.equals("") && newValue.equals("")) {
+                countChoice--;
+            }
+        });
 
         cbGrade.valueProperty().addListener((observableValue, oldValue, newValue) -> {
             totalGrade = totalGrade + getGrade(newValue) - getGrade(oldValue);
             if (totalGrade < 0) {
                 totalGrade = 0;
+            }
+        });
+
+        // configure choice image
+        btn_image_choice.setText("Choose image");
+        btn_image_choice.setOnAction(event -> {
+            FileChooser filechooser = new FileChooser();
+            filechooser.setTitle("Choose Image");
+            File selectedFile = filechooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                imagePath = selectedFile.getAbsolutePath();
+                if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png")) {
+                    btn_image_choice.setText("Image is selected");
+                    image_choice.setImage(new Image(imagePath));
+                } else {
+                    btn_image_choice.setText("Image must be .jpg or .png");
+                    imagePath = null;
+                }
             }
         });
     }
@@ -75,9 +113,18 @@ public class ChoiceBoxController implements Initializable {
         return choiceTextField.getText();
     }
 
-    public void setInfo(String choiceText, double grade) {
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setInfo(String choiceText, double grade, String imagePath) {
         choiceTextField.setText(choiceText);
         cbGrade.setValue(grade + "%");
+        this.imagePath = imagePath;
+        if (imagePath != null) {
+            btn_image_choice.setText("Image is selected");
+            image_choice.setImage(new Image(imagePath));
+        }
     }
 
     public void reset() {
@@ -85,5 +132,9 @@ public class ChoiceBoxController implements Initializable {
         choiceTextField.setText("");
         cbGrade.setDisable(true);
         cbGrade.setValue("None");
+        imagePath = null;
+        btn_image_choice.setText("Choose image");
+        image_choice.setImage(null);
+        countChoice = 0;
     }
 }
