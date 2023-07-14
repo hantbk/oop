@@ -12,12 +12,13 @@ public class ViewFactory {
     private static ViewFactory instance;
     private final Stage stage;
     private Scene homeScene, questionBankScene, addQuestion, editQuestion;
-    private Scene addQuizScene, quizViewScene, editQuizScene, startQuizScene;
+    private Scene addQuizScene, quizViewScene, editQuizScene, startQuizScene, endQuizScene;
     private QuestionBankController questionBankController;
     private QuizViewController quizViewController;
     private EditQuizController editQuizController;
     private EditQuestionController editQuestionController;
     private StartQuizController startQuizController;
+    private EndQuizController endQuizController;
     private HomeController homeController1;
 
     // singleton design pattern
@@ -31,6 +32,7 @@ public class ViewFactory {
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
         FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartQuizView.fxml"));
+        FXMLLoader endQuizView = new FXMLLoader(getClass().getResource("/Fxml/EndQuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
             homeController1 = home.getController();
@@ -55,6 +57,9 @@ public class ViewFactory {
 
             startQuizScene = new Scene(startQuizView.load());
             startQuizController = startQuizView.getController();
+
+            endQuizScene = new Scene(endQuizView.load());
+            endQuizController = endQuizView.getController();
 
 
         } catch (IOException e) {
@@ -142,6 +147,10 @@ public class ViewFactory {
                 stage.setScene(startQuizScene);
                 break;
             }
+            case END_QUIZ: {
+                stage.setScene(endQuizScene);
+                break;
+            }
             default: {
                 stage.setScene(homeScene);
             }
@@ -156,6 +165,7 @@ public class ViewFactory {
         ADD_QUIZ,
         QUIZ_VIEW,
         EDIT_QUIZ,
-        START_QUIZ
+        START_QUIZ,
+        END_QUIZ
     }
 }

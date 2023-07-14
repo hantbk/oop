@@ -232,7 +232,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="attempt_pane" layoutX="367.0" layoutY="350.0" prefHeight="165.0" prefWidth="355.0" style="-fx-background-color: white; -fx-border-color: #AFD3E2; -fx-border-radius: 5px; -fx-border-width: 2px;" stylesheets="@../Styles/home.css">
+      <AnchorPane fx:id="attempt_pane" disable="true" layoutX="367.0" layoutY="350.0" prefHeight="165.0" prefWidth="355.0" style="-fx-background-color: white; -fx-border-color: #AFD3E2; -fx-border-radius: 5px; -fx-border-width: 2px;" stylesheets="@../Styles/home.css" visible="false">
          <children>
             <HBox alignment="CENTER" layoutX="36.0" layoutY="10.0" prefHeight="50.0" prefWidth="301.0">
                <children>

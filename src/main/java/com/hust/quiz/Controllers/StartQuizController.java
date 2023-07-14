@@ -91,11 +91,18 @@ public class StartQuizController implements Initializable {
             quiz_pane.setDisable(true);
             quiz_pane.opacityProperty().setValue(0.5);
             attempt_pane.setVisible(true);
+            attempt_pane.setDisable(false);
         });
         btn_cancel_finish.setOnMouseClicked(event -> {
             quiz_pane.setDisable(false);
             quiz_pane.opacityProperty().setValue(1);
             attempt_pane.setVisible(false);
+            attempt_pane.setDisable(true);
+        });
+        btn_submit_quiz.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().updateQuizHome();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
         });
     }
 
