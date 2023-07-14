@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -24,36 +25,54 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class StartQuizController implements Initializable {
-    private static int totalTime; // in seconds
-    private final List<QuestionInStartController> listController = new ArrayList<>();
+
+    private static int sec;
+    private static int quizTimeLimit;
+    private static String quizTimeFormat;
+    @FXML
+    private AnchorPane quiz_pane;
     @FXML
     private Label timerLabel;
     @FXML
     private ImageView btn_menu_return;
     @FXML
-    private Label label_quiz_name_1;
-    @FXML
-    private Label label_quiz_name_2;
+    private Label label_quiz_name_1, label_quiz_name_2;
     @FXML
     private VBox vbox_question;
     @FXML
     private GridPane grid_num_question;
     @FXML
     private ScrollPane scrollPane_quizView;
+    @FXML
+    private AnchorPane attempt_pane;
+    @FXML
+    private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt;
+    private List<QuestionInStartController> listController = new ArrayList<>();
 
     public static void setQuizTime(int quizTimeLimit, String quizTimeFormat) {
-        if (Objects.equals(quizTimeFormat, "hours")) {
-            totalTime = quizTimeLimit * 3600;
-        } else if (Objects.equals(quizTimeFormat, "minutes")) {
-            totalTime = quizTimeLimit * 60;
-        } else if (Objects.equals(quizTimeFormat, "seconds")) {
-            totalTime = quizTimeLimit;
-        }
+        StartQuizController.quizTimeLimit = quizTimeLimit;
+        StartQuizController.quizTimeFormat = quizTimeFormat;
     }
 
     public void runTimer() {
-        CountdownTimer countdownTimer = new CountdownTimer(totalTime, timerLabel);
-        countdownTimer.start();
+        if (quizTimeFormat == null) {
+            timerLabel.setText("No time limit");
+        } else {
+            if (Objects.equals(quizTimeFormat, "hours")) {
+                sec = quizTimeLimit * 3600;
+            } else if (Objects.equals(quizTimeFormat, "minutes")) {
+                sec = quizTimeLimit * 60;
+            } else if (Objects.equals(quizTimeFormat, "seconds")) {
+                sec = quizTimeLimit;
+            }
+            CountdownTimer countdownTimer = new CountdownTimer(sec, timerLabel);
+            countdownTimer.start();
+        }
+    }
+
+    public void endQuiz() {
+        //quiz_pane.setDisable(true);
+
     }
 
     @Override
@@ -62,6 +81,23 @@ public class StartQuizController implements Initializable {
             this.reset();
             ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
+        btn_finish_attempt.setOnMouseClicked(event -> {
+            quiz_pane.setDisable(true);
+            quiz_pane.opacityProperty().setValue(0.5);
+            attempt_pane.setVisible(true);
+            attempt_pane.setDisable(false);
+        });
+        btn_cancel_finish.setOnMouseClicked(event -> {
+            quiz_pane.setDisable(false);
+            quiz_pane.opacityProperty().setValue(1);
+            attempt_pane.setVisible(false);
+            attempt_pane.setDisable(true);
+        });
+        btn_submit_quiz.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().updateQuizHome();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
         });
     }
 
@@ -108,5 +144,6 @@ public class StartQuizController implements Initializable {
             listController.clear();
         this.vbox_question.getChildren().clear();
         this.grid_num_question.getChildren().clear();
+        quiz_pane.setDisable(false);
     }
 }
