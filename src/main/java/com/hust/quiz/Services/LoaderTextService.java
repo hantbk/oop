@@ -67,7 +67,7 @@ public class LoaderTextService {
                     validAnswers.clear(); // Reset valid answers
                 } else {
                     quest_id++;
-                    Question question = new Question(quest_id, line, null);
+                    Question question = new Question(quest_id,getTime()+" "+String.valueOf(quest_id), line, null);
                     questions.add(question);
                     questionCount++;
                 }

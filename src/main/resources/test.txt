@@ -544,3 +544,4 @@ B. Ngày Người Được Bảo Hiểm được chẩn đoán mắc bệnh Ung 
 C. Ngày hoàn thành hồ sơ yêu cầu cấp quyền lợi Bảo Hiểm Miễn Phí Dành Cho Con Của Người Được Bảo Hiểm
 D. Ngày Manulife chấp nhận chi trả quyền lợi Ung Thư Giai Đoạn Cuối cho Người Được Bảo Hiểm.
 ANSWER: B
+

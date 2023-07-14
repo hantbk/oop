@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -17,7 +18,7 @@ public class ChoiceBoxController implements Initializable {
     @FXML
     private Label choiceNumberLabel;
     @FXML
-    private TextField choiceTextField;
+    private TextArea choiceTextField;
     @FXML
     private ComboBox<String> cbGrade;
 

@@ -23,7 +23,7 @@ public class AddQuizController implements Initializable {
     @FXML
     private TextField text_time_limit; // Time limit
     @FXML
-    private Spinner<Integer> spinner_time_format;
+    private Spinner<String> spinner_time_format;
     @FXML
     private Spinner<String> spinner_time_expire;
     @FXML
@@ -43,6 +43,7 @@ public class AddQuizController implements Initializable {
         // configure btn_menu_return - back to home
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
+            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
@@ -51,18 +52,32 @@ public class AddQuizController implements Initializable {
             String quizName = text_quiz_name.getText();
             String quizDescription = Objects.equals(text_quiz_description.getText(), "")
                     ? "No description" : text_quiz_description.getText();
+            int timeLimit;
+            String time_format = null;
 
             if (quizName.isEmpty()) {
                 // alert pop-up if didn't fill name box
                 alert_missing_name.setVisible(true);
             } else {
-                // turn off alert
-                alert_missing_name.setVisible(false);
+                if(checkbox_enable_time_limit.isSelected()){
+                    timeLimit = Integer.parseInt(text_time_limit.getText());
+                    time_format = spinner_time_format.getValue();
+                    // turn off alert
+                    alert_missing_name.setVisible(false);
 
-                QuizService.addQuiz(new Quiz(quizName, quizDescription));
+                    QuizService.addQuiz(new Quiz(quizName, quizDescription, timeLimit, time_format));
+                    ViewFactory.getInstance().updateQuizView(quizName);
+                    this.reset();
+                    ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                }else {
+                    // turn off alert
+                    alert_missing_name.setVisible(false);
 
-                ViewFactory.getInstance().updateQuizView(quizName, quizDescription);
-                ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                    QuizService.addQuiz(new Quiz(quizName, quizDescription, 0, time_format));
+                    ViewFactory.getInstance().updateQuizView(quizName);
+                    this.reset();
+                    ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                }
             }
         });
 
@@ -114,17 +129,26 @@ public class AddQuizController implements Initializable {
         spinner_time_format.setDisable(true);
 
         //set gia tri ban dau chon spiner chon minute
-        spinner_time_format.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0, 5));
+        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("minutes", "hours", "days","seconds","weeks")));
         // default time expire - fixed - no change
         spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
     }
 
     private void reset() {
+        text_quiz_name.setText(null);
+        text_quiz_description.setText(null);
         date_open.setValue(null);
         date_close.setValue(null);
         text_time_limit.setText(null);
         spinner_time_format.getValueFactory().setValue(null);
+        if(checkbox_enable_open.isSelected())
+            checkbox_enable_open.setSelected(false);
+        if(checkbox_enable_close.isSelected())
+            checkbox_enable_close.setSelected(false);
+        if(checkbox_enable_time_limit.isSelected())
+            checkbox_enable_time_limit.setSelected(false);
 
         setInit();
     }
+
 }

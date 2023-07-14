@@ -50,6 +50,7 @@ public class AddQuestionController implements Initializable {
         // configure btn_menu_return
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
+            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
@@ -104,7 +105,7 @@ public class AddQuestionController implements Initializable {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUESTION_BANK);
         });
 
-        //them 3 choice sau khi nhan vao btn
+        //them 3 choice sau khi nhan vao btn blank
         btn_blankChoice.setOnAction(event -> {
             if (countChoice < 5) {
                 addChoiceBox(3);

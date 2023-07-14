@@ -13,253 +13,290 @@
 
 <AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuizViewController">
    <children>
-      <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+      <AnchorPane fx:id="first_pane">
          <children>
-            <Label layoutX="40.0" layoutY="20.0" prefHeight="80.0" prefWidth="80.0" text="IT" textFill="#dd1515">
-               <font>
-                  <Font size="60.0" />
-               </font>
-            </Label>
-            <HBox layoutX="40.0" layoutY="100.0" prefHeight="50.0">
+            <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
                <children>
-                  <Label prefHeight="50.0" text="Home" textFill="RED">
+                  <Label layoutX="40.0" layoutY="20.0" prefHeight="80.0" prefWidth="80.0" text="IT" textFill="#dd1515">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="60.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="50.0" text="/">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                  </Label>
-                  <Label prefHeight="50.0" text="My Courses">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="50.0" text="/">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                  </Label>
-                  <Label prefHeight="50.0" text="THI CUỐI KỲ" textFill="RED">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="50.0" text="/">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                  </Label>
-                  <Label prefHeight="50.0" text="General" textFill="RED">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="50.0" text="/">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="label_quiz_name_IT" prefHeight="50.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="60.0" layoutY="250.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
-         <children>
-            <AnchorPane layoutX="40.0" layoutY="20.0">
-               <children>
-                  <Label fx:id="label_quiz_name_view" prefHeight="58.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="btn_edit_quiz" fitHeight="20.0" fitWidth="20.0" layoutX="1050.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Img/setting.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="10.0" fitWidth="10.0" layoutX="1070.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Img/redarrowdown.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="label_quiz_description" layoutY="50.0" text="Label">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <VBox alignment="CENTER" layoutX="40.0" layoutY="120.0" prefWidth="1080.0">
-               <children>
-                  <Label text="Time limit: 1 hour">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="Grading method: Last attempt">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Label layoutX="40.0" layoutY="200.0" text="Summary of your previous attempts" textFill="RED">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <VBox layoutX="40.0" layoutY="250.0">
-               <children>
-                  <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #146C94;">
+                  <HBox layoutX="40.0" layoutY="100.0" prefHeight="50.0">
                      <children>
-                        <Label layoutX="200.0" layoutY="10.0" text="Attempt" textFill="WHITE">
+                        <Label prefHeight="50.0" text="Home" textFill="RED">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="500.0" layoutY="10.0" text="State" textFill="WHITE">
+                        <Label prefHeight="50.0" text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="50.0" text="My Courses">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #EEEEEE;">
-                     <children>
-                        <Label layoutX="200.0" layoutY="10.0" text="Preview">
+                        <Label prefHeight="50.0" text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="50.0" text="THI CUỐI KỲ" textFill="RED">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="500.0" layoutY="10.0" text="Never submitted">
+                        <Label prefHeight="50.0" text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="50.0" text="General" textFill="RED">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
-            <Button fx:id="btn_preview_quiz" layoutX="480.0" layoutY="380.0" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="PREVIEW QUIZ NOW" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
-         <children>
-            <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Img/menu.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Img/male_user.png" />
-               </image>
-            </ImageView>
-            <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Img/whitearrowdown.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anchor_blur" opacity="0.5" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" />
-      <AnchorPane fx:id="anchor_confirm" layoutX="357.0" layoutY="300.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: WHITE;">
-         <children>
-            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="10.0" prefHeight="50.0">
-               <children>
-                  <Label text="Start attempt">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="380.0" />
-                     </HBox.margin>
-                  </Label>
-                  <ImageView fx:id="btn_close_confirm" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Img/icons8-cancel-40.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <Line endX="500.0" layoutX="100.0" layoutY="70.0" startX="-100.0" strokeWidth="0.3" />
-            <VBox layoutX="35.0" layoutY="80.0">
-               <children>
-                  <Label text="Time limit" textFill="RED">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <HBox>
-                     <children>
-                        <Label text="Your attempt will have a time limit of ">
+                        <Label prefHeight="50.0" text="/">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
                         </Label>
-                        <Label text="1 hour.">
+                        <Label fx:id="label_quiz_name_IT" prefHeight="50.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <Label prefWidth="520.0" text="When you start, the timer will begin to count down and cannot be paused. You must finished your attempt before it expires. Are you sure you wish to start now?" wrapText="true">
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="60.0" layoutY="250.0" prefHeight="500.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+               <children>
+                  <AnchorPane layoutX="40.0" layoutY="20.0" prefHeight="90.0" prefWidth="1080.0">
+                     <children>
+                        <Label fx:id="label_quiz_name_view" prefHeight="58.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="btn_edit_quiz" fitHeight="20.0" fitWidth="20.0" layoutX="1050.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/setting.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" layoutX="1070.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/redarrowdown.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="label_quiz_description" layoutY="61.0" text="Quiz description">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <VBox alignment="CENTER" layoutX="40.0" layoutY="120.0" prefWidth="1080.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="Time limit:  ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="timeLimitLabel1" layoutX="10.0" layoutY="10.0" text="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="timeFormatLabel1" text="hour">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label text="Grading method: Last attempt">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Label layoutX="40.0" layoutY="200.0" text="Summary of your previous attempts" textFill="RED">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font>
                   </Label>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="240.0">
-               <children>
-                  <Button fx:id="btn_start_attempt" mnemonicParsing="false" style="-fx-background-color: RED;" text="START ATTEMPT" textFill="WHITE">
+                  <VBox layoutX="40.0" layoutY="250.0">
+                     <children>
+                        <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #19A7CE;">
+                           <children>
+                              <Label layoutX="200.0" layoutY="10.0" text="Attempt" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="500.0" layoutY="10.0" text="State" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #EEEEEE;">
+                           <children>
+                              <Label layoutX="200.0" layoutY="10.0" text="Preview">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="500.0" layoutY="10.0" text="Never submitted">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <Button fx:id="btn_preview_quiz" layoutX="480.0" layoutY="380.0" mnemonicParsing="false" style="-fx-background-color: #19A7CE;" text="PREVIEW QUIZ NOW" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btn_cancel_attempt" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="CANCEL" textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
                   </Button>
                </children>
-            </HBox>
+            </AnchorPane>
+            <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
+               <children>
+                  <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/menu.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/male_user.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Img/whitearrowdown.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="blur_pane" opacity="0.5" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" visible="false" />
+      <AnchorPane fx:id="second_pane" prefHeight="800.0" prefWidth="1280.0" visible="false">
+         <children>
+            <AnchorPane layoutX="357.0" layoutY="300.0" style="-fx-background-color: white; -fx-border-color: #AFD3E2;" stylesheets="@../Styles/home.css">
+               <children>
+                  <HBox alignment="CENTER_LEFT" layoutX="36.0" layoutY="10.0" prefHeight="50.0" prefWidth="554.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="203.0" text="Start attempt">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="btn_close_confirm" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/icons8-cancel-40.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="330.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Line endX="500.0" layoutX="100.5" layoutY="70.0" startX="-100.0" strokeWidth="0.3" />
+                  <VBox layoutX="35.5" layoutY="80.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label text="Time limit" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Your attempt will have a time limit of ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="timeLimitLabel" text="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="timeFormatLabel" text="hour">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label prefWidth="520.0" text="When you start, the timer will begin to count down and cannot be paused. You must finished your attempt before it expires. Are you sure you wish to start now?" wrapText="true">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="25.5" layoutY="240.0">
+                     <children>
+                        <Button fx:id="btn_start_attempt" mnemonicParsing="false" style="-fx-background-color: RED;" text="START ATTEMPT" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btn_cancel_attempt" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="CANCEL" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

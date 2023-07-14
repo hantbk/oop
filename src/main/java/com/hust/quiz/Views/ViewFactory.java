@@ -17,6 +17,8 @@ public class ViewFactory {
     private QuizViewController quizViewController;
     private EditQuizController editQuizController;
     private EditQuestionController editQuestionController;
+    private StartQuizController startQuizController;
+    private HomeController homeController1;
 
     // singleton design pattern
     private ViewFactory() {
@@ -28,9 +30,10 @@ public class ViewFactory {
         FXMLLoader quizView = new FXMLLoader(getClass().getResource("/Fxml/QuizView.fxml"));
         FXMLLoader addQuizView = new FXMLLoader(getClass().getResource("/Fxml/AddQuizView.fxml"));
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
-        FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartView.fxml"));
+        FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartQuizView.fxml"));
         try {
             homeScene = new Scene(home.load());
+            homeController1 = home.getController();
 
             // because we need to access to QuestionBankController in HomeController to set TabPane
             HomeController homeController = home.getController();
@@ -51,11 +54,16 @@ public class ViewFactory {
             editQuizController = editQuizView.getController();
 
             startQuizScene = new Scene(startQuizView.load());
+            startQuizController = startQuizView.getController();
+
+
         } catch (IOException e) {
             System.out.println("Error to load fxml in ViewFactory");
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
+        //quizViewController.displayInfo("Bao hiem");
         stage.setScene(homeScene);
         stage.setResizable(false);
         stage.setTitle("Quiz App");
@@ -69,8 +77,8 @@ public class ViewFactory {
         return instance;
     }
 
-    public void updateQuizView(String quizName, String quizInfo) {
-        quizViewController.displayInfo(quizName, quizInfo);
+    public void updateQuizView(String quizName) {
+        quizViewController.displayInfo(quizName);
     }
 
     public void updateEditQuizView(String quizName) {
@@ -80,6 +88,18 @@ public class ViewFactory {
     //ham nay de dien thong tin question vao cac o khi bam vao edit ow questionBank
     public void updateEditQuestionView(Question question, String category_name) {
         editQuestionController.setInfo(question, category_name);
+    }
+
+    public void updateQuestionQuiz(String quizName) {
+        startQuizController.updateQuestion(quizName);
+    }
+//    public void updateQuestionQuiz(List<Question> listQuestion, String quizName) {
+//        startQuizController.updateQuestion(listQuestion, quizName);
+//    }
+
+    //update quiz trong home
+    public void updateQuizHome() {
+        homeController1.updateQuiz();
     }
 
     public void routes(SCENES scene) {
@@ -114,6 +134,7 @@ public class ViewFactory {
                 break;
             }
             case START_QUIZ: {
+                startQuizController.runTimer();
                 stage.setScene(startQuizScene);
                 break;
             }
