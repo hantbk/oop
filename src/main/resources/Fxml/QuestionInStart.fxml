@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -54,9 +55,12 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="0.0">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/setting.png" />
+                           </image></ImageView>
                         <Label text="Edit question" textFill="#146c94">
                            <font>
                               <Font size="15.0" />
@@ -70,7 +74,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="10.0" style="-fx-background-color: #EEEEEE;">
          <children>
-            <VBox prefWidth="720.0" spacing="10.0">
+            <VBox prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
                <children>
                   <Label fx:id="label_questionContent" text="Question content" wrapText="true">
                      <font>

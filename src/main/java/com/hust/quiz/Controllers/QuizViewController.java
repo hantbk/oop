@@ -23,14 +23,15 @@ public class QuizViewController implements Initializable {
     private Label label_quiz_description;
     @FXML
     private Label timeFormatLabel;
-    @FXML
-    private Label timeLimitLabel;
+
     @FXML
     private Label timeFormatLabel1;
+
+    @FXML
+    private Label timeLimitLabel;
+
     @FXML
     private Label timeLimitLabel1;
-    @FXML
-    private Label timeLimitLabel2;
     @FXML
     private ImageView btn_edit_quiz; // click jump to EditQuizView - NOT done
     @FXML
@@ -58,24 +59,24 @@ public class QuizViewController implements Initializable {
         label_quiz_name_IT.setText(quiz.getQuiz_name());
         label_quiz_name_view.setText(quiz.getQuiz_name());
         label_quiz_description.setText(quiz.getQuiz_description());
-        if(quiz.getTimeLimit()  > 0){
-            timeLimitLabel.setText(String.valueOf(quiz.getTimeLimit()));
-        }else{
-            timeLimitLabel.setText(" Unlimit!");
+
+        if (quiz.getTimeLimit() > 0 && quiz.getTimeFormat() != null) {
+            timeLimitLabel.setText(String.valueOf(quiz.getTimeLimit()) + " ");
+            timeFormatLabel.setText(quiz.getTimeFormat());
+            //System.out.println(quiz.getTimeFormat());
+        } else {
+            timeLimitLabel.setText("No time limit");
+            timeFormatLabel.setText("");
         }
-//        timeFormatLabel.setText(timeFormat);
-        if(quiz.getTimeLimit()  > 0){
-            timeLimitLabel1.setText(String.valueOf(quiz.getTimeLimit()));
-        }else{
-            timeLimitLabel1.setText(" Unlimit!");
+
+        if (quiz.getTimeLimit() > 0 && quiz.getTimeFormat() != null) {
+            timeLimitLabel1.setText(String.valueOf(quiz.getTimeLimit()) + " ");
+            timeFormatLabel1.setText(quiz.getTimeFormat());
+        } else {
+            timeLimitLabel1.setText("No");
+            timeFormatLabel1.setText("");
         }
-//        timeFormatLabel1.setText(timeFormat);
-        if(quiz.getTimeLimit()  > 0){
-            timeLimitLabel2.setText(String.valueOf(quiz.getTimeLimit()));
-        }else{
-            timeLimitLabel2.setText(" Unlimit!");
-        }
-//        timeFormatLabel1.setText(timeFormat);
+        StartQuizController.setQuizTime(quiz.getTimeLimit(), quiz.getTimeFormat());
     }
 
     @Override

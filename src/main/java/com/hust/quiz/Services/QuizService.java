@@ -65,7 +65,7 @@ public class QuizService {
             // add questions found to list
             while (rs.next()) {
                 Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"),rs.getString("question_image"), 1, rs.getInt("category_id"));
+                        rs.getString("question_text"), rs.getString("question_image"), 1, rs.getInt("category_id"));
                 result.add(question);
             }
             // close
@@ -91,7 +91,7 @@ public class QuizService {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 result = new Quiz(rs.getInt("quiz_id"), rs.getString("quiz_name"),
-                        rs.getString("quiz_description"), rs.getInt("quiz_time_limit"));
+                        rs.getString("quiz_description"), rs.getInt("quiz_time_limit"), rs.getString("quiz_time_format"));
             } else {
                 System.out.println("No Quiz found");
             }
@@ -105,13 +105,14 @@ public class QuizService {
         }
         return result;
     }
+
     public static Quiz getQuiz(String quiz_name) {
         int id = QuizService.getId(quiz_name);
         Quiz result = QuizService.getQuiz(id);
         return result;
     }
 
-    public static List<String> getAllQuiz(){
+    public static List<String> getAllQuiz() {
         List<String> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
             // write query
@@ -120,7 +121,7 @@ public class QuizService {
 
             // execute
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 result.add(rs.getString("quiz_name"));
             }
             // close

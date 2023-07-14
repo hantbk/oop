@@ -123,7 +123,12 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="timeLimitLabel" layoutX="10.0" layoutY="10.0">
+                              <Label fx:id="timeLimitLabel1" layoutX="10.0" layoutY="10.0" text="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="timeFormatLabel1" text="hour">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -144,16 +149,16 @@
                   </Label>
                   <VBox layoutX="40.0" layoutY="250.0">
                      <children>
-                        <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #146C94;">
+                        <AnchorPane prefHeight="50.0" prefWidth="1080.0" style="-fx-background-color: #19A7CE;">
                            <children>
                               <Label layoutX="200.0" layoutY="10.0" text="Attempt" textFill="WHITE">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
                               <Label layoutX="500.0" layoutY="10.0" text="State" textFill="WHITE">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
                            </children>
@@ -174,7 +179,7 @@
                         </AnchorPane>
                      </children>
                   </VBox>
-                  <Button fx:id="btn_preview_quiz" layoutX="480.0" layoutY="380.0" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="PREVIEW QUIZ NOW" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="btn_preview_quiz" layoutX="480.0" layoutY="380.0" mnemonicParsing="false" style="-fx-background-color: #19A7CE;" text="PREVIEW QUIZ NOW" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -212,20 +217,23 @@
          <children>
             <AnchorPane layoutX="357.0" layoutY="300.0" style="-fx-background-color: white; -fx-border-color: #AFD3E2;" stylesheets="@../Styles/home.css">
                <children>
-                  <HBox alignment="CENTER_LEFT" layoutX="20.5" layoutY="10.0" prefHeight="50.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="36.0" layoutY="10.0" prefHeight="50.0" prefWidth="554.0">
                      <children>
-                        <Label text="Start attempt">
+                        <Label prefHeight="30.0" prefWidth="203.0" text="Start attempt">
                            <font>
                               <Font size="25.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="380.0" />
+                              <Insets />
                            </HBox.margin>
                         </Label>
                         <ImageView fx:id="btn_close_confirm" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Img/icons8-cancel-40.png" />
                            </image>
+                           <HBox.margin>
+                              <Insets left="330.0" />
+                           </HBox.margin>
                         </ImageView>
                      </children>
                   </HBox>
@@ -234,14 +242,9 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label text="Time limit: " textFill="RED">
+                              <Label text="Time limit" textFill="RED">
                                  <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="timeLimitLabel1" layoutX="10.0" layoutY="10.0" text="1 hour" textFill="RED">
-                                 <font>
-                                    <Font size="20.0" />
+                                    <Font name="System Bold" size="25.0" />
                                  </font>
                               </Label>
                            </children>
@@ -253,7 +256,12 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="timeLimitLabel2" text="1 hour">
+                              <Label fx:id="timeLimitLabel" text="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="timeFormatLabel" text="hour">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -274,13 +282,16 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets bottom="10.0" right="10.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="btn_cancel_attempt" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="CANCEL" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
                         </Button>
                      </children>
                   </HBox>

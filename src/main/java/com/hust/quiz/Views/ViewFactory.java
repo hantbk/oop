@@ -56,12 +56,14 @@ public class ViewFactory {
             startQuizScene = new Scene(startQuizView.load());
             startQuizController = startQuizView.getController();
 
+
         } catch (IOException e) {
             System.out.println("Error to load fxml in ViewFactory");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
+        //quizViewController.displayInfo("Bao hiem");
         stage.setScene(homeScene);
         stage.setResizable(false);
         stage.setTitle("Quiz App");
@@ -96,7 +98,9 @@ public class ViewFactory {
 //    }
 
     //update quiz trong home
-    public void updateQuizHome(){ homeController1.updateQuiz(); };
+    public void updateQuizHome() {
+        homeController1.updateQuiz();
+    }
 
     public void routes(SCENES scene) {
         switch (scene) {
@@ -130,6 +134,7 @@ public class ViewFactory {
                 break;
             }
             case START_QUIZ: {
+                startQuizController.runTimer();
                 stage.setScene(startQuizScene);
                 break;
             }

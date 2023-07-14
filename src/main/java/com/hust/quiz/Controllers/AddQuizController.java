@@ -129,7 +129,7 @@ public class AddQuizController implements Initializable {
         spinner_time_format.setDisable(true);
 
         //set gia tri ban dau chon spiner chon minute
-        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("minutes", "hours", "days")));
+        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("minutes", "hours", "days","seconds","weeks")));
         // default time expire - fixed - no change
         spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
     }
