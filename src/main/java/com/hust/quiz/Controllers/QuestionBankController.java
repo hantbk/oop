@@ -83,7 +83,6 @@ public class QuestionBankController implements Initializable {
         // # configure btn_menu_return - comeback to home
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
         // # configure btn_turn_editing_on - add quiz scene

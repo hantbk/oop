@@ -14,7 +14,8 @@ public class Question {
         this.question_image = image;
         category_id = 0;
     }
-    public Question(int id,String question_name,String question_text,String image){
+
+    public Question(int id, String question_name, String question_text, String image) {
         this.question_id = id;
         this.question_name = question_name;
         this.question_text = question_text;
@@ -55,7 +56,7 @@ public class Question {
         return question_text;
     }
 
-    public String getQuestion_image() {
+    public String getQuestionImage() {
         return question_image;
     }
 
@@ -75,9 +76,10 @@ public class Question {
         return category_id;
     }
 
-    public void setInfo(String question_name, String question_text, int mark, int category_id) {
+    public void setInfo(String question_name, String question_text, String image, int mark, int category_id) {
         this.question_name = question_name;
         this.question_text = question_text;
+        this.question_image = image;
         this.mark = mark;
         this.category_id = category_id;
     }
