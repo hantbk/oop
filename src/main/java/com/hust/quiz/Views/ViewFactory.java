@@ -102,6 +102,10 @@ public class ViewFactory {
         homeController1.updateQuiz();
     }
 
+    public void endQUiz() {
+        startQuizController.endQuiz();
+    }
+
     public void routes(SCENES scene) {
         switch (scene) {
             case HOME: {

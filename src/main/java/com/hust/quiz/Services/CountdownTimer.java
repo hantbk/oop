@@ -1,5 +1,6 @@
 package com.hust.quiz.Services;
 
+import com.hust.quiz.Views.ViewFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CountdownTimer {
 
+    public boolean running = true;
     private long seconds;
     private Label timerLabel;
     private Timeline timeline;
@@ -25,7 +27,9 @@ public class CountdownTimer {
             } else {
                 seconds--;
             }
-            timerLabel.setText(getClockString());
+            if (running) {
+                timerLabel.setText(getClockString());
+            }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -34,6 +38,8 @@ public class CountdownTimer {
     public void stop() {
         timeline.stop();
         timerLabel.setText("Time's up!");
+        running = false;
+        ViewFactory.getInstance().endQUiz();
     }
 
     private String formatTime(int hours, int minutes, int seconds) {
