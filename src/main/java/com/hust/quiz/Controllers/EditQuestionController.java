@@ -5,6 +5,7 @@ import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.CategoryService;
 import com.hust.quiz.Services.ChoiceService;
+import com.hust.quiz.Services.ImageService;
 import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
@@ -12,9 +13,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,12 +28,13 @@ import java.util.ResourceBundle;
 public class EditQuestionController implements Initializable {
     private final List<ChoiceBoxController> listChoiceBoxController = new ArrayList<>();
     private int countChoice = 0;
+    private String imagePath = null;
     private Question question;
     private List<Choice> listChoice;
     @FXML
-    private ImageView btn_menu_return; // return to home
+    private ImageView btn_menu_return, image_question; // return to home
     @FXML
-    private Button btn_blankChoice, btn_Cancel, btn_SaveAndContinueEditing, btn_SaveChanges;
+    private Button btn_blankChoice, btn_Cancel, btn_SaveAndContinueEditing, btn_SaveChanges, btn_image_question;
     @FXML
     private VBox vBoxAddChoiceBox;
     @FXML
@@ -64,10 +69,8 @@ public class EditQuestionController implements Initializable {
                 labelAlert.setText("Default mark must be a number!");
             } else if (kindOfCategory.getValue() == null) {
                 labelAlert.setText("Category is empty!");
-            } else if (listChoiceBoxController.get(0).getChoiceText().equals("")) {
-                labelAlert.setText("Choice 1 is empty!");
-            } else if (listChoiceBoxController.get(1).getChoiceText().equals("")) {
-                labelAlert.setText("Choice 2 is empty!");
+            } else if (ChoiceBoxController.getCountChoice() < 2) {
+                labelAlert.setText("You must have at least 2 choices!");
             } else if (ChoiceBoxController.getTotalGrade() != 100) {
                 labelAlert.setText("Total of grade must be 100!");
             } else {
@@ -86,10 +89,8 @@ public class EditQuestionController implements Initializable {
                 labelAlert.setText("Default mark must be a number!");
             } else if (kindOfCategory.getValue() == null) {
                 labelAlert.setText("Category is empty!");
-            } else if (listChoiceBoxController.get(0).getChoiceText().equals("")) {
-                labelAlert.setText("Choice 1 is empty!");
-            } else if (listChoiceBoxController.get(1).getChoiceText().equals("")) {
-                labelAlert.setText("Choice 2 is empty!");
+            } else if (ChoiceBoxController.getCountChoice() < 2) {
+                labelAlert.setText("You must have at least 2 choices!");
             } else if ((ChoiceBoxController.getTotalGrade()) != 100) {
                 labelAlert.setText("Total of grade must be 100!");
             } else {
@@ -113,33 +114,65 @@ public class EditQuestionController implements Initializable {
                 labelAlert.setText("You can only add 5 choices!");
             }
         });
+
+        btn_image_question.setOnAction(event -> {
+            FileChooser filechooser = new FileChooser();
+            filechooser.setTitle("Choose Image");
+            File selectedFile = filechooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                imagePath = selectedFile.getAbsolutePath();
+                if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png")) {
+                    btn_image_question.setText("Image is selected");
+                    image_question.setImage(new Image(imagePath));
+                } else {
+                    btn_image_question.setText("Image must be .jpg or .png");
+                    imagePath = null;
+                }
+            }
+        });
     }
 
     private void updateQuestion() {
         // update question
         String categoryName = kindOfCategory.getValue();
 
-        question.setInfo(text_QuestionName.getText(), text_QuestionText.getText(),
+        if (imagePath != null) {
+            imagePath = ImageService.saveImage(question.getId(), imagePath, true);
+        }
+
+        question.setInfo(text_QuestionName.getText(), text_QuestionText.getText().trim(), imagePath,
                 Integer.parseInt(text_DefaultMark.getText()), CategoryService.getID(categoryName));
 
         QuestionService.updateQuestion(question);
 
         // update choice
         for (int i = 0; i < listChoice.size(); i++) {
-            String text = listChoiceBoxController.get(i).getChoiceText();
+            ChoiceBoxController controller = listChoiceBoxController.get(i);
+            String text = controller.getChoiceText();
             if (!text.equals("")) {
-                listChoice.get(i).setInfo(text, listChoiceBoxController.get(i).getGrade());
+                String imageChoice = controller.getImagePath();
+                if (imageChoice != null) {
+                    imageChoice = ImageService.saveImage(listChoice.get(i).getId(), imageChoice, false);
+                }
+                listChoice.get(i).setInfo(text, controller.getGrade(), imageChoice);
             }
         }
         ChoiceService.updateChoice(listChoice);
 
         // add new choice if user add more choice
-        for (int i = listChoice.size(); i < countChoice; i++) {
-            String text = listChoiceBoxController.get(i).getChoiceText();
-            if (!text.equals("")) {
-                Choice newChoice = new Choice(listChoiceBoxController.get(i).getChoiceText(),
-                        listChoiceBoxController.get(i).getGrade(), question.getId());
-                ChoiceService.addChoice(newChoice);
+        if (countChoice > listChoice.size()) {
+            int newChoiceId = ChoiceService.getLastChoiceId() + 1;
+            for (int i = listChoice.size(); i < countChoice; i++) {
+                ChoiceBoxController controller = listChoiceBoxController.get(i);
+                String text = controller.getChoiceText();
+                if (!text.equals("")) {
+                    String imageChoice = controller.getImagePath();
+                    if (imageChoice != null) {
+                        imageChoice = ImageService.saveImage(newChoiceId, imageChoice, false);
+                    }
+                    Choice newChoice = new Choice(controller.getChoiceText(), controller.getGrade(), imageChoice, question.getId());
+                    ChoiceService.addChoice(newChoice);
+                }
             }
         }
 
@@ -168,7 +201,7 @@ public class EditQuestionController implements Initializable {
                 Parent root = loader.load();
                 ChoiceBoxController choiceBoxController = loader.getController();
                 choiceBoxController.setNumberChoice(countChoice + 1);
-                choiceBoxController.setInfo(choice.getContent(), choice.getChoiceGrade());
+                choiceBoxController.setInfo(choice.getContent(), choice.getChoiceGrade(), choice.getChoiceImage());
                 listChoiceBoxController.add(choiceBoxController);
                 vBoxAddChoiceBox.getChildren().add(countChoice++, root);
             }
@@ -179,17 +212,18 @@ public class EditQuestionController implements Initializable {
 
     //ham reset các ô điền về trống
     private void reset() {
-        if(!listChoiceBoxController.isEmpty())
+        if (!listChoiceBoxController.isEmpty())
             listChoiceBoxController.get(0).reset();  // reset total grade = 0
         listChoiceBoxController.clear();
         vBoxAddChoiceBox.getChildren().clear();
         countChoice = 0;
+        System.out.println(ChoiceBoxController.getCountChoice());
 
         labelAlert.setText("");
-        text_QuestionName.setText(null);
-        text_QuestionText.setText(null);
-        text_DefaultMark.setText(null);
-        kindOfCategory.setValue(null);
+//        text_QuestionName.setText(null);
+//        text_QuestionText.setText(null);
+//        text_DefaultMark.setText(null);
+//        kindOfCategory.setValue(null);
         updateCategory();
     }
 
@@ -217,6 +251,16 @@ public class EditQuestionController implements Initializable {
         text_QuestionText.setText(oldQuestion.getQuestion_text());
         kindOfCategory.setValue(category_name);
         text_DefaultMark.setText(String.valueOf(oldQuestion.getMark()));
+
+        // image question
+        imagePath = oldQuestion.getQuestionImage();
+        if (imagePath != null) {
+            Image image = new Image(imagePath);
+            image_question.setImage(image);
+            btn_image_question.setText("Change image");
+        } else {
+            btn_image_question.setText("Add image");
+        }
 
         //set cac choice vao cac o
         listChoice = ChoiceService.getChoice(oldQuestion.getQuestion_id());

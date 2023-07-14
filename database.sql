@@ -56,6 +56,20 @@ BEGIN
     SET question_count = (SELECT COUNT(*) FROM question WHERE category_id = OLD.category_id)
     WHERE category_id = OLD.category_id;
 END;;
+
+CREATE TRIGGER trg_question_count_update
+AFTER UPDATE ON question
+FOR EACH ROW
+BEGIN
+    UPDATE category
+    SET question_count = (SELECT COUNT(*) FROM question WHERE category_id = NEW.category_id)
+    WHERE category_id = NEW.category_id;
+
+    UPDATE category
+    SET question_count = (SELECT COUNT(*) FROM question WHERE category_id = OLD.category_id)
+    WHERE category_id = OLD.category_id;
+END;;
+
 DELIMITER ;
 
 --
@@ -65,8 +79,8 @@ CREATE TABLE `choice` (
   `choice_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `choice_content` VARCHAR(1000) NOT NULL,
   `choice_grade` DOUBLE,
+  `choice_image` VARCHAR(255) DEFAULT NULL,
   `question_id` INT UNSIGNED NOT NULL,
-  `image_data` LONGBLOB,
 
   PRIMARY KEY (`choice_id`),
   INDEX `question_id_idx` (`question_id` ASC) VISIBLE,
@@ -146,15 +160,15 @@ INSERT INTO `question` (`question_id`, `question_name`,`question_text`, `categor
 (1, 'Ay yo', 'abcd', 4),
 (2, 'do dat', 'efgh', 4);
 
-INSERT INTO `choice` (`choice_id`, `choice_content`, `choice_grade`, `question_id`, `image_data`) VALUES
-(1, 'a', 1, 1, NULL),
-(2, 'b', 0, 1, NULL),
-(3, 'c', 0, 1, NULL),
-(4, 'd', 0, 1, NULL),
-(5, 'e', 1, 2, NULL),
-(6, 'f', 0, 2, NULL),
-(7, 'g', 0, 2, NULL),
-(8, 'h', 0, 2, NULL);
+INSERT INTO `choice` (`choice_id`, `choice_content`, `choice_grade`, `question_id`) VALUES
+(1, 'a', 1, 1),
+(2, 'b', 0, 1),
+(3, 'c', 0, 1),
+(4, 'd', 0, 1),
+(5, 'e', 1, 2),
+(6, 'f', 0, 2),
+(7, 'g', 0, 2),
+(8, 'h', 0, 2);
 
 INSERT INTO `quiz`.`quiz` (`quiz_id`, `quiz_name`, `quiz_description`, `quiz_time_limit`, `quiz_time_format`) VALUES 
 ('1', 'OOP', 'Kiểm tra giữa kì', '120', 'minutes'),
