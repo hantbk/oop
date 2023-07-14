@@ -3,10 +3,7 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
-import com.hust.quiz.Services.CategoryService;
-import com.hust.quiz.Services.ChoiceService;
-import com.hust.quiz.Services.ImageService;
-import com.hust.quiz.Services.QuestionService;
+import com.hust.quiz.Services.*;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +51,6 @@ public class EditQuestionController implements Initializable {
         // configure btn_menu_return
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
@@ -65,7 +61,7 @@ public class EditQuestionController implements Initializable {
                 labelAlert.setText("Question name is empty!");
             } else if (text_QuestionText.getText().equals("")) {
                 labelAlert.setText("Question text is empty!");
-            } else if (isNotNumber(text_DefaultMark.getText())) {
+            } else if (Utils.isNotNumber(text_DefaultMark.getText())) {
                 labelAlert.setText("Default mark must be a number!");
             } else if (kindOfCategory.getValue() == null) {
                 labelAlert.setText("Category is empty!");
@@ -85,7 +81,7 @@ public class EditQuestionController implements Initializable {
                 labelAlert.setText("Question name is empty!");
             } else if (text_QuestionText.getText().equals("")) {
                 labelAlert.setText("Question text is empty!");
-            } else if (isNotNumber(text_DefaultMark.getText())) {
+            } else if (Utils.isNotNumber(text_DefaultMark.getText())) {
                 labelAlert.setText("Default mark must be a number!");
             } else if (kindOfCategory.getValue() == null) {
                 labelAlert.setText("Category is empty!");
@@ -109,7 +105,7 @@ public class EditQuestionController implements Initializable {
         //them 3 choice sau khi nhan vao btn
         btn_blankChoice.setOnAction(event -> {
             if (countChoice < 5) {
-                addChoiceBox(3);
+                addChoiceBox(5 - countChoice);
             } else {
                 labelAlert.setText("You can only add 5 choices!");
             }
@@ -181,7 +177,7 @@ public class EditQuestionController implements Initializable {
 
     private void addChoiceBox(int numberChoice) {
         try {
-            for (int i = 0; i < numberChoice && countChoice < 5; i++) {
+            for (int i = 0; i < numberChoice; i++) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/choiceQuestionBox.fxml"));
                 Parent root = loader.load();
                 ChoiceBoxController choiceBoxController = loader.getController();
@@ -220,10 +216,6 @@ public class EditQuestionController implements Initializable {
         System.out.println(ChoiceBoxController.getCountChoice());
 
         labelAlert.setText("");
-//        text_QuestionName.setText(null);
-//        text_QuestionText.setText(null);
-//        text_DefaultMark.setText(null);
-//        kindOfCategory.setValue(null);
         updateCategory();
     }
 
@@ -232,15 +224,6 @@ public class EditQuestionController implements Initializable {
         List<Category> listCategory = CategoryService.getCategories();
         for (Category category : listCategory) {
             kindOfCategory.getItems().add(category.toString());
-        }
-    }
-
-    private boolean isNotNumber(String str) {
-        try {
-            Integer.parseInt(str);
-            return false;
-        } catch (NumberFormatException e) {
-            return true;
         }
     }
 

@@ -2,6 +2,7 @@ package com.hust.quiz.Views;
 
 import com.hust.quiz.Controllers.*;
 import com.hust.quiz.Models.Question;
+import com.hust.quiz.Models.Quiz;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -78,8 +79,8 @@ public class ViewFactory {
         quizViewController.displayInfo(quizName);
     }
 
-    public void updateEditQuizView(String quizName) {
-        editQuizController.editQuizDisplayInfo(quizName);
+    public void updateEditQuizView(Quiz quiz) {
+        editQuizController.editQuizDisplayInfo(quiz);
     }
 
     //ham nay de dien thong tin question vao cac o khi bam vao edit ow questionBank
@@ -87,19 +88,14 @@ public class ViewFactory {
         editQuestionController.setInfo(question, category_name);
     }
 
-    public void updateQuestionQuiz(String quizName) {
-        startQuizController.updateQuestion(quizName);
+    public void updateQuestionQuiz(Quiz quiz) {
+        startQuizController.updateQuestion(quiz);
     }
-//    public void updateQuestionQuiz(List<Question> listQuestion, String quizName) {
-//        startQuizController.updateQuestion(listQuestion, quizName);
-//    }
 
     //update quiz trong home
     public void updateQuizHome() {
         homeController.updateQuiz();
     }
-
-    ;
 
     public void routes(SCENES scene) {
         switch (scene) {
@@ -133,6 +129,7 @@ public class ViewFactory {
                 break;
             }
             case START_QUIZ: {
+                startQuizController.runTimer();
                 stage.setScene(startQuizScene);
                 break;
             }

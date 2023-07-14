@@ -3,10 +3,7 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
-import com.hust.quiz.Services.CategoryService;
-import com.hust.quiz.Services.ChoiceService;
-import com.hust.quiz.Services.ImageService;
-import com.hust.quiz.Services.QuestionService;
+import com.hust.quiz.Services.*;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,7 +54,6 @@ public class AddQuestionController implements Initializable {
         // configure btn_menu_return
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
@@ -68,7 +64,7 @@ public class AddQuestionController implements Initializable {
                 labelAlert.setText("Question name is empty!");
             } else if (text_QuestionText.getText().equals("")) {
                 labelAlert.setText("Question text is empty!");
-            } else if (isNotNumber(text_DefaultMark.getText())) {
+            } else if (Utils.isNotNumber(text_DefaultMark.getText())) {
                 labelAlert.setText("Default mark must be a number!");
             } else if (kindOfCategory.getValue() == null) {
                 labelAlert.setText("Category is empty!");
@@ -88,7 +84,7 @@ public class AddQuestionController implements Initializable {
                 labelAlert.setText("Question name is empty!");
             } else if (text_QuestionText.getText().equals("")) {
                 labelAlert.setText("Question text is empty!");
-            } else if (isNotNumber(text_DefaultMark.getText())) {
+            } else if (Utils.isNotNumber(text_DefaultMark.getText())) {
                 labelAlert.setText("Default mark must be a number!");
             } else if (kindOfCategory.getValue() == null) {
                 labelAlert.setText("Category is empty!");
@@ -209,15 +205,6 @@ public class AddQuestionController implements Initializable {
         List<Category> listCategory = CategoryService.getCategories();
         for (Category category : listCategory) {
             kindOfCategory.getItems().add(category.toString());
-        }
-    }
-
-    private boolean isNotNumber(String str) {
-        try {
-            Integer.parseInt(str);
-            return false;
-        } catch (NumberFormatException e) {
-            return true;
         }
     }
 }

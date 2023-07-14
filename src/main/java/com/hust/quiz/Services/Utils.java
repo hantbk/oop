@@ -21,4 +21,21 @@ public class Utils {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     }
+
+    public static boolean isNotNumber(String str) {
+        try {
+            Integer.parseInt(str);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
+    public static int StringToInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
 }

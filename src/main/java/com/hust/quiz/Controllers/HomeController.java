@@ -1,6 +1,5 @@
 package com.hust.quiz.Controllers;
 
-import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
@@ -21,6 +20,7 @@ import java.util.ResourceBundle;
 
 
 public class HomeController implements Initializable {
+    private final List<String> listQuizName = new ArrayList<>();
     @FXML
     private Button btn_add, btn_back, btn_question, btn_category, btn_import, btn_export, btn_turn_editing_on;
     @FXML
@@ -29,7 +29,6 @@ public class HomeController implements Initializable {
     private VBox vbox_quiz;
     private Parent questionBankView;
     private QuestionBankController questionBankController;
-    private List<String> listQuizName = new ArrayList<>();
 
     /**
      * Reset home status
@@ -44,7 +43,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //get quiz from database show in homeview
-        this.updateQuiz();
+        updateQuiz();
 
         // configure btn_add, btn_back
         btn_add.setOnAction(e -> {
@@ -108,13 +107,14 @@ public class HomeController implements Initializable {
     public QuestionBankController getQuestionBankController() {
         return questionBankController;
     }
-    public void updateQuiz(){
+
+    public void updateQuiz() {
         vbox_quiz.getChildren().clear();
         listQuizName.clear();
         Image image = new Image(String.valueOf(this.getClass().getResource("/Img/filecheck.png")));
         listQuizName.addAll(QuizService.getAllQuiz());
-        List<ImageView> imageViews = new ArrayList<ImageView>(listQuizName.size());
-        for(int i = 0; i < listQuizName.size(); i++){
+        List<ImageView> imageViews = new ArrayList<>(listQuizName.size());
+        for (int i = 0; i < listQuizName.size(); i++) {
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(60);
             imageView.setFitWidth(60);

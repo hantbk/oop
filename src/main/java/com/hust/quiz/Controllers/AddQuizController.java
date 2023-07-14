@@ -2,6 +2,7 @@ package com.hust.quiz.Controllers;
 
 import com.hust.quiz.Models.Quiz;
 import com.hust.quiz.Services.QuizService;
+import com.hust.quiz.Services.Utils;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -10,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddQuizController implements Initializable {
@@ -23,9 +23,7 @@ public class AddQuizController implements Initializable {
     @FXML
     private TextField text_time_limit; // Time limit
     @FXML
-    private Spinner<String> spinner_time_format;
-    @FXML
-    private Spinner<String> spinner_time_expire;
+    private Spinner<String> spinner_time_format, spinner_time_expire;
     @FXML
     private Button btn_create, btn_cancel; // Save quiz, Cancel create quiz
     @FXML
@@ -50,56 +48,39 @@ public class AddQuizController implements Initializable {
         // configure btn_save - save quiz
         btn_create.setOnAction(event -> {
             String quizName = text_quiz_name.getText();
-            String quizDescription = Objects.equals(text_quiz_description.getText(), "")
-                    ? "No description" : text_quiz_description.getText();
-            int timeLimit;
-            String time_format = null;
 
             if (quizName.isEmpty()) {
                 // alert pop-up if didn't fill name box
                 alert_missing_name.setVisible(true);
             } else {
-                if(checkbox_enable_time_limit.isSelected()){
-                    timeLimit = Integer.parseInt(text_time_limit.getText());
-                    time_format = spinner_time_format.getValue();
-                    // turn off alert
-                    alert_missing_name.setVisible(false);
+                // turn off alert
+                alert_missing_name.setVisible(false);
 
-                    QuizService.addQuiz(new Quiz(quizName, quizDescription, timeLimit, time_format));
-                    ViewFactory.getInstance().updateQuizView(quizName);
-                    this.reset();
-                    ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
-                }else {
-                    // turn off alert
-                    alert_missing_name.setVisible(false);
+                String quizDescription = "";
+                int timeLimit = 0;
+                String time_format = null;
 
-                    QuizService.addQuiz(new Quiz(quizName, quizDescription, 0, time_format));
-                    ViewFactory.getInstance().updateQuizView(quizName);
-                    this.reset();
-                    ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+                if (check_display_description.isSelected()) {
+                    quizDescription = text_quiz_description.getText().trim();
                 }
+
+                if (checkbox_enable_time_limit.isSelected()) {
+                    timeLimit = Utils.StringToInt(text_time_limit.getText());
+                    time_format = spinner_time_format.getValue();
+                }
+                QuizService.addQuiz(new Quiz(quizName, quizDescription, timeLimit, time_format, date_open.getValue(), date_close.getValue()));
+
+                ViewFactory.getInstance().updateQuizView(quizName);
+                this.reset();
+                ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
             }
         });
 
         //tick enable để có thể set open date
-        checkbox_enable_open.setOnAction(event -> {
-            if (checkbox_enable_open.isSelected()) {
-                date_open.setDisable(false);
-            } else {
-                date_open.setValue(null);
-                date_open.setDisable(true);
-            }
-        });
+        checkbox_enable_open.setOnAction(event -> date_open.setDisable(!checkbox_enable_open.isSelected()));
 
         //tick enable để có thể set close date
-        checkbox_enable_close.setOnAction(event -> {
-            if (checkbox_enable_close.isSelected()) {
-                date_close.setDisable(false);
-            } else {
-                date_close.setValue(null);
-                date_close.setDisable(true);
-            }
-        });
+        checkbox_enable_close.setOnAction(event -> date_close.setDisable(!checkbox_enable_close.isSelected()));
 
         //tick enable để có thể set time limit
         checkbox_enable_time_limit.setOnAction(event -> {
@@ -108,7 +89,6 @@ public class AddQuizController implements Initializable {
                 spinner_time_format.setDisable(false);
             } else {
                 text_time_limit.clear();
-                spinner_time_format.getValueFactory().setValue(null);
                 text_time_limit.setDisable(true);
                 spinner_time_format.setDisable(true);
             }
@@ -122,14 +102,8 @@ public class AddQuizController implements Initializable {
     }
 
     private void setInit() {
-        //ban đầu các thành phần này sẽ không điền được nếu không chọn enable
-        date_open.setDisable(true);
-        date_close.setDisable(true);
-        text_time_limit.setDisable(true);
-        spinner_time_format.setDisable(true);
-
         //set gia tri ban dau chon spiner chon minute
-        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("minutes", "hours", "days")));
+        spinner_time_format.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("minutes", "hours", "days", "seconds", "weeks")));
         // default time expire - fixed - no change
         spinner_time_expire.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("Open attempts are submitted automatically")));
     }
@@ -140,15 +114,15 @@ public class AddQuizController implements Initializable {
         date_open.setValue(null);
         date_close.setValue(null);
         text_time_limit.setText(null);
-        spinner_time_format.getValueFactory().setValue(null);
-        if(checkbox_enable_open.isSelected())
-            checkbox_enable_open.setSelected(false);
-        if(checkbox_enable_close.isSelected())
-            checkbox_enable_close.setSelected(false);
-        if(checkbox_enable_time_limit.isSelected())
-            checkbox_enable_time_limit.setSelected(false);
+        spinner_time_format.getValueFactory().setValue("minutes");
+        //ban đầu các thành phần này sẽ không điền được nếu không chọn enable
+        date_open.setDisable(true);
+        date_close.setDisable(true);
+        text_time_limit.setDisable(true);
+        spinner_time_format.setDisable(true);
 
-        setInit();
+        checkbox_enable_open.setSelected(false);
+        checkbox_enable_close.setSelected(false);
+        checkbox_enable_time_limit.setSelected(false);
     }
-
 }
