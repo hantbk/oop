@@ -4,8 +4,10 @@ module com.hust.quiz {
     requires java.sql;
     requires mysql.connector.java;
 
-//    requires org.apache.poi.ooxml;
-    requires poi.ooxml;
+
+    requires org.apache.poi.ooxml;
+
+    //requires poi.ooxml;
 
     opens com.hust.quiz to javafx.fxml;
     exports com.hust.quiz;
