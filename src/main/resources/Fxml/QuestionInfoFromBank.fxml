@@ -14,20 +14,41 @@
          <image>
             <Image url="@../Img/plus.png" />
          </image>
+         <HBox.margin>
+            <Insets top="2.0" />
+         </HBox.margin>
       </ImageView>
-      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
+      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" prefHeight="30.0" prefWidth="561.0" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
          <padding>
             <Insets bottom="5.0" />
          </padding>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/bulleted-list-32.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </CheckBox>
-      <Label fx:id="question_content" text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
+      <Label fx:id="question_content" prefHeight="21.0" prefWidth="342.0" text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
          <font>
             <Font size="15.0" />
          </font>
+         <padding>
+            <Insets top="2.0" />
+         </padding>
       </Label>
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/zoom-in.png" />
+         </image>
+         <HBox.margin>
+            <Insets left="5.0" top="2.0" />
+         </HBox.margin>
+      </ImageView>
    </children>
    <padding>
       <Insets top="5.0" />

@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
    <children>
       <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
          <children>
@@ -329,8 +329,8 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor_blur" opacity="0.3" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" visible="false" />
-      <AnchorPane fx:id="anchor_add_question_bank" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE;" visible="false">
+      <AnchorPane fx:id="anchor_blur" opacity="0.5" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: WHITE;" visible="false" />
+      <AnchorPane fx:id="anchor_add_question_bank" layoutX="150.0" layoutY="100.0" prefHeight="608.0" prefWidth="1003.0" style="-fx-background-color: WHITE; -fx-border-color: #19A7CE;" visible="false">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0">
                <children>
@@ -346,6 +346,9 @@
                      <image>
                         <Image url="@../Img/icons8-cancel-40.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets left="35.0" />
+                     </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
@@ -396,7 +399,7 @@
               <content>
                 <AnchorPane fx:id="pane_question_list" minHeight="0.0" minWidth="0.0" prefWidth="950.0">
                      <children>
-                        <CheckBox layoutX="20.0" mnemonicParsing="false" text="Questions">
+                        <CheckBox layoutX="25.0" mnemonicParsing="false" text="Questions">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -410,7 +413,7 @@
                                           <Image url="@../Img/plus.png" />
                                        </image>
                                     </ImageView>
-                                    <CheckBox maxWidth="470.0" mnemonicParsing="false" prefHeight="21.0" text="Question name">
+                                    <CheckBox maxWidth="470.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="127.0" text="Question name">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
@@ -431,7 +434,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Button fx:id="btn_add_ques_bank_selected" layoutX="20.0" layoutY="558.0" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="ADD SELECTED QUESTIONS TO THE QUIZ" textFill="WHITE">
+            <Button fx:id="btn_add_ques_bank_selected" layoutX="20.0" layoutY="565.0" mnemonicParsing="false" style="-fx-background-color: #146C94;" text="ADD SELECTED QUESTIONS TO THE QUIZ" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
