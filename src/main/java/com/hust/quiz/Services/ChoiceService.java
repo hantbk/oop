@@ -27,7 +27,7 @@ public class ChoiceService {
             // add questions found to list
             while (rs.next()) {
                 Choice choice = new Choice(rs.getInt("choice_id"), rs.getString("choice_content"),
-                        rs.getInt("choice_grade"), rs.getString("choice_image"), question_id);
+                        rs.getDouble("choice_grade"), rs.getString("choice_image"), question_id);
                 result.add(choice);
             }
             // close
