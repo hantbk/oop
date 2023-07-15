@@ -19,6 +19,9 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
       </CheckBox>
       <Label fx:id="question_content" text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
          <font>

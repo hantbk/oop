@@ -3,19 +3,29 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="40.0" prefWidth="1081.0" stylesheets="@../Styles/questionBank.css"
-            xmlns="http://javafx.com/javafx/18" fx:controller="com.hust.quiz.Controllers.QuestionInforController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="1081.0" stylesheets="@../Styles/questionBank.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInforController">
     <children>
-        <Button fx:id="edit_button" layoutX="1014.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0"
-                prefWidth="50.0" styleClass="tab-label" text="Edit"/>
-        <CheckBox fx:id="select_checkbox" layoutX="6.0" layoutY="12.0" mnemonicParsing="false"/>
-        <Label fx:id="infoQuestion_label" layoutX="27.0" layoutY="3.0" prefHeight="31.0" prefWidth="968.0">
+      <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="10.0">
+         <image>
+            <Image url="@../Img/bulleted-list-32.png" />
+         </image>
+      </ImageView>
+        <Button fx:id="edit_button" layoutX="1020.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: rgba(0,0,0,0);" styleClass="tab-label" text="Edit" />
+        <CheckBox fx:id="select_checkbox" layoutX="6.0" layoutY="12.0" mnemonicParsing="false" />
+        <Label fx:id="infoQuestion_label" layoutX="50.0" layoutY="3.0" prefHeight="31.0" prefWidth="945.0">
             <font>
-                <Font size="14.0"/>
+                <Font size="14.0" />
             </font>
         </Label>
+      <ImageView fitHeight="10.0" fitWidth="10.0" layoutX="1062.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Img/bluearrowdown.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
