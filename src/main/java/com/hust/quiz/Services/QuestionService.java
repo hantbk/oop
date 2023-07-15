@@ -10,7 +10,7 @@ import java.util.List;
 public class QuestionService {
 
     //lấy id bằng question_name
-    public static int getId(String question_name) {
+    public static int getId(String question_name) throws SQLException {
         try (Connection conn = Utils.getConnection()) {
             // SELECT row have category_name
             String sql = "SELECT question_id FROM question WHERE question_name = ?";
@@ -23,37 +23,30 @@ public class QuestionService {
                 return rs.getInt("question_id");
             } else {
                 System.out.println("No ID found");
+                return -1;
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
         }
-        return -1;
     }
 
     //add question to database
-    public static void addQuestion(Question question) {
+    public static void addQuestion(Question question) throws SQLException {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO question (question_name, question_text, question_image, mark, category_id)" +
                     " VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, question.getQuestion_name());
             pst.setString(2, question.getQuestion_text());
-            pst.setString(3, question.getQuestion_image());
+            pst.setString(3, question.getQuestionImage());
             pst.setInt(4, question.getMark());
             pst.setString(5, String.valueOf(question.getCategory_id()));
             pst.executeUpdate();
             pst.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    public static void addQuestion(List<Question> questions, int category_id) {
+    public static void addQuestion(List<Question> questions, int category_id) throws SQLException {
         // Avoid create connection many times
-        try {
-            Connection conn = Utils.getConnection();
+        try (Connection conn = Utils.getConnection()) {
             Statement stmt = conn.createStatement();
 
             String sql = "INSERT INTO question (question_name, question_text, question_image, mark, category_id)" +
@@ -62,7 +55,7 @@ public class QuestionService {
                 PreparedStatement pst = conn.prepareStatement(sql);
                 pst.setString(1, question.getQuestion_name());
                 pst.setString(2, question.getQuestion_text());
-                pst.setString(3, question.getQuestion_image());
+                pst.setString(3, question.getQuestionImage());
                 pst.setInt(4, question.getMark());
                 pst.setString(5, String.valueOf(category_id));
                 pst.executeUpdate();
@@ -70,9 +63,6 @@ public class QuestionService {
             }
 
             stmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -124,7 +114,6 @@ public class QuestionService {
                 return rs.getInt("question_id");
             }
             ps.close();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -178,13 +167,14 @@ public class QuestionService {
 
     public static void updateQuestion(Question question) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "UPDATE question SET question_name = ?, question_text = ?, mark = ?, category_id = ? WHERE question_id = ?";
+            String sql = "UPDATE question SET question_name = ?, question_text = ?, question_image = ?, mark = ?, category_id = ? WHERE question_id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, question.getQuestion_name());
             pst.setString(2, question.getQuestion_text());
-            pst.setInt(3, question.getMark());
-            pst.setString(4, String.valueOf(question.getCategory_id()));
-            pst.setString(5, String.valueOf(question.getQuestion_id()));
+            pst.setString(3, question.getQuestionImage());
+            pst.setInt(4, question.getMark());
+            pst.setString(5, String.valueOf(question.getCategory_id()));
+            pst.setString(6, String.valueOf(question.getQuestion_id()));
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {

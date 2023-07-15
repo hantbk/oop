@@ -6,6 +6,7 @@ import com.hust.quiz.Models.Question;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class LoaderTextService {
                 Matcher answerMatcher = answerPattern.matcher(line);
 
                 if (answerMatcher.matches()) {
-                    Choice choice = new Choice(line.substring(3), 0, quest_id);
+                    Choice choice = new Choice(line.substring(3), 0, null, quest_id);
                     choices.add(choice);
 
                     validAnswers.add(line.substring(0, 1));
@@ -67,7 +68,7 @@ public class LoaderTextService {
                     validAnswers.clear(); // Reset valid answers
                 } else {
                     quest_id++;
-                    Question question = new Question(quest_id,getTime()+" "+String.valueOf(quest_id), line, null);
+                    Question question = new Question(quest_id, getTime() + " " + String.valueOf(quest_id), line, null);
                     questions.add(question);
                     questionCount++;
                 }
@@ -81,8 +82,8 @@ public class LoaderTextService {
 
                 return "Success: " + questionCount + " question(s) found";
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | SQLException e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefWidth="871.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionReviewController">
+    <children>
+        <AnchorPane layoutX="10.0" layoutY="10.0" style="-fx-border-color: #146C94;">
+            <children>
+                <VBox AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label text="Question ">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="label_questionNum" text="1">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <Label text="Not yet answer">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="Marked out of">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Label text="1.0">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                <Label text="Flag question" textFill="#146c94">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="0.0">
+                            <children>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Img/setting.png" />
+                                    </image></ImageView>
+                                <Label text="Edit question" textFill="#146c94">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+      <VBox layoutX="150.0" layoutY="10.0" prefHeight="245.0" spacing="20.0">
+         <children>
+            <VBox>
+               <children>
+                    <AnchorPane style="-fx-background-color: #EEEEEE;">
+                        <children>
+                            <VBox prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
+                                <children>
+                                    <Label fx:id="label_questionContent" text="Question content" wrapText="true">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Label>
+                              <HBox>
+                                 <children>
+                                          <RadioButton fx:id="rButton_A" disable="true" mnemonicParsing="false">
+                                              <toggleGroup>
+                                                  <ToggleGroup fx:id="Choice" />
+                                              </toggleGroup>
+                                              <font>
+                                                  <Font size="15.0" />
+                                              </font>
+                                          </RadioButton>
+                                    <Label fx:id="lbChoiceA" text="Choice A" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                          <RadioButton fx:id="rButton_B" disable="true" mnemonicParsing="false" toggleGroup="$Choice">
+                                              <font>
+                                                  <Font size="15.0" />
+                                              </font>
+                                    </RadioButton>
+                                    <Label fx:id="lbChoiceB" text="Choice B" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                          <RadioButton fx:id="rButton_C" disable="true" mnemonicParsing="false" toggleGroup="$Choice">
+                                              <font>
+                                                  <Font size="15.0" />
+                                              </font>
+                                    </RadioButton>
+                                    <Label fx:id="lbChoiceC" text="Choice C" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                          <RadioButton fx:id="rButton_D" disable="true" mnemonicParsing="false" toggleGroup="$Choice">
+                                              <font>
+                                                  <Font size="15.0" />
+                                              </font>
+                                    </RadioButton>
+                                    <Label fx:id="lbChoiceD" text="Choice D" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                          <RadioButton fx:id="rButton_E" disable="true" mnemonicParsing="false">
+                                              <toggleGroup>
+                                                  <ToggleGroup fx:id="Choice1" />
+                                              </toggleGroup>
+                                              <font>
+                                                  <Font size="15.0" />
+                                              </font>
+                                          </RadioButton>
+                                    <Label fx:id="lbChoiceE" text="Choice E" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                                </children>
+                        </VBox>
+                        </children>
+                    </AnchorPane>
+               </children>
+            </VBox>
+            <AnchorPane>
+               <children>
+                  <VBox fx:id="correctPlace" prefHeight="36.0" prefWidth="720.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="21.0" prefWidth="643.0">
+                           <children>
+                              <Label text="The correct answer is: ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbCorrectAnswer" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

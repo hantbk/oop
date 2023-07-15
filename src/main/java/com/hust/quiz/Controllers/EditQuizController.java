@@ -2,8 +2,10 @@ package com.hust.quiz.Controllers;
 
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Question;
+import com.hust.quiz.Models.Quiz;
 import com.hust.quiz.Services.CategoryService;
 import com.hust.quiz.Services.QuestionService;
+import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,23 +28,19 @@ public class EditQuizController implements Initializable {
     @FXML
     private ImageView btn_menu_return;
     @FXML
-    private Label label_quiz_name_IT, label_quiz_name_edit;
-    @FXML
-    private Label number_of_questions;
+    private Label label_quiz_name_IT, label_quiz_name_edit, number_of_questions;
     @FXML
     private AnchorPane add_question_option;
     @FXML
-    private HBox add_new_question;
-    @FXML
-    private HBox add_from_bank;
-    @FXML
-    private HBox add_random;
+    private HBox add_new_question, add_from_bank, add_random;
     @FXML
     private ImageView arrow_add;
 
-    // ADD QUESTIONS FROM BANK
+    // BLURRRRRR
     @FXML
     private AnchorPane anchor_blur;
+
+    // ADD QUESTIONS FROM BANK
     @FXML
     private AnchorPane anchor_add_question_bank;
     @FXML
@@ -57,11 +55,36 @@ public class EditQuizController implements Initializable {
     private CheckBox showSubcategoryQuestionCheckbox;
     @FXML
     private VBox listQuestion_vbox;
+    @FXML
+    private Button btn_add_ques_bank_selected;
 
-    public void editQuizDisplayInfo(String quizName) {
-        // TODO: Update num
-        label_quiz_name_IT.setText(quizName);
-        label_quiz_name_edit.setText(quizName);
+    // ADD A RANDOM QUESTION
+    @FXML
+    private AnchorPane anchor_add_question_random;
+    @FXML
+    private ImageView btn_exit_add_random;
+    @FXML
+    private Button btn_add_ques_random;
+    @FXML
+    private ComboBox<String> btn_category_random;
+    @FXML
+    private TreeView<String> tree_view_category_random;
+    @FXML
+    private CheckBox showSubcategoryQuestionCheckbox_random;
+    @FXML
+    private VBox listQuestion_vbox_random;
+    @FXML
+    private AnchorPane list_question_pane_random;
+
+    private Quiz quiz;
+    private List<Question> questionList;
+
+    public void editQuizDisplayInfo(Quiz quiz) {
+        this.quiz = quiz;
+        label_quiz_name_IT.setText(quiz.getQuiz_name());
+        label_quiz_name_edit.setText(quiz.getQuiz_name());
+        questionList = QuizService.getQuestionQuiz(quiz.getQuiz_id());
+        number_of_questions.setText(questionList.size() + " questions");
     }
 
     @Override
@@ -74,14 +97,17 @@ public class EditQuizController implements Initializable {
         add_question_option.setVisible(false);
         anchor_blur.setVisible(false);
         anchor_add_question_bank.setVisible(false);
+        anchor_add_question_random.setVisible(false);
 
         arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(true));
 
-        // configure add a new question
+
+        // TODO: configure add a new question
         add_new_question.setOnMouseClicked(event -> {
             add_question_option.setVisible(false);
         });
-        // configure add question from bank
+
+        // TODO: configure add question from bank
         add_from_bank.setOnMouseClicked(event -> {
             updateCategory();
             add_question_option.setVisible(false);
@@ -111,28 +137,35 @@ public class EditQuizController implements Initializable {
                         if (showSubcategoryQuestionCheckbox.isSelected()) {
                             if (listQuestions != null && !listQuestions.isEmpty()) {
                                 listQuestions.addAll(currentCategoryQuestions);
-                                addToQuestionList(listQuestions, category_name);
+                                addToQuestionList(listQuestions, category_name,listQuestion_vbox,pane_question_list);
                             } else if (!currentCategoryQuestions.isEmpty()) {
-                                addToQuestionList(currentCategoryQuestions, category_name);
+                                addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
                             } else {
                                 pane_question_list.setVisible(false);
                             }
                         } else {
-                            addToQuestionList(currentCategoryQuestions, category_name);
+                            addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
                         }
                         // check checkbox show subcategory is selected or not AFTER select category
                         showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
                             if (showSubcategoryQuestionCheckbox.isSelected()) {
                                 if (listQuestions != null && !listQuestions.isEmpty()) {
                                     listQuestions.addAll(currentCategoryQuestions);
-                                    addToQuestionList(listQuestions, category_name);
+                                    addToQuestionList(listQuestions, category_name, listQuestion_vbox, pane_question_list);
                                 }
                             } else {
-                                addToQuestionList(currentCategoryQuestions, category_name);
+                                addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
                             }
                         });
                     }
                 }
+            });
+            // configure add selected questions
+            btn_add_ques_bank_selected.setOnAction(e -> {
+                anchor_blur.setVisible(false);
+                anchor_add_question_bank.setVisible(false);
+
+                // TODO: Add to quiz
             });
 
             // configure exit
@@ -141,9 +174,72 @@ public class EditQuizController implements Initializable {
                 anchor_add_question_bank.setVisible(false);
             });
         });
-        // configure add a random question
+
+        // TODO: configure add a random question
         add_random.setOnMouseClicked(event -> {
             add_question_option.setVisible(false);
+            anchor_blur.setVisible(true);
+            anchor_add_question_random.setVisible(true);
+
+            // display category tree view
+            updateCategory();
+            // configure display TreeView
+            btn_category_random.getParent().setOnMouseClicked(e -> tree_view_category_random.setVisible(false));
+            btn_category_random.setOnMouseClicked(e -> tree_view_category_random.setVisible(!tree_view_category_random.isVisible()));
+
+            tree_view_category_random.setOnMouseClicked(e -> {
+                if (e.getClickCount() == 2) {
+                    TreeItem<String> selectedItem = tree_view_category_random.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        String category_name = selectedItem.getValue();
+                        btn_category_random.setValue(category_name);
+                        tree_view_category_random.setVisible(false);
+
+                        // Find ID of the category
+                        int idCategory = CategoryService.getID(category_name);
+                        List<Question> currentCategoryQuestions = QuestionService.getQuestions(idCategory);
+                        List<Question> listQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
+
+                        listQuestion_vbox_random.getChildren().clear();
+                        // check checkbox show subcategory is selected or not BEFORE select category
+                        if (showSubcategoryQuestionCheckbox_random.isSelected()) {
+                            if (listQuestions != null && !listQuestions.isEmpty()) {
+                                listQuestions.addAll(currentCategoryQuestions);
+                                addToQuestionList(listQuestions, category_name, listQuestion_vbox_random, list_question_pane_random);
+                            } else if (!currentCategoryQuestions.isEmpty()) {
+                                addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox_random, list_question_pane_random);
+                            } else {
+                                list_question_pane_random.setVisible(false);
+                            }
+                        } else {
+                            addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox_random, list_question_pane_random);
+                        }
+                        // check checkbox show subcategory is selected or not AFTER select category
+                        showSubcategoryQuestionCheckbox_random.setOnAction(actionEvent -> {
+                            if (showSubcategoryQuestionCheckbox_random.isSelected()) {
+                                if (listQuestions != null && !listQuestions.isEmpty()) {
+                                    listQuestions.addAll(currentCategoryQuestions);
+                                    addToQuestionList(listQuestions, category_name, listQuestion_vbox_random, list_question_pane_random);
+                                }
+                            } else {
+                                addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox_random, list_question_pane_random);
+                            }
+                        });
+                    }
+                }
+            });
+
+            // configure add random questions
+            btn_add_ques_random.setOnAction(e -> {
+                anchor_blur.setVisible(false);
+                anchor_add_question_random.setVisible(false);
+                // TODO: Add
+            });
+            // configure exit
+            btn_exit_add_random.setOnMouseClicked(e -> {
+                anchor_blur.setVisible(false);
+                anchor_add_question_random.setVisible(false);
+            });
         });
     }
 
@@ -155,6 +251,7 @@ public class EditQuizController implements Initializable {
             }
         }
     }
+
     private void updateCategory() {
         List<Category> categories = CategoryService.getCategories();
         // create TreeItem
@@ -177,10 +274,11 @@ public class EditQuizController implements Initializable {
 
         tree_view_category.setRoot(rootNode);
         tree_view_category.setShowRoot(false);
+        tree_view_category_random.setRoot(rootNode);
+        tree_view_category_random.setShowRoot(false);
     }
-
-    private void addToQuestionList(List<Question> questions, String category_name) {
-        listQuestion_vbox.getChildren().clear();
+    private void addToQuestionList(List<Question> questions, String category_name, VBox list, AnchorPane listPane) {
+        list.getChildren().clear();
 
         if (!questions.isEmpty()) {
             //add new_list_question
@@ -190,15 +288,15 @@ public class EditQuizController implements Initializable {
                     Parent questionInfo = loader.load();
                     QuestionInfoFromBankController controller = loader.getController();
                     controller.updateQuestionInfo(q, category_name);
-                    listQuestion_vbox.getChildren().add(questionInfo);
+                    list.getChildren().add(questionInfo);
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                     e.printStackTrace();
                 }
             }
-            pane_question_list.setVisible(true);
+            listPane.setVisible(true);
         } else {
-            pane_question_list.setVisible(false);
+            listPane.setVisible(false);
         }
     }
 }

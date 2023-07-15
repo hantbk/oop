@@ -27,7 +27,7 @@ public class ChoiceService {
             // add questions found to list
             while (rs.next()) {
                 Choice choice = new Choice(rs.getInt("choice_id"), rs.getString("choice_content"),
-                        rs.getInt("choice_grade"), question_id);
+                        rs.getDouble("choice_grade"), rs.getString("choice_image"), question_id);
                 result.add(choice);
             }
             // close
@@ -44,12 +44,13 @@ public class ChoiceService {
     //add  choice to sql
     public static void addChoice(Choice choice) {
         try (Connection conn = Utils.getConnection()) {
-            String sql = "INSERT INTO choice (choice_content, choice_grade, question_id)" +
-                    " VALUES (?, ?, ?)";
+            String sql = "INSERT INTO choice (choice_content, choice_grade, choice_image, question_id)" +
+                    " VALUES (?, ?, ?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, choice.getContent());
             pst.setDouble(2, choice.getChoiceGrade());
-            pst.setInt(3, choice.getQuestion_id());
+            pst.setString(3, choice.getChoiceImage());
+            pst.setInt(4, choice.getQuestion_id());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -69,10 +70,16 @@ public class ChoiceService {
             Connection conn = Utils.getConnection();
 
             Statement st = conn.createStatement();
+            String sql = "INSERT INTO choice (choice_content, choice_grade, choice_image, question_id) VALUES (?, ?, ?, ?)";
             for (Choice choice : choices) {
-                String sql = "INSERT INTO choice (choice_content, choice_grade, question_id)" +
-                        " VALUES ('" + choice.getContent() + "', " + choice.getChoiceGrade() + ", " + choice.getQuestion_id() + ")";
-                st.executeUpdate(sql);
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, choice.getContent());
+                pst.setDouble(2, choice.getChoiceGrade());
+                pst.setString(3, choice.getChoiceImage());
+                pst.setInt(4, choice.getQuestion_id());
+                pst.executeUpdate();
+                pst.close();
+                pst.close();
             }
             st.close();
             conn.close();
@@ -88,10 +95,15 @@ public class ChoiceService {
             Connection conn = Utils.getConnection();
 
             Statement st = conn.createStatement();
+            String sql = "UPDATE choice SET choice_content = ?, choice_grade = ?, choice_image = ? WHERE choice_id = ?";
             for (Choice choice : choices) {
-                String sql = "UPDATE choice SET choice_content = '" + choice.getContent()
-                        + "', choice_grade = " + choice.getChoiceGrade() + " WHERE choice_id = " + choice.getId();
-                st.executeUpdate(sql);
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, choice.getContent());
+                pst.setDouble(2, choice.getChoiceGrade());
+                pst.setString(3, choice.getChoiceImage());
+                pst.setInt(4, choice.getId());
+                pst.executeUpdate();
+                pst.close();
             }
             st.close();
             conn.close();
@@ -99,5 +111,20 @@ public class ChoiceService {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public static int getLastChoiceId() {
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "SELECT choice_id FROM choice ORDER BY choice_id DESC LIMIT 1";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("choice_id");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 }

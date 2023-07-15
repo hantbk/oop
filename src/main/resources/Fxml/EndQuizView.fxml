@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EndQuizController">
+   <children>
+      <AnchorPane layoutX="67.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
+         <children>
+            <Label fx:id="label_quiz_name_1" layoutX="40.0" layoutY="10.0" prefHeight="80.0" text="IT" textFill="#dd1515">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+            <HBox layoutX="40.0" layoutY="80.0" prefHeight="50.0">
+               <children>
+                  <Label prefHeight="50.0" text="Home" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="50.0" text="My Courses">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="50.0" text="THI CUỐI KỲ" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="50.0" text="General" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label_quiz_name_2" prefHeight="50.0" text="Thi giữa kỳ 2 môn Công Nghệ" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="50.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label_quiz_name_IT1" prefHeight="50.0" text="Preview" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #146C94;">
+         <children>
+            <ImageView fx:id="btn_menu_return" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/menu.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1188.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/male_user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitWidth="10.0" layoutX="1234.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Img/whitearrowdown.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="1144.0" layoutY="17.0" prefHeight="17.0" prefWidth="39.0" text="User" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="quiz_pane" layoutX="67.0" layoutY="249.0" prefHeight="504.0" prefWidth="1086.0">
+         <children>
+            <AnchorPane prefWidth="877.0" style="-fx-border-color: #AFD3E2;">
+               <children>
+                  <ScrollPane fx:id="scrollPane_quizView" prefHeight="498.0" prefWidth="880.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="880.0">
+                           <children>
+                              <GridPane alignment="CENTER" prefHeight="120.0" prefWidth="880.0" style="-fx-background-color: #EEEEEE;" AnchorPane.topAnchor="5.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="434.0" minWidth="10.0" prefWidth="131.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="779.0" minWidth="10.0" prefWidth="749.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Started on" textFill="#dd1515">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="State" textFill="#dd1515" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Completed on" textFill="#dd1515" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Time taken" textFill="#dd1515" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Marks" textFill="#dd1515" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Grade" textFill="#dd1515" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbTimeStart" text="Tuesday, " GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="5.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="15.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Finished" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="5.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="15.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbTimeComplete" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="5.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="15.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbTimeTaken" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="5.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="15.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbMark" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="5.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="15.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbGrade" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="5.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets left="15.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                              <VBox fx:id="vbox_question" layoutY="130.0" prefHeight="300.0" prefWidth="880.0" spacing="10.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="895.0" prefHeight="504.0" prefWidth="256.0" style="-fx-border-color: rgba(0,0,0,0);">
+               <children>
+                  <AnchorPane prefHeight="500.0" prefWidth="257.0" style="-fx-border-color: rgba(0,0,0,0); -fx-background-color: #EEEEEE;">
+                     <children>
+                        <VBox prefHeight="500.0" prefWidth="265.0" style="-fx-border-color: #AFD3E2;">
+                           <children>
+                              <Label prefHeight="92.0" prefWidth="265.0" style="-fx-border-color: #AFD3E2;" text="Quiz navigation" textFill="RED">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/male_user.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <GridPane fx:id="grid_num_question" alignment="CENTER" hgap="8.0" prefHeight="375.0" prefWidth="251.0" vgap="8.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <Button fx:id="btn_finish_review" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Finish review">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" />
+                                 </padding>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
