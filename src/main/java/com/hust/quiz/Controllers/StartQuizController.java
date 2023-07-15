@@ -19,10 +19,13 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.*;
 
 public class StartQuizController implements Initializable {
 
@@ -47,7 +50,13 @@ public class StartQuizController implements Initializable {
     private AnchorPane attempt_pane;
     @FXML
     private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt;
-    private List<QuestionInStartController> listController = new ArrayList<>();
+    private final List<QuestionInStartController> listController = new ArrayList<>();
+    private String timeStartQuiz;
+    private String timeCompleteQuiz;
+    private LocalTime start;
+    private LocalTime end;
+    private Quiz quiz;
+
 
     public static void setQuizTime(int quizTimeLimit, String quizTimeFormat) {
         StartQuizController.quizTimeLimit = quizTimeLimit;
@@ -67,6 +76,12 @@ public class StartQuizController implements Initializable {
             }
             CountdownTimer countdownTimer = new CountdownTimer(sec, timerLabel);
             countdownTimer.start();
+            LocalDate now = LocalDate.now();
+            this.start = LocalTime.now();
+            DateTimeFormatter day = DateTimeFormatter.ofPattern("EEEE");
+            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
+            this.timeStartQuiz = now.format(day) + ", " + now.format(date)+ ", " + this.start.format(time);
         }
     }
 
@@ -95,14 +110,24 @@ public class StartQuizController implements Initializable {
             attempt_pane.setDisable(true);
         });
         btn_submit_quiz.setOnMouseClicked(event -> {
-            this.reset();
-            ViewFactory.getInstance().updateQuizHome();
+            System.out.println("Grade: " + this.getGradeQuiz());
+            LocalDate now = LocalDate.now();
+            this.end = LocalTime.now();
+            DateTimeFormatter day = DateTimeFormatter.ofPattern("EEEE");
+            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
+            this.timeCompleteQuiz = now.format(day) + ", " + now.format(date)+ ", " + this.end.format(time);
+            Duration timeTaken = Duration.between(start, end);
+
+            ViewFactory.getInstance().reviewQuiz(this.quiz, timeStartQuiz, timeCompleteQuiz, timeTaken, this.listController);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
+            this.reset();
         });
     }
 
     //update cac cau hoi trong quiz vao vBox
     public void updateQuestion(Quiz quiz) {
+        this.quiz = quiz;
         int quiz_id = quiz.getQuiz_id();
         List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
         this.label_quiz_name_1.setText(quiz.getQuiz_name());
@@ -114,6 +139,7 @@ public class StartQuizController implements Initializable {
             try {
                 Parent root = listFXMLQuestionQuiz[i].load();
                 QuestionInStartController controller = listFXMLQuestionQuiz[i].getController();
+                listController.add(controller);
                 controller.setInforQuestion(question, i);
                 vbox_question.getChildren().add(root);
             } catch (IOException e) {
@@ -145,5 +171,15 @@ public class StartQuizController implements Initializable {
         this.vbox_question.getChildren().clear();
         this.grid_num_question.getChildren().clear();
         quiz_pane.setDisable(false);
+    }
+
+    public double getGradeQuiz(){
+        double grade = 0;
+        System.out.println("So cau hoi: " + listController.size());
+
+        for(QuestionInStartController questionInStartController : listController) {
+            grade += questionInStartController.getGrade();
+        }
+        return grade;
     }
 }

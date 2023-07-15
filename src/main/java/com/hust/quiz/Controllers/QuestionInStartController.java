@@ -17,9 +17,6 @@ import java.util.ResourceBundle;
 //hiển thị câu hỏi trong bài test
 public class QuestionInStartController implements Initializable {
     @FXML
-    private ToggleGroup Choice;
-
-    @FXML
     private Label label_questionContent;
 
     @FXML
@@ -46,13 +43,12 @@ public class QuestionInStartController implements Initializable {
 
     }
 
-    public void setInforQuestion(Question question, int questiomNum) {
+    public void setInforQuestion(Question question, int questionNum) {
         this.questionInBox = question;
-        this.label_questionNum.setText(String.valueOf(questiomNum));
+        this.label_questionNum.setText(String.valueOf(questionNum));
         this.label_questionContent.setText(question.getQuestion_text());
-        List<Choice> listChoice = new ArrayList<>();
-        listChoice.addAll(ChoiceService.getChoice(question.getQuestion_id()));
-        listChoiceInBox = listChoice;
+        List<Choice> listChoice = new ArrayList<>(ChoiceService.getChoice(question.getQuestion_id()));
+        listChoiceInBox.addAll(listChoice);
         int numChoice = listChoice.size();
         if (!listChoice.isEmpty()) {
             if( numChoice == 2){
@@ -83,7 +79,36 @@ public class QuestionInStartController implements Initializable {
         }
     }
 
-    public void getGrade(){
+    //lay grade cua question
+    public double getGrade(){
+        if(rButton_A.isSelected()){
+            return  listChoiceInBox.get(0).getChoiceGrade() / 100;
+        }else if(rButton_B.isSelected()){
+            return listChoiceInBox.get(1).getChoiceGrade() / 100;
+        }else if(rButton_C.isSelected()){
+            return listChoiceInBox.get(2).getChoiceGrade() / 100;
+        }else if(rButton_D.isSelected()){
+            return listChoiceInBox.get(3).getChoiceGrade() / 100;
+        }else if(rButton_E.isSelected()){
+            return listChoiceInBox.get(4).getChoiceGrade() / 100;
+        }else{
+            return 0;
+        }
+    }
 
+    public int getSelected(){
+        if(rButton_A.isSelected()){
+            return 0;
+        }else if(rButton_B.isSelected()){
+            return 1;
+        }else if(rButton_C.isSelected()){
+            return 2;
+        }else if(rButton_D.isSelected()){
+            return 3;
+        }else if(rButton_E.isSelected()){
+            return 4;
+        }else{
+            return -1;
+        }
     }
 }
