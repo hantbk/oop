@@ -17,7 +17,7 @@
             <Insets top="2.0" />
          </HBox.margin>
       </ImageView>
-      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" prefHeight="30.0" prefWidth="897.0" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
+      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" prefHeight="30.0" prefWidth="897.0" text="Question name">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

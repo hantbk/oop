@@ -22,6 +22,10 @@ public class QuestionInfoFromBankController {
     }
 
     public boolean checkingCheckBox() {
-        return check_box_question_name.isSelected();
+        return this.check_box_question_name.isSelected();
+    }
+
+    public Question getQuestion(){
+        return this.question;
     }
 }
