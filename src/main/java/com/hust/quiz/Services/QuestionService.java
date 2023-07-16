@@ -1,6 +1,7 @@
 package com.hust.quiz.Services;
 
 import com.hust.quiz.Models.Question;
+import com.hust.quiz.Models.Quiz;
 
 import java.sql.*;
 import java.util.ArrayList;
