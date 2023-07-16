@@ -1,5 +1,7 @@
 package com.hust.quiz.Models;
 
+import java.util.Objects;
+
 public class Question {
     private int question_id;
     private String question_name;
@@ -82,5 +84,22 @@ public class Question {
         this.question_image = image;
         this.mark = mark;
         this.category_id = category_id;
+    }
+
+    //use for colection Set<Question> in EditQuiz
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+        if(obj == null|| getClass() !=obj.getClass()){
+            return false;
+        }
+        Question ques = (Question) obj;
+        return this.question_id == ques.question_id;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(question_id);
     }
 }

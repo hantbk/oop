@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -18,7 +17,7 @@
             <Insets top="2.0" />
          </HBox.margin>
       </ImageView>
-      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" prefHeight="30.0" prefWidth="561.0" text="Question name anvejknbkjenvanjbvkeavneaveaveabveabaekjvbebmenvebwebv">
+      <CheckBox fx:id="check_box_question_name" mnemonicParsing="false" prefHeight="30.0" prefWidth="897.0" text="Question name">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -33,14 +32,6 @@
             </ImageView>
          </graphic>
       </CheckBox>
-      <Label fx:id="question_content" prefHeight="21.0" prefWidth="342.0" text="Content oeianhvewbnwejklvqebjvwnveqwvqevevwevwevw">
-         <font>
-            <Font size="15.0" />
-         </font>
-         <padding>
-            <Insets top="2.0" />
-         </padding>
-      </Label>
       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Img/zoom-in.png" />
