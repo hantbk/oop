@@ -35,6 +35,8 @@ public class EditQuizController implements Initializable {
     private HBox add_new_question, add_from_bank, add_random;
     @FXML
     private ImageView arrow_add;
+    @FXML
+    private Button btn_save_edit_quiz;
 
     // BLURRRRRR
     @FXML
@@ -157,15 +159,32 @@ public class EditQuizController implements Initializable {
                                 addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
                             }
                         });
+
+                        // configure btn_add_ques_bank_selected
+                        btn_add_ques_bank_selected.setOnAction(actionEvent -> {
+                            anchor_blur.setVisible(false);
+                            anchor_add_question_bank.setVisible(false);
+
+                            List<Question> questionsAddingList = null;
+                            if (showSubcategoryQuestionCheckbox.isSelected()) {
+                                if (listQuestions != null && !listQuestions.isEmpty()) {
+                                    updateAddingList(listQuestions, questionsAddingList);
+                                }
+                            } else {
+                                updateAddingList(currentCategoryQuestions, questionsAddingList);
+                            }
+                            if (questionsAddingList != null) {
+                                QuizService.updateQuiz(this.quiz.getQuiz_id(), questionsAddingList);
+                            }
+                        });
                     }
                 }
             });
+
             // configure add selected questions
             btn_add_ques_bank_selected.setOnAction(e -> {
                 anchor_blur.setVisible(false);
                 anchor_add_question_bank.setVisible(false);
-
-                // TODO: Add to quiz
             });
 
             // configure exit
@@ -251,7 +270,6 @@ public class EditQuizController implements Initializable {
             }
         }
     }
-
     private void updateCategory() {
         List<Category> categories = CategoryService.getCategories();
         // create TreeItem
@@ -297,6 +315,23 @@ public class EditQuizController implements Initializable {
             listPane.setVisible(true);
         } else {
             listPane.setVisible(false);
+        }
+    }
+    private void updateAddingList(List<Question> questionsList, List<Question> questionsAddList) {
+        if (!questionsList.isEmpty()) {
+            for (Question question : questionsList) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoFromBank.fxml"));
+                    Parent questionInfo = loader.load();
+                    QuestionInfoFromBankController controller = loader.getController();
+                    if (controller.checkingCheckBox()) {
+                        questionsAddList.add(question);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
