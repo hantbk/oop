@@ -2,14 +2,12 @@ package com.hust.quiz.Services;
 
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Quiz;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizService {
-
     public static void addQuiz(Quiz quiz) {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO quiz (quiz_name, quiz_description, quiz_time_limit, quiz_time_format, " +
@@ -78,7 +76,6 @@ public class QuizService {
         }
         return result;
     }
-
     public static Quiz getQuiz(String quiz_name) {
         try (Connection conn = Utils.getConnection()) {
             // write query
@@ -117,7 +114,6 @@ public class QuizService {
         }
         return null;
     }
-
     public static List<String> getAllQuiz() {
         List<String> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
@@ -138,5 +134,38 @@ public class QuizService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void updateQuiz(int quizID, List<Question> questionList) {
+        try (Connection conn = Utils.getConnection()) {
+            // TODO: Check if this quiz has any questions
+            // if yes -> delete all questions and add
+            // if no -> add
+            String init = "DELETE FROM `quiz_question` WHERE `quiz_id` = ?;";
+            PreparedStatement preparedStatement = conn.prepareStatement(init);
+            preparedStatement.setString(1, String.valueOf(quizID));
+            preparedStatement.executeUpdate();
+
+            String sql = "INSERT INTO `quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES (?, ?, ?);";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            int order = quizCountQues(quizID);
+            for (Question question : questionList) {
+                pst.setString(1, String.valueOf(quizID));
+                pst.setString(2, String.valueOf(question.getQuestion_id()));
+                pst.setString(3, String.valueOf(order));
+                pst.executeUpdate();
+                order = order + 1;
+            }
+            pst.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static int quizCountQues(int quizID) {
+        List<Question> questionList = getQuestionQuiz(quizID);
+        return questionList.size();
     }
 }
