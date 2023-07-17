@@ -95,14 +95,7 @@ public class ChoiceBoxController implements Initializable {
     }
 
     public double getGrade() {
-        if (Objects.equals(cbGrade.getValue(), "None")) {
-            return 0;
-        } else {
-            // remove % from string
-            String grade = cbGrade.getValue().substring(0, cbGrade.getValue().length() - 1);
-            grade = grade.replace(",", ".");
-            return Double.parseDouble(grade);
-        }
+        return getGrade(cbGrade.getValue());
     }
 
     public void setNumberChoice(int num) {

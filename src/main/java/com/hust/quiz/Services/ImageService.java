@@ -34,6 +34,9 @@ public class ImageService {
      * @return String new path of image
      */
     public static String saveImage(int id, String path, boolean isQuestion) {
+        if (path == null) {
+            return null;
+        }
         String extension = path.substring(path.lastIndexOf("."));
         String newFilePath;
         if (isQuestion) {

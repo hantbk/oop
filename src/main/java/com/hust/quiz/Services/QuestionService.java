@@ -100,6 +100,36 @@ public class QuestionService {
         return result;
     }
 
+    //
+    public static List<Question> getRandomQuestion(int category_id, int numQuestion) {
+        List<Question> result = new ArrayList<>();
+        try (Connection conn = Utils.getConnection()) {
+            // write query
+            String sql = "SELECT * FROM question WHERE category_id = ? ORDER BY RAND() LIMIT ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, category_id);
+            stmt.setInt(2, numQuestion);
+
+            // execute
+            ResultSet rs = stmt.executeQuery();
+
+            // add questions found to list
+            while (rs.next()) {
+                Question question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
+                        rs.getString("question_text"), rs.getString("question_image"),
+                        rs.getInt("mark"), rs.getInt("category_id"));
+                result.add(question);
+            }
+            // close
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     /**
      * Get last question id
      *

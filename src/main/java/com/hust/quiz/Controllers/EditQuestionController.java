@@ -117,11 +117,11 @@ public class EditQuestionController implements Initializable {
             File selectedFile = filechooser.showOpenDialog(null);
             if (selectedFile != null) {
                 imagePath = selectedFile.getAbsolutePath();
-                if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png")) {
+                if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png") || imagePath.endsWith(".gif")) {
                     btn_image_question.setText("Image is selected");
                     image_question.setImage(new Image(imagePath));
                 } else {
-                    btn_image_question.setText("Image must be .jpg or .png");
+                    btn_image_question.setText("Image must be .jpg or .png or .gif");
                     imagePath = null;
                 }
             }
@@ -132,9 +132,7 @@ public class EditQuestionController implements Initializable {
         // update question
         String categoryName = kindOfCategory.getValue();
 
-        if (imagePath != null) {
-            imagePath = ImageService.saveImage(question.getId(), imagePath, true);
-        }
+        imagePath = ImageService.saveImage(question.getId(), imagePath, true);
 
         question.setInfo(text_QuestionName.getText(), text_QuestionText.getText().trim(), imagePath,
                 Integer.parseInt(text_DefaultMark.getText()), CategoryService.getID(categoryName));
@@ -146,10 +144,7 @@ public class EditQuestionController implements Initializable {
             ChoiceBoxController controller = listChoiceBoxController.get(i);
             String text = controller.getChoiceText();
             if (!text.equals("")) {
-                String imageChoice = controller.getImagePath();
-                if (imageChoice != null) {
-                    imageChoice = ImageService.saveImage(listChoice.get(i).getId(), imageChoice, false);
-                }
+                String imageChoice = ImageService.saveImage(listChoice.get(i).getId(), controller.getImagePath(), false);
                 listChoice.get(i).setInfo(text, controller.getGrade(), imageChoice);
             }
         }
@@ -162,10 +157,7 @@ public class EditQuestionController implements Initializable {
                 ChoiceBoxController controller = listChoiceBoxController.get(i);
                 String text = controller.getChoiceText();
                 if (!text.equals("")) {
-                    String imageChoice = controller.getImagePath();
-                    if (imageChoice != null) {
-                        imageChoice = ImageService.saveImage(newChoiceId, imageChoice, false);
-                    }
+                    String imageChoice = ImageService.saveImage(newChoiceId, controller.getImagePath(), false);
                     Choice newChoice = new Choice(controller.getChoiceText(), controller.getGrade(), imageChoice, question.getId());
                     ChoiceService.addChoice(newChoice);
                 }

@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 
 public class ViewFactory {
     private static ViewFactory instance;
@@ -115,6 +117,10 @@ public class ViewFactory {
 
     public void endQUiz() {
         startQuizController.endQuiz();
+    }
+
+    public void reviewQuiz(Quiz quiz, String timeStart, String timeComplete, Duration timeTaken, List<QuestionInStartController> listControllerAnswer) {
+        endQuizController.setInforQuiz(quiz, timeStart, timeComplete, timeTaken, listControllerAnswer);
     }
 
     public void routes(SCENES scene) {

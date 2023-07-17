@@ -33,6 +33,7 @@ public class QuestionBankController implements Initializable {
     private ImageView btn_menu_return;
     @FXML
     private TabPane tabPane;
+
     // TAB QUESTION
     @FXML
     private VBox container;
@@ -152,7 +153,7 @@ public class QuestionBankController implements Initializable {
                 TreeItem<String> selectedItem = category2.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
                     parent_id = CategoryService.getParentID(selectedItem.getValue());
-                    System.out.println(parent_id);
+                    System.out.println("Parent id: " + parent_id);
                     btn_category2.setValue(selectedItem.getValue());
                     category2.setVisible(false);
                 }

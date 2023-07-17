@@ -3,13 +3,15 @@ package com.hust.quiz.Services;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Quiz;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizService {
-
     public static void addQuiz(Quiz quiz) {
         try (Connection conn = Utils.getConnection()) {
             String sql = "INSERT INTO quiz (quiz_name, quiz_description, quiz_time_limit, quiz_time_format, " +
@@ -19,8 +21,8 @@ public class QuizService {
             pst.setString(2, quiz.getQuiz_description());
             pst.setInt(3, quiz.getTimeLimit());
             pst.setString(4, quiz.getTimeFormat());
-            pst.setDate(5, Date.valueOf(quiz.getOpen_date()));
-            pst.setDate(6, Date.valueOf(quiz.getClose_date()));
+            pst.setDate(5, quiz.getOpen_date());
+            pst.setDate(6, quiz.getClose_date());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -138,5 +140,29 @@ public class QuizService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void updateQuiz(int quizID, List<Question> questionList) {
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "INSERT INTO `quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES (?, ?, ?);";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            int order = quizCountQues(quizID);
+            for (Question question : questionList) {
+                pst.setString(1, String.valueOf(quizID));
+                pst.setString(2, String.valueOf(question.getQuestion_id()));
+                pst.setString(3, String.valueOf(order));
+                pst.executeUpdate();
+                order = order + 1;
+            }
+            pst.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static int quizCountQues(int quizID) {
+        List<Question> questionList = getQuestionQuiz(quizID);
+        return questionList.size();
     }
 }
