@@ -209,6 +209,27 @@ public class QuestionService {
             e.printStackTrace();
         }
     }
+
+    // get question by id
+    public static Question getQuestionById(int question_id) {
+        Question question = null;
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "SELECT * FROM question WHERE question_id = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, question_id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
+                        rs.getString("question_text"), rs.getString("question_image"),
+                        rs.getInt("mark"), rs.getInt("category_id"));
+            }
+            pst.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return question;
+    }
 }
 
 

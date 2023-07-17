@@ -128,4 +128,28 @@ public class CategoryService {
         }
         return parent_id;
     }
+
+    // get Category by category name
+    public static Category getCategoryByName(String category_name) {
+        Category category = null;
+        try (Connection conn = Utils.getConnection()) {
+            // SELECT row have category_name
+            String sql = "SELECT * FROM category WHERE category_name = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, Category.getName(category_name));
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                // return parent ID of the category
+                category = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getInt("parent_id"),
+                        rs.getInt("question_count"), rs.getString("category_info"));
+            } else {
+                System.out.println("Not found parent_id have name is " + category_name);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return category;
+    }
 }

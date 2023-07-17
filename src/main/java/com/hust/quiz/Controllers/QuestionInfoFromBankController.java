@@ -11,6 +11,7 @@ public class QuestionInfoFromBankController {
 //  private Label question_content;
     private Question question;
     private String category_name;
+    private boolean added = false;
 
     public void updateQuestionInfo(Question question, String category_name) {
         check_box_question_name.setText(question.getQuestionContent());
@@ -21,6 +22,18 @@ public class QuestionInfoFromBankController {
 
     public boolean getTicks() {
         return this.check_box_question_name.isSelected();
+    }
+
+    public void setTicks(boolean tick) {
+        this.check_box_question_name.setSelected(tick);
+    }
+
+    public boolean isAdded() {
+        return added;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
     }
 
     public Question getQuestion() {
