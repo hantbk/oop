@@ -184,7 +184,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lbCorrectAnswer" maxWidth="562.0" prefHeight="50.0" prefWidth="562.0" wrapText="true">
+                              <Label fx:id="lbCorrectAnswer" alignment="TOP_LEFT" maxWidth="562.0" prefHeight="50.0" prefWidth="562.0" wrapText="true">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

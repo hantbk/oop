@@ -61,8 +61,12 @@ public class EndQuizController implements Initializable {
         }
         DecimalFormat df = new DecimalFormat("##.##");
         this.lbMark.setText(this.mark + " / " + (double) numQues);
-        this.lbGrade.setText(Double.parseDouble(df.format((this.mark / (double) numQues) * 10)) +
-                " out of 10.00 (" + Double.parseDouble(df.format((this.mark / (double) numQues))) * 100 + "%)");
+        String tmp1 = df.format((this.mark / (double) numQues) * 10);
+        String tmp2 = df.format((this.mark / (double) numQues));
+        tmp1 = tmp1.replace(",", ".");
+        tmp2 = tmp2.replace(",", ".");
+        System.out.println(tmp1 + " " + tmp2);
+        this.lbGrade.setText(tmp1 + " out of 10.00 (" + Double.parseDouble(tmp2) * 100 + "%)");
     }
 
     private void updateQuestion(Quiz quiz) {

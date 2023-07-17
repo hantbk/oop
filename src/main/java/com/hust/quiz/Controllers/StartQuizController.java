@@ -168,6 +168,8 @@ public class StartQuizController implements Initializable {
             this.timeCompleteQuiz = now.format(day) + ", " + now.format(date) + ", " + this.end.format(time);
             Duration timeTaken = Duration.between(start, end);
 
+            countdownTimer.stop();
+
             ViewFactory.getInstance().reviewQuiz(this.quiz, timeStartQuiz, timeCompleteQuiz, timeTaken, this.listController);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
             this.reset();
