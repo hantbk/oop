@@ -10,39 +10,33 @@ import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.*;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.embed.swing.SwingFXUtils;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
+import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import javafx.scene.control.TextInputDialog;
 
 
 public class StartQuizController implements Initializable {
@@ -146,8 +140,16 @@ public class StartQuizController implements Initializable {
                 quiz_pane.opacityProperty().setValue(1);
                 attempt_pane.setVisible(false);
                 attempt_pane.setDisable(true);
+                String password = null;
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("SET PASSWORD FOR THE PDF FILE");
+                dialog.setHeaderText(null);
+                dialog.setContentText("PASSWORD:");
+                dialog.showAndWait().ifPresent(input->{
+                            exportQuiztoPDF(input);
+                        });
 
-                exportQuiztoPDF();
+                //exportQuiztoPDF();
 
                 quiz_pane.setDisable(true);
                 quiz_pane.opacityProperty().setValue(0.5);
@@ -156,7 +158,7 @@ public class StartQuizController implements Initializable {
         });
     }
 
-    private void exportQuiztoPDF() {
+    private void exportQuiztoPDF(String password) {
         List<Question> listQuestion = QuizService.getQuestionQuiz(this.quiz.getQuiz_id());
 
         FileChooser fileChooser = new FileChooser();
@@ -166,6 +168,9 @@ public class StartQuizController implements Initializable {
         File file = fileChooser.showSaveDialog(null);
         if (file != null) {
             try (PDDocument document = new PDDocument()) {
+                StandardProtectionPolicy policy = new StandardProtectionPolicy(password, password, new AccessPermission());
+                policy.setEncryptionKeyLength(128); // Set the key length (can be 40, 128, or 256)
+                policy.setPermissions(new AccessPermission());
                 PDPage page = new PDPage();
                 document.addPage(page);
 
@@ -267,6 +272,7 @@ public class StartQuizController implements Initializable {
                 }
 
                 contentStream.close();
+                document.protect(policy);
                 document.save(file);
             } catch (IOException e) {
                 e.printStackTrace();
