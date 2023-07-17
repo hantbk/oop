@@ -55,8 +55,6 @@ public class QuizViewController implements Initializable {
             timeLimitLabel1.setText("No");
             timeFormatLabel1.setText("");
         }
-
-        StartQuizController.setQuizTime(quiz.getTimeLimit(), quiz.getTimeFormat());
     }
 
     @Override
@@ -91,7 +89,7 @@ public class QuizViewController implements Initializable {
         btn_start_attempt.setOnAction(event -> {
             blur_pane.setVisible(false);
             second_pane.setVisible(false);
-            ViewFactory.getInstance().updateQuestionQuiz(quiz);
+            ViewFactory.getInstance().updateStartQuiz(quiz);
             ViewFactory.getInstance().routes(ViewFactory.SCENES.START_QUIZ);
         });
     }

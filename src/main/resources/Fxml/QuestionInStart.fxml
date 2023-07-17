@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="212.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInStartController">
+<AnchorPane prefHeight="212.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInStartController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" style="-fx-border-color: #146C94;">
          <children>
@@ -25,7 +26,7 @@
                         </Label>
                         <Label fx:id="label_questionNum" text="1">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
                      </children>
@@ -74,14 +75,18 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="10.0" style="-fx-background-color: #EEEEEE;">
          <children>
-            <VBox prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
+            <VBox fx:id="vBox_question" prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
                <children>
                   <Label fx:id="label_questionContent" text="Question content" wrapText="true">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="img_ques" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image_question" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="200.0" />
+                     </VBox.margin>
+                  </ImageView>
                   <RadioButton fx:id="rButton_A" mnemonicParsing="false" text="Choice A" wrapText="true">
                      <toggleGroup>
                         <ToggleGroup fx:id="Choice" />

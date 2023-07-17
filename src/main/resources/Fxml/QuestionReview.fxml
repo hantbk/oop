@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="871.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionReviewController">
+<AnchorPane prefHeight="439.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionReviewController">
     <children>
         <AnchorPane layoutX="10.0" layoutY="10.0" style="-fx-border-color: #146C94;">
             <children>
@@ -73,21 +73,25 @@
                 </VBox>
             </children>
         </AnchorPane>
-      <VBox layoutX="150.0" layoutY="10.0" prefHeight="245.0" spacing="20.0">
+      <VBox layoutX="150.0" layoutY="10.0" prefHeight="426.0" prefWidth="720.0" spacing="15.0">
          <children>
             <VBox>
                <children>
                     <AnchorPane style="-fx-background-color: #EEEEEE;">
                         <children>
-                            <VBox prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
+                            <VBox fx:id="vBox_question" prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
                                 <children>
                                     <Label fx:id="label_questionContent" text="Question content" wrapText="true">
                                         <font>
                                             <Font size="20.0" />
                                         </font>
                                     </Label>
-                              <ImageView fx:id="img_ques" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <HBox>
+                              <ImageView fx:id="image_question" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <VBox.margin>
+                                    <Insets left="150.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <HBox spacing="5.0">
                                  <children>
                                           <RadioButton fx:id="rButton_A" disable="true" mnemonicParsing="false">
                                               <toggleGroup>
@@ -104,7 +108,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox>
+                              <HBox spacing="5.0">
                                  <children>
                                           <RadioButton fx:id="rButton_B" disable="true" mnemonicParsing="false" toggleGroup="$Choice">
                                               <font>
@@ -118,7 +122,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox>
+                              <HBox spacing="5.0">
                                  <children>
                                           <RadioButton fx:id="rButton_C" disable="true" mnemonicParsing="false" toggleGroup="$Choice">
                                               <font>
@@ -132,7 +136,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox>
+                              <HBox spacing="5.0">
                                  <children>
                                           <RadioButton fx:id="rButton_D" disable="true" mnemonicParsing="false" toggleGroup="$Choice">
                                               <font>
@@ -146,7 +150,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox>
+                              <HBox spacing="5.0">
                                  <children>
                                           <RadioButton fx:id="rButton_E" disable="true" mnemonicParsing="false">
                                               <toggleGroup>
@@ -169,13 +173,18 @@
                     </AnchorPane>
                </children>
             </VBox>
-            <AnchorPane>
+            <AnchorPane prefHeight="50.0" prefWidth="720.0">
                <children>
-                  <VBox fx:id="correctPlace" prefWidth="720.0" spacing="10.0">
+                  <VBox fx:id="correctPlace" prefHeight="50.0" prefWidth="720.0" spacing="10.0">
                      <children>
-                        <HBox prefWidth="720.0">
+                        <HBox prefHeight="70.0" prefWidth="720.0" spacing="5.0">
                            <children>
-                              <Label fx:id="lbCorrectAnswer" prefWidth="720.0" wrapText="true">
+                              <Label text="The correct answer is: ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbCorrectAnswer" alignment="TOP_LEFT" maxWidth="562.0" prefHeight="50.0" prefWidth="562.0" wrapText="true">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

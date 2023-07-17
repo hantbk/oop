@@ -3,7 +3,7 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Category;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.CategoryService;
-import com.hust.quiz.Services.LoadeDocxService;
+import com.hust.quiz.Services.LoaderDocxService;
 import com.hust.quiz.Services.LoaderTextService;
 import com.hust.quiz.Services.QuestionService;
 import com.hust.quiz.Views.ViewFactory;
@@ -221,7 +221,7 @@ public class QuestionBankController implements Initializable {
                 if (directory.endsWith(".txt")) {
                     message = LoaderTextService.importFile(directory);
                 } else {
-                    message = LoadeDocxService.importFile(directory);
+                    message = LoaderDocxService.importFile(directory);
                 }
                 alert.setTitle(null);
                 alert.setHeaderText(null);

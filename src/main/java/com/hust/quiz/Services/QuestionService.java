@@ -9,25 +9,6 @@ import java.util.List;
 
 public class QuestionService {
 
-    //lấy id bằng question_name
-    public static int getId(String question_name) throws SQLException {
-        try (Connection conn = Utils.getConnection()) {
-            // SELECT row have category_name
-            String sql = "SELECT question_id FROM question WHERE question_name = ?";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, question_name);
-
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                // return ID of the category
-                return rs.getInt("question_id");
-            } else {
-                System.out.println("No ID found");
-                return -1;
-            }
-        }
-    }
-
     //add question to database
     public static void addQuestion(Question question) throws SQLException {
         try (Connection conn = Utils.getConnection()) {
@@ -211,27 +192,6 @@ public class QuestionService {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    // get question by id
-    public static Question getQuestionById(int question_id) {
-        Question question = null;
-        try (Connection conn = Utils.getConnection()) {
-            String sql = "SELECT * FROM question WHERE question_id = ?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, question_id);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                question = new Question(rs.getInt("question_id"), rs.getString("question_name"),
-                        rs.getString("question_text"), rs.getString("question_image"),
-                        rs.getInt("mark"), rs.getInt("category_id"));
-            }
-            pst.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return question;
     }
 }
 
