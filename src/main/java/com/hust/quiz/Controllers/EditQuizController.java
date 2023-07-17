@@ -78,6 +78,10 @@ public class EditQuizController implements Initializable {
     @FXML
     private ComboBox<String> cb_category_random;
     @FXML
+    private AnchorPane anchor_tree_view;
+    @FXML
+    private TreeView<String> tree_view_category_random;
+    @FXML
     private Spinner<Integer> spinner_numQues = new Spinner<>();
     @FXML
     private CheckBox showSubcategoryQuestionCheckbox_random;
@@ -96,6 +100,8 @@ public class EditQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        anchor_add_question_bank.setVisible(false);
+        anchor_add_question_random.setVisible(false);
         btn_menu_return.setOnMouseClicked(event -> {
             this.resetEditPane();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
@@ -208,37 +214,58 @@ public class EditQuizController implements Initializable {
 
         // TODO: configure add a random question
         add_random.setOnMouseClicked(event -> {
-            this.updateCategoryRandom();
+            anchor_tree_view.setVisible(false);
+            updateCategory();
             add_question_option.setVisible(false);
             anchor_blur.setVisible(true);
             anchor_add_question_random.setVisible(true);
 
-            cb_category_random.setOnAction(e -> {
-                vbox_questionRandom.getChildren().clear();
-                String category_name = this.cb_category_random.getValue();
-                Category category = CategoryService.getCategoryByName(category_name);
+            // configure display TreeView
+            tree_view_category_random.getParent().setOnMouseClicked(e -> {
+                tree_view_category_random.setVisible(false);
+                anchor_tree_view.setVisible(false);
+            });
 
-                spinner_numQues.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, category.getQuestion_count(), 0, 1));
-                spinner_numQues.setOnMouseClicked(eventSpinner -> {
-                    vbox_questionRandom.getChildren().clear();
+            cb_category_random.setOnMouseClicked(e -> {
+                tree_view_category_random.setVisible(!tree_view_category_random.isVisible());
+                anchor_tree_view.setVisible(true);
+            });
 
-                    listQuestionRandom.clear();
-                    listQuestionRandom.addAll(QuestionService.getRandomQuestion(category.getId(), spinner_numQues.getValue()));
+            tree_view_category_random.setOnMouseClicked(e -> {
+                if (e.getClickCount() == 2) {
+                    TreeItem<String> selectedItem = tree_view_category_random.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        String category_name = selectedItem.getValue();
+                        cb_category_random.setValue(category_name);
 
-                    for (Question q : listQuestionRandom) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoFromBank.fxml"));
-                            Parent questionInfo = loader.load();
-                            QuestionInfoFromBankController controller = loader.getController();
-                            controller.updateQuestionInfo(q, category_name);
-                            controller.setTicks(true);
-                            vbox_questionRandom.getChildren().add(questionInfo);
-                        } catch (IOException except) {
-                            System.out.println(except.getMessage());
-                            except.printStackTrace();
-                        }
+                        tree_view_category_random.setVisible(false);
+                        anchor_tree_view.setVisible(false);
+
+                        vbox_questionRandom.getChildren().clear();
+                        Category category = CategoryService.getCategoryByName(category_name);
+
+                        spinner_numQues.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, category.getQuestion_count(), 0, 1));
+                        spinner_numQues.setOnMouseClicked(eventSpinner -> {
+                            vbox_questionRandom.getChildren().clear();
+
+                            listQuestionRandom.clear();
+                            listQuestionRandom.addAll(QuestionService.getRandomQuestion(category.getId(), spinner_numQues.getValue()));
+                            for (Question q : listQuestionRandom) {
+                                try {
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoFromBank.fxml"));
+                                    Parent questionInfo = loader.load();
+                                    QuestionInfoFromBankController controller = loader.getController();
+                                    controller.updateQuestionInfo(q, category_name);
+                                    controller.setTicks(true);
+                                    vbox_questionRandom.getChildren().add(questionInfo);
+                                } catch (IOException except) {
+                                    System.out.println(except.getMessage());
+                                    except.printStackTrace();
+                                }
+                            }
+                        });
                     }
-                });
+                }
             });
 
             // configure add random questions
@@ -363,6 +390,8 @@ public class EditQuizController implements Initializable {
 
         tree_view_category.setRoot(rootNode);
         tree_view_category.setShowRoot(false);
+        tree_view_category_random.setRoot(rootNode);
+        tree_view_category_random.setShowRoot(false);
     }
 
     private void expandAll(TreeItem<?> item) {

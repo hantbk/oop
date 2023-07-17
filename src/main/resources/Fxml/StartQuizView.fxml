@@ -191,7 +191,7 @@
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <GridPane fx:id="grid_num_question" alignment="CENTER" hgap="8.0" prefHeight="375.0" prefWidth="251.0" vgap="8.0">
+                              <GridPane fx:id="grid_num_question" alignment="CENTER" hgap="5.0" prefHeight="375.0" vgap="5.0">
                                 <columnConstraints>
                                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -215,6 +215,9 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
                               </GridPane>
                               <Button fx:id="btn_finish_attempt" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Finish attempt...">
                                  <font>
