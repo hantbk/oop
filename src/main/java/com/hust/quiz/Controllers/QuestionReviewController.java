@@ -3,11 +3,14 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Services.ChoiceService;
+import com.hust.quiz.Services.ImageService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,8 @@ public class QuestionReviewController {
     private Label lbCorrectAnswer;
     @FXML
     private VBox correctPlace;
+    @FXML
+    private ImageView img_ques;
 
     public void setQuestion(Question question, int questionNum){
         this.label_questionNum.setText(String.valueOf(questionNum));
@@ -85,6 +90,17 @@ public class QuestionReviewController {
                 lbChoiceD.setText("D: " + listChoice.get(3).getContent());
                 lbChoiceE.setText("E: " + listChoice.get(4).getContent());
             }
+        }
+
+        int question_id = question.getQuestion_id();
+        if (ImageService.getImage(question_id) != null) { // Kiểm tra xem câu hỏi có ảnh không
+            if (ImageService.getImage(question_id).toLowerCase().endsWith(".png")) {
+                Image image = new Image(ImageService.getImage(question_id));
+                img_ques.setImage(image);
+            }
+        }
+        else {
+            img_ques.setVisible(false); // Ẩn đối tượng ImageView nếu không có ảnh
         }
     }
 

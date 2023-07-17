@@ -3,11 +3,15 @@ package com.hust.quiz.Controllers;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Services.ChoiceService;
+import com.hust.quiz.Services.ImageService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,6 +39,8 @@ public class QuestionInStartController implements Initializable {
     private RadioButton rButton_D;
     @FXML
     private RadioButton rButton_E;
+    @FXML
+    private ImageView img_ques;
 
     private Question questionInBox; //cau hoi chua trong box
     private List<Choice> listChoiceInBox = new ArrayList<>();
@@ -76,6 +82,17 @@ public class QuestionInStartController implements Initializable {
                 rButton_D.setText("D: " + listChoice.get(3).getContent());
                 rButton_E.setText("E: " + listChoice.get(4).getContent());
             }
+        }
+
+        int question_id = question.getQuestion_id();
+        if (ImageService.getImage(question_id) != null) { // Kiểm tra xem câu hỏi có ảnh không
+            if (ImageService.getImage(question_id).toLowerCase().endsWith(".png")) {
+                Image image = new Image(ImageService.getImage(question_id));
+                img_ques.setImage(image);
+            }
+        }
+        else {
+            img_ques.setVisible(false); // Ẩn đối tượng ImageView nếu không có ảnh
         }
     }
 

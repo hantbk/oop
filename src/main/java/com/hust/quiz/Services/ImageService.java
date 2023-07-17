@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ImageService {
-    public static final String PATH_QUESTION = "D:\\IntelliJ\\oop\\src\\main\\resources\\question_img\\";
+    public static final String PATH_QUESTION = "C:\\Users\\LE NHAT DUC\\oop\\src\\main\\resources\\question_img\\";
     public static final String PATH_CHOICE = "D:\\IntelliJ\\oop\\src\\main\\resources\\choice_img\\";
 
     /**
