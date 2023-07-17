@@ -173,6 +173,8 @@ public class StartQuizController implements Initializable {
         this.vbox_question.getChildren().clear();
         this.grid_num_question.getChildren().clear();
         quiz_pane.setDisable(false);
+        this.attempt_pane.setVisible(false);
+        quiz_pane.opacityProperty().setValue(1);
     }
 
     public double getGradeQuiz() {

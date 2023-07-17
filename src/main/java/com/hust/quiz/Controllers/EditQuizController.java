@@ -110,6 +110,7 @@ public class EditQuizController implements Initializable {
             QuizService.updateQuestionQuiz(quiz_id, listAdd, listRemove);
             addedListQuestion = listQuestion;
             this.resetEditPane(); // don't reset before update QuestionQuiz
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
         });
 
         arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(!add_question_option.isVisible()));
