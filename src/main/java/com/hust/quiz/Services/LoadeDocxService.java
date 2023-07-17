@@ -102,7 +102,7 @@ public class LoadeDocxService {
         for (XWPFRun run : paragraph.getRuns()) {
             for (XWPFPicture picture : run.getEmbeddedPictures()) {
                 XWPFPictureData pictureData = picture.getPictureData();
-                String fileName = "image_" + imageIndex + ".png";
+                String fileName = "question_" + imageIndex + ".png";
                 File imageFile = new File(ImageService.PATH_QUESTION + fileName);
                 FileOutputStream fos = new FileOutputStream(imageFile);
                 fos.write(pictureData.getData());

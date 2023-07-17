@@ -22,7 +22,16 @@ import java.net.URL;
 import java.util.*;
 
 public class EditQuizController implements Initializable {
-    //EditQuiz Pane
+    //    private final List<Question> listQuestion = new ArrayList<>(); // list question of quiz
+//    private final List<Question> listQuestionToAdd = new ArrayList<>(); // list question to add to quiz
+//    private final List<Question> listQuestionToRemove = new ArrayList<>(); // list question to remove from quiz
+    private final Set<Question> questionList = new HashSet<>();
+    private final List<Question> listQuestionSelected = new ArrayList<>();
+    private final List<Question> listQuestionRandom = new ArrayList<>();
+    //QuestionInforFromBankController of select question pane
+    private final List<QuestionInfoFromBankController> listQuesSelectController = new ArrayList<>();
+
+    //EDIT QUIZ PANE
     @FXML
     private VBox vbox_questionEditPane;
     @FXML
@@ -39,7 +48,6 @@ public class EditQuizController implements Initializable {
     private Button btn_save_edit_quiz;
     @FXML
     private Label lb_totalOfMark;
-
     // BLURRRRRR
     @FXML
     private AnchorPane anchor_blur;
@@ -58,7 +66,7 @@ public class EditQuizController implements Initializable {
     @FXML
     private CheckBox showSubcategoryQuestionCheckbox;
     @FXML
-    private VBox listQuestion_vbox;
+    private VBox vbox_questionBank;
     @FXML
     private Button btn_add_ques_bank_selected;
 
@@ -79,14 +87,7 @@ public class EditQuizController implements Initializable {
     private VBox listQuestion_vbox_random;
     @FXML
     private AnchorPane list_question_pane_random;
-
     private Quiz quiz;
-    private Set<Question> questionList = new HashSet<>();
-    private List<Question> listQuestionSelected = new ArrayList<>();
-    private List<Question> listQuestionRandom = new ArrayList<>();
-
-    //QuestionInforFromBankController of select question pane
-    private List<QuestionInfoFromBankController> listQuesSelectController = new ArrayList<>();
 
     public void editQuizDisplayInfo(Quiz quiz) {
         this.quiz = quiz;
@@ -99,26 +100,19 @@ public class EditQuizController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_menu_return.setOnMouseClicked(event -> {
-            ViewFactory.getInstance().updateQuizHome();
             this.resetEditPane();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
         //add list question to quiz
         btn_save_edit_quiz.setOnAction(event -> {
-            int quiz_id = QuizService.getId(this.label_quiz_name_edit.getText());
+            int quiz_id = quiz.getQuiz_id();
             List<Question> listQues = new ArrayList<>(this.questionList);
             QuizService.updateQuiz(quiz_id, listQues);
             this.resetEditPane();
         });
 
-        add_question_option.setVisible(false);
-        anchor_blur.setVisible(false);
-        anchor_add_question_bank.setVisible(false);
-        anchor_add_question_random.setVisible(false);
-
-        arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(true));
-
+        arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(!add_question_option.isVisible()));
 
         // TODO: configure add a new question
         add_new_question.setOnMouseClicked(event -> {
@@ -134,7 +128,7 @@ public class EditQuizController implements Initializable {
             pane_question_list.setVisible(false);
 
             // configure display TreeView
-            btn_category.getParent().setOnMouseClicked(e -> tree_view_category.setVisible(false));
+            tree_view_category.getParent().setOnMouseClicked(e -> tree_view_category.setVisible(false));
             btn_category.setOnMouseClicked(e -> tree_view_category.setVisible(!tree_view_category.isVisible()));
 
             tree_view_category.setOnMouseClicked(e -> {
@@ -151,29 +145,29 @@ public class EditQuizController implements Initializable {
                         List<Question> currentCategoryQuestions = QuestionService.getQuestions(idCategory);
                         List<Question> listQuestions = QuestionService.getQuestionFromSubcategory(idCategory);
 
-                        listQuestion_vbox.getChildren().clear();
+                        vbox_questionBank.getChildren().clear();
                         // check checkbox show subcategory is selected or not BEFORE select category
                         if (showSubcategoryQuestionCheckbox.isSelected()) {
                             if (listQuestions != null && !listQuestions.isEmpty()) {
                                 listQuestions.addAll(currentCategoryQuestions);
-                                addToQuestionList(listQuestions, category_name, listQuestion_vbox, pane_question_list);
+                                addToQuestionList(listQuestions, category_name, pane_question_list);
                             } else if (!currentCategoryQuestions.isEmpty()) {
-                                addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
+                                addToQuestionList(currentCategoryQuestions, category_name, pane_question_list);
                             } else {
                                 pane_question_list.setVisible(false);
                             }
                         } else {
-                            addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
+                            addToQuestionList(currentCategoryQuestions, category_name, pane_question_list);
                         }
                         // check checkbox show subcategory is selected or not AFTER select category
                         showSubcategoryQuestionCheckbox.setOnAction(actionEvent -> {
                             if (showSubcategoryQuestionCheckbox.isSelected()) {
                                 if (listQuestions != null && !listQuestions.isEmpty()) {
                                     listQuestions.addAll(currentCategoryQuestions);
-                                    addToQuestionList(listQuestions, category_name, listQuestion_vbox, pane_question_list);
+                                    addToQuestionList(listQuestions, category_name, pane_question_list);
                                 }
                             } else {
-                                addToQuestionList(currentCategoryQuestions, category_name, listQuestion_vbox, pane_question_list);
+                                addToQuestionList(currentCategoryQuestions, category_name, pane_question_list);
                             }
                         });
                     }
@@ -185,7 +179,7 @@ public class EditQuizController implements Initializable {
                 this.listQuestionSelected.addAll(this.getQuestionSelected());
                 if (!this.listQuestionSelected.isEmpty()) {
                     this.questionList.addAll(this.listQuestionSelected);
-                    this.listQuestion_vbox.getChildren().clear();
+                    this.vbox_questionBank.getChildren().clear();
                     this.listQuestionSelected.clear();
                 }
                 this.updateEditPane();
@@ -287,10 +281,10 @@ public class EditQuizController implements Initializable {
         tree_view_category.setShowRoot(false);
     }
 
-    private void addToQuestionList(List<Question> questions, String category_name, VBox list, AnchorPane listPane) {
+    private void addToQuestionList(List<Question> questions, String category_name, AnchorPane listPane) {
         //xóa cái cũ để update
-        if (!list.getChildren().isEmpty()) {
-            list.getChildren().clear();
+        if (!vbox_questionBank.getChildren().isEmpty()) {
+            vbox_questionBank.getChildren().clear();
         }
         //xóa controller cũ
         if (!this.listQuesSelectController.isEmpty()) {
@@ -306,7 +300,7 @@ public class EditQuizController implements Initializable {
                     QuestionInfoFromBankController controller = loader.getController();
                     this.listQuesSelectController.add(controller);
                     controller.updateQuestionInfo(q, category_name);
-                    list.getChildren().add(questionInfo);
+                    vbox_questionBank.getChildren().add(questionInfo);
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                     e.printStackTrace();
@@ -322,7 +316,7 @@ public class EditQuizController implements Initializable {
         List<Question> listQuesSelect = new ArrayList<>();
         if (!this.listQuesSelectController.isEmpty()) {
             for (QuestionInfoFromBankController controller : this.listQuesSelectController) {
-                if (controller.checkingCheckBox()) {
+                if (controller.getTicks()) {
                     listQuesSelect.add(controller.getQuestion());
                 }
             }
@@ -331,26 +325,23 @@ public class EditQuizController implements Initializable {
     }
 
     //update question of quiz
-    public void updateEditPane() {
+    private void updateEditPane() {
         if (!vbox_questionEditPane.getChildren().isEmpty()) {
             vbox_questionEditPane.getChildren().clear();
         }
         this.number_of_questions.setText(questionList.size() + " questions");
-        double mark = Double.parseDouble(String.valueOf(questionList.size()));
-        this.lb_totalOfMark.setText(String.valueOf(mark));
-        if (!this.questionList.isEmpty()) {
-//            FXMLLoader[] listFXML = new FXMLLoader[questionList.size()];
-            int i = 0;
-            for (Question ques : questionList) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoFromBank.fxml"));
-                    Parent questionInfor = loader.load();
-                    QuestionInfoFromBankController controller = loader.getController();
-                    controller.updateQuestionInfo(ques, "");
-                    vbox_questionEditPane.getChildren().add(questionInfor);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        this.lb_totalOfMark.setText(questionList.size() + ".0");
+
+        for (Question ques : questionList) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoFromBank.fxml"));
+                Parent questionInfor = loader.load();
+                QuestionInfoFromBankController controller = loader.getController();
+                controller.updateQuestionInfo(ques, "");
+                vbox_questionEditPane.getChildren().add(questionInfor);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                throw new RuntimeException(e);
             }
         }
     }
@@ -382,9 +373,6 @@ public class EditQuizController implements Initializable {
         }
         if (!this.listQuesSelectController.isEmpty()) {
             this.listQuesSelectController.clear();
-        }
-        if (!this.vbox_questionEditPane.getChildren().isEmpty()) {
-            this.vbox_questionEditPane.getChildren().clear();
         }
     }
 }

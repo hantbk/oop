@@ -69,6 +69,7 @@ public class ViewFactory {
             e.printStackTrace();
         }
 
+//        updateQuizView("OOP");
         stage.setScene(homeScene);
         stage.setResizable(false);
         stage.setTitle("Quiz App");

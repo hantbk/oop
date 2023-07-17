@@ -4,12 +4,10 @@ import com.hust.quiz.Models.Question;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 
-import java.util.List;
-
 public class QuestionInfoFromBankController {
     @FXML
     private CheckBox check_box_question_name;
-//  @FXML
+    //  @FXML
 //  private Label question_content;
     private Question question;
     private String category_name;
@@ -21,11 +19,11 @@ public class QuestionInfoFromBankController {
         this.category_name = category_name;
     }
 
-    public boolean checkingCheckBox() {
+    public boolean getTicks() {
         return this.check_box_question_name.isSelected();
     }
 
-    public Question getQuestion(){
+    public Question getQuestion() {
         return this.question;
     }
 }
