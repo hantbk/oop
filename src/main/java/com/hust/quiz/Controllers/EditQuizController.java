@@ -124,7 +124,7 @@ public class EditQuizController implements Initializable {
         // TODO: configure add a new question
         add_new_question.setOnMouseClicked(event -> {
             add_question_option.setVisible(false);
-            anchor_blur.setVisible(true);
+//            anchor_blur.setVisible(true);
 
         });
 
@@ -357,6 +357,8 @@ public class EditQuizController implements Initializable {
     private void resetEditPane() {
         listQuestionToAdd.clear();
         listQuestionToRemove.clear();
+        listQuestion.clear();
+        addedListQuestion.clear();
     }
 
     private void resetQuestionBankPane() {

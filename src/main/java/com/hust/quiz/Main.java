@@ -8,8 +8,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
+
     @Override
     public void start(Stage stage) {
-        ViewFactory view = ViewFactory.getInstance();
+        ViewFactory.getInstance();
     }
 }
