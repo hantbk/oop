@@ -34,11 +34,15 @@ public class ImageService {
      * @return String new path of image
      */
     public static String saveImage(int id, String path, boolean isQuestion) {
+        if (path == null) {
+            return null;
+        }
+        String extension = path.substring(path.lastIndexOf("."));
         String newFilePath;
         if (isQuestion) {
-            newFilePath = PATH_QUESTION + "question_" + id + ".png";
+            newFilePath = PATH_QUESTION + "question_" + id + extension;
         } else {
-            newFilePath = PATH_CHOICE + "choice_" + id + ".png";
+            newFilePath = PATH_CHOICE + "choice_" + id + extension;
         }
         if (path.equals(newFilePath)) {
             return newFilePath;

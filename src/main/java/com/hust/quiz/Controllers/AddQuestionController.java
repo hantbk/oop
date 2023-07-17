@@ -119,11 +119,11 @@ public class AddQuestionController implements Initializable {
             File selectedFile = filechooser.showOpenDialog(null);
             if (selectedFile != null) {
                 imagePath = selectedFile.getAbsolutePath();
-                if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png")) {
+                if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png") || imagePath.endsWith(".gif")) {
                     btn_image_question.setText("Image is selected");
                     image_question.setImage(new Image(imagePath));
                 } else {
-                    btn_image_question.setText("Image must be .jpg or .png");
+                    btn_image_question.setText("Image must be .jpg or .png or .gif ");
                     imagePath = null;
                 }
             }
@@ -134,9 +134,7 @@ public class AddQuestionController implements Initializable {
         String categoryName = kindOfCategory.getValue();
         int newQuestionId = QuestionService.getLastQuestionId() + 1;
         // save image
-        if (imagePath != null) {
-            imagePath = ImageService.saveImage(newQuestionId, imagePath, true);
-        }
+        imagePath = ImageService.saveImage(newQuestionId, imagePath, true);
 
         Question newQuestion = new Question(text_QuestionName.getText(), text_QuestionText.getText().trim(), imagePath,
                 Integer.parseInt(text_DefaultMark.getText()), CategoryService.getID(categoryName));
@@ -154,10 +152,7 @@ public class AddQuestionController implements Initializable {
         for (ChoiceBoxController controller : listChoiceBoxController) {
             if (!controller.getChoiceText().equals("")) {
                 newChoiceId++;
-                String imageChoice = controller.getImagePath();
-                if (imageChoice != null) {
-                    imageChoice = ImageService.saveImage(newChoiceId, imageChoice, false);
-                }
+                String imageChoice = ImageService.saveImage(newChoiceId, controller.getImagePath(), false);
                 Choice newChoice = new Choice(controller.getChoiceText(), controller.getGrade(), imageChoice, newQuestionId);
                 listChoice.add(newChoice);
             }

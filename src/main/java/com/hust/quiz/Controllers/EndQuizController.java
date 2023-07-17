@@ -23,11 +23,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EndQuizController implements Initializable {
+    private final List<QuestionReviewController> listControllerReview = new ArrayList<>();
     @FXML
     private Button btn_finish_review;
     @FXML
     private GridPane grid_num_question;
-
     @FXML
     private Label label_quiz_name_1;
     @FXML
@@ -48,9 +48,8 @@ public class EndQuizController implements Initializable {
     private VBox vbox_question;
     @FXML
     private ScrollPane scrollPane_quizView;
-
     private double mark = 0;
-    private List<QuestionReviewController> listControllerReview = new ArrayList<>();
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_finish_review.setOnMouseClicked(event -> {
             ViewFactory.getInstance().updateQuizHome();
@@ -58,24 +57,26 @@ public class EndQuizController implements Initializable {
             System.out.println("Finish review");
         });
     }
-    public void setInforQuiz(Quiz quiz, String timeStart, String timeComplete, Duration timeTaken, List<QuestionInStartController> listControllerAnswer){
+
+    public void setInforQuiz(Quiz quiz, String timeStart, String timeComplete, Duration timeTaken, List<QuestionInStartController> listControllerAnswer) {
         this.lbTimeStart.setText(timeStart);
         this.lbTimeComplete.setText(timeComplete);
         this.lbTimeTaken.setText(this.getTimeTaken(timeTaken));
         this.updateQuestion(quiz);
         int numQues = listControllerAnswer.size();
-        for(int i = 0; i < numQues; i++){
+        for (int i = 0; i < numQues; i++) {
             int selected = listControllerAnswer.get(i).getSelected();
             double grade = listControllerAnswer.get(i).getGrade();
             this.mark += grade;
             this.listControllerReview.get(i).setSelected(selected);
             this.listControllerReview.get(i).checkCorrect(grade != 0);
         }
-        double maxMark = (double) numQues;
         DecimalFormat df = new DecimalFormat("##.##");
-        this.lbMark.setText(String.valueOf(this.mark) + " / " + maxMark);
-        this.lbGrade.setText(Double.parseDouble(df.format((this.mark / maxMark)*10))  + " out of 10.00 (" + Double.parseDouble(df.format((this.mark / maxMark)))*100 + "%)");
+        this.lbMark.setText(this.mark + " / " + (double) numQues);
+        this.lbGrade.setText(Double.parseDouble(df.format((this.mark / (double) numQues) * 10)) +
+                " out of 10.00 (" + Double.parseDouble(df.format((this.mark / (double) numQues))) * 100 + "%)");
     }
+
     public void updateQuestion(Quiz quiz) {
         int quiz_id = quiz.getQuiz_id();
         List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
@@ -114,27 +115,27 @@ public class EndQuizController implements Initializable {
         }
     }
 
-    public String getTimeTaken(Duration duration){
+    public String getTimeTaken(Duration duration) {
         String timeTaken = "";
         long hour = duration.toHours();
-        if(hour == 1) {
+        if (hour == 1) {
             timeTaken += "1 hour";
-        } else if(hour > 1) {
+        } else if (hour > 1) {
             timeTaken += String.valueOf(hour) + " hours ";
         }
 
         long minute = duration.toMinutesPart();
-        if(minute <= 1) {
-            timeTaken += String.valueOf(minute) + " min ";
-        }else if(minute > 1) {
-            timeTaken += String.valueOf(minute) + " mins ";
+        if (minute <= 1) {
+            timeTaken += minute + " min ";
+        } else {
+            timeTaken += minute + " mins ";
         }
 
         long sec = duration.toSecondsPart();
-        if(sec == 1){
-            timeTaken += String.valueOf(sec) + " sec";
-        }else if(sec > 1){
-            timeTaken += String.valueOf(sec) + " secs";
+        if (sec == 1) {
+            timeTaken += sec + " sec";
+        } else if (sec > 1) {
+            timeTaken += sec + " secs";
         }
         return timeTaken;
     }

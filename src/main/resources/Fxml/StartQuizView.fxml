@@ -19,7 +19,7 @@
    <children>
       <AnchorPane layoutX="57.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
          <children>
-            <Label fx:id="label_quiz_name_IT1" layoutX="40.0" layoutY="20.0" prefHeight="80.0" text="IT" textFill="#dd1515">
+            <Label layoutX="40.0" layoutY="20.0" prefHeight="80.0" text="IT" textFill="#dd1515">
                <font>
                   <Font size="60.0" />
                </font>

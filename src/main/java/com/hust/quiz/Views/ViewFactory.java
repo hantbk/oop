@@ -6,9 +6,9 @@ import com.hust.quiz.Models.Quiz;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.time.Duration;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
 public class ViewFactory {
@@ -63,7 +63,6 @@ public class ViewFactory {
             endQuizScene = new Scene(endQuizView.load());
             endQuizController = endQuizView.getController();
 
-
         } catch (IOException e) {
             System.out.println("Error to load fxml in ViewFactory");
             System.out.println(e.getMessage());
@@ -83,10 +82,20 @@ public class ViewFactory {
         return instance;
     }
 
+    /**
+     * Update quiz view when click on quiz in home view or after add quiz
+     *
+     * @param quizName name of quiz
+     */
     public void updateQuizView(String quizName) {
         quizViewController.displayInfo(quizName);
     }
 
+    /**
+     * Update edit quiz view when click on edit button in quiz view
+     *
+     * @param quiz quiz to edit
+     */
     public void updateEditQuizView(Quiz quiz) {
         editQuizController.editQuizDisplayInfo(quiz);
     }
@@ -96,11 +105,12 @@ public class ViewFactory {
         editQuestionController.setInfo(question, category_name);
     }
 
+    // update question before start quiz
     public void updateQuestionQuiz(Quiz quiz) {
         startQuizController.updateQuestion(quiz);
     }
 
-    //update quiz trong home
+    //update quiz in home scene
     public void updateQuizHome() {
         homeController.updateQuiz();
     }
@@ -109,9 +119,9 @@ public class ViewFactory {
         startQuizController.endQuiz();
     }
 
-    public void reviewQuiz(Quiz quiz, String timeStart, String timeComplete, Duration timeTaken, List<QuestionInStartController> listControllerAnswer){
+    public void reviewQuiz(Quiz quiz, String timeStart, String timeComplete, Duration timeTaken, List<QuestionInStartController> listControllerAnswer) {
         endQuizController.setInforQuiz(quiz, timeStart, timeComplete, timeTaken, listControllerAnswer);
-    };
+    }
 
     public void routes(SCENES scene) {
         switch (scene) {

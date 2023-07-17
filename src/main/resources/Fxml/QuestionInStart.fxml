@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="212.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInStartController">
+<AnchorPane prefHeight="212.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInStartController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" style="-fx-border-color: #146C94;">
          <children>
@@ -25,7 +25,7 @@
                         </Label>
                         <Label fx:id="label_questionNum" text="1">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
                      </children>

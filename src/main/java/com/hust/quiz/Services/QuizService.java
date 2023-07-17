@@ -2,7 +2,11 @@ package com.hust.quiz.Services;
 
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Quiz;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +21,8 @@ public class QuizService {
             pst.setString(2, quiz.getQuiz_description());
             pst.setInt(3, quiz.getTimeLimit());
             pst.setString(4, quiz.getTimeFormat());
-            pst.setDate(5, Date.valueOf(quiz.getOpen_date()));
-            pst.setDate(6, Date.valueOf(quiz.getClose_date()));
+            pst.setDate(5, quiz.getOpen_date());
+            pst.setDate(6, quiz.getClose_date());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {
@@ -76,6 +80,7 @@ public class QuizService {
         }
         return result;
     }
+
     public static Quiz getQuiz(String quiz_name) {
         try (Connection conn = Utils.getConnection()) {
             // write query
@@ -114,6 +119,7 @@ public class QuizService {
         }
         return null;
     }
+
     public static List<String> getAllQuiz() {
         List<String> result = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
@@ -136,51 +142,31 @@ public class QuizService {
         return result;
     }
 
-    public static void updateQuiz(int quizID, List<Question> questionList) {
-        if(QuizService.quizCountQues(quizID) != 0){
-            try (Connection conn = Utils.getConnection()) {
-                // TODO: Check if this quiz has any questions
-                // if yes -> delete all questions and add
-                // if no -> add
-                String init = "DELETE FROM `quiz_question` WHERE `quiz_id` = ?;";
-                PreparedStatement preparedStatement = conn.prepareStatement(init);
-                preparedStatement.setString(1, String.valueOf(quizID));
-                preparedStatement.executeUpdate();
-                preparedStatement.close();
-
-                String sql = "INSERT INTO `quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES (?, ?, ?);";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                int order = quizCountQues(quizID);
-                for (Question question : questionList) {
-                    pst.setString(1, String.valueOf(quizID));
-                    pst.setString(2, String.valueOf(question.getQuestion_id()));
-                    pst.setString(3, String.valueOf(order));
-                    pst.executeUpdate();
-                    order = order + 1;
-                }
-                pst.close();
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
+    public static void updateQuestionQuiz(int quizID, List<Question> questionToAdd, List<Question> questionToDelete) {
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "INSERT INTO `quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES (?, ?, ?);";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            int order = quizCountQues(quizID);
+            for (Question question : questionToAdd) {
+                pst.setString(1, String.valueOf(quizID));
+                pst.setString(2, String.valueOf(question.getQuestion_id()));
+                pst.setString(3, String.valueOf(order));
+                pst.executeUpdate();
+                order = order + 1;
             }
-        }else{
-            try (Connection conn = Utils.getConnection()){
-                String sql = "INSERT INTO `quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES (?, ?, ?);";
-                PreparedStatement pst = conn.prepareStatement(sql);
-                int order = quizCountQues(quizID);
-                for (Question question : questionList) {
-                    pst.setString(1, String.valueOf(quizID));
-                    pst.setString(2, String.valueOf(question.getQuestion_id()));
-                    pst.setString(3, String.valueOf(order));
-                    pst.executeUpdate();
-                    order = order + 1;
-                }
-                pst.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
+            pst.close();
+
+            String sql2 = "DELETE FROM `quiz_question` WHERE `quiz_id` = ? AND `question_id` = ?;";
+            PreparedStatement pst2 = conn.prepareStatement(sql2);
+            for (Question question : questionToDelete) {
+                pst2.setString(1, String.valueOf(quizID));
+                pst2.setString(2, String.valueOf(question.getQuestion_id()));
+                pst2.executeUpdate();
             }
+            pst2.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

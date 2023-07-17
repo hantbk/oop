@@ -1,5 +1,6 @@
 package com.hust.quiz.Models;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -60,11 +61,17 @@ public class Quiz {
         return quiz_id;
     }
 
-    public LocalDate getOpen_date() {
-        return open_date;
+    public Date getOpen_date() {
+        if (open_date == null) {
+            return null;
+        }
+        return Date.valueOf(open_date);
     }
 
-    public LocalDate getClose_date() {
-        return close_date;
+    public Date getClose_date() {
+        if (close_date == null) {
+            return null;
+        }
+        return Date.valueOf(close_date);
     }
 }

@@ -40,8 +40,7 @@ public class AddQuizController implements Initializable {
 
         // configure btn_menu_return - back to home
         btn_menu_return.setOnMouseClicked(event -> {
-            this.reset();
-            ViewFactory.getInstance().updateQuizHome();
+            reset();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
 
@@ -70,8 +69,9 @@ public class AddQuizController implements Initializable {
                 }
                 QuizService.addQuiz(new Quiz(quizName, quizDescription, timeLimit, time_format, date_open.getValue(), date_close.getValue()));
 
-                ViewFactory.getInstance().updateQuizView(quizName);
                 this.reset();
+                ViewFactory.getInstance().updateQuizHome();
+                ViewFactory.getInstance().updateQuizView(quizName);
                 ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
             }
         });

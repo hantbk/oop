@@ -89,15 +89,16 @@ public class Question {
     //use for colection Set<Question> in EditQuiz
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) {
+        if (this == obj) {
             return true;
         }
-        if(obj == null|| getClass() !=obj.getClass()){
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         Question ques = (Question) obj;
         return this.question_id == ques.question_id;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(question_id);
