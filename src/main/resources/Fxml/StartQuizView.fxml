@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.StartQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.StartQuizController">
    <children>
       <AnchorPane layoutX="57.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
          <children>
@@ -167,7 +167,7 @@
                <children>
                   <AnchorPane prefHeight="500.0" prefWidth="257.0" style="-fx-border-color: rgba(0,0,0,0); -fx-background-color: #EEEEEE;">
                      <children>
-                        <VBox prefHeight="500.0" prefWidth="265.0" style="-fx-border-color: #AFD3E2;">
+                        <VBox prefHeight="500.0" prefWidth="265.0" spacing="5.0" style="-fx-border-color: #AFD3E2;">
                            <children>
                               <Label prefHeight="92.0" prefWidth="265.0" style="-fx-border-color: #AFD3E2;" text="Quiz navigation" textFill="RED">
                                  <font>
@@ -191,37 +191,37 @@
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <GridPane fx:id="grid_num_question" alignment="CENTER" hgap="8.0" prefHeight="375.0" prefWidth="251.0" vgap="8.0">
-                                <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                              </GridPane>
+                              <ScrollPane layoutY="5.0" prefHeight="252.0" prefWidth="264.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="240.0">
+                                       <children>
+                                          <GridPane fx:id="grid_num_question" alignment="CENTER" hgap="8.0" prefWidth="232.0" vgap="8.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="43.0" minWidth="10.0" prefWidth="40.0" />
+                                                <ColumnConstraints maxWidth="43.0" minWidth="10.0" prefWidth="40.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="43.0" minWidth="0.0" prefWidth="40.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="43.0" minWidth="10.0" prefWidth="40.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="43.0" minWidth="10.0" prefWidth="40.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                       <padding>
+                                          <Insets left="5.0" top="5.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
                               <Button fx:id="btn_finish_attempt" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Finish attempt...">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                                  <padding>
-                                    <Insets bottom="10.0" left="10.0" />
+                                    <Insets bottom="10.0" left="10.0" top="10.0" />
                                  </padding>
                               </Button>
                            </children>

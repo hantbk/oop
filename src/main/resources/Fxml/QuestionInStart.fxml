@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -74,13 +75,18 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="10.0" style="-fx-background-color: #EEEEEE;">
          <children>
-            <VBox prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
+            <VBox fx:id="vBox_question" prefWidth="720.0" spacing="10.0" style="-fx-background-color: #e7f3f5;">
                <children>
                   <Label fx:id="label_questionContent" text="Question content" wrapText="true">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="image_question" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="200.0" />
+                     </VBox.margin>
+                  </ImageView>
                   <RadioButton fx:id="rButton_A" mnemonicParsing="false" text="Choice A" wrapText="true">
                      <toggleGroup>
                         <ToggleGroup fx:id="Choice" />

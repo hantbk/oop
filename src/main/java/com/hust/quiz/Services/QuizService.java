@@ -31,29 +31,6 @@ public class QuizService {
         }
     }
 
-    //lay id tu ten quiz
-    public static int getId(String quizName) {
-        int quiz_id = 0;
-        try (Connection conn = Utils.getConnection()) {
-            // SELECT row have category_name
-            String sql = "SELECT quiz_id FROM quiz WHERE quiz_name = ?";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, quizName);
-
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                // return ID of the category
-                quiz_id = rs.getInt("quiz_id");
-            } else {
-                System.out.println("No ID found");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return quiz_id;
-    }
-
     //lấy danh sách câu hỏi của quiz
     public static List<Question> getQuestionQuiz(int quiz_id) {
         List<Question> result = new ArrayList<>();

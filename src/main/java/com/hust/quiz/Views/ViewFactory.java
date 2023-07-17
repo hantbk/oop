@@ -106,8 +106,8 @@ public class ViewFactory {
     }
 
     // update question before start quiz
-    public void updateQuestionQuiz(Quiz quiz) {
-        startQuizController.updateQuestion(quiz);
+    public void updateStartQuiz(Quiz quiz) {
+        startQuizController.updateStartQuiz(quiz);
     }
 
     //update quiz in home scene
@@ -155,7 +155,6 @@ public class ViewFactory {
                 break;
             }
             case START_QUIZ: {
-                startQuizController.runTimer();
                 stage.setScene(startQuizScene);
                 break;
             }

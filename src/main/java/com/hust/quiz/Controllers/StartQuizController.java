@@ -29,12 +29,14 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class StartQuizController implements Initializable {
-    private static int sec;
-    private static int quizTimeLimit;
-    private static String quizTimeFormat;
     private final List<QuestionInStartController> listController = new ArrayList<>();
+    private CountdownTimer countdownTimer;
+    private int sec;
+    private String timeStartQuiz, timeCompleteQuiz;
+    private LocalTime start, end;
+    private Quiz quiz;
     @FXML
-    private AnchorPane quiz_pane;
+    private AnchorPane quiz_pane, attempt_pane;
     @FXML
     private Label timerLabel;
     @FXML
@@ -48,54 +50,99 @@ public class StartQuizController implements Initializable {
     @FXML
     private ScrollPane scrollPane_quizView;
     @FXML
-    private AnchorPane attempt_pane;
-    @FXML
     private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt;
-    private String timeStartQuiz;
-    private String timeCompleteQuiz;
-    private LocalTime start;
-    private LocalTime end;
-    private Quiz quiz;
 
-
-    public static void setQuizTime(int quizTimeLimit, String quizTimeFormat) {
-        StartQuizController.quizTimeLimit = quizTimeLimit;
-        StartQuizController.quizTimeFormat = quizTimeFormat;
-    }
-
-    public void runTimer() {
-        if (quizTimeFormat == null) {
+    private void runTimer() {
+        if (quiz.getTimeFormat() == null || quiz.getTimeLimit() == 0) {
             timerLabel.setText("No time limit");
         } else {
-            if (Objects.equals(quizTimeFormat, "hours")) {
-                sec = quizTimeLimit * 3600;
-            } else if (Objects.equals(quizTimeFormat, "minutes")) {
-                sec = quizTimeLimit * 60;
-            } else if (Objects.equals(quizTimeFormat, "seconds")) {
-                sec = quizTimeLimit;
+            if (Objects.equals(quiz.getTimeFormat(), "hours")) {
+                sec = quiz.getTimeLimit() * 3600;
+            } else if (Objects.equals(quiz.getTimeFormat(), "minutes")) {
+                sec = quiz.getTimeLimit() * 60;
+            } else if (Objects.equals(quiz.getTimeFormat(), "seconds")) {
+                sec = quiz.getTimeLimit();
             }
-            CountdownTimer countdownTimer = new CountdownTimer(sec, timerLabel);
-            countdownTimer.start();
-            LocalDate now = LocalDate.now();
-            this.start = LocalTime.now();
-            DateTimeFormatter day = DateTimeFormatter.ofPattern("EEEE");
-            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
-            this.timeStartQuiz = now.format(day) + ", " + now.format(date) + ", " + this.start.format(time);
+            countdownTimer.setTimeAndRun(sec);
         }
+    }
+
+    //update cac cau hoi trong quiz vao vBox
+    public void updateStartQuiz(Quiz quiz) {
+        this.quiz = quiz;
+        this.label_quiz_name_1.setText(quiz.getQuiz_name());
+        this.label_quiz_name_2.setText(quiz.getQuiz_name());
+
+        // update vbox
+        int quiz_id = quiz.getQuiz_id();
+        List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
+        int i = 1;
+        for (Question question : listQuestion) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/QuestionInStart.fxml"));
+            try {
+                Parent root = loader.load();
+                QuestionInStartController controller = loader.getController();
+                listController.add(controller);
+                controller.setInforQuestion(question, i);
+                vbox_question.getChildren().add(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.print("At " + this.getClass());
+            }
+            i++;
+        }
+
+        // update gridPane
+        for (int j = 0; j < listQuestion.size(); j++) {
+            final int question_index = j + 1;
+            Button button = new Button(String.valueOf(question_index));
+            button.setPrefSize(40, 30);
+            button.setOnAction(event -> {
+                //vị trí của câu hỏi i trong VBox
+                double place = vbox_question.getChildren().get(Integer.parseInt(button.getText()) - 1).getLayoutY() +
+                        (Integer.parseInt(button.getText()) - 1) * 10 - 10;
+                //nhảy đến vị trí câu hỏi i
+                scrollPane_quizView.setVvalue(place / vbox_question.getHeight());
+            });
+            grid_num_question.add(button, j % 5, j / 5);
+        }
+
+        // update timer
+        runTimer();
+
+        // update time start quiz
+        LocalDate now = LocalDate.now();
+        this.start = LocalTime.now();
+        DateTimeFormatter day = DateTimeFormatter.ofPattern("EEEE");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
+        this.timeStartQuiz = now.format(day) + ", " + now.format(date) + ", " + this.start.format(time);
     }
 
     public void endQuiz() {
         //quiz_pane.setDisable(true);
+        System.out.println("Grade: " + this.getGradeQuiz());
+        LocalDate now = LocalDate.now();
+        this.end = LocalTime.now();
+        DateTimeFormatter day = DateTimeFormatter.ofPattern("EEEE");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
+        this.timeCompleteQuiz = now.format(day) + ", " + now.format(date) + ", " + this.end.format(time);
+        Duration timeTaken = Duration.between(start, end);
+
+        ViewFactory.getInstance().reviewQuiz(this.quiz, timeStartQuiz, timeCompleteQuiz, timeTaken, this.listController);
+        ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
+        this.reset();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_menu_return.setOnMouseClicked(event -> {
             this.reset();
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
         });
+
+        countdownTimer = new CountdownTimer(timerLabel);
 
         btn_finish_attempt.setOnMouseClicked(event -> {
             quiz_pane.setDisable(true);
@@ -127,53 +174,14 @@ public class StartQuizController implements Initializable {
         });
     }
 
-    //update cac cau hoi trong quiz vao vBox
-    public void updateQuestion(Quiz quiz) {
-        this.quiz = quiz;
-        int quiz_id = quiz.getQuiz_id();
-        List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
-        this.label_quiz_name_1.setText(quiz.getQuiz_name());
-        this.label_quiz_name_2.setText(quiz.getQuiz_name());
-        int i = 1;
-        FXMLLoader[] listFXMLQuestionQuiz = new FXMLLoader[listQuestion.size() + 1];
-        for (Question question : listQuestion) {
-            listFXMLQuestionQuiz[i] = new FXMLLoader(getClass().getResource("/FXML/QuestionInStart.fxml"));
-            try {
-                Parent root = listFXMLQuestionQuiz[i].load();
-                QuestionInStartController controller = listFXMLQuestionQuiz[i].getController();
-                listController.add(controller);
-                controller.setInforQuestion(question, i);
-                vbox_question.getChildren().add(root);
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.print("At " + this.getClass());
-            }
-            i++;
-        }
-
-        for (int j = 0; j < listQuestion.size(); j++) {
-            final int question_index = j + 1;
-            Button button = new Button(String.valueOf(question_index));
-            button.setPrefSize(40, 30);
-            button.setOnAction(event -> {
-                //vị trí của câu hỏi i trong VBox
-                double place = vbox_question.getChildren().get(Integer.parseInt(button.getText()) - 1).getLayoutY() - (Integer.parseInt(button.getText())) * 10;
-                //nhảy đến vị trí câu hỏi i
-                scrollPane_quizView.setVvalue(place / vbox_question.getHeight());
-                //System.out.println(place/vbox_question.getHeight());
-            });
-            grid_num_question.add(button, j % 5, j / 5);
-        }
-    }
 
     //reset all
     private void reset() {
-        if (!listController.isEmpty())
-            listController.clear();
-        this.vbox_question.getChildren().clear();
-        this.grid_num_question.getChildren().clear();
+        listController.clear();
+        vbox_question.getChildren().clear();
+        grid_num_question.getChildren().clear();
         quiz_pane.setDisable(false);
-        this.attempt_pane.setVisible(false);
+        attempt_pane.setVisible(false);
         quiz_pane.opacityProperty().setValue(1);
     }
 

@@ -29,21 +29,9 @@ public class EndQuizController implements Initializable {
     @FXML
     private GridPane grid_num_question;
     @FXML
-    private Label label_quiz_name_1;
+    private Label label_quiz_name_1, label_quiz_name_2, label_quiz_name_IT1;
     @FXML
-    private Label label_quiz_name_2;
-    @FXML
-    private Label label_quiz_name_IT1;
-    @FXML
-    private Label lbGrade;
-    @FXML
-    private Label lbMark;
-    @FXML
-    private Label lbTimeComplete;
-    @FXML
-    private Label lbTimeStart;
-    @FXML
-    private Label lbTimeTaken;
+    private Label lbGrade, lbMark, lbTimeComplete, lbTimeStart, lbTimeTaken;
     @FXML
     private VBox vbox_question;
     @FXML
@@ -52,7 +40,6 @@ public class EndQuizController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_finish_review.setOnMouseClicked(event -> {
-            ViewFactory.getInstance().updateQuizHome();
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
             System.out.println("Finish review");
         });
@@ -62,6 +49,7 @@ public class EndQuizController implements Initializable {
         this.lbTimeStart.setText(timeStart);
         this.lbTimeComplete.setText(timeComplete);
         this.lbTimeTaken.setText(this.getTimeTaken(timeTaken));
+
         this.updateQuestion(quiz);
         int numQues = listControllerAnswer.size();
         for (int i = 0; i < numQues; i++) {
@@ -77,19 +65,18 @@ public class EndQuizController implements Initializable {
                 " out of 10.00 (" + Double.parseDouble(df.format((this.mark / (double) numQues))) * 100 + "%)");
     }
 
-    public void updateQuestion(Quiz quiz) {
+    private void updateQuestion(Quiz quiz) {
         int quiz_id = quiz.getQuiz_id();
         List<Question> listQuestion = QuizService.getQuestionQuiz(quiz_id);
         this.label_quiz_name_1.setText(quiz.getQuiz_name());
         this.label_quiz_name_2.setText(quiz.getQuiz_name());
+
         int i = 1;
-        FXMLLoader[] listFXMLQuestionQuiz = new FXMLLoader[listQuestion.size() + 1];
-//        listController = new ArrayList<>();
         for (Question question : listQuestion) {
-            listFXMLQuestionQuiz[i] = new FXMLLoader(getClass().getResource("/FXML/QuestionReview.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/QuestionReview.fxml"));
             try {
-                Parent root = listFXMLQuestionQuiz[i].load();
-                QuestionReviewController controller = listFXMLQuestionQuiz[i].getController();
+                Parent root = loader.load();
+                QuestionReviewController controller = loader.getController();
                 controller.setQuestion(question, i);
                 this.listControllerReview.add(controller);
                 vbox_question.getChildren().add(root);
@@ -99,7 +86,7 @@ public class EndQuizController implements Initializable {
             }
             i++;
         }
-        List<Button> listButton = new ArrayList<>();
+
         for (int j = 0; j < listQuestion.size(); j++) {
             final int question_index = j + 1;
             Button button = new Button(String.valueOf(question_index));
@@ -121,7 +108,7 @@ public class EndQuizController implements Initializable {
         if (hour == 1) {
             timeTaken += "1 hour";
         } else if (hour > 1) {
-            timeTaken += String.valueOf(hour) + " hours ";
+            timeTaken += hour + " hours ";
         }
 
         long minute = duration.toMinutesPart();

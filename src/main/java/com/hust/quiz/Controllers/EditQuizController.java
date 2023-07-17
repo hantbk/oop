@@ -118,7 +118,7 @@ public class EditQuizController implements Initializable {
         // TODO: configure add a new question
         add_new_question.setOnMouseClicked(event -> {
             add_question_option.setVisible(false);
-            anchor_blur.setVisible(true);
+//            anchor_blur.setVisible(true);
 
         });
 
@@ -213,9 +213,12 @@ public class EditQuizController implements Initializable {
             anchor_blur.setVisible(true);
             anchor_add_question_random.setVisible(true);
 
-            cb_category_random.setOnAction(e -> {
+            cb_category_random.setOnMouseClicked(e -> {
                 vbox_questionRandom.getChildren().clear();
                 String category_name = this.cb_category_random.getValue();
+                if (category_name == null) {
+                    return;
+                }
                 Category category = CategoryService.getCategoryByName(category_name);
 
                 spinner_numQues.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, category.getQuestion_count(), 0, 1));
@@ -330,6 +333,8 @@ public class EditQuizController implements Initializable {
     private void resetEditPane() {
         listQuestionToAdd.clear();
         listQuestionToRemove.clear();
+        listQuestion.clear();
+        addedListQuestion.clear();
     }
 
     private void resetQuestionBankPane() {

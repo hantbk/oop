@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LoadeDocxService {
+public class LoaderDocxService {
 
     public static String importFile(String path) {
         int quest_id = QuestionService.getLastQuestionId();

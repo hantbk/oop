@@ -1,30 +1,15 @@
 package com.hust.quiz.Services;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ImageService {
-    private static final String BASE_PATH = new File("").getAbsolutePath();
+    private static final String BASE_PATH = System.getProperty("user.dir").endsWith("oop") ?
+            System.getProperty("user.dir") : System.getProperty("user.dir") + "\\oop";
+
     public static final String PATH_QUESTION = BASE_PATH + "\\src\\main\\resources\\question_img\\";
     public static final String PATH_CHOICE = BASE_PATH + "\\src\\main\\resources\\choice_img\\";
-
-    /**
-     * Get path of image
-     *
-     * @param question_id id of question
-     * @return String path of image
-     */
-    public static String getImage(int question_id) {
-        String filePath = PATH_QUESTION + "question_" + question_id + ".png";
-        // check if image exists
-        File file = new File(filePath);
-        if (file.exists()) {
-            return filePath;
-        }
-        return null;
-    }
 
     /**
      * Copy image from path to PATH
@@ -40,6 +25,7 @@ public class ImageService {
         }
         String extension = path.substring(path.lastIndexOf("."));
         String newFilePath;
+        System.out.println(BASE_PATH);
         if (isQuestion) {
             newFilePath = PATH_QUESTION + "question_" + id + extension;
         } else {

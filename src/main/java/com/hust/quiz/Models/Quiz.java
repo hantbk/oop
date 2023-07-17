@@ -2,7 +2,6 @@ package com.hust.quiz.Models;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Quiz {
     private final String quiz_name;
@@ -12,7 +11,6 @@ public class Quiz {
     private final LocalDate open_date;
     private final LocalDate close_date;
     private int quiz_id;
-    private List<Question> listQuestion;
 
     public Quiz(String quiz_name, String quiz_description, int timeLimit, String time_format, LocalDate open_date, LocalDate close_date) {
         this.quiz_name = quiz_name;
@@ -39,14 +37,6 @@ public class Quiz {
 
     public String getQuiz_description() {
         return quiz_description;
-    }
-
-    public List<Question> getListQuestion() {
-        return listQuestion;
-    }
-
-    public void setListQuestion(List<Question> listQuestion) {
-        this.listQuestion = listQuestion;
     }
 
     public String getTimeFormat() {

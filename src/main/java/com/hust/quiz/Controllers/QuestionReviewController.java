@@ -6,7 +6,8 @@ import com.hust.quiz.Services.ChoiceService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -15,72 +16,62 @@ import java.util.List;
 public class QuestionReviewController {
     @FXML
     private Label label_questionContent;
-
     @FXML
     private Label label_questionNum;
-
     @FXML
-    private Label lbChoiceA;
-
+    private Label lbChoiceA, lbChoiceB, lbChoiceC, lbChoiceD, lbChoiceE;
     @FXML
-    private Label lbChoiceB;
-
-    @FXML
-    private Label lbChoiceC;
-
-    @FXML
-    private Label lbChoiceD;
-
-    @FXML
-    private Label lbChoiceE;
-
-    @FXML
-    private RadioButton rButton_A;
-
-    @FXML
-    private RadioButton rButton_B;
-
-    @FXML
-    private RadioButton rButton_C;
-
-    @FXML
-    private RadioButton rButton_D;
-
-    @FXML
-    private RadioButton rButton_E;
+    private RadioButton rButton_A, rButton_B, rButton_C, rButton_D, rButton_E;
     @FXML
     private Label lbCorrectAnswer;
     @FXML
+    private VBox vBox_question;
+    @FXML
+    private ImageView image_question;
+    @FXML
     private VBox correctPlace;
 
-    public void setQuestion(Question question, int questionNum){
+    public void setQuestion(Question question, int questionNum) {
         this.label_questionNum.setText(String.valueOf(questionNum));
         this.label_questionContent.setText(question.getQuestion_text());
+        if (question.getQuestionImage() != null) {
+            image_question.setImage(new Image(question.getQuestionImage()));
+            image_question.setFitHeight(150);
+        } else {
+            vBox_question.getChildren().remove(image_question);
+        }
+
         List<Choice> listChoice = new ArrayList<>(ChoiceService.getChoice(question.getQuestion_id()));
         this.setCorrectAnswer(listChoice);
         int numChoice = listChoice.size();
         if (!listChoice.isEmpty()) {
-            if( numChoice == 2){
+            if (numChoice == 2) {
                 lbChoiceA.setText("A: " + listChoice.get(0).getContent());
-                lbChoiceB.setText("B: "+ listChoice.get(1).getContent());
-                lbChoiceC.setVisible(false);    rButton_C.setVisible(false);
-                lbChoiceD.setVisible(false);    rButton_D.setVisible(false);
-                lbChoiceE.setVisible(false);    rButton_D.setVisible(false);
-            }else if(numChoice == 3){
+                lbChoiceB.setText("B: " + listChoice.get(1).getContent());
+                lbChoiceC.setVisible(false);
+                rButton_C.setVisible(false);
+                lbChoiceD.setVisible(false);
+                rButton_D.setVisible(false);
+                lbChoiceE.setVisible(false);
+                rButton_D.setVisible(false);
+            } else if (numChoice == 3) {
                 lbChoiceA.setText("A: " + listChoice.get(0).getContent());
-                lbChoiceB.setText("B: "+ listChoice.get(1).getContent());
+                lbChoiceB.setText("B: " + listChoice.get(1).getContent());
                 lbChoiceC.setText("C: " + listChoice.get(2).getContent());
-                rButton_D.setVisible(false);    lbChoiceD.setVisible(false);
-                rButton_E.setVisible(false);    lbChoiceE.setVisible(false);
-            }else if(numChoice == 4){
+                rButton_D.setVisible(false);
+                lbChoiceD.setVisible(false);
+                rButton_E.setVisible(false);
+                lbChoiceE.setVisible(false);
+            } else if (numChoice == 4) {
                 lbChoiceA.setText("A: " + listChoice.get(0).getContent());
-                lbChoiceB.setText("B: "+ listChoice.get(1).getContent());
+                lbChoiceB.setText("B: " + listChoice.get(1).getContent());
                 lbChoiceC.setText("C: " + listChoice.get(2).getContent());
                 lbChoiceD.setText("D: " + listChoice.get(3).getContent());
-                rButton_E.setVisible(false);    lbChoiceE.setVisible(false);
-            }else if(numChoice == 5){
+                rButton_E.setVisible(false);
+                lbChoiceE.setVisible(false);
+            } else if (numChoice == 5) {
                 lbChoiceA.setText("A: " + listChoice.get(0).getContent());
-                lbChoiceB.setText("B: "+ listChoice.get(1).getContent());
+                lbChoiceB.setText("B: " + listChoice.get(1).getContent());
                 lbChoiceC.setText("C: " + listChoice.get(2).getContent());
                 lbChoiceD.setText("D: " + listChoice.get(3).getContent());
                 lbChoiceE.setText("E: " + listChoice.get(4).getContent());
@@ -89,33 +80,33 @@ public class QuestionReviewController {
     }
 
     //tick vào đáp án đã chọn
-    public void setSelected(int selected){
-        if(selected == 0){
+    public void setSelected(int selected) {
+        if (selected == 0) {
             rButton_A.setSelected(true);
-        }else if(selected == 1){
+        } else if (selected == 1) {
             rButton_B.setSelected(true);
-        }else if(selected == 2){
+        } else if (selected == 2) {
             rButton_C.setSelected(true);
-        }else if(selected == 3){
+        } else if (selected == 3) {
             rButton_D.setSelected(true);
-        }else if(selected == 4){
+        } else if (selected == 4) {
             rButton_E.setSelected(true);
         }
     }
 
     //hiển thị đáp án đúng
-    public void setCorrectAnswer(List<Choice> listChoice){
-        for(Choice choice : listChoice){
-            if(choice.getChoiceGrade() != 0)
+    private void setCorrectAnswer(List<Choice> listChoice) {
+        for (Choice choice : listChoice) {
+            if (choice.getChoiceGrade() != 0)
                 lbCorrectAnswer.setText(choice.getContent());
         }
     }
 
     //nếu trả lời đúng thì màu xanh, sai thì màu dỏ
-    public void checkCorrect(boolean isCorrect){
-        if(isCorrect){
+    public void checkCorrect(boolean isCorrect) {
+        if (isCorrect) {
             this.correctPlace.setStyle("-fx-background-color: #7ef19b");
-        }else{
+        } else {
             this.correctPlace.setStyle("-fx-background-color: #e86b6b");
         }
     }
