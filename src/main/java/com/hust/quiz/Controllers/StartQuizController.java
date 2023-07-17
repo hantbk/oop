@@ -1,22 +1,33 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Quiz;
+import com.hust.quiz.Services.ChoiceService;
 import com.hust.quiz.Services.CountdownTimer;
 import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.*;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.embed.swing.SwingFXUtils;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
@@ -27,13 +38,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+
+
 public class StartQuizController implements Initializable {
 
     private static int sec;
     private static int quizTimeLimit;
     private static String quizTimeFormat;
     @FXML
-    private AnchorPane quiz_pane;
+    private AnchorPane quiz_pane, anchorPDF;
     @FXML
     private Label timerLabel;
     @FXML
@@ -49,7 +67,7 @@ public class StartQuizController implements Initializable {
     @FXML
     private AnchorPane attempt_pane;
     @FXML
-    private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt;
+    private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt, btnPDF;
     private final List<QuestionInStartController> listController = new ArrayList<>();
     private String timeStartQuiz;
     private String timeCompleteQuiz;
@@ -123,7 +141,142 @@ public class StartQuizController implements Initializable {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
             this.reset();
         });
+        btnPDF.setOnMouseClicked(event -> {
+                quiz_pane.setDisable(false);
+                quiz_pane.opacityProperty().setValue(1);
+                attempt_pane.setVisible(false);
+                attempt_pane.setDisable(true);
+
+                exportQuiztoPDF();
+
+                quiz_pane.setDisable(true);
+                quiz_pane.opacityProperty().setValue(0.5);
+                attempt_pane.setVisible(true);
+                attempt_pane.setDisable(false);
+        });
     }
+
+    private void exportQuiztoPDF() {
+        List<Question> listQuestion = QuizService.getQuestionQuiz(this.quiz.getQuiz_id());
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null) {
+            try (PDDocument document = new PDDocument()) {
+                PDPage page = new PDPage();
+                document.addPage(page);
+
+                // Load the Arial font from the resources folder
+                PDType0Font font = PDType0Font.load(document, StartQuizController.class.getClassLoader().getResourceAsStream("arial.ttf"));
+
+                float margin = 50; // Margin on the left and right sides
+                float yPosition = page.getMediaBox().getHeight() - 50; // Set initial y position
+                float fontSize = 12;
+                int maxLineWidth = (int) (page.getMediaBox().getWidth() - 2 * margin);
+
+                PDPageContentStream contentStream = new PDPageContentStream(document, page);
+                contentStream.setFont(font, fontSize);
+
+                StringBuilder currentLine = new StringBuilder();
+
+                for (Question question : listQuestion) {
+                    String questionText = question.getQuestion_text();
+                    String[] words = questionText.split(" ");
+
+                    for (String word : words) {
+                        String potentialLine = currentLine + word + " ";
+                        float lineWidth = fontSize * font.getStringWidth(potentialLine) / 1000;
+
+                        if (lineWidth > maxLineWidth) {
+                            contentStream.beginText();
+                            contentStream.newLineAtOffset(margin, yPosition);
+                            contentStream.showText(currentLine.toString());
+                            contentStream.endText();
+                            yPosition -= fontSize + 5; // Move to the next line
+                            currentLine = new StringBuilder(word + " ");
+
+                            // Check if there is enough space for another line
+                            if (yPosition <= margin) {
+                                // Create a new page and reset the y position
+                                contentStream.close();
+                                page = new PDPage();
+                                document.addPage(page);
+                                contentStream = new PDPageContentStream(document, page);
+                                contentStream.setFont(font, fontSize);
+                                yPosition = page.getMediaBox().getHeight() - margin;
+                            }
+                        } else {
+                            currentLine.append(word).append(" ");
+                        }
+                    }
+
+                    // Write the remaining line
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(margin, yPosition);
+                    contentStream.showText(currentLine.toString());
+                    contentStream.endText();
+                    yPosition -= fontSize + 5; // Move to the next line
+                    currentLine = new StringBuilder(); // Reset currentLine for the next question
+
+                    List<Choice> listChoice = ChoiceService.getChoice(question.getQuestion_id());
+                    Map<Integer, String> mapChoice = new HashMap<>();
+                    mapChoice.put(0, "A. "); mapChoice.put(1, "B. "); mapChoice.put(2, "C. "); mapChoice.put(3, "D. ");
+                    int index = 0;
+                    for (Choice choice : listChoice) {
+                        String choiceContent = mapChoice.get(index++) + choice.getContent();
+                        String[] words1 = choiceContent.split(" ");
+
+                        for (String word : words1) {
+                            String potentialLine = currentLine + word + " ";
+                            float lineWidth = fontSize * font.getStringWidth(potentialLine) / 1000;
+
+                            if (lineWidth > maxLineWidth) {
+                                contentStream.beginText();
+                                contentStream.newLineAtOffset(80, yPosition);
+                                contentStream.showText(currentLine.toString());
+                                contentStream.endText();
+                                yPosition -= fontSize + 5; // Move to the next line
+                                currentLine = new StringBuilder(word + " ");
+
+                                // Check if there is enough space for another line
+                                if (yPosition <= margin) {
+                                    // Create a new page and reset the y position
+                                    contentStream.close();
+                                    page = new PDPage();
+                                    document.addPage(page);
+                                    contentStream = new PDPageContentStream(document, page);
+                                    contentStream.setFont(font, fontSize);
+                                    yPosition = page.getMediaBox().getHeight() - margin;
+                                }
+                            } else {
+                                currentLine.append(word).append(" ");
+                            }
+                        }
+
+                        // Write the remaining line
+                        contentStream.beginText();
+                        contentStream.newLineAtOffset(80, yPosition);
+                        contentStream.showText(currentLine.toString());
+                        contentStream.endText();
+                        yPosition -= fontSize + 5; // Move to the next line
+                        currentLine = new StringBuilder(); // Reset currentLine for the next question
+                    }
+                }
+
+                contentStream.close();
+                document.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
 
     //update cac cau hoi trong quiz vao vBox
     public void updateQuestion(Quiz quiz) {

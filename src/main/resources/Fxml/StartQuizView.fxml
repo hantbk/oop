@@ -126,7 +126,7 @@
       </AnchorPane>
       <AnchorPane fx:id="quiz_pane" layoutX="57.0" layoutY="239.0" prefHeight="504.0" prefWidth="1086.0">
          <children>
-            <AnchorPane prefHeight="500.0" prefWidth="877.0" style="-fx-border-color: #AFD3E2;">
+            <AnchorPane fx:id="anchorPDF" prefHeight="500.0" prefWidth="877.0" style="-fx-border-color: #AFD3E2;">
                <children>
                   <AnchorPane layoutX="665.0" layoutY="14.0" prefHeight="42.0" prefWidth="214.0" style="-fx-border-color: RED;">
                      <children>
@@ -265,6 +265,7 @@
                         <Insets bottom="10.0" />
                      </HBox.margin>
                   </Button>
+                  <Button fx:id="btnPDF" mnemonicParsing="false" text="PDF" />
                </children>
             </HBox>
          </children>
