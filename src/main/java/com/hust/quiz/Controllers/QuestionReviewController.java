@@ -107,7 +107,7 @@ public class QuestionReviewController {
     public void setCorrectAnswer(List<Choice> listChoice){
         for(Choice choice : listChoice){
             if(choice.getChoiceGrade() != 0)
-                lbCorrectAnswer.setText(choice.getContent());
+                lbCorrectAnswer.setText("The correct answer is: " + choice.getContent());
         }
     }
 

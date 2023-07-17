@@ -170,16 +170,11 @@
             </VBox>
             <AnchorPane>
                <children>
-                  <VBox fx:id="correctPlace" prefHeight="36.0" prefWidth="720.0" spacing="10.0">
+                  <VBox fx:id="correctPlace" prefWidth="720.0" spacing="10.0">
                      <children>
-                        <HBox prefHeight="21.0" prefWidth="643.0">
+                        <HBox prefWidth="720.0">
                            <children>
-                              <Label text="The correct answer is: ">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbCorrectAnswer" wrapText="true">
+                              <Label fx:id="lbCorrectAnswer" prefWidth="720.0" wrapText="true">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

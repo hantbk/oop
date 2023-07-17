@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.EditQuizController">
     <children>
         <AnchorPane layoutX="60.0" layoutY="80.0" prefHeight="150.0" prefWidth="1160.0" style="-fx-border-color: #AFD3E2;">
             <children>
@@ -464,7 +464,7 @@
                 </VBox>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="anchor_add_question_random" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE;" visible="false">
+        <AnchorPane fx:id="anchor_add_question_random" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE;">
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0">
                     <children>
@@ -501,23 +501,6 @@
                                                 <Font size="15.0" />
                                             </font>
                                         </Label>
-                                        <HBox layoutX="30.0" layoutY="10.0">
-                                            <children>
-                                                <Label prefHeight="21.0" prefWidth="114.0" text="Category">
-                                                    <font>
-                                                        <Font size="15.0" />
-                                                    </font>
-                                                    <HBox.margin>
-                                                        <Insets top="5.0" />
-                                                    </HBox.margin>
-                                                </Label>
-                                                <ComboBox fx:id="cb_category_random" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-border-color: rgba(0, 0, 0, 0.7);">
-                                                    <padding>
-                                                        <Insets left="15.0" />
-                                                    </padding>
-                                                </ComboBox>
-                                            </children>
-                                        </HBox>
                                         <ScrollPane layoutX="30.0" layoutY="145.0" prefHeight="255.0" prefWidth="860.0">
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="855.0">
@@ -537,6 +520,32 @@
                                                 <Spinner fx:id="spinner_numQues" prefHeight="26.0" prefWidth="70.0" />
                                             </children>
                                         </HBox>
+                                        <HBox layoutX="30.0" layoutY="10.0">
+                                            <children>
+                                                <Label prefHeight="21.0" prefWidth="114.0" text="Category">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                    <HBox.margin>
+                                                        <Insets top="5.0" />
+                                                    </HBox.margin>
+                                                </Label>
+                                    <VBox>
+                                       <children>
+                                                      <ComboBox fx:id="cb_category_random" prefHeight="32.0" prefWidth="239.0" promptText="Default" style="-fx-border-color: rgba(0, 0, 0, 0.7);">
+                                                          <padding>
+                                                              <Insets left="15.0" />
+                                                          </padding>
+                                                      </ComboBox>
+                                       </children>
+                                    </VBox>
+                                            </children>
+                                        </HBox>
+                              <AnchorPane fx:id="anchor_tree_view" layoutX="145.0" layoutY="42.0">
+                                 <children>
+                                    <TreeView fx:id="tree_view_category_random" prefHeight="286.0" prefWidth="359.0" visible="false" />
+                                 </children>
+                              </AnchorPane>
                                     </children>
                                 </AnchorPane>
                             </content>
