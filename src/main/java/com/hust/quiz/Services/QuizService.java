@@ -138,6 +138,14 @@ public class QuizService {
 
     public static void updateQuiz(int quizID, List<Question> questionList) {
         try (Connection conn = Utils.getConnection()) {
+            // TODO: Check if this quiz has any questions
+            // if yes -> delete all questions and add
+            // if no -> add
+            String init = "DELETE FROM `quiz_question` WHERE `quiz_id` = ?;";
+            PreparedStatement preparedStatement = conn.prepareStatement(init);
+            preparedStatement.setString(1, String.valueOf(quizID));
+            preparedStatement.executeUpdate();
+
             String sql = "INSERT INTO `quiz_question` (`quiz_id`, `question_id`, `question_order`) VALUES (?, ?, ?);";
             PreparedStatement pst = conn.prepareStatement(sql);
             int order = quizCountQues(quizID);
@@ -149,6 +157,7 @@ public class QuizService {
                 order = order + 1;
             }
             pst.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
