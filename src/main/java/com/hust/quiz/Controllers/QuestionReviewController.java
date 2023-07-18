@@ -53,7 +53,7 @@ public class QuestionReviewController {
                 lbChoiceD.setVisible(false);
                 rButton_D.setVisible(false);
                 lbChoiceE.setVisible(false);
-                rButton_D.setVisible(false);
+                rButton_E.setVisible(false);
             } else if (numChoice == 3) {
                 lbChoiceA.setText("A: " + listChoice.get(0).getContent());
                 lbChoiceB.setText("B: " + listChoice.get(1).getContent());
