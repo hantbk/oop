@@ -33,8 +33,7 @@ public class QuestionReviewController {
     private ImageView image_question;
     @FXML
     private VBox correctPlace;
-    @FXML
-    private ImageView img_ques;
+
 
     public void setQuestion(Question question, int questionNum) {
         this.label_questionNum.setText(String.valueOf(questionNum));
@@ -83,16 +82,16 @@ public class QuestionReviewController {
             }
         }
 
-        int question_id = question.getQuestion_id();
-        if (ImageService.getImage(question_id) != null) { // Kiểm tra xem câu hỏi có ảnh không
-            if (ImageService.getImage(question_id).toLowerCase().endsWith(".png")) {
-                Image image = new Image(ImageService.getImage(question_id));
-                img_ques.setImage(image);
-            }
-        }
-        else {
-            img_ques.setVisible(false); // Ẩn đối tượng ImageView nếu không có ảnh
-        }
+//        int question_id = question.getQuestion_id();
+//        if (ImageService.getImage(question_id) != null) { // Kiểm tra xem câu hỏi có ảnh không
+//            if (ImageService.getImage(question_id).toLowerCase().endsWith(".png")) {
+//                Image image = new Image(ImageService.getImage(question_id));
+//                img_ques.setImage(image);
+//            }
+//        }
+//        else {
+//            img_ques.setVisible(false); // Ẩn đối tượng ImageView nếu không có ảnh
+//        }
     }
 
     //tick vào đáp án đã chọn

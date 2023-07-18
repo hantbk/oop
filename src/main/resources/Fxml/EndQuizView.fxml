@@ -303,8 +303,11 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <padding>
-                                    <Insets top="10.0" />
+                                    <Insets top="8.0" />
                                  </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
                               </GridPane>
                               <Button fx:id="btn_finish_review" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Finish review">
                                  <font>

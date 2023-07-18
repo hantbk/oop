@@ -10,6 +10,7 @@ import com.hust.quiz.Views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,7 @@ public class EditQuizController implements Initializable {
     private final Set<Question> listQuestionToRemove = new HashSet<>(); // list question to remove from quiz
     //QuestionInfoFromBankController of select question pane
     private final List<QuestionInfoFromBankController> listQuesSelectController = new ArrayList<>();
+    private final List<QuestionInfoQuizController> listQuestionEditController = new ArrayList<>();
     private final List<Question> listQuestionRandom = new ArrayList<>();
     private Set<Question> addedListQuestion = new HashSet<>(); // list question added to quiz
     //EDIT QUIZ PANE
@@ -87,6 +89,8 @@ public class EditQuizController implements Initializable {
     private CheckBox showSubcategoryQuestionCheckbox_random;
     @FXML
     private VBox vbox_questionRandom;
+    @FXML
+    private Button btn_delete;
     private Quiz quiz;
 
     public void editQuizDisplayInfo(Quiz quiz) {
@@ -117,6 +121,21 @@ public class EditQuizController implements Initializable {
             addedListQuestion = listQuestion;
             this.resetEditPane(); // don't reset before update QuestionQuiz
             ViewFactory.getInstance().routes(ViewFactory.SCENES.QUIZ_VIEW);
+        });
+
+        btn_delete.setOnAction(event -> {
+            int index = 0;
+            for(QuestionInfoQuizController controller : listQuestionEditController){
+                if(controller.isSelectDelete()){
+                    Question quesDelete = controller.getQuestion();
+                    listQuestion.remove(quesDelete);
+                    listQuestionToRemove.add(quesDelete);
+                    vbox_questionEditPane.getChildren().remove(index);
+                    index = index - 1;
+                }
+                index++;
+            }
+            updateEditPane();
         });
 
         arrow_add.setOnMouseClicked(event -> add_question_option.setVisible(!add_question_option.isVisible()));
@@ -318,22 +337,26 @@ public class EditQuizController implements Initializable {
 
     //update question of quiz
     private void updateEditPane() {
+        //xóa phàn tử cũ update lại
         vbox_questionEditPane.getChildren().clear();
+        listQuestionEditController.clear(); //xóa các fxml cũ load lại
         this.number_of_questions.setText(listQuestion.size() + " questions");
         this.lb_totalOfMark.setText(listQuestion.size() + ".0");
-
+        int i = 0;
+        FXMLLoader[] loader = new FXMLLoader[this.listQuestion.size()];
         for (Question ques : listQuestion) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoFromBank.fxml"));
-                Parent questionInfo = loader.load();
-                QuestionInfoFromBankController controller = loader.getController();
-                controller.updateQuestionInfo(ques, "");
-                controller.setTicks(true);
+                loader[i] = new FXMLLoader(getClass().getResource("/Fxml/QuestionInfoQuiz.fxml"));
+                Parent questionInfo = loader[i].load();
+                QuestionInfoQuizController controller = loader[i].getController();
+                listQuestionEditController.add(controller);
+                controller.setInfor(ques, i+1);
                 vbox_questionEditPane.getChildren().add(questionInfo);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 throw new RuntimeException(e);
             }
+            i++;
         }
     }
 
@@ -359,6 +382,7 @@ public class EditQuizController implements Initializable {
         listQuestionToRemove.clear();
         listQuestion.clear();
         addedListQuestion.clear();
+        listQuestionEditController.clear();
     }
 
     private void resetQuestionBankPane() {

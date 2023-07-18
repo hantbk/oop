@@ -98,7 +98,7 @@ public class EndQuizController implements Initializable {
             button.setPrefSize(40, 30);
             button.setOnAction(event -> {
                 //vị trí của câu hỏi i trong VBox
-                double place = vbox_question.getChildren().get(Integer.parseInt(button.getText()) - 1).getLayoutY() - (Integer.parseInt(button.getText())) * 10;
+                double place = vbox_question.getChildren().get(Integer.parseInt(button.getText()) - 1).getLayoutY() + (Integer.parseInt(button.getText()) - 1) * 10 -10;
                 //nhảy đến vị trí câu hỏi i
                 scrollPane_quizView.setVvalue(place / vbox_question.getHeight());
                 //System.out.println(place/vbox_question.getHeight());
