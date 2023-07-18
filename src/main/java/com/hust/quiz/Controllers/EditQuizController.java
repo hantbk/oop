@@ -289,8 +289,13 @@ public class EditQuizController implements Initializable {
 
             // configure add random questions
             btn_add_ques_random.setOnAction(e -> {
+
                 listQuestion.addAll(listQuestionRandom);
-                listQuestionToAdd.addAll(listQuestionRandom);
+                for(Question q : listQuestionRandom){
+                    if(!addedListQuestion.contains(q)){
+                        listQuestionToAdd.add(q);
+                    }
+                }
 
                 updateEditPane();
                 resetRandomPane();
