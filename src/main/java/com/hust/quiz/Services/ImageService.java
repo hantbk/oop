@@ -8,8 +8,10 @@ public class ImageService {
     private static final String BASE_PATH = System.getProperty("user.dir").endsWith("oop") ?
             System.getProperty("user.dir") : System.getProperty("user.dir") + "\\oop";
 
-    public static final String PATH_QUESTION = BASE_PATH + "\\src\\main\\resources\\question_img\\";
-    public static final String PATH_CHOICE = BASE_PATH + "\\src\\main\\resources\\choice_img\\";
+    public static final String PATH_QUESTION = (System.getProperty("os.name").toLowerCase().contains("win")) ?
+            BASE_PATH + "\\src\\main\\resources\\question_img\\" : BASE_PATH + "/src/main/resources/question_img/";
+    public static final String PATH_CHOICE = (System.getProperty("os.name").toLowerCase().contains("win")) ?
+            BASE_PATH + "\\src\\main\\resources\\choice_img\\" : BASE_PATH + "/src/main/resources/choice_img/";
 
     /**
      * Copy image from path to PATH
