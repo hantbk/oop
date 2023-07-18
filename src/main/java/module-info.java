@@ -5,9 +5,7 @@ module com.hust.quiz {
     requires mysql.connector.java;
 
 
-    requires org.apache.poi.ooxml;
-
-//    requires poi.ooxml;
+    //requires org.apache.poi.ooxml;
 
     requires poi.ooxml;
     requires org.apache.pdfbox;
