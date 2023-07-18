@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class QuizViewController implements Initializable {
+
     @FXML
     private Label label_quiz_name_IT, label_quiz_name_view, label_quiz_description;
     @FXML
@@ -52,7 +53,7 @@ public class QuizViewController implements Initializable {
     @FXML
     private ImageView btn_close_confirm;
     @FXML
-    private Button btn_start_attempt, btn_cancel_attempt,btn_export;
+    private Button btn_start_attempt, btn_cancel_attempt, btn_export;
     private Quiz quiz;
 
     public void displayInfo(String quizName) {
@@ -118,13 +119,12 @@ public class QuizViewController implements Initializable {
             dialog.setTitle("SET PASSWORD FOR THE PDF FILE");
             dialog.setHeaderText(null);
             dialog.setContentText("PASSWORD:");
-            dialog.showAndWait().ifPresent(input->{
+            dialog.showAndWait().ifPresent(input -> {
                 exportQuiztoPDF(input);
             });
 
         });
     }
-
 
     private void exportQuiztoPDF(String password) {
         List<Question> listQuestion = QuizService.getQuestionQuiz(this.quiz.getQuiz_id());
@@ -234,7 +234,10 @@ public class QuizViewController implements Initializable {
 
                     List<Choice> listChoice = ChoiceService.getChoice(question.getQuestion_id());
                     Map<Integer, String> mapChoice = new HashMap<>();
-                    mapChoice.put(0, "A. "); mapChoice.put(1, "B. "); mapChoice.put(2, "C. "); mapChoice.put(3, "D. ");
+                    mapChoice.put(0, "A. ");
+                    mapChoice.put(1, "B. ");
+                    mapChoice.put(2, "C. ");
+                    mapChoice.put(3, "D. ");
                     int index = 0;
                     for (Choice choice : listChoice) {
                         // Print the choice text
