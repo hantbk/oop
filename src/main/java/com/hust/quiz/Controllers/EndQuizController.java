@@ -41,6 +41,7 @@ public class EndQuizController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_finish_review.setOnMouseClicked(event -> {
             ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+            this.reset();
             System.out.println("Finish review");
         });
     }
@@ -129,6 +130,13 @@ public class EndQuizController implements Initializable {
             timeTaken += sec + " secs";
         }
         return timeTaken;
+    }
+
+    private void reset() {
+        this.vbox_question.getChildren().clear();
+        this.grid_num_question.getChildren().clear();
+        this.listControllerReview.clear();
+        this.mark = 0;
     }
 
 }

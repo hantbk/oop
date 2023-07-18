@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox prefHeight="25.0" prefWidth="1050.0" style="-fx-background-color: #DDE6ED;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hust.quiz.Controllers.QuestionInfoQuizController">
+    <children>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/icons8-direction-24.png" />
+            </image>
+            <HBox.margin>
+                <Insets left="5.0" />
+            </HBox.margin>
+        </ImageView>
+        <Label alignment="CENTER" prefWidth="30.0" style="-fx-background-color: white;" text="1">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin></Label>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/bulleted-list-32.png" />
+            </image>
+            <HBox.margin>
+                <Insets bottom="3.0" left="10.0" />
+            </HBox.margin>
+        </ImageView>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/setting.png" />
+            </image>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+        </ImageView>
+        <Label prefWidth="600.0" text="Question name">
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin></Label>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/icons8-magnify-50.png" />
+            </image>
+         <HBox.margin>
+            <Insets left="170.0" />
+         </HBox.margin>
+        </ImageView>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/icons8-trash-50.png" />
+            </image>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+        </ImageView>
+        <Label contentDisplay="RIGHT" style="-fx-background-color: white;" text="1.00">
+            <graphic>
+                <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/icons8-pencil-30.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin>
+        </Label>
+    </children>
+    <padding>
+        <Insets top="5.0" />
+    </padding>
+</HBox>
