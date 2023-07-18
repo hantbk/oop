@@ -36,6 +36,7 @@ public class ViewFactory {
         FXMLLoader editQuizView = new FXMLLoader(getClass().getResource("/Fxml/EditQuizView.fxml"));
         FXMLLoader startQuizView = new FXMLLoader(getClass().getResource("/Fxml/StartQuizView.fxml"));
         FXMLLoader endQuizView = new FXMLLoader(getClass().getResource("/Fxml/EndQuizView.fxml"));
+        //System.out.println(getClass().getResource("/Fxml/EndQuizView.fxml").getPath());
         try {
             homeScene = new Scene(home.load());
             homeController = home.getController();

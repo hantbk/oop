@@ -40,7 +40,7 @@ public class QuestionReviewController {
         this.label_questionNum.setText(String.valueOf(questionNum));
         this.label_questionContent.setText(question.getQuestion_text());
         if (question.getQuestionImage() != null) {
-            image_question.setImage(new Image(question.getQuestionImage()));
+            image_question.setImage(new Image("file:///" + question.getQuestionImage()));
             image_question.setFitHeight(150);
         } else {
             vBox_question.getChildren().remove(image_question);

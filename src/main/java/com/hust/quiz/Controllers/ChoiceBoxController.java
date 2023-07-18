@@ -74,7 +74,7 @@ public class ChoiceBoxController implements Initializable {
                 imagePath = selectedFile.getAbsolutePath();
                 if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png") || imagePath.endsWith(".gif")) {
                     btn_image_choice.setText("Image is selected");
-                    image_choice.setImage(new Image(imagePath));
+                    image_choice.setImage(new Image("file:///" + imagePath));
                 } else {
                     btn_image_choice.setText("Image must be .jpg or .png or .gif ");
                     imagePath = null;
@@ -116,7 +116,7 @@ public class ChoiceBoxController implements Initializable {
         this.imagePath = imagePath;
         if (imagePath != null) {
             btn_image_choice.setText("Image is selected");
-            image_choice.setImage(new Image(imagePath));
+            image_choice.setImage(new Image("file:///" + imagePath));
         }
     }
 
