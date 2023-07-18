@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ImageService {
+
     private static final String BASE_PATH = System.getProperty("user.dir").endsWith("oop") ?
             System.getProperty("user.dir") : System.getProperty("user.dir") + "\\oop";
 

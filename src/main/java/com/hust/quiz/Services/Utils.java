@@ -10,7 +10,6 @@ public class Utils {
     //    static final String password = "Vanhao23102003"; // fixed
     static final String password = "root"; // fixed
 
-
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

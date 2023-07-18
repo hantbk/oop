@@ -1,7 +1,9 @@
 package com.hust.quiz.Controllers;
 
+import com.hust.quiz.Models.Choice;
 import com.hust.quiz.Models.Question;
 import com.hust.quiz.Models.Quiz;
+import com.hust.quiz.Services.ChoiceService;
 import com.hust.quiz.Services.CountdownTimer;
 import com.hust.quiz.Services.QuizService;
 import com.hust.quiz.Views.ViewFactory;
@@ -16,17 +18,35 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiConsumer;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
+import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import javafx.scene.control.TextInputDialog;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
+import javax.imageio.ImageIO;
+
+
 
 public class StartQuizController implements Initializable {
     private final List<QuestionInStartController> listController = new ArrayList<>();
@@ -36,7 +56,9 @@ public class StartQuizController implements Initializable {
     private LocalTime start, end;
     private Quiz quiz;
     @FXML
-    private AnchorPane quiz_pane, attempt_pane;
+
+    private AnchorPane quiz_pane, anchorPDF;
+
     @FXML
     private Label timerLabel;
     @FXML
@@ -50,7 +72,17 @@ public class StartQuizController implements Initializable {
     @FXML
     private ScrollPane scrollPane_quizView;
     @FXML
-    private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt;
+
+    private AnchorPane attempt_pane;
+    @FXML
+    private Button btn_cancel_finish, btn_submit_quiz, btn_finish_attempt, btnPDF;
+    private final List<QuestionInStartController> listController = new ArrayList<>();
+    private String timeStartQuiz;
+    private String timeCompleteQuiz;
+    private LocalTime start;
+    private LocalTime end;
+    private Quiz quiz;
+
 
     private void runTimer() {
         if (quiz.getTimeFormat() == null || quiz.getTimeLimit() == 0) {
@@ -65,6 +97,46 @@ public class StartQuizController implements Initializable {
             }
             countdownTimer.setTimeAndRun(sec);
         }
+    }
+
+    public void endQuiz() {
+        //quiz_pane.setDisable(true);
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn_menu_return.setOnMouseClicked(event -> {
+            this.reset();
+            ViewFactory.getInstance().updateQuizHome();
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.HOME);
+        });
+        btn_finish_attempt.setOnMouseClicked(event -> {
+            quiz_pane.setDisable(true);
+            quiz_pane.opacityProperty().setValue(0.5);
+            attempt_pane.setVisible(true);
+            attempt_pane.setDisable(false);
+        });
+        btn_cancel_finish.setOnMouseClicked(event -> {
+            quiz_pane.setDisable(false);
+            quiz_pane.opacityProperty().setValue(1);
+            attempt_pane.setVisible(false);
+            attempt_pane.setDisable(true);
+        });
+        btn_submit_quiz.setOnMouseClicked(event -> {
+            System.out.println("Grade: " + this.getGradeQuiz());
+            LocalDate now = LocalDate.now();
+            this.end = LocalTime.now();
+            DateTimeFormatter day = DateTimeFormatter.ofPattern("EEEE");
+            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
+            this.timeCompleteQuiz = now.format(day) + ", " + now.format(date)+ ", " + this.end.format(time);
+            Duration timeTaken = Duration.between(start, end);
+
+            ViewFactory.getInstance().reviewQuiz(this.quiz, timeStartQuiz, timeCompleteQuiz, timeTaken, this.listController);
+            ViewFactory.getInstance().routes(ViewFactory.SCENES.END_QUIZ);
+            this.reset();
+        });
     }
 
     //update cac cau hoi trong quiz vao vBox
