@@ -13,6 +13,7 @@ public class ImageService {
     public static final String PATH_CHOICE = (System.getProperty("os.name").toLowerCase().contains("win")) ?
             BASE_PATH + "\\src\\main\\resources\\choice_img\\" : BASE_PATH + "/src/main/resources/choice_img/";
 
+
     /**
      * Copy image from path to PATH
      *

@@ -119,7 +119,7 @@ public class EditQuestionController implements Initializable {
                 imagePath = selectedFile.getAbsolutePath();
                 if (imagePath.endsWith(".jpg") || imagePath.endsWith(".png") || imagePath.endsWith(".gif")) {
                     btn_image_question.setText("Image is selected");
-                    image_question.setImage(new Image(imagePath));
+                    image_question.setImage(new Image("file:///" + imagePath));
                 } else {
                     btn_image_question.setText("Image must be .jpg or .png or .gif");
                     imagePath = null;
@@ -229,7 +229,7 @@ public class EditQuestionController implements Initializable {
         // image question
         imagePath = oldQuestion.getQuestionImage();
         if (imagePath != null) {
-            Image image = new Image(imagePath);
+            Image image = new Image("file:///" + imagePath);
             image_question.setImage(image);
             btn_image_question.setText("Change image");
         } else {
