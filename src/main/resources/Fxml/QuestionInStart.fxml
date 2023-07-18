@@ -48,7 +48,10 @@
                   </Label>
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Img/icons8-flag-50.png" />
+                           </image></ImageView>
                         <Label text="Flag question" textFill="#146c94">
                            <font>
                               <Font size="15.0" />
@@ -58,7 +61,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="0.0">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Img/setting.png" />
                            </image></ImageView>

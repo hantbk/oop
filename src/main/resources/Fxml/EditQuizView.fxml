@@ -148,7 +148,7 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField editable="false" prefHeight="40.0" prefWidth="100.0">
+                                <TextField editable="false" prefHeight="40.0" prefWidth="80.0" text="10.00">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
@@ -169,7 +169,10 @@
                     <children>
                         <AnchorPane prefHeight="66.0" prefWidth="1073.0" style="-fx-background-color: #EEEEEE;">
                             <children>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <image>
+                              <Image url="@../Img/icons8-pencil-30.png" />
+                           </image></ImageView>
                                 <HBox alignment="CENTER_LEFT" layoutX="950.0">
                                     <children>
                                         <CheckBox mnemonicParsing="false" text="Shuffle">
@@ -201,6 +204,23 @@
                                         </ImageView>
                                     </children>
                                 </HBox>
+                        <Button fx:id="btn_delete" alignment="CENTER" contentDisplay="RIGHT" layoutX="892.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Delete" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="-5.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Img/icons8-trash-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="15.0" layoutY="35.0" text="Page 1" textFill="RED" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="33.0">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                         <ScrollPane layoutY="65.0" prefHeight="272.0" prefWidth="1074.0">
@@ -309,11 +329,6 @@
                                 </Label>
                             </children>
                         </HBox>
-                  <Button fx:id="btn_delete" layoutX="463.0" layoutY="1.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="105.0" text="DELETE">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
                     </children>
                 </AnchorPane>
             </children>

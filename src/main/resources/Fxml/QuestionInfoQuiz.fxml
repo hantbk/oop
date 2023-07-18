@@ -46,19 +46,12 @@
                 <Image url="@../Img/icons8-magnify-50.png" />
             </image>
          <HBox.margin>
-            <Insets left="170.0" />
+            <Insets left="150.0" />
          </HBox.margin>
         </ImageView>
-      <CheckBox fx:id="checkbox_delete" mnemonicParsing="false" prefHeight="20.0" prefWidth="37.0">
-         <graphic>
-              <ImageView fitHeight="20.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                      <Image url="@../Img/icons8-trash-50.png" />
-                  </image>
-              </ImageView>
-         </graphic>
+      <CheckBox fx:id="checkbox_delete" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
          <HBox.margin>
-            <Insets left="10.0" />
+            <Insets left="15.0" />
          </HBox.margin>
       </CheckBox>
         <Label contentDisplay="RIGHT" style="-fx-background-color: white;" text="1.00">
