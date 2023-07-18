@@ -20,8 +20,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -29,6 +31,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiConsumer;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -37,6 +40,10 @@ import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import javafx.scene.control.TextInputDialog;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
+import javax.imageio.ImageIO;
 
 
 public class StartQuizController implements Initializable {
@@ -184,10 +191,10 @@ public class StartQuizController implements Initializable {
 
                 PDPageContentStream contentStream = new PDPageContentStream(document, page);
                 contentStream.setFont(font, fontSize);
-
                 StringBuilder currentLine = new StringBuilder();
 
                 for (Question question : listQuestion) {
+                    // Print the question text
                     String questionText = question.getQuestion_text();
                     String[] words = questionText.split(" ");
 
@@ -204,7 +211,7 @@ public class StartQuizController implements Initializable {
                             currentLine = new StringBuilder(word + " ");
 
                             // Check if there is enough space for another line
-                            if (yPosition <= margin) {
+                            if (yPosition < margin) {
                                 // Create a new page and reset the y position
                                 contentStream.close();
                                 page = new PDPage();
@@ -218,7 +225,7 @@ public class StartQuizController implements Initializable {
                         }
                     }
 
-                    // Write the remaining line
+                    // Write the remaining line for the question
                     contentStream.beginText();
                     contentStream.newLineAtOffset(margin, yPosition);
                     contentStream.showText(currentLine.toString());
@@ -226,16 +233,54 @@ public class StartQuizController implements Initializable {
                     yPosition -= fontSize + 5; // Move to the next line
                     currentLine = new StringBuilder(); // Reset currentLine for the next question
 
+                    // Print the question image
+                    String questionImageUrl = "file:///" + question.getQuestionImage();
+                    if (question.getQuestionImage() != null && !question.getQuestionImage().isEmpty()) {
+                        try {
+                            URL url = new URL(questionImageUrl);
+                            try (InputStream inputStream = url.openStream()) {
+                                BufferedImage bufferedImage = ImageIO.read(inputStream);
+                                if (bufferedImage != null) {
+                                    float imageWidth = 200; // Adjust the image width
+                                    float imageHeight = 100; // Adjust the image height
+                                    if (yPosition + imageHeight < margin) {
+                                        // Create a new page and reset the y position
+                                        contentStream.close();
+                                        page = new PDPage();
+                                        document.addPage(page);
+                                        contentStream = new PDPageContentStream(document, page);
+                                        contentStream.setFont(font, fontSize);
+                                        yPosition = page.getMediaBox().getHeight() - margin;
+                                    }
+                                    PDImageXObject pdImage = LosslessFactory.createFromImage(document, bufferedImage);
+                                    contentStream.drawImage(pdImage, margin, yPosition - imageHeight, imageWidth, imageHeight);
+                                    yPosition -= imageHeight + 20; // Move to the next line after the image
+                                }
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (yPosition < margin) {
+                        // Create a new page and reset the y position
+                        contentStream.close();
+                        page = new PDPage();
+                        document.addPage(page);
+                        contentStream = new PDPageContentStream(document, page);
+                        contentStream.setFont(font, fontSize);
+                        yPosition = page.getMediaBox().getHeight() - margin;
+                    }
+
                     List<Choice> listChoice = ChoiceService.getChoice(question.getQuestion_id());
                     Map<Integer, String> mapChoice = new HashMap<>();
                     mapChoice.put(0, "A. "); mapChoice.put(1, "B. "); mapChoice.put(2, "C. "); mapChoice.put(3, "D. ");
                     int index = 0;
                     for (Choice choice : listChoice) {
+                        // Print the choice text
                         String choiceContent = mapChoice.get(index++) + choice.getContent();
                         String[] words1 = choiceContent.split(" ");
-
-                        for (String word : words1) {
-                            String potentialLine = currentLine + word + " ";
+                        for (String word1 : words1) {
+                            String potentialLine = currentLine + word1 + " ";
                             float lineWidth = fontSize * font.getStringWidth(potentialLine) / 1000;
 
                             if (lineWidth > maxLineWidth) {
@@ -244,10 +289,10 @@ public class StartQuizController implements Initializable {
                                 contentStream.showText(currentLine.toString());
                                 contentStream.endText();
                                 yPosition -= fontSize + 5; // Move to the next line
-                                currentLine = new StringBuilder(word + " ");
+                                currentLine = new StringBuilder(word1 + " ");
 
                                 // Check if there is enough space for another line
-                                if (yPosition <= margin) {
+                                if (yPosition < margin) {
                                     // Create a new page and reset the y position
                                     contentStream.close();
                                     page = new PDPage();
@@ -257,17 +302,46 @@ public class StartQuizController implements Initializable {
                                     yPosition = page.getMediaBox().getHeight() - margin;
                                 }
                             } else {
-                                currentLine.append(word).append(" ");
+                                currentLine.append(word1).append(" ");
                             }
                         }
 
-                        // Write the remaining line
+                        // Write the remaining line for the choice
                         contentStream.beginText();
                         contentStream.newLineAtOffset(80, yPosition);
                         contentStream.showText(currentLine.toString());
                         contentStream.endText();
                         yPosition -= fontSize + 5; // Move to the next line
-                        currentLine = new StringBuilder(); // Reset currentLine for the next question
+                        currentLine = new StringBuilder(); // Reset currentLine for the next choice
+
+                        // Print the choice image
+                        String choiceImageUrl = "file:///" + choice.getChoiceImage();
+                        if (choice.getChoiceImage() != null && !choice.getChoiceImage().isEmpty()) {
+                            try {
+                                URL url = new URL(choiceImageUrl);
+                                try (InputStream inputStream = url.openStream()) {
+                                    BufferedImage bufferedImage = ImageIO.read(inputStream);
+                                    if (bufferedImage != null) {
+                                        float imageWidth = 200; // Adjust the image width
+                                        float imageHeight = 100; // Adjust the image height
+                                        if (yPosition + imageHeight < margin) {
+                                            // Create a new page and reset the y position
+                                            contentStream.close();
+                                            page = new PDPage();
+                                            document.addPage(page);
+                                            contentStream = new PDPageContentStream(document, page);
+                                            contentStream.setFont(font, fontSize);
+                                            yPosition = page.getMediaBox().getHeight() - margin;
+                                        }
+                                        PDImageXObject pdImage = LosslessFactory.createFromImage(document, bufferedImage);
+                                        contentStream.drawImage(pdImage, 80, yPosition - imageHeight, imageWidth, imageHeight);
+                                        yPosition -= imageHeight + 15; // Move to the next line after the image
+                                    }
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
 
@@ -279,10 +353,6 @@ public class StartQuizController implements Initializable {
             }
         }
     }
-
-
-
-
 
     //update cac cau hoi trong quiz vao vBox
     public void updateQuestion(Quiz quiz) {

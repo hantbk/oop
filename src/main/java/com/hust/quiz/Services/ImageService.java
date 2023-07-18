@@ -7,7 +7,9 @@ import java.nio.file.Path;
 
 public class ImageService {
     public static final String PATH_QUESTION = "D:\\IntelliJ\\oop\\src\\main\\resources\\question_img\\";
+
     public static final String PATH_CHOICE = "D:\\IntelliJ\\oop\\src\\main\\resources\\choice_img\\";
+
 
     /**
      * Get path of image
