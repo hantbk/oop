@@ -309,6 +309,11 @@
                                 </Label>
                             </children>
                         </HBox>
+                  <Button fx:id="btn_delete" layoutX="463.0" layoutY="1.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="105.0" text="DELETE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
                     </children>
                 </AnchorPane>
             </children>
@@ -464,7 +469,7 @@
                 </VBox>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="anchor_add_question_random" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE; -fx-border-color: #19A7CE; -fx-border-radius: 3px;">
+        <AnchorPane fx:id="anchor_add_question_random" layoutX="150.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: WHITE; -fx-border-color: #19A7CE; -fx-border-radius: 3px;" visible="false">
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0">
                     <children>
