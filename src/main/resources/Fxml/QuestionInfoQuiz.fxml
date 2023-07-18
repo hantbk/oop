@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="Fxml.QuestionInfoQuiz"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="21.6" prefWidth="950.4" xmlns="http://javafx.com/javafx/19"
+      fx:controller="com.hust.quiz.Controllers.QuestionInfoFromBankController">
+    <children>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/icons8-direction-24.png"/>
+            </image>
+            <HBox.margin>
+                <Insets top="2.0"/>
+            </HBox.margin>
+        </ImageView>
+        <Label text="Label"/>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/zoom-in.png"/>
+            </image>
+            <HBox.margin>
+                <Insets left="5.0" top="2.0"/>
+            </HBox.margin>
+        </ImageView>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/zoom-in.png"/>
+            </image>
+        </ImageView>
+        <Label text="Label"/>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/zoom-in.png"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Img/zoom-in.png"/>
+            </image>
+        </ImageView>
+        <Label contentDisplay="RIGHT" text="1.00">
+            <graphic>
+                <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/icons8-pencil-30.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
+    </children>
+    <padding>
+        <Insets top="5.0"/>
+    </padding>
+</HBox>
